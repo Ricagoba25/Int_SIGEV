@@ -1,0 +1,98 @@
+html,
+body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #f5f5f5;
+}
+.title-page {
+    margin-bottom: 50px;
+}
+
+.form-signin {
+    border-radius: 15px;
+    box-shadow: 1px 1px 15px 1px #b4b4b4;
+    width: 100%;
+    max-width: 400px;
+    padding: 15px;
+    margin: auto;
+    padding: 30px;
+    text-align: center;
+}
+
+.form-signin .checkbox {
+    font-weight: 400;
+}
+.div-msg-error {
+    padding: 5px;
+    color: #ff0000;
+}
+label.is-invalid {
+    color: red;
+    font-size: 12px;
+    margin: 5px 0px 0px 5px;
+}
+.my-style-input {
+    height: 50px;
+}
+
+
+
+
+.login {
+    width: 500px;
+    box-shadow: 2px 2px 2px 2px #f2f2f2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    border: 1px solid #f2f2f2;
+    border-radius: 15px;
+}
+
+.logo {
+    width: 120px;
+    height: 120px;
+    border-radius: 10px;
+}
+.titulo{
+    margin-top: 50px;
+    margin-bottom: 80px;
+}
+
+.btn-login {
+    width: 300px;
+}
+
+.menText{
+    font-size: 12px;
+
+}
+.container__organizacion, .container__formulario{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container__organizacion_contenido{
+    width: 600px;
+    box-shadow: 2px 2px 2px 2px #f2f2f2;
+    padding: 15px;
+}
+
+.container__formulario_contenido{
+    width: 900px;
+    padding: 20px;
+    margin-top: 50px;
+    border: 2px solid #8d8c8c;
+    border-radius: 7px;
+}
+
+
+
+
