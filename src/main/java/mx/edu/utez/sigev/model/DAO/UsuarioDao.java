@@ -1,7 +1,7 @@
 package mx.edu.utez.sigev.model.DAO;
 
-import mx.edu.utez.sigev.model.Rol;
-import mx.edu.utez.sigev.model.Usuario;
+import mx.edu.utez.sigev.model.BeanRol;
+import mx.edu.utez.sigev.model.BeanUsuario;
 import mx.edu.utez.sigev.utils.MysqlConector;
 
 import java.sql.Connection;
@@ -13,15 +13,15 @@ import java.util.List;
 
 public class UsuarioDao implements DaoRepository {
     private Connection con;
-    private List<Usuario> listaUsuario;
-    private Usuario usr;
+    private List<BeanUsuario> listaBeanUsuario;
+    private BeanUsuario usr;
     private boolean resp;
 
     //Contructor donde inicializamos la conexion a la BD
     public UsuarioDao() {
         this.con = new MysqlConector().connect();
-        this.listaUsuario = new ArrayList<>();
-        this.usr = new Usuario();
+        this.listaBeanUsuario = new ArrayList<>();
+        this.usr = new BeanUsuario();
         this.resp = false;
     }
 
@@ -48,8 +48,10 @@ public class UsuarioDao implements DaoRepository {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return listaUsuario;
+        return listaBeanUsuario;
     }
+
+
 
     @Override
 
@@ -80,10 +82,10 @@ public class UsuarioDao implements DaoRepository {
                 usr.setContrasena(res.getString("contrasena"));
                 usr.setTelefono(res.getString("telefono"));
                 usr.setEstatusUsuario(res.getInt("estatusUsuario"));
-                Rol rol = new Rol();
-                rol.setIdRol(res.getInt("idRol"));
-                rol.setNombreRol(res.getString("nombreRol"));
-                usr.setRol(rol);
+                BeanRol beanRol = new BeanRol();
+                beanRol.setIdRol(res.getInt("idRol"));
+                beanRol.setNombreRol(res.getString("nombreRol"));
+                usr.setRol(beanRol);
 
 
 

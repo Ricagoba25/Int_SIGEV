@@ -49,7 +49,7 @@
       <div class="container__titulo">
         <h2 class="titulo text-center">REGISTRO DE ORGANIZACIÓN</h2>
       </div>
-      <div class="container__formulario">
+      <div class="container__formulario" style="margin-bottom: 200px">
         <div class="container__formulario_contenido">
           <form class="form-signin" action="../../ServletOrganizacion" method="post">
             <!-- Primera fila-->
@@ -108,9 +108,9 @@
       <div class="container__titulo">
         <h2 class="titulo text-center">REGISTRO DE VOLUNTARIO</h2>
       </div>
-      <div class="container__formulario">
+      <div class="container__formulario" style="margin-bottom: 200px">
         <div class="container__formulario_contenido">
-          <form action="../../ServletVoluntario" method="post">
+          <form action="/ServletVoluntario" method="post">
             <!-- Primera fila-->
             <div class="row mt-2">
               <div class="col-xl-4">
@@ -132,20 +132,20 @@
                 <label for="telefono" class="form-label">Teléfono:</label>
                 <input type="text" name="telefono" class="form-control" id="telefono">
               </div>
+              <div class="col-xl-8">
+                <label for="curp" class="form-label">Curp:</label>
+                <input type="text" name="curp" class="form-control" id="curp">
+              </div>
+            </div>
+            <!-- Tercera linea-->
+            <div class="row mt-2">
               <div class="col-xl-4">
-                <label for="correo" class="form-label">Correo:</label>
+                <label for="correo" class="form-label">CORREO:</label>
                 <input type="text" name="correo" class="form-control" id="correo">
               </div>
               <div class="col-xl-4">
                 <label for="contrasena" class="form-label">Contraseña:</label>
                 <input type="password" name="contrasenia" class="form-control" id="contrasena">
-              </div>
-            </div>
-            <!-- Tercera linea-->
-            <div class="row mt-2">
-              <div class="col-xl-8">
-                <label for="curp" class="form-label">CURP:</label>
-                <input type="text" name="curp" class="form-control" id="curp">
               </div>
             </div>
             <!-- Button -->
@@ -161,6 +161,15 @@
       </div>
     </div>
   </div>
+
+  <footer class="main-footer">
+    <!-- To the right -->
+    <div class="float-right d-none d-sm-inline">
+
+    </div>
+    <!-- Default to the left -->
+
+  </footer>
 
   <script>
     function changeForm(radio) {

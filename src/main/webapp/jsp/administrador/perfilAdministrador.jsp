@@ -6,7 +6,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>SIGEV | Inicio </title>
+    <title>SIGEV | Administrador </title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -88,8 +88,8 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="/jsp/administrador/perfilAdministrador.jsp">
-                    <button class="btn btn-info" > Mi Perfil </button>
+                <a href="/perfilAdministrador">
+                    <button class="btn btn-info" type="submit" > Mi Perfil </button>
                 </a>
             </li>
 
@@ -195,68 +195,75 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Main content -->
-        <div class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4" style="margin-left: 100px">
+            <div class=" pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2 mt-4 text-center">PERFIL DE ${nombreGeneral}</h1>
+            </div>
+            <!--Contenido-->
 
-                                <p class="card-text">
-                                    Some quick example text to build on the card title and make up the bulk of the card's
-                                    content.
-                                </p>
-
-                                <a href="#" class="card-link">Card link</a>
-                                <a href="#" class="card-link">Another link</a>
-                            </div>
-                        </div>
-
-                        <div class="card card-primary card-outline">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-
-                                <p class="card-text">
-                                    Some quick example text to build on the card title and make up the bulk of the card's
-                                    content.
-                                </p>
-                                <a href="#" class="card-link">Card link</a>
-                                <a href="#" class="card-link">Another link</a>
-                            </div>
-                        </div><!-- /.card -->
-                    </div>
-                    <!-- /.col-md-6 -->
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="m-0">Featured</h5>
-                            </div>
-                            <div class="card-body">
-                                <h6 class="card-title">Special title treatment</h6>
-
-                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
-                            </div>
-                        </div>
-
-                        <div class="card card-primary card-outline">
-                            <div class="card-header">
-                                <h5 class="m-0">Featured</h5>
-                            </div>
-                            <div class="card-body">
-                                <h6 class="card-title">Special title treatment</h6>
-
-                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.col-md-6 -->
+            <!-- Logo Imagen-->
+            <div class="m-auto mt-5 mb-4 text-center">
+                <div>
+                    <img src="/assets/img/Generic%20photo.jpg" alt="FotoPerfil" class="fotoPerfil rounded-circle">
                 </div>
-                <!-- /.row -->
-            </div><!-- /.container-fluid -->
-        </div>
+                <div>
+                    <a href="#" class="text-center" data-bs-toggle="modal" data-bs-target="#exampleModal">Cambiar Logo</a>
+                </div>
+            </div>
+
+            <!--Formulario-->
+            <div class="container__formulario">
+                <div class="container__formulario_contenido">
+                    <!-- Primera fila-->
+                    <form action="../../index.jsp" method="post">
+                        <div class="row mt-2">
+                            <div class="col-xl-4">
+                                <label for="nombre" class="form-label">Nombre:</label>
+                                <input type="text" value="${nombre}" name="nombre" class="form-control" id="nombre">
+                            </div>
+                            <div class="col-xl-4">
+                                <label for="primerApellido" class="form-label">Apellido Paterno:</label>
+                                <input type="text" class="form-control" value="${primerApellido}" name="primerApellido"
+                                       id="primerApellido">
+                            </div>
+                            <div class="col-xl-4">
+                                <label for="segundoApellido" class="form-label">Apellido Materno:</label>
+                                <input type="text" value="${segundoApellido}" name="segundoApellido" class="form-control" id="segundoApellido">
+                            </div>
+                        </div>
+                        <!-- Segunda Fila-->
+                        <div class="row mt-2">
+                            <div class="col-xl-4">
+                                <label for="correo" class="form-label">Correo*:</label>
+                                <input type="text" value="${correo}" name="correo" class="form-control"
+                                       id="correo">
+                            </div>
+                            <div class="col-xl-4">
+                                <label for="telefono" class="form-label">Teléfono:</label>
+                                <input type="text" value="${telefono}" name="telefono" class="form-control"
+                                       id="telefono">
+                            </div>
+                        </div>
+
+                        <!-- Button -->
+                        <div class="m-auto mt-5 text-center">
+                            <div>
+                                <button type="submit" class="btn btn-primary btn-login mb-4 mt-4"> Actualizar
+                                    Información
+                                </button>
+                            </div>
+                            <div>
+                                <h6 class="text-center aste__marcados">Los elementos marcados con * no son
+                                    actualizables</h6>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+
+        </main>
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->

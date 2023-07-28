@@ -1,8 +1,8 @@
 package mx.edu.utez.sigev.controller;
 
 
-import mx.edu.utez.sigev.model.Rol;
-import mx.edu.utez.sigev.model.Usuario;
+import mx.edu.utez.sigev.model.BeanRol;
+import mx.edu.utez.sigev.model.BeanUsuario;
 import mx.edu.utez.sigev.model.DAO.UsuarioDao;
 
 
@@ -17,8 +17,9 @@ import org.json.JSONObject;
 
 @WebServlet(name = "user", value = "/user-servlet")
 public class userServlet extends HttpServlet {
-    @Override
 
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -30,40 +31,26 @@ public class userServlet extends HttpServlet {
         String pass = request.getParameter("contrasenia");
 
         UsuarioDao dao = new UsuarioDao();
-        Usuario usr = (Usuario) dao.findOne(email, pass);
+        BeanUsuario usr = (BeanUsuario) dao.findOne(email, pass);
 
         if (usr.getIdUsuario() != 0) {
             //Set rol
-            Rol rol = new Rol();
-            rol.setNombreRol(usr.getRol().getNombreRol());
+            BeanRol beanRol = new BeanRol();
+            beanRol.setNombreRol(usr.getRol().getNombreRol());
 
             System.out.println("llegue aqui jeje");
-            System.out.println(rol.getNombreRol());
+            System.out.println(beanRol.getNombreRol());
             System.out.println(usr);
 
-            request.getSession().setAttribute("tipoSesion", rol.getNombreRol());
+            request.getSession().setAttribute("tipoSesion", beanRol.getNombreRol());
             request.getSession().setAttribute("sesion",usr);
 
-            String tipoSesion = rol.getNombreRol();
-
-            if (tipoSesion != null) {
-                if (tipoSesion.equals("Administrador")){
-                    System.out.println("soy admin");
-                    /*response.sendRedirect("/dashboard/index.jsp");*/
-                } else if (tipoSesion.equals("Organización")) {
-                    System.out.println("soy orga");
-                    request.getRequestDispatcher("/dashboard/perfilOrganizacion.jsp").forward(request, response);
-                    System.out.println("si mande a la pagina");
-                }else {
-                    System.out.println("soy volu");
-                    request.getRequestDispatcher("/jsp/organizacion/perfilVoluntario.jsp").forward(request,response);
-                }
-
-            }
 
             jsonResponse.put("error", 0);
             jsonResponse.put("title", "");
             jsonResponse.put("message", "Inicio se sesión exitoso");
+            System.out.println("este es el rol" + beanRol.getNombreRol());
+            jsonResponse.put("tipoSesion", beanRol.getNombreRol() );
 
         } else {
 
@@ -88,6 +75,10 @@ public class userServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("Entra al get");
-        /*resp.sendRedirect("index.jsp");*/
+        resp.sendRedirect("index.jsp");
     }
+
+
+
+
 }

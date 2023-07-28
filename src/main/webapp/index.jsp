@@ -5,6 +5,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>SIGEV | Iniciar Sesión </title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/style.css">
@@ -115,6 +118,7 @@
                 data: formData,
                 success: function (response) {
                     loading = false;
+
                     // Procesar la respuesta del servlet si es necesario
                     console.log("Respuesta del servidor:", response);
 
@@ -126,7 +130,18 @@
                         $(".div-msg-error").show();
                         $('#msg-error').text(response.message);
                     }else {
-                        window.location.href = "dashboard";
+
+                        switch (response.tipoSesion){
+                            case "Administrador":
+                                window.location.href = '../dashboard/index.jsp';
+                                break;
+                            case "Organización":
+                                window.location.href = 'dashboard/dashboardOrganizacion.jsp';
+                                break;
+                            case "Voluntario":
+                                window.location.href = 'dashboard/dashboardVoluntario.jsp';
+                                break;
+                        }
                     }
 
                    /* if (response.status === 'success') {

@@ -10,25 +10,41 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6867e21e-5850-4c68-9edf-2957e5a99de1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/model/Rol.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/model/Usuario.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/assets/css/styles.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/Logo SIGEV.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/dashboard/perfilOrganizacion.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/jsp/seguridad/registro.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/controller/ServletCerrarSesion.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/controller/ServletVoluntario.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/model/BeanColor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/model/BeanDireccion.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/model/BeanEstado.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/model/BeanEvento.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/model/BeanNotificacion.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/model/BeanOrganizacion.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/model/BeanPermiso.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/model/BeanPersona.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/model/BeanVoluntario.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/model/DAO/DaoPersona.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/model/DAO/DaoUsuario.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/model/DAO/DaoVoluntario.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/assets/css/bootstrap.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/assets/img/Generic photo.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/assets/js/bootstrap.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/dashboard/dashboardOrganizacion.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/dashboard/dashboardVoluntario.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/jsp/administrador/perfilAdministrador.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/jsp/seguridad/restablecerContra.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/jsp/voluntario/perfilVoluntario.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/ff1e38cb-0e0a-461a-88d3-8d20602b5a6b.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/ff1e38cb-0e0a-461a-88d3-8d20602b5a6b.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demoruiz/controller/userServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/controller/userServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demoruiz/model/DAO/DaoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/model/DAO/DaoRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demoruiz/model/DAO/UsuarioDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/model/DAO/UsuarioDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demoruiz/model/Rol.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demoruiz/model/Usuario.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demoruiz/utils/MysqlConector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/utils/MysqlConector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/controller/userServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/controller/userServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/model/DAO/UsuarioDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/model/DAO/UsuarioDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/model/Rol.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/model/BeanRol.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/model/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/model/BeanUsuario.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/css/dashboard.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/css/dashboard.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/css/styles.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/dashboard/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/dashboard/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/dashboard/perfilOrganizacion.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/organizacion/perfilOrganizacion.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/seguridad/registro.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/seguridad/registro.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,9 +55,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Servlet" />
-        <option value="Class" />
         <option value="Interface" />
         <option value="Jsp File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -67,7 +83,9 @@
     </option>
   </component>
   <component name="ProjectId" id="2SwWrCnPNXvlH15sUyfoF3WXpJ7" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -79,13 +97,13 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/richa/OneDrive/Documentos/Repositorios/SIGEV-demo/src/main/webapp/assets/css",
+    "last_opened_file_path": "C:/Users/richa/Desktop/Repositorios/Zazil",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "fileTemplates",
+    "settings.editor.selected.configurable": "inlay.hints",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -96,11 +114,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\richa\OneDrive\Documentos\Repositorios\SIGEV-demo\src\main\webapp\assets\js" />
       <recent name="C:\Users\richa\OneDrive\Documentos\Repositorios\SIGEV-demo\src\main\webapp\assets\css" />
       <recent name="C:\Users\richa\OneDrive\Documentos\Repositorios\SIGEV-demo\src\main\webapp\jsp\seguridad" />
-      <recent name="C:\Users\richa\OneDrive\Documentos\Repositorios\SIGEV-demo\src\main\webapp\assets\plugins\bootstrap" />
-      <recent name="C:\Users\richa\OneDrive\Documentos\Repositorios\SIGEV-demo\src\main\webapp\jsp" />
-      <recent name="C:\Users\richa\OneDrive\Documentos\Repositorios\SIGEV-demo\src\main\webapp\assets\img" />
+      <recent name="C:\Users\richa\OneDrive\Documentos\Repositorios\SIGEV-demo\src\main\java\mx\edu\utez\sigev\model\DAO" />
+      <recent name="C:\Users\richa\OneDrive\Documentos\Repositorios\SIGEV-demo\src\main\java\mx\edu\utez\sigev\controller" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\richa\OneDrive\Documentos\Repositorios\SIGEV-demo\src\main\webapp\dashboard" />
@@ -122,8 +140,6 @@
     </configuration>
     <configuration name="Tomcat 9.0.78" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.76" ALTERNATIVE_JRE_ENABLED="false">
       <option name="BROWSER_ID" value="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
-      <option name="UPDATE_ON_FRAME_DEACTIVATION" value="true" />
-      <option name="UPDATE_CLASSES_ON_FRAME_DEACTIVATION" value="true" />
       <option name="UPDATING_POLICY" value="redeploy-artifacts" />
       <deployment>
         <artifact name="demoRuiz:war exploded">
@@ -223,12 +239,24 @@
       <workItem from="1690227152678" duration="237000" />
       <workItem from="1690227406673" duration="1718000" />
       <workItem from="1690229222643" duration="11987000" />
-      <workItem from="1690426761878" duration="19276000" />
+      <workItem from="1690426761878" duration="20574000" />
+      <workItem from="1690469954135" duration="36585000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

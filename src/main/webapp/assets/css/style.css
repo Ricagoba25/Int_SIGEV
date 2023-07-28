@@ -42,56 +42,12 @@ label.is-invalid {
 }
 
 
-
-
-.login {
-    width: 500px;
-    box-shadow: 2px 2px 2px 2px #f2f2f2;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 40px;
-    border: 1px solid #f2f2f2;
-    border-radius: 15px;
+.nav-link2{
+    color: #ffffff;
 }
 
-.logo {
-    width: 120px;
-    height: 120px;
-    border-radius: 10px;
-}
-.titulo{
-    margin-top: 50px;
-    margin-bottom: 80px;
-}
 
-.btn-login {
-    width: 300px;
-}
 
-.menText{
-    font-size: 12px;
-
-}
-.container__organizacion, .container__formulario{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.container__organizacion_contenido{
-    width: 600px;
-    box-shadow: 2px 2px 2px 2px #f2f2f2;
-    padding: 15px;
-}
-
-.container__formulario_contenido{
-    width: 900px;
-    padding: 20px;
-    margin-top: 50px;
-    border: 2px solid #8d8c8c;
-    border-radius: 7px;
-}
 
 
 
