@@ -1,5 +1,6 @@
 package mx.edu.utez.sigev.model.DAO;
 
+import mx.edu.utez.sigev.model.*;
 import mx.edu.utez.sigev.model.BeanVoluntario;
 import mx.edu.utez.sigev.utils.MysqlConector;
 
@@ -7,84 +8,174 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
-public class DaoVoluntario {
+public class DaoVoluntario implements DaoRepository {
 
-    Connection conn;
-    PreparedStatement ps;
-    ResultSet rs;
+    private Connection con;
+    private PreparedStatement pstm;
+    private ResultSet rs;
     MysqlConector mysqlConector = new MysqlConector();
-    private static final String INSERT_PERSONA = "INSERT INTO persona (nombrePersona, primerApellido, segundoApellido) VALUES (?, ?, ?)";
-    private static final String INSERT_USUARIO = "INSERT INTO usuario (correo, contrasena, telefono) VALUES (?, ?, ?)";
-    private static final String INSERT_VOLUNTARIO = "INSERT INTO voluntario (curp) VALUES (?)";
-
-    public void insertarVoluntario(BeanVoluntario voluntario) throws SQLException {
-        Connection connPersona = null;
-        Connection connUsuario = null;
+    
+    @Override
+    public List findAll() {
+        List<BeanVoluntario> listaBeanVoluntario = new ArrayList<>();
         try {
-            connPersona = mysqlConector.connect();
-            connUsuario = mysqlConector.connect();
-            connPersona.setAutoCommit(false); // Iniciar transacción
-            connUsuario.setAutoCommit(false); // Iniciar transacción
+            String query = "SELECT * FROM voluntario v " +
+                    "join persona p on v.persona_idPersona = p.idPersona " +
+                    "join usuario u on u.idUsuario = p.usuario_idUsuario ";
 
-            // Insertar en tabla "persona"
-            try (PreparedStatement stmtPersona = connPersona.prepareStatement(INSERT_PERSONA)) {
-                System.out.println(" datos 1 " + stmtPersona);
-                stmtPersona.setString(1, voluntario.getPersona().getNombrePersona());
-                stmtPersona.setString(2, voluntario.getPersona().getPrimerApellido());
-                stmtPersona.setString(3, voluntario.getPersona().getSegundoApellido());
-                stmtPersona.executeUpdate();
-                System.out.println(" datos " + stmtPersona);
+            con = MysqlConector.connect();
+            pstm = con.prepareStatement(query);
+            rs = pstm.executeQuery();
+
+            while (rs.next()) {
+                BeanUsuario beanUsuario = new BeanUsuario();
+                beanUsuario.setIdUsuario(rs.getInt("idUsuario"));
+                beanUsuario.setCorreo(rs.getString("correo"));
+                beanUsuario.setContrasena(rs.getString("contrasena"));
+                beanUsuario.setTelefono(rs.getString("telefono"));
+
+                BeanPersona beanPersona = new BeanPersona();
+                beanPersona.setIdPersona(rs.getInt("idPersona"));
+                beanPersona.setNombrePersona(rs.getString("nombrePersona"));
+                beanPersona.setPrimerApellido(rs.getString("primerApellido"));
+                beanPersona.setSegundoApellido(rs.getString("segundoApellido"));
+                beanPersona.setUsuario(beanUsuario);
+
+                BeanVoluntario beanVoluntario = new BeanVoluntario();
+                beanVoluntario.setIdVoluntario(rs.getInt("idVoluntario"));
+                beanVoluntario.setCurp(rs.getString("curp"));
+                beanVoluntario.setEstatusVoluntario(rs.getInt("estatusVoluntario"));
+                beanVoluntario.setPersona(beanPersona);
+                listaBeanVoluntario.add(beanVoluntario);
             }
-
-            // Obtener el ID generado en tabla "persona"
-            int idPersonaGenerado;
-            try (PreparedStatement stmtLastId = conn.prepareStatement("SELECT LAST_INSERT_ID()")) {
-                try (ResultSet rs = stmtLastId.executeQuery()) {
-                    if (rs.next()) {
-                        idPersonaGenerado = rs.getInt(1);
-                    } else {
-                        throw new SQLException("No se pudo obtener el ID generado en tabla 'persona'.");
-                    }
-                }
-            }
-
-            // Insertar en tabla "usuario"
-            try (PreparedStatement stmtUsuario = conn.prepareStatement(INSERT_USUARIO)) {
-                stmtUsuario.executeUpdate();
-            }
-
-            // Obtener el ID generado en tabla "usuario"
-            int idUsuarioGenerado;
-            try (PreparedStatement stmtLastId = conn.prepareStatement("SELECT LAST_INSERT_ID()")) {
-                try (ResultSet rs = stmtLastId.executeQuery()) {
-                    if (rs.next()) {
-                        idUsuarioGenerado = rs.getInt(1);
-                    } else {
-                        throw new SQLException("No se pudo obtener el ID generado en tabla 'usuario'.");
-                    }
-                }
-            }
-
-            // Insertar en tabla "voluntario"
-            try (PreparedStatement stmtVoluntario = conn.prepareStatement(INSERT_VOLUNTARIO)) {
-                stmtVoluntario.setString(1, voluntario.getCurp());
-                stmtVoluntario.setInt(2, idPersonaGenerado);
-                stmtVoluntario.setInt(3, idUsuarioGenerado);
-                stmtVoluntario.executeUpdate();
-            }
-
-            conn.commit(); // Confirmar transacción
         } catch (SQLException e) {
-            if (conn != null) {
-                conn.rollback(); // Hacer rollback en caso de error
-            }
-            throw e;
+            System.err.println("Error en el método findAll() - DaoVoluntario -> " + e.getMessage());
         } finally {
-            if (conn != null) {
-                conn.setAutoCommit(true); // Restaurar el autocommit a su valor por defecto
-                conn.close();
+            cerrarConexiones("findAll");
+        }
+        return listaBeanVoluntario;
+    }
+
+    @Override
+    public Object findOne(int id) {
+        BeanVoluntario beanVoluntario = new BeanVoluntario();
+        try {
+            String query = "SELECT * FROM voluntario v " +
+                    "join persona p on v.persona_idPersona = p.idPersona " +
+                    "join usuario u on u.idUsuario = p.usuario_idUsuario " +
+                    "join rol r on r.idRol = u.rol_idRol " +
+                    "WHERE idUsuario = ?";
+
+            con = MysqlConector.connect();
+            pstm = con.prepareStatement(query);
+            pstm.setInt(1, id);
+            rs = pstm.executeQuery();
+            if (rs.next()) {
+                BeanUsuario beanUsuario = new BeanUsuario();
+                beanUsuario.setIdUsuario(rs.getInt("idUsuario"));
+                beanUsuario.setCorreo(rs.getString("correo"));
+                beanUsuario.setContrasena(rs.getString("contrasena"));
+                beanUsuario.setTelefono(rs.getString("telefono"));
+
+                BeanRol beanRol = new BeanRol();
+                beanRol.setIdRol(rs.getInt("idRol"));
+                beanRol.setNombreRol(rs.getString("nombreRol"));
+                beanUsuario.setRol(beanRol);
+
+                BeanPersona beanPersona = new BeanPersona();
+                beanPersona.setIdPersona(rs.getInt("idPersona"));
+                beanPersona.setNombrePersona(rs.getString("nombrePersona"));
+                beanPersona.setPrimerApellido(rs.getString("primerApellido"));
+                beanPersona.setSegundoApellido(rs.getString("segundoApellido"));
+                beanPersona.setUsuario(beanUsuario);
+
+                beanVoluntario.setIdVoluntario(rs.getInt("idVoluntario"));
+                beanVoluntario.setCurp(rs.getString("curp"));
+                beanVoluntario.setEstatusVoluntario(rs.getInt("estatusVoluntario"));
+                beanVoluntario.setPersona(beanPersona);
             }
+        } catch (SQLException e) {
+            System.err.println("Error en el método findOne() - DaoVoluntario -> " + e.getMessage());
+        } finally {
+            cerrarConexiones("findOne");
+        }
+        return beanVoluntario;
+    }
+
+    @Override
+    public boolean update(int id, Object object) {
+        boolean modificado = false;
+        BeanVoluntario voluntario = (BeanVoluntario) object;
+        try {
+            String query = "UPDATE voluntario SET curp = ? WHERE idVoluntario = ?";
+            con = MysqlConector.connect();
+            pstm = con.prepareStatement(query);
+            pstm.setString(1, voluntario.getCurp());
+            pstm.setInt(2, voluntario.getIdVoluntario());
+            modificado = pstm.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.err.println("Error en el método update() - DaoVoluntario -> " + e.getMessage());
+        } finally {
+            cerrarConexiones("update");
+        }
+        return modificado;
+    }
+
+    @Override
+    public boolean delete(int id) {
+        boolean eliminado = false;
+        try {
+            String query = "UPDATE voluntario SET estatusVoluntario = ?  WHERE idVoluntario = ?";
+
+            con = MysqlConector.connect();
+            pstm = con.prepareStatement(query);
+            pstm.setInt(1, 0);
+            pstm.setInt(2, id);
+            eliminado = pstm.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.err.println("Error en el método delete() - DaoVoluntario -> " + e.getMessage());
+        } finally {
+            cerrarConexiones("delete");
+        }
+        return eliminado;
+    }
+
+    @Override
+    public boolean insert(Object object) {
+        BeanVoluntario voluntario = (BeanVoluntario) object;
+        boolean registrado = false;
+        try {
+            String query = "INSERT INTO voluntario (curp, persona_idPersona) values(?,?)";
+
+            con = MysqlConector.connect();
+            pstm = con.prepareStatement(query);
+            pstm.setString(1, voluntario.getCurp());
+            pstm.setInt(2, voluntario.getPersona().getIdPersona());
+            registrado = pstm.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.err.println("Error en el método insert() - DaoVoluntario -> " + e.getMessage());
+        } finally {
+            cerrarConexiones("insert");
+        }
+        return registrado;
+    }
+
+    private void cerrarConexiones(String metodo) {
+        try {
+            if (rs != null) {
+                rs.close();
+            }
+            if (pstm != null) {
+                pstm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al cerrar conexiones - DaoVoluntario - en el método " + metodo + " -> " + e.getMessage());
         }
     }
 }

@@ -18,41 +18,14 @@ public class DaoUsuario implements DaoRepository {
 
     @Override
     public List findAll() {
-        List<BeanUsuario> listaBeanUsuario = new ArrayList<>();
-        try {
-            String query = "SELECT * FROM usuario u";
-            con = MysqlConector.connect();
-            pstm = con.prepareStatement(query);
-            rs = pstm.executeQuery();
-
-            while (rs.next()) {
-                BeanUsuario beanUsuario = new BeanUsuario();
-                beanUsuario.setIdUsuario(rs.getInt("idUsuario"));
-                beanUsuario.setCorreo(rs.getString("correo"));
-                beanUsuario.setContrasena(rs.getString("contrasena"));
-                beanUsuario.setTelefono(rs.getString("telefono"));
-                beanUsuario.setEstatusUsuario(rs.getInt("estatusUsuario"));
-
-                BeanRol beanRol = new BeanRol();
-                beanRol.setIdRol(rs.getInt("idRol"));
-                beanRol.setNombreRol(rs.getString("nombreRol"));
-                beanUsuario.setRol(beanRol);
-                listaBeanUsuario.add(beanUsuario);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } finally {
-            cerrarConexiones("iniciarSesion");
-        }
-        return listaBeanUsuario;
+        return null;
     }
-
 
     @Override
     public Object findOne(int id) {
         BeanUsuario beanUsuario = new BeanUsuario();
         try {
-            String query = "SELECT * FROM usuario u WHERE idUsuario = ?";
+            String query = "SELECT * FROM usuario u join rol r on u.rol_idRol = r.idRol WHERE u.idUsuario = ?";
             con = MysqlConector.connect();
             pstm = con.prepareStatement(query);
             pstm.setInt(1, id);
@@ -69,7 +42,35 @@ public class DaoUsuario implements DaoRepository {
                 beanRol.setNombreRol(rs.getString("nombreRol"));
                 beanUsuario.setRol(beanRol);
             }
-        } catch (NumberFormatException | SQLException e) {
+        } catch (SQLException e) {
+            System.err.println("Error en el método findOne() - DaoUsuario -> " + e.getMessage());
+        } finally {
+            cerrarConexiones("findOne");
+        }
+        return beanUsuario;
+    }
+
+    public Object findbyCorreo(String correo) {
+        BeanUsuario beanUsuario = new BeanUsuario();
+        try {
+            String query = "SELECT * FROM usuario u join rol r on u.rol_idRol = r.idRol WHERE u.correo = ?";
+            con = MysqlConector.connect();
+            pstm = con.prepareStatement(query);
+            pstm.setString(1, correo);
+            rs = pstm.executeQuery();
+            if (rs.next()) {
+                beanUsuario.setIdUsuario(rs.getInt("idUsuario"));
+                beanUsuario.setCorreo(rs.getString("correo"));
+                beanUsuario.setContrasena(rs.getString("contrasena"));
+                beanUsuario.setTelefono(rs.getString("telefono"));
+                beanUsuario.setEstatusUsuario(rs.getInt("estatusUsuario"));
+
+                BeanRol beanRol = new BeanRol();
+                beanRol.setIdRol(rs.getInt("idRol"));
+                beanRol.setNombreRol(rs.getString("nombreRol"));
+                beanUsuario.setRol(beanRol);
+            }
+        } catch (SQLException e) {
             System.err.println("Error en el método findOne() - DaoUsuario -> " + e.getMessage());
         } finally {
             cerrarConexiones("findOne");
@@ -98,7 +99,7 @@ public class DaoUsuario implements DaoRepository {
                 beanRol.setNombreRol(rs.getString("nombreRol"));
                 beanUsuario.setRol(beanRol);
             }
-        } catch (NumberFormatException | SQLException e) {
+        } catch (SQLException e) {
             System.err.println("Error en el método iniciarSesion() - DaoUsuario -> " + e.getMessage());
         } finally {
             cerrarConexiones("iniciarSesion");
