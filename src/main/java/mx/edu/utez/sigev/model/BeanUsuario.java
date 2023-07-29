@@ -3,16 +3,14 @@ package mx.edu.utez.sigev.model;
 
 import java.io.Serializable;
 
-public class BeanUsuario implements  Serializable {
-
-
+public class BeanUsuario implements Serializable {
     private int idUsuario;
     private String correo;
     private String contrasena;
     private String telefono;
     private String codigoRecuperacion;
     private int estatusUsuario;
-    private BeanRol beanRol;
+    private BeanRol rol;
 
     public BeanUsuario() {
     }
@@ -66,10 +64,10 @@ public class BeanUsuario implements  Serializable {
     }
 
     public BeanRol getRol() {
-        return beanRol;
+        return rol;
     }
 
-    public void setRol(BeanRol beanRol) {
-        this.beanRol = beanRol;
+    public void setRol(BeanRol rol) {
+        this.rol = rol;
     }
 }

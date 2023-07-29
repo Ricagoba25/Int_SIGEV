@@ -1,12 +1,18 @@
 package mx.edu.utez.sigev.model;
 
-public class BeanDireccion {
-    int idDireccion;
-    String calle;
-    String colonia;
-    String municipio;
-    String noExterior;
-    String noInterior;
+import java.io.Serializable;
+
+public class BeanDireccion implements Serializable {
+    private int idDireccion;
+    private String calle;
+    private String colonia;
+    private String municipio;
+    private String noExterior;
+    private String noInterior;
+    private BeanEstado estado;
+
+    public BeanDireccion() {
+    }
 
     public int getIdDireccion() {
         return idDireccion;
@@ -54,5 +60,13 @@ public class BeanDireccion {
 
     public void setNoInterior(String noInterior) {
         this.noInterior = noInterior;
+    }
+
+    public BeanEstado getEstado() {
+        return estado;
+    }
+
+    public void setEstado(BeanEstado estado) {
+        this.estado = estado;
     }
 }

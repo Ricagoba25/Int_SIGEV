@@ -1,8 +1,13 @@
 package mx.edu.utez.sigev.model;
 
-public class BeanEstado {
-    int idEstado;
-    String nombre;
+import java.io.Serializable;
+
+public class BeanEstado implements Serializable {
+    private int idEstado;
+    private String nombre;
+
+    public BeanEstado() {
+    }
 
     public int getIdEstado() {
         return idEstado;

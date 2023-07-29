@@ -1,9 +1,14 @@
 package mx.edu.utez.sigev.model;
 
-public class BeanColor {
-    int idColor;
-    String nombreColor;
-    String codigo;
+import java.io.Serializable;
+
+public class BeanColor implements Serializable {
+    private int idColor;
+    private String nombreColor;
+    private String codigo;
+
+    public BeanColor() {
+    }
 
     public int getIdColor() {
         return idColor;

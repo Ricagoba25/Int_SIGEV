@@ -1,9 +1,13 @@
 package mx.edu.utez.sigev.model;
 
-public class BeanPermiso {
+import java.io.Serializable;
 
-    int idPermiso;
-    String nombrePermiso;
+public class BeanPermiso implements Serializable {
+    private int idPermiso;
+    private String nombrePermiso;
+
+    public BeanPermiso() {
+    }
 
     public int getIdPermiso() {
         return idPermiso;

@@ -1,13 +1,20 @@
 package mx.edu.utez.sigev.model;
 
-public class BeanOrganizacion {
-    int idOrganizacion;
-    String rfc;
-    String nombreOrganizacion;
-    String razonSocial;
-    String imagenLogotipo;
-    int estatusOrganizacion;
+import java.io.Serializable;
 
+public class BeanOrganizacion implements Serializable {
+    private int idOrganizacion;
+    private String rfc;
+    private String nombreOrganizacion;
+    private String razonSocial;
+    private String imagenLogotipo;
+    private int estatusOrganizacion;
+    private BeanUsuario usuario;
+    private BeanColor color;
+    private BeanDireccion direccion;
+
+    public BeanOrganizacion() {
+    }
 
     public int getIdOrganizacion() {
         return idOrganizacion;
@@ -53,7 +60,31 @@ public class BeanOrganizacion {
         return estatusOrganizacion;
     }
 
-    public void setEstatusOrganizacion(String estatusOrganizacion) {
-        this.estatusOrganizacion = Integer.parseInt(estatusOrganizacion);
+    public void setEstatusOrganizacion(int estatusOrganizacion) {
+        this.estatusOrganizacion = estatusOrganizacion;
+    }
+
+    public BeanUsuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(BeanUsuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public BeanColor getColor() {
+        return color;
+    }
+
+    public void setColor(BeanColor color) {
+        this.color = color;
+    }
+
+    public BeanDireccion getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(BeanDireccion direccion) {
+        this.direccion = direccion;
     }
 }

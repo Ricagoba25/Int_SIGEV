@@ -1,9 +1,14 @@
 package mx.edu.utez.sigev.model;
 
-public class BeanNotificacion {
-    int idNotificacion;
-    String mensaje;
-    int estatusNotificacion;
+import java.io.Serializable;
+
+public class BeanNotificacion implements Serializable {
+    private int idNotificacion;
+    private String mensaje;
+    private int estatusNotificacion;
+
+    public BeanNotificacion() {
+    }
 
     public int getIdNotificacion() {
         return idNotificacion;

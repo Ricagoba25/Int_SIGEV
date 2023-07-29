@@ -1,19 +1,22 @@
 package mx.edu.utez.sigev.model;
 
-public class BeanPersona {
+import java.io.Serializable;
+
+public class BeanPersona implements Serializable {
     private int idPersona;
     private String nombrePersona;
     private String primerApellido;
     private String segundoApellido;
+    private BeanUsuario usuario;
 
     public BeanPersona() {
     }
 
-    public BeanPersona(int idPersona, String nombrePersona, String primerApellido, String segundoApellido) {
-        this.idPersona = idPersona;
-        this.nombrePersona = nombrePersona;
-        this.primerApellido = primerApellido;
-        this.segundoApellido = segundoApellido;
+    public String getNombreCompleto() {
+        if (getSegundoApellido() != null) {
+            return getNombrePersona() + " " + getPrimerApellido() + " " + getSegundoApellido();
+        }
+        return getNombrePersona() + " " + getPrimerApellido();
     }
 
     public int getIdPersona() {
@@ -46,5 +49,13 @@ public class BeanPersona {
 
     public void setSegundoApellido(String segundoApellido) {
         this.segundoApellido = segundoApellido;
+    }
+
+    public BeanUsuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(BeanUsuario usuario) {
+        this.usuario = usuario;
     }
 }
