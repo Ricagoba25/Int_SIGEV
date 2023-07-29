@@ -51,9 +51,6 @@ public class DaoVoluntario {
 
             // Insertar en tabla "usuario"
             try (PreparedStatement stmtUsuario = conn.prepareStatement(INSERT_USUARIO)) {
-                stmtUsuario.setString(1, voluntario.getUsuario().getCorreo());
-                stmtUsuario.setString(2, voluntario.getUsuario().getContrasena());
-                stmtUsuario.setString(2, voluntario.getUsuario().getTelefono());
                 stmtUsuario.executeUpdate();
             }
 

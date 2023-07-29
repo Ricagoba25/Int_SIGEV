@@ -37,6 +37,11 @@ public class DaoPersona {
 
             if (ps.executeUpdate() > 0){
                 rest1 = true;
+                BeanPersona beanPersona = new BeanPersona();
+                beanPersona.setIdPersona(rs.getInt("idPersona"));
+                beanPersona.setNombrePersona(rs.getString("nombre"));
+                beanPersona.setPrimerApellido(rs.getString("primerApellido"));
+                beanPersona.setSegundoApellido(rs.getString("segundoApellido"));
                 System.out.println("Se Registro");
             }
 
