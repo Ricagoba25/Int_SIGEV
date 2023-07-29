@@ -6,10 +6,16 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class MysqlConector {
-    final String DBNAME = "sigev", USER = "root", PASSWORD = "root", TIMEZONE = "America/Mexico_City", USESSL = "false", PUBLICKEY = "true",
-            DDLAUTO = "true", HOST = "localhost";
+    static final String DBNAME = "sigev";
+    static final String USER = "root";
+    static final String PASSWORD = "root";
+    static final String TIMEZONE = "America/Mexico_City";
+    static final String USESSL = "false";
+    static final String PUBLICKEY = "true";
+    static final String DDLAUTO = "true";
+    static final String HOST = "localhost";
 
-    public Connection connect() {
+    public static Connection connect() {
         String dataSource =
                 String.format("jdbc:mysql://%s:3306/%s?user=%s&password=%s&serverTimezone=%s&useSSL=%s&allowPublicKeyRetrieval=%s&createDatabaseIfNotExist= %s", HOST, DBNAME, USER, PASSWORD, TIMEZONE, USESSL, PUBLICKEY, DDLAUTO);
         try {
