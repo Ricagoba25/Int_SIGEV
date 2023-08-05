@@ -10,17 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6867e21e-5850-4c68-9edf-2957e5a99de1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/utils/AdminSessionFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/acceso-denegado.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/ff1e38cb-0e0a-461a-88d3-8d20602b5a6b.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/ff1e38cb-0e0a-461a-88d3-8d20602b5a6b.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/utils/MysqlConector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/utils/MysqlConector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/dashboard/dashboardOrganizacion.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/dashboard/organizacion.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/dashboard/dashboardVoluntario.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/dashboard/voluntario.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/dashboard/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/dashboard/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -222,7 +212,7 @@
       <workItem from="1690229222643" duration="11987000" />
       <workItem from="1690426761878" duration="20574000" />
       <workItem from="1690469954135" duration="36585000" />
-      <workItem from="1691263742296" duration="6775000" />
+      <workItem from="1691263742296" duration="7143000" />
     </task>
     <servers />
   </component>
