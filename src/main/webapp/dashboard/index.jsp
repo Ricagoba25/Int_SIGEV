@@ -323,6 +323,7 @@
             $.ajax({
                 type: "POST",
                 url: "/sesion-servlet",
+                data: {accion : 'cerrarSesion'},
                 success: function (resp) {
                     console.log("si funciono");
                     // Redireccionar al usuario a la página de inicio de sesión
