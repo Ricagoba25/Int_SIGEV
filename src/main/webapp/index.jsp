@@ -122,7 +122,6 @@
                     // Procesar la respuesta del servlet si es necesario
                     console.log("Respuesta del servidor:", response);
 
-
                     $("#loading").hide();
                     $("#txt-btn").show();
 
@@ -136,25 +135,14 @@
                                 window.location.href = '../dashboard/index.jsp';
                                 break;
                             case "Organización":
-                                window.location.href = 'dashboard/dashboardOrganizacion.jsp';
+                                window.location.href = 'dashboard/organizacion.jsp';
                                 break;
                             case "Voluntario":
-                                window.location.href = 'dashboard/dashboardVoluntario.jsp';
+                                window.location.href = 'dashboard/voluntario.jsp';
                                 break;
                         }
                     }
 
-                   /* if (response.status === 'success') {
-
-                        /*setTimeout(() => {
-                                window.location.href = "dashboard";
-                            },
-                            1000)
-                        //  $("#loading").hide();
-
-                    } else {
-
-                    } */
                 },
                 error: function (error) {
                     loading = false;

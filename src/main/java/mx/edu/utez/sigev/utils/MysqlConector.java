@@ -6,7 +6,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class MysqlConector {
-    final String DBNAME = "sigev", USER = "root", PASSWORD = "root", TIMEZONE = "America/Mexico_City", USESSL = "false", PUBLICKEY = "true",
+    String password = "";
+    final String DBNAME = "sigev", USER = "root", PASSWORD = password, TIMEZONE = "America/Mexico_City", USESSL = "false", PUBLICKEY = "true",
             DDLAUTO = "true", HOST = "localhost";
 
     public Connection connect() {
