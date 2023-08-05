@@ -86,7 +86,7 @@
             messages: {
                 correo: {
                     required: "El correo es requerido.",
-                    email: "El correo electrónico debe ser en el siguiente formato name@domain.com."
+                    email: "El correo electrónico debe ser en el siguiente formato nombre@dominio.com."
                 },
                 contrasenia: "La contraseña es requerida.",
             },
@@ -104,17 +104,19 @@
 
             var correo = document.getElementById("correo").value;
             var contrasenia = document.getElementById("contrasenia").value;
+            var accion = 'iniciarSesion';
 
             // Objeto con los datos del formulario
             var formData = {
                 correo: correo,
-                contrasenia: contrasenia
+                contrasenia: contrasenia,
+                accion: accion
             };
 
             // Realizar la petición AJAX
             $.ajax({
                 type: "POST",
-                url: "/user-servlet",
+                url: "/sesion-servlet",
                 data: formData,
                 success: function (response) {
                     loading = false;
@@ -125,24 +127,12 @@
                     $("#loading").hide();
                     $("#txt-btn").show();
 
-                    if(response.error){
+                    if (response.error) {
                         $(".div-msg-error").show();
                         $('#msg-error').text(response.message);
-                    }else {
-
-                        switch (response.tipoSesion){
-                            case "Administrador":
-                                window.location.href = '../dashboard/index.jsp';
-                                break;
-                            case "Organización":
-                                window.location.href = 'dashboard/organizacion.jsp';
-                                break;
-                            case "Voluntario":
-                                window.location.href = 'dashboard/voluntario.jsp';
-                                break;
-                        }
+                    } else {
+                        window.location.href = '../dashboard/index.jsp';
                     }
-
                 },
                 error: function (error) {
                     loading = false;

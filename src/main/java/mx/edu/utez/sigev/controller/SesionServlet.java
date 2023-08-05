@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 import java.io.*;
 
 
-@WebServlet(name = "SesionServlet", value = "/Sesion-servlet")
+@WebServlet(name = "SesionServlet", value = "/sesion-servlet")
 public class SesionServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -31,35 +31,35 @@ public class SesionServlet extends HttpServlet {
 
         DaoUsuario daoUsuario = new DaoUsuario();
 
-        switch (accion){
+        switch (accion) {
             case "iniciarSesion":
                 BeanUsuario usuarioSesion = (BeanUsuario) daoUsuario.iniciarSesion(email, pass);
 
                 System.out.println("Id usuario logueado " + usuarioSesion.getIdUsuario());
                 if (usuarioSesion.getIdUsuario() != 0) {
 
-                    if(usuarioSesion.getEstatusUsuario() == 1){
+                    if (usuarioSesion.getEstatusUsuario() == 1) {
                         System.out.println("Inicie sesion con");
                         System.out.println(usuarioSesion.getIdUsuario());
                         System.out.println(usuarioSesion.getRol().getNombreRol());
 
                         request.getSession().setAttribute("tipoSesion", usuarioSesion.getRol().getNombreRol());
 
-                        switch (usuarioSesion.getRol().getNombreRol()){
+                        switch (usuarioSesion.getRol().getNombreRol()) {
                             case "Administrador":
-                                DaoPersona  daoPersona = new DaoPersona();
+                                DaoPersona daoPersona = new DaoPersona();
                                 BeanPersona personaSesion = (BeanPersona) daoPersona.findOne(usuarioSesion.getIdUsuario());
-                                request.getSession().setAttribute("sesion",personaSesion);
+                                request.getSession().setAttribute("sesion", personaSesion);
                                 break;
                             case "Organización":
                                 DaoOrganizacion daoOrganizacion = new DaoOrganizacion();
                                 BeanOrganizacion organizacionSesion = (BeanOrganizacion) daoOrganizacion.findOne(usuarioSesion.getIdUsuario());
-                                request.getSession().setAttribute("sesion",organizacionSesion);
+                                request.getSession().setAttribute("sesion", organizacionSesion);
                                 break;
                             case "Voluntario":
                                 DaoVoluntario daoVoluntario = new DaoVoluntario();
                                 BeanVoluntario voluntarioSesion = (BeanVoluntario) daoVoluntario.findOne(usuarioSesion.getIdUsuario());
-                                request.getSession().setAttribute("sesion",voluntarioSesion);
+                                request.getSession().setAttribute("sesion", voluntarioSesion);
                                 break;
                         }
 
@@ -83,7 +83,7 @@ public class SesionServlet extends HttpServlet {
             case "cerrarSesion":
                 HttpSession session = request.getSession(false);
 
-                if (session != null){
+                if (session != null) {
                     session.invalidate();
                 }
 

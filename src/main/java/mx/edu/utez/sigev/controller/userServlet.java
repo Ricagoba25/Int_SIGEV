@@ -1,9 +1,10 @@
 package mx.edu.utez.sigev.controller;
 
 
+import com.google.gson.JsonObject;
 import mx.edu.utez.sigev.model.BeanRol;
 import mx.edu.utez.sigev.model.BeanUsuario;
-import mx.edu.utez.sigev.model.DAO.UsuarioDao;
+import mx.edu.utez.sigev.model.DAO.DaoUsuario;
 
 
 import java.io.IOException;
@@ -13,7 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONObject;
 
 @WebServlet(name = "user", value = "/user-servlet")
 public class userServlet extends HttpServlet {
@@ -24,14 +24,14 @@ public class userServlet extends HttpServlet {
             throws ServletException, IOException {
 
         // Crear una respuesta en formato JSON
-        JSONObject jsonResponse = new JSONObject();
+        JsonObject jsonResponse = new JsonObject();
 
         // Obtener los datos del formulario
         String email = request.getParameter("correo");
         String pass = request.getParameter("contrasenia");
 
-        UsuarioDao dao = new UsuarioDao();
-        BeanUsuario usr = (BeanUsuario) dao.findOne(email, pass);
+        DaoUsuario dao = new DaoUsuario();
+        BeanUsuario usr = (BeanUsuario) dao.iniciarSesion(email, pass);
 
         if (usr.getIdUsuario() != 0) {
             //Set rol
@@ -46,17 +46,17 @@ public class userServlet extends HttpServlet {
             request.getSession().setAttribute("sesion",usr);
 
 
-            jsonResponse.put("error", 0);
-            jsonResponse.put("title", "");
-            jsonResponse.put("message", "Inicio se sesión exitoso");
+            jsonResponse.addProperty("error", 0);
+            jsonResponse.addProperty("title", "");
+            jsonResponse.addProperty("message", "Inicio se sesión exitoso");
             System.out.println("este es el rol" + beanRol.getNombreRol());
-            jsonResponse.put("tipoSesion", beanRol.getNombreRol() );
+            jsonResponse.addProperty("tipoSesion", beanRol.getNombreRol() );
 
         } else {
 
-            jsonResponse.put("error", 1);
-            jsonResponse.put("title", "Usuario no encontrado.");
-            jsonResponse.put("message", "El usuario o la contraseña son incorrectos.");
+            jsonResponse.addProperty("error", 1);
+            jsonResponse.addProperty("title", "Usuario no encontrado.");
+            jsonResponse.addProperty("message", "El usuario o la contraseña son incorrectos.");
 
         }
 

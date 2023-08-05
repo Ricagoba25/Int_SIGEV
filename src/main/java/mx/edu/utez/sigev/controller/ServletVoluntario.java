@@ -6,7 +6,6 @@ import mx.edu.utez.sigev.model.BeanVoluntario;
 import mx.edu.utez.sigev.model.DAO.DaoPersona;
 import mx.edu.utez.sigev.model.DAO.DaoUsuario;
 import mx.edu.utez.sigev.model.DAO.DaoVoluntario;
-import mx.edu.utez.sigev.model.DAO.UsuarioDao;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -63,11 +62,7 @@ public class ServletVoluntario extends HttpServlet {
 
                 DaoVoluntario daoVoluntario = new DaoVoluntario();
 
-                try {
-                    daoVoluntario.insertarVoluntario(voluntario);
-                }catch (SQLException e){
-                    System.out.println("Usuario no agregado");
-                }
+                daoVoluntario.insert(voluntario);
 
                 break;
         }

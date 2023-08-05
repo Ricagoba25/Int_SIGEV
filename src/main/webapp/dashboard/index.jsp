@@ -119,18 +119,26 @@
         <div class="sidebar">
             <!-- Sidebar user panel (optional) -->
             <c:if test="${not empty sesion}">
-            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                <div class="image">
-                    <img src="/assets/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-                </div>
-                <div class="info">
-                    <a href="#" class="d-block"> ${sesion.correo}</a>
-                    <c:if test="${tipoSesion == 'Administrador'}">
-                        <p class="mb-0 mt-0" style="color: #fff;">Eres <strong>Administrador</strong></p>
-                    </c:if>
-                </div>
+                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                    <div class="image">
+                        <img src="/assets/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                    </div>
+                    <div class="info">
+                        <c:if test="${tipoSesion == 'Administrador'}">
+                            <a href="#" class="d-block"> ${sesion.getNombreCompleto()}</a>
+                            <p class="mb-0 mt-0" style="color: #fff;">Eres <strong>Administrador</strong></p>
+                        </c:if>
+                        <c:if test="${tipoSesion == 'Organización'}">
+                            <a href="#" class="d-block"> ${sesion.getNombreOrganizacion()}</a>
+                            <p class="mb-0 mt-0" style="color: #fff;">Eres <strong>Organizacion</strong></p>
+                        </c:if>
+                        <c:if test="${tipoSesion == 'Voluntario'}">
+                            <a href="#" class="d-block"> ${sesion.getPersona().getNombreCompleto()}</a>
+                            <p class="mb-0 mt-0" style="color: #fff;">Eres <strong>Voluntario</strong></p>
+                        </c:if>
+                    </div>
 
-            </div>
+                </div>
             </c:if>
 
             <!-- SidebarSearch Form -->
@@ -314,7 +322,7 @@
             // Realizar una solicitud AJAX para cerrar la sesión en el servidor
             $.ajax({
                 type: "POST",
-                url: "/ServletCerrarSesion",
+                url: "/sesion-servlet",
                 success: function (resp) {
                     console.log("si funciono");
                     // Redireccionar al usuario a la página de inicio de sesión
