@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -54,11 +55,6 @@ public class AdministradorServlet extends HttpServlet {
         DaoPersona daoPersona = new DaoPersona();
 
         switch (accion) {
-            case "consultar":
-                List<BeanPersona> listaAdmins =  daoPersona.findAll();
-
-                request.getSession().setAttribute("listaAdmins", listaAdmins);
-                break;
             case "registrar":
                 Boolean resUsuario = daoUsuario.insert(usuario);
 
@@ -99,7 +95,21 @@ public class AdministradorServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("Entra al get");
-        resp.sendRedirect("../dashboard/index.jsp");
+        DaoPersona daoPersona = new DaoPersona();
+
+        List<BeanPersona> listaAdmins = new ArrayList<>();
+
+        try{
+            listaAdmins =  daoPersona.findAll();
+        }catch (NumberFormatException e){
+            e.printStackTrace();
+        }
+
+        Gson gson = new Gson();
+        String json = gson.toJson(listaAdmins);
+
+        resp.setContentType("text/json");
+        resp.getWriter().write(json);
+
     }
 }
