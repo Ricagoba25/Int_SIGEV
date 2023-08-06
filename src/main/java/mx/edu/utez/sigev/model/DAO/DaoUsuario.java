@@ -18,7 +18,12 @@ public class DaoUsuario implements DaoRepository {
 
     @Override
     public List findAll() {
-        return null;
+        BeanUsuario beanUsuario = new BeanUsuario();
+
+
+
+
+
     }
 
     @Override
