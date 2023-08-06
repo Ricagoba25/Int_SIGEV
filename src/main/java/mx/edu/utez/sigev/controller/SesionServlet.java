@@ -37,7 +37,6 @@ public class SesionServlet extends HttpServlet {
 
                 System.out.println("Id usuario logueado " + usuarioSesion.getIdUsuario());
                 if (usuarioSesion.getIdUsuario() != 0) {
-
                     if (usuarioSesion.getEstatusUsuario() == 1) {
                         System.out.println("Inicie sesion con");
                         System.out.println(usuarioSesion.getIdUsuario());
@@ -81,6 +80,8 @@ public class SesionServlet extends HttpServlet {
                 }
                 break;
             case "cerrarSesion":
+                request.getSession().removeAttribute("tipoSesion");
+                request.getSession().removeAttribute("sesion");
                 HttpSession session = request.getSession(false);
 
                 if (session != null) {
@@ -106,10 +107,8 @@ public class SesionServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("Entra al get");
+    protected void doGet(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException {
+        request.getSession().removeAttribute("sesion");
         resp.sendRedirect("index.jsp");
     }
-
-
 }

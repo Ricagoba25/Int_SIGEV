@@ -17,14 +17,7 @@ public class DaoUsuario implements DaoRepository {
     private ResultSet rs;
 
     @Override
-    public List findAll() {
-        BeanUsuario beanUsuario = new BeanUsuario();
-
-
-
-
-
-    }
+    public List findAll() { return null;}
 
     @Override
     public Object findOne(int id) {

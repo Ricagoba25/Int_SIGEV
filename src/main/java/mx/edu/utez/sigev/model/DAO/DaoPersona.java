@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DaoPersona implements DaoRepository {
@@ -18,7 +19,43 @@ public class DaoPersona implements DaoRepository {
 
     @Override
     public List findAll() {
-        return null;
+        List<BeanPersona> listaBeanPersona = new ArrayList<>();
+        try {
+            String query = "SELECT * FROM persona p " +
+                    "join usuario u on u.idUsuario = p.usuario_idUsuario " +
+                    "join rol r on u.rol_idRol = r.idRol " +
+                    "WHERE idRol = 1";
+
+            con = MysqlConector.connect();
+            pstm = con.prepareStatement(query);
+            rs = pstm.executeQuery();
+
+            while (rs.next()) {
+                BeanRol beanRol = new BeanRol();
+                beanRol.setIdRol(rs.getInt("idRol"));
+                beanRol.setNombreRol(rs.getString("nombreRol"));
+
+                BeanUsuario beanUsuario = new BeanUsuario();
+                beanUsuario.setIdUsuario(rs.getInt("idUsuario"));
+                beanUsuario.setCorreo(rs.getString("correo"));
+                beanUsuario.setContrasena(rs.getString("contrasena"));
+                beanUsuario.setTelefono(rs.getString("telefono"));
+                beanUsuario.setRol(beanRol);
+
+                BeanPersona beanPersona = new BeanPersona();
+                beanPersona.setIdPersona(rs.getInt("idPersona"));
+                beanPersona.setNombrePersona(rs.getString("nombrePersona"));
+                beanPersona.setPrimerApellido(rs.getString("primerApellido"));
+                beanPersona.setSegundoApellido(rs.getString("segundoApellido"));
+                beanPersona.setUsuario(beanUsuario);
+                listaBeanPersona.add(beanPersona);
+            }
+        } catch (SQLException e) {
+            System.err.println("Error en el método findAll() - DaoColor -> " + e.getMessage());
+        } finally {
+            cerrarConexiones("findAll");
+        }
+        return listaBeanPersona;
     }
 
 
@@ -28,7 +65,7 @@ public class DaoPersona implements DaoRepository {
         try {
             String query = "SELECT * FROM persona p " +
                     "join usuario u on u.idUsuario = p.usuario_idUsuario " +
-                    "join rol r on u.rol_idRol = r.idRol " +
+                    "join rol r on u.rol_idRol = r.idRol" +
                     "WHERE idUsuario = ?";
 
             con = MysqlConector.connect();
@@ -36,15 +73,15 @@ public class DaoPersona implements DaoRepository {
             pstm.setInt(1, id);
             rs = pstm.executeQuery();
             if (rs.next()) {
+                BeanRol beanRol = new BeanRol();
+                beanRol.setIdRol(rs.getInt("idRol"));
+                beanRol.setNombreRol(rs.getString("nombreRol"));
+
                 BeanUsuario beanUsuario = new BeanUsuario();
                 beanUsuario.setIdUsuario(rs.getInt("idUsuario"));
                 beanUsuario.setCorreo(rs.getString("correo"));
                 beanUsuario.setContrasena(rs.getString("contrasena"));
                 beanUsuario.setTelefono(rs.getString("telefono"));
-
-                BeanRol beanRol = new BeanRol();
-                beanRol.setIdRol(rs.getInt("idRol"));
-                beanRol.setNombreRol(rs.getString("nombreRol"));
                 beanUsuario.setRol(beanRol);
 
                 beanPersona.setIdPersona(rs.getInt("idPersona"));

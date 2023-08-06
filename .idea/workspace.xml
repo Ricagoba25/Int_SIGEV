@@ -18,6 +18,7 @@
       <change afterPath="$PROJECT_DIR$/src/main/webapp/templates/sidebar.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/ff1e38cb-0e0a-461a-88d3-8d20602b5a6b.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/ff1e38cb-0e0a-461a-88d3-8d20602b5a6b.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/utils/AdminSessionFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/utils/AdminSessionFilter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/acceso-denegado.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/acceso-denegado.jsp" afterDir="false" />
@@ -34,8 +35,10 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
+        <option value="Jsp File" />
         <option value="Sevlet" />
         <option value="Class" />
+        <option value="Sevlet" />
         <option value="Jsp File" />
         <option value="Servlet" />
       </list>
@@ -131,6 +134,9 @@
       <option name="UPDATE_ON_FRAME_DEACTIVATION" value="true" />
       <option name="UPDATE_CLASSES_ON_FRAME_DEACTIVATION" value="true" />
       <option name="UPDATING_POLICY" value="redeploy-artifacts" />
+    <configuration name="Tomcat 9.0.76" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.763" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
+      <option name="BROWSER_ID" value="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
+      <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
         <artifact name="demoRuiz:war exploded">
           <settings>
@@ -235,6 +241,7 @@
       <workItem from="1691267583729" duration="3689000" />
       <workItem from="1691263742296" duration="6775000" />
       <workItem from="1691263742296" duration="7143000" />
+      <workItem from="1691281002918" duration="4497000" />
     </task>
     <task id="LOCAL-00001" summary="Se agrega clase para enviar correos">
       <option name="closed" value="true" />
@@ -284,7 +291,31 @@
       <option name="project" value="LOCAL" />
       <updated>1690617952026</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Se crea y se utiliza SesionServlet">
+      <option name="closed" value="true" />
+      <created>1691271917384</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1691271917384</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Se corrige boton de cerrar sesión">
+      <option name="closed" value="true" />
+      <created>1691272222524</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1691272222524</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Se sube AdministradorServlet">
+      <option name="closed" value="true" />
+      <created>1691285891837</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1691285891837</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -307,7 +338,10 @@
     <MESSAGE value="Se convierten estaticas las variables para poder usarlas en los dao" />
     <MESSAGE value="Se realiza DaoUsuario completo" />
     <MESSAGE value="Se refactorizan daos" />
-    <option name="LAST_COMMIT_MESSAGE" value="Se refactorizan daos" />
+    <MESSAGE value="Se crea y se utiliza SesionServlet" />
+    <MESSAGE value="Se corrige boton de cerrar sesión" />
+    <MESSAGE value="Se sube AdministradorServlet" />
+    <option name="LAST_COMMIT_MESSAGE" value="Se sube AdministradorServlet" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
