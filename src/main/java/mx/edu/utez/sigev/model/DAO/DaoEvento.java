@@ -1,9 +1,12 @@
 package mx.edu.utez.sigev.model.DAO;
 
+import mx.edu.utez.sigev.model.BeanColor;
 import mx.edu.utez.sigev.model.BeanDireccion;
 import mx.edu.utez.sigev.model.BeanEstado;
+import mx.edu.utez.sigev.model.BeanEvento;
 import mx.edu.utez.sigev.utils.MysqlConector;
 
+import  java.sql.Date;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,22 +14,21 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DaoDireccion implements DaoRepository {
+public class DaoEvento implements DaoRepository {
     private Connection con;
     private PreparedStatement pstm;
     private ResultSet rs;
 
     @Override
     public List findAll() {
-        List<BeanDireccion> listaBeanDireccion = new ArrayList<>();
+        List<BeanEvento> listaBeanEvento = new ArrayList<>();
         try {
-            String query = "SELECT * FROM Direccion d join Estado e on d.estado_idEstado = e.idEstado";
+            String query = "SELECT * FROM evento";
             con = MysqlConector.connect();
             pstm = con.prepareStatement(query);
             rs = pstm.executeQuery();
 
             while (rs.next()) {
-
 
                 BeanEstado beanEstado = new BeanEstado();
                 beanEstado.setIdEstado(rs.getInt("idEstado"));
@@ -34,31 +36,35 @@ public class DaoDireccion implements DaoRepository {
 
                 BeanDireccion beanDireccion = new BeanDireccion();
 
-                beanDireccion.setIdDireccion(rs.getInt("idDireccion"));
                 beanDireccion.setCalle(rs.getString("calle"));
-                beanDireccion.setColonia(rs.getString("Colonia"));
+                beanDireccion.setColonia(rs.getString("colonia"));
                 beanDireccion.setMunicipio(rs.getString("municipio"));
                 beanDireccion.setNoExterior(rs.getString("noExterior"));
                 beanDireccion.setNoInterior(rs.getString("noInterior"));
-
-                //Seteas un objeto sobre otro
                 beanDireccion.setEstado(beanEstado);
 
-                listaBeanDireccion.add(beanDireccion);
+                BeanEvento beanEvento =  new BeanEvento();
+                beanEvento.setNombreEvento(rs.getString("nombreEvento"));
+                beanEvento.setDescripcion(rs.getString("descripcion"));
+                beanEvento.setFecha(rs.getDate("fecha"));
+                beanEvento.setEstatusEvento(rs.getInt("estatusEvento"));
+                beanEvento.setDireccion(beanDireccion);
+
+                listaBeanEvento.add(beanEvento);
             }
         } catch (SQLException e) {
-            System.err.println("Error en el método findAll() - DaoDireccion -> " + e.getMessage());
+            System.err.println("Error en el método findAll() - DaoColor -> " + e.getMessage());
         } finally {
             cerrarConexiones("findAll");
         }
-        return listaBeanDireccion;
+        return listaBeanEvento;
     }
 
     @Override
     public Object findOne(int id) {
-        BeanDireccion beanDireccion = new BeanDireccion();
+        BeanEvento beanEvento = new BeanEvento();
         try {
-            String query = "SELECT * FROM direccion d join Estado e  WHERE d.idDireccion = ?";
+            String query = "SELECT * FROM evento WHERE idEvento = ?";
             con = MysqlConector.connect();
             pstm = con.prepareStatement(query);
             pstm.setInt(1, id);
@@ -69,8 +75,8 @@ public class DaoDireccion implements DaoRepository {
                 beanEstado.setIdEstado(rs.getInt("idEstado"));
                 beanEstado.setNombre(rs.getString("nombre"));
 
+                BeanDireccion beanDireccion = new BeanDireccion();
 
-                beanDireccion.setIdDireccion(rs.getInt("idDireccion"));
                 beanDireccion.setCalle(rs.getString("calle"));
                 beanDireccion.setColonia(rs.getString("colonia"));
                 beanDireccion.setMunicipio(rs.getString("municipio"));
@@ -78,33 +84,39 @@ public class DaoDireccion implements DaoRepository {
                 beanDireccion.setNoInterior(rs.getString("noInterior"));
                 beanDireccion.setEstado(beanEstado);
 
+                beanEvento.setNombreEvento(rs.getString("nombreEvento"));
+                beanEvento.setDescripcion(rs.getString("descripcion"));
+                beanEvento.setFecha(rs.getDate("fecha"));
+                beanEvento.setEstatusEvento(rs.getInt("estatusEvento"));
+                beanEvento.setDireccion(beanDireccion);
+
             }
         } catch (SQLException e) {
-            System.err.println("Error en el método findOne() - DaoColor -> " + e.getMessage());
+            System.err.println("Error en el método findOne() - DaoEvento -> " + e.getMessage());
         } finally {
             cerrarConexiones("findOne");
         }
-        return beanDireccion;
+        return beanEvento;
     }
 
     @Override
     public boolean update(int id, Object object) {
         boolean modificado = false;
-        BeanDireccion direccion = (BeanDireccion) object;
+        BeanEvento evento = (BeanEvento) object;
         try {
-            String query = "UPDATE  direccion SET calle = ?, colonia = ?, municipio = ?, noExterior = ?, noInterior = ?, estado_idEstado = ? where = idDireccion = ?";
+            String query = "UPDATE evento SET nombreEvento = ?, descripcion = ?, fecha = ?, estatusEvento = ?, direccion ?  WHERE idEvento = ?";
             con = MysqlConector.connect();
             pstm = con.prepareStatement(query);
 
-            pstm.setString(1, direccion.getCalle());
-            pstm.setString(2, direccion.getColonia());
-            pstm.setString(3, direccion.getMunicipio());
-            pstm.setString(4,direccion.getNoExterior());
-            pstm.setString(5,direccion.getNoExterior());
-            pstm.setInt(6,direccion.getEstado().getIdEstado());
+            pstm.setString(1, evento.getNombreEvento());
+            pstm.setString(2, evento.getDescripcion());
+            pstm.setString(3, evento.getFecha().toString());
+            pstm.setInt(4, evento.getEstatusEvento());
+            pstm.setInt(5, evento.getDireccion().getIdDireccion());
+
             modificado = pstm.executeUpdate() > 0;
         } catch (SQLException e) {
-            System.err.println("Error en el método update() - DaoDireccion -> " + e.getMessage());
+            System.err.println("Error en el método update() - DaoColor -> " + e.getMessage());
         } finally {
             cerrarConexiones("update");
         }
@@ -115,14 +127,14 @@ public class DaoDireccion implements DaoRepository {
     public boolean delete(int id) {
         boolean eliminado = false;
         try {
-            String query = "DELETE FROM direccion WHERE estado_idEstado = ?";
+            String query = "DELETE FROM evento WHERE idevento = ?";
 
             con = MysqlConector.connect();
             pstm = con.prepareStatement(query);
             pstm.setInt(1, id);
             eliminado = pstm.executeUpdate() > 0;
         } catch (SQLException e) {
-            System.err.println("Error en el método delete() - DaoDireccion -> " + e.getMessage());
+            System.err.println("Error en el método delete() - DaoColor -> " + e.getMessage());
         } finally {
             cerrarConexiones("delete");
         }
@@ -131,24 +143,25 @@ public class DaoDireccion implements DaoRepository {
 
     @Override
     public boolean insert(Object object) {
-        BeanDireccion direccion = (BeanDireccion) object;
+        BeanEvento evento = (BeanEvento) object;
         boolean registrado = false;
         try {
-            String query = "INSERT INTO direcion (calle, colonia, municipio, noExterior, noInterior, estado_idEstado) values(?,?,?,?,?,?)";
+            String query = "INSERT INTO evento (nombreEvento, descripcion, fecha, estatusEvento, direccion_idDirecion) values(?,?,?,?,?,?)";
 
             con = MysqlConector.connect();
             pstm = con.prepareStatement(query);
 
-            pstm.setString(1, direccion.getCalle());
-            pstm.setString(2, direccion.getColonia());
-            pstm.setString(3, direccion.getMunicipio());
-            pstm.setString(4, direccion.getNoExterior());
-            pstm.setString(5, direccion.getNoInterior());
-            pstm.setInt(6, direccion.getEstado().getIdEstado());
+
+            pstm.setString(1, evento.getNombreEvento());
+            pstm.setString(2, evento.getDescripcion());
+            pstm.setString(3,evento.getFecha().toString());
+            pstm.setInt(4, evento.getEstatusEvento());
+            pstm.setInt(5, evento.getDireccion().getIdDireccion());
+
 
             registrado = pstm.executeUpdate() > 0;
         } catch (SQLException e) {
-            System.err.println("Error en el método insert() - DaoDireccion -> " + e.getMessage());
+            System.err.println("Error en el método insert() - DaoColor -> " + e.getMessage());
         } finally {
             cerrarConexiones("insert");
         }
@@ -167,7 +180,7 @@ public class DaoDireccion implements DaoRepository {
                 con.close();
             }
         } catch (SQLException e) {
-            System.err.println("Error al cerrar conexiones - DaoDireccion - en el método " + metodo + " -> " + e.getMessage());
+            System.err.println("Error al cerrar conexiones - DaoColor - en el método " + metodo + " -> " + e.getMessage());
         }
     }
 }

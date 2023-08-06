@@ -10,8 +10,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6867e21e-5850-4c68-9edf-2957e5a99de1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/model/DAO/DaoDireccion.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/model/DAO/DaoEvento.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/model/DAO/DaoDireccion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/model/DAO/DaoDireccion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/utils/MysqlConector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/utils/MysqlConector.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -209,7 +212,7 @@
       <workItem from="1691267583729" duration="3689000" />
       <workItem from="1691263742296" duration="6775000" />
       <workItem from="1691263742296" duration="7143000" />
-      <workItem from="1691281002918" duration="4497000" />
+      <workItem from="1691281002918" duration="10847000" />
     </task>
     <task id="LOCAL-00001" summary="Se agrega clase para enviar correos">
       <option name="closed" value="true" />
