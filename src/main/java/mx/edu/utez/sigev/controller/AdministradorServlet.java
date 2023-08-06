@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@WebServlet(name = "AdministradorServlet", value = "/Administrador-servlet")
+@WebServlet(name = "AdministradorServlet", value = "/administrador")
 public class AdministradorServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

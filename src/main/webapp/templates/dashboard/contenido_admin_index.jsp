@@ -2,6 +2,6 @@
 
 
 <div>
-    <h1>Bienvenido a mi página</h1>
+    <h1>Bienvenido al index admin</h1>
     <!-- Resto del contenido de la página -->
 </div>
