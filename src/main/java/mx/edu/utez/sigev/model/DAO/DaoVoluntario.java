@@ -74,7 +74,7 @@ public class DaoVoluntario implements DaoRepository {
             String query = "SELECT * FROM voluntario v " +
                     "join persona p on v.persona_idPersona = p.idPersona " +
                     "join usuario u on u.idUsuario = p.usuario_idUsuario " +
-                    "join rol r on u.rol_idRol = r.idRol" +
+                    "join rol r on u.rol_idRol = r.idRol " +
                     "WHERE idUsuario = ?";
 
             con = MysqlConector.connect();
