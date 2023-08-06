@@ -2,6 +2,7 @@
 
 <%
     request.setAttribute("pageTitle", "Usuarios | SIGEV");
+    request.setAttribute("url_parent", "./contenido_usuarios_index.jsp");
 %>
 <!-- Incluye el template -->
 <jsp:include page="../templates/dashboard/template_dashboard.jsp" />
