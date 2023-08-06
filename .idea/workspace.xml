@@ -10,8 +10,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6867e21e-5850-4c68-9edf-2957e5a99de1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/model/DAO/DaoDireccion.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/controller/AdministradorServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/controller/ServletCerrarSesion.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/controller/SesionServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/controller/SesionServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/model/DAO/DaoOrganizacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/model/DAO/DaoOrganizacion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/model/DAO/DaoPersona.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/model/DAO/DaoPersona.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/model/DAO/DaoUsuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/model/DAO/DaoUsuario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/model/DAO/DaoVoluntario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/model/DAO/DaoVoluntario.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,8 +30,8 @@
         <option value="Servlet" />
         <option value="Interface" />
         <option value="Jsp File" />
-        <option value="Sevlet" />
         <option value="Class" />
+        <option value="Sevlet" />
       </list>
     </option>
   </component>
@@ -259,7 +265,23 @@
       <option name="project" value="LOCAL" />
       <updated>1690617952026</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Se crea y se utiliza SesionServlet">
+      <option name="closed" value="true" />
+      <created>1691271917384</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1691271917384</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Se corrige boton de cerrar sesión">
+      <option name="closed" value="true" />
+      <created>1691272222524</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1691272222524</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -282,7 +304,9 @@
     <MESSAGE value="Se convierten estaticas las variables para poder usarlas en los dao" />
     <MESSAGE value="Se realiza DaoUsuario completo" />
     <MESSAGE value="Se refactorizan daos" />
-    <option name="LAST_COMMIT_MESSAGE" value="Se refactorizan daos" />
+    <MESSAGE value="Se crea y se utiliza SesionServlet" />
+    <MESSAGE value="Se corrige boton de cerrar sesión" />
+    <option name="LAST_COMMIT_MESSAGE" value="Se corrige boton de cerrar sesión" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

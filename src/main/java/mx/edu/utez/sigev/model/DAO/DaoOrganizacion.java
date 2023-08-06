@@ -1,6 +1,6 @@
 package mx.edu.utez.sigev.model.DAO;
 
-import mx.edu.utez.sigev.model.BeanOrganizacion;
+import mx.edu.utez.sigev.model.*;
 import mx.edu.utez.sigev.utils.MysqlConector;
 
 import java.sql.Connection;
@@ -23,12 +23,43 @@ public class DaoOrganizacion implements DaoRepository {
                     "join color c on c.idColor = o.color_idColor " +
                     "join direccion d on d.idDireccion = o.direccion_idDireccion " +
                     "join estado e on e.idEstado = d.estado_idEstado " +
-                    "join usuario u on o.usuario_idUsuario = u.idUsuario";
+                    "join usuario u on o.usuario_idUsuario = u.idUsuario " +
+                    "join rol r on u.rol_idRol = r.idRol";
             con = MysqlConector.connect();
             pstm = con.prepareStatement(query);
             rs = pstm.executeQuery();
 
             while (rs.next()) {
+                BeanEstado beanEstado = new BeanEstado();
+                beanEstado.setIdEstado(rs.getInt("idEstado"));
+                beanEstado.setNombre(rs.getString("nombre"));
+
+                BeanDireccion beanDireccion = new BeanDireccion();
+                beanDireccion.setIdDireccion(rs.getInt("idDireccion"));
+                beanDireccion.setCalle(rs.getString("calle"));
+                beanDireccion.setColonia(rs.getString("colonia"));
+                beanDireccion.setMunicipio(rs.getString("municipio"));
+                beanDireccion.setNoExterior(rs.getString("noExterior"));
+                beanDireccion.setNoInterior(rs.getString("noInterior"));
+                beanDireccion.setEstado(beanEstado);
+
+                BeanRol beanRol = new BeanRol();
+                beanRol.setIdRol(rs.getInt("idRol"));
+                beanRol.setNombreRol(rs.getString("nombreRol"));
+
+                BeanUsuario beanUsuario = new BeanUsuario();
+                beanUsuario.setIdUsuario(rs.getInt("idUsuario"));
+                beanUsuario.setCorreo(rs.getString("correo"));
+                beanUsuario.setContrasena(rs.getString("contrasena"));
+                beanUsuario.setTelefono(rs.getString("telefono"));
+                beanUsuario.setEstatusUsuario(rs.getInt("estatusUsuario"));
+                beanUsuario.setRol(beanRol);
+
+                BeanColor beanColor = new BeanColor();
+                beanColor.setIdColor(rs.getInt("idColor"));
+                beanColor.setNombreColor(rs.getString("nombreColor"));
+                beanColor.setCodigo(rs.getString("codigo"));
+
                 BeanOrganizacion beanOrganizacion = new BeanOrganizacion();
                 beanOrganizacion.setIdOrganizacion(rs.getInt("idOrganizacion"));
                 beanOrganizacion.setRfc(rs.getString("rfc"));
@@ -36,6 +67,9 @@ public class DaoOrganizacion implements DaoRepository {
                 beanOrganizacion.setRazonSocial(rs.getString("razonSocial"));
                 beanOrganizacion.setImagenLogotipo(rs.getString("imagenLogotipo"));
                 beanOrganizacion.setEstatusOrganizacion(rs.getInt("estatusOrganizacion"));
+                beanOrganizacion.setUsuario(beanUsuario);
+                beanOrganizacion.setColor(beanColor);
+                beanOrganizacion.setDireccion(beanDireccion);
                 listaBeanOrganizacion.add(beanOrganizacion);
             }
         } catch (SQLException e) {
@@ -55,14 +89,53 @@ public class DaoOrganizacion implements DaoRepository {
                     "join direccion d on d.idDireccion = o.direccion_idDireccion " +
                     "join estado e on e.idEstado = d.estado_idEstado " +
                     "join usuario u on o.usuario_idUsuario = u.idUsuario " +
+                    "join rol r on u.rol_idRol = r.idRol" +
                     "WHERE idUsuario = ?";
+
             con = MysqlConector.connect();
             pstm = con.prepareStatement(query);
             pstm.setInt(1, id);
             rs = pstm.executeQuery();
             if (rs.next()) {
+                BeanEstado beanEstado = new BeanEstado();
+                beanEstado.setIdEstado(rs.getInt("idEstado"));
+                beanEstado.setNombre(rs.getString("nombre"));
+
+                BeanDireccion beanDireccion = new BeanDireccion();
+                beanDireccion.setIdDireccion(rs.getInt("idDireccion"));
+                beanDireccion.setCalle(rs.getString("calle"));
+                beanDireccion.setColonia(rs.getString("colonia"));
+                beanDireccion.setMunicipio(rs.getString("municipio"));
+                beanDireccion.setNoExterior(rs.getString("noExterior"));
+                beanDireccion.setNoInterior(rs.getString("noInterior"));
+                beanDireccion.setEstado(beanEstado);
+
+                BeanRol beanRol = new BeanRol();
+                beanRol.setIdRol(rs.getInt("idRol"));
+                beanRol.setNombreRol(rs.getString("nombreRol"));
+
+                BeanUsuario beanUsuario = new BeanUsuario();
+                beanUsuario.setIdUsuario(rs.getInt("idUsuario"));
+                beanUsuario.setCorreo(rs.getString("correo"));
+                beanUsuario.setContrasena(rs.getString("contrasena"));
+                beanUsuario.setTelefono(rs.getString("telefono"));
+                beanUsuario.setEstatusUsuario(rs.getInt("estatusUsuario"));
+                beanUsuario.setRol(beanRol);
+
+                BeanColor beanColor = new BeanColor();
+                beanColor.setIdColor(rs.getInt("idColor"));
+                beanColor.setNombreColor(rs.getString("nombreColor"));
+                beanColor.setCodigo(rs.getString("codigo"));
+
                 beanOrganizacion.setIdOrganizacion(rs.getInt("idOrganizacion"));
+                beanOrganizacion.setRfc(rs.getString("rfc"));
                 beanOrganizacion.setNombreOrganizacion(rs.getString("nombreOrganizacion"));
+                beanOrganizacion.setRazonSocial(rs.getString("razonSocial"));
+                beanOrganizacion.setImagenLogotipo(rs.getString("imagenLogotipo"));
+                beanOrganizacion.setEstatusOrganizacion(rs.getInt("estatusOrganizacion"));
+                beanOrganizacion.setUsuario(beanUsuario);
+                beanOrganizacion.setColor(beanColor);
+                beanOrganizacion.setDireccion(beanDireccion);
             }
         } catch (SQLException e) {
             System.err.println("Error en el método findOne() - DaoOrganizacion -> " + e.getMessage());
