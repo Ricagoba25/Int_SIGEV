@@ -75,7 +75,7 @@ public class DaoVoluntario implements DaoRepository {
                     "join persona p on v.persona_idPersona = p.idPersona " +
                     "join usuario u on u.idUsuario = p.usuario_idUsuario " +
                     "join rol r on u.rol_idRol = r.idRol " +
-                    "WHERE idUsuario = ?";
+                    "WHERE u.idUsuario = ?";
 
             con = MysqlConector.connect();
             pstm = con.prepareStatement(query);
