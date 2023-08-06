@@ -17,13 +17,13 @@
 <div class="container">
     <div class="row">
         <div class="col-xl-12 text-center">
-
             <div class="code"> 403  </div>
             <h1><code>Acceso Denegado</code></h1>
             <hr>
             <h3 class="text-center">No tienes permiso para ver este sitio.</h3>
             <h3 class="">🚫🚫🚫🚫</h3>
             <h6 class="w3-center w3-animate-zoom">Código de Error: 403 acceso denegado</h6>
+            <a class="mt-2" href="/index.jsp"> Regresar al inicio </a>
         </div>
     </div>
 

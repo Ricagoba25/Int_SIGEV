@@ -110,22 +110,7 @@
     </a>
 
     <!-- Sidebar -->
-    <div class="sidebar">
-      <!-- Sidebar user panel (optional) -->
-      <c:if test="${not empty sesion}">
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-          <div class="image">
-            <img src="/assets/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-          </div>
-          <div class="info">
-            <a href="#" class="d-block"> ${sesion.correo}</a>
-            <c:if test="${tipoSesion == 'Voluntario'}">
-              <p class="mb-0 mt-0" style="color: #fff;">Eres un <strong>Voluntario</strong></p>
-            </c:if>
-          </div>
 
-        </div>
-      </c:if>
 
       <!-- SidebarSearch Form -->
       <div class="form-inline">

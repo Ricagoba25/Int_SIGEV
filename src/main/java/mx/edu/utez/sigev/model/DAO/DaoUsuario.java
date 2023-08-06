@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DaoUsuario implements DaoRepository {
@@ -16,9 +17,7 @@ public class DaoUsuario implements DaoRepository {
     private ResultSet rs;
 
     @Override
-    public List findAll() {
-        return null;
-    }
+    public List findAll() { return null;}
 
     @Override
     public Object findOne(int id) {
@@ -30,15 +29,15 @@ public class DaoUsuario implements DaoRepository {
             pstm.setInt(1, id);
             rs = pstm.executeQuery();
             if (rs.next()) {
-                BeanRol beanRol = new BeanRol();
-                beanRol.setIdRol(rs.getInt("idRol"));
-                beanRol.setNombreRol(rs.getString("nombreRol"));
-
                 beanUsuario.setIdUsuario(rs.getInt("idUsuario"));
                 beanUsuario.setCorreo(rs.getString("correo"));
                 beanUsuario.setContrasena(rs.getString("contrasena"));
                 beanUsuario.setTelefono(rs.getString("telefono"));
                 beanUsuario.setEstatusUsuario(rs.getInt("estatusUsuario"));
+
+                BeanRol beanRol = new BeanRol();
+                beanRol.setIdRol(rs.getInt("idRol"));
+                beanRol.setNombreRol(rs.getString("nombreRol"));
                 beanUsuario.setRol(beanRol);
             }
         } catch (SQLException e) {
@@ -58,15 +57,15 @@ public class DaoUsuario implements DaoRepository {
             pstm.setString(1, correo);
             rs = pstm.executeQuery();
             if (rs.next()) {
-                BeanRol beanRol = new BeanRol();
-                beanRol.setIdRol(rs.getInt("idRol"));
-                beanRol.setNombreRol(rs.getString("nombreRol"));
-
                 beanUsuario.setIdUsuario(rs.getInt("idUsuario"));
                 beanUsuario.setCorreo(rs.getString("correo"));
                 beanUsuario.setContrasena(rs.getString("contrasena"));
                 beanUsuario.setTelefono(rs.getString("telefono"));
                 beanUsuario.setEstatusUsuario(rs.getInt("estatusUsuario"));
+
+                BeanRol beanRol = new BeanRol();
+                beanRol.setIdRol(rs.getInt("idRol"));
+                beanRol.setNombreRol(rs.getString("nombreRol"));
                 beanUsuario.setRol(beanRol);
             }
         } catch (SQLException e) {
@@ -87,15 +86,15 @@ public class DaoUsuario implements DaoRepository {
             pstm.setString(2, contrasena);
             rs = pstm.executeQuery();
             if (rs.next()) {
-                BeanRol beanRol = new BeanRol();
-                beanRol.setIdRol(rs.getInt("idRol"));
-                beanRol.setNombreRol(rs.getString("nombreRol"));
-
                 beanUsuario.setIdUsuario(rs.getInt("idUsuario"));
                 beanUsuario.setCorreo(rs.getString("correo"));
                 beanUsuario.setContrasena(rs.getString("contrasena"));
                 beanUsuario.setTelefono(rs.getString("telefono"));
                 beanUsuario.setEstatusUsuario(rs.getInt("estatusUsuario"));
+
+                BeanRol beanRol = new BeanRol();
+                beanRol.setIdRol(rs.getInt("idRol"));
+                beanRol.setNombreRol(rs.getString("nombreRol"));
                 beanUsuario.setRol(beanRol);
             }
         } catch (SQLException e) {
