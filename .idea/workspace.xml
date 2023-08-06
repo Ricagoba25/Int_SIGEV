@@ -10,11 +10,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6867e21e-5850-4c68-9edf-2957e5a99de1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/model/DAO/DaoEvento.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/utils/CorsFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/model/DAO/DaoDireccion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/model/DAO/DaoDireccion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/utils/MysqlConector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/utils/MysqlConector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/controller/AdministradorServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/controller/AdministradorServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/dashboard/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/dashboard/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/dashboard/usuarios.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/dashboard/usuarios.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/dashboard/contenido_admin_index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/templates/dashboard/contenido_admin_index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/dashboard/contenido_usuarios_index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/templates/dashboard/contenido_usuarios_index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/dashboard/template_dashboard.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/templates/dashboard/template_dashboard.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,7 +28,6 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Servlet" />
         <option value="Interface" />
         <option value="Jsp File" />
         <option value="Sevlet" />
@@ -212,7 +215,7 @@
       <workItem from="1691267583729" duration="3689000" />
       <workItem from="1691263742296" duration="6775000" />
       <workItem from="1691263742296" duration="7143000" />
-      <workItem from="1691281002918" duration="10847000" />
+      <workItem from="1691281002918" duration="4497000" />
     </task>
     <task id="LOCAL-00001" summary="Se agrega clase para enviar correos">
       <option name="closed" value="true" />

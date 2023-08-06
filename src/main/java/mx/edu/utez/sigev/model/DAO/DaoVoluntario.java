@@ -1,6 +1,8 @@
 package mx.edu.utez.sigev.model.DAO;
 
-import mx.edu.utez.sigev.model.*;
+import mx.edu.utez.sigev.model.BeanPersona;
+import mx.edu.utez.sigev.model.BeanRol;
+import mx.edu.utez.sigev.model.BeanUsuario;
 import mx.edu.utez.sigev.model.BeanVoluntario;
 import mx.edu.utez.sigev.utils.MysqlConector;
 
@@ -17,25 +19,31 @@ public class DaoVoluntario implements DaoRepository {
     private PreparedStatement pstm;
     private ResultSet rs;
     MysqlConector mysqlConector = new MysqlConector();
-    
+
     @Override
     public List findAll() {
         List<BeanVoluntario> listaBeanVoluntario = new ArrayList<>();
         try {
             String query = "SELECT * FROM voluntario v " +
                     "join persona p on v.persona_idPersona = p.idPersona " +
-                    "join usuario u on u.idUsuario = p.usuario_idUsuario ";
+                    "join usuario u on u.idUsuario = p.usuario_idUsuario " +
+                    "join rol r on u.rol_idRol = r.idRol";
 
             con = MysqlConector.connect();
             pstm = con.prepareStatement(query);
             rs = pstm.executeQuery();
 
             while (rs.next()) {
+                BeanRol beanRol = new BeanRol();
+                beanRol.setIdRol(rs.getInt("idRol"));
+                beanRol.setNombreRol(rs.getString("nombreRol"));
+
                 BeanUsuario beanUsuario = new BeanUsuario();
                 beanUsuario.setIdUsuario(rs.getInt("idUsuario"));
                 beanUsuario.setCorreo(rs.getString("correo"));
                 beanUsuario.setContrasena(rs.getString("contrasena"));
                 beanUsuario.setTelefono(rs.getString("telefono"));
+                beanUsuario.setRol(beanRol);
 
                 BeanPersona beanPersona = new BeanPersona();
                 beanPersona.setIdPersona(rs.getInt("idPersona"));
@@ -66,23 +74,23 @@ public class DaoVoluntario implements DaoRepository {
             String query = "SELECT * FROM voluntario v " +
                     "join persona p on v.persona_idPersona = p.idPersona " +
                     "join usuario u on u.idUsuario = p.usuario_idUsuario " +
-                    "join rol r on r.idRol = u.rol_idRol " +
-                    "WHERE idUsuario = ?";
+                    "join rol r on u.rol_idRol = r.idRol " +
+                    "WHERE u.idUsuario = ?";
 
             con = MysqlConector.connect();
             pstm = con.prepareStatement(query);
             pstm.setInt(1, id);
             rs = pstm.executeQuery();
             if (rs.next()) {
+                BeanRol beanRol = new BeanRol();
+                beanRol.setIdRol(rs.getInt("idRol"));
+                beanRol.setNombreRol(rs.getString("nombreRol"));
+
                 BeanUsuario beanUsuario = new BeanUsuario();
                 beanUsuario.setIdUsuario(rs.getInt("idUsuario"));
                 beanUsuario.setCorreo(rs.getString("correo"));
                 beanUsuario.setContrasena(rs.getString("contrasena"));
                 beanUsuario.setTelefono(rs.getString("telefono"));
-
-                BeanRol beanRol = new BeanRol();
-                beanRol.setIdRol(rs.getInt("idRol"));
-                beanRol.setNombreRol(rs.getString("nombreRol"));
                 beanUsuario.setRol(beanRol);
 
                 BeanPersona beanPersona = new BeanPersona();

@@ -9,7 +9,7 @@ import java.io.IOException;
 
 
 @WebFilter(urlPatterns = {
-        "/dashboard/index.jsp",
+        "/dashboard/organizacion.jsp",
 
 }) // This filter will be applied to all URLs
 
