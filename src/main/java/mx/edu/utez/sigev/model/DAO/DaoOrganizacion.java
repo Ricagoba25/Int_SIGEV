@@ -89,8 +89,8 @@ public class DaoOrganizacion implements DaoRepository {
                     "join direccion d on d.idDireccion = o.direccion_idDireccion " +
                     "join estado e on e.idEstado = d.estado_idEstado " +
                     "join usuario u on o.usuario_idUsuario = u.idUsuario " +
-                    "join rol r on u.rol_idRol = r.idRol" +
-                    "WHERE idUsuario = ?";
+                    "join rol r on u.rol_idRol = r.idRol " +
+                    "WHERE u.idUsuario = ?";
 
             con = MysqlConector.connect();
             pstm = con.prepareStatement(query);
