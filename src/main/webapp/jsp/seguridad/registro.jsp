@@ -70,17 +70,41 @@
             </div>
             <!-- Segunda Fila-->
             <div class="row mt-2">
-              <div class="col-xl-8">
-                <label for="direccion" class="form-label">Dirección:</label>
-                <input type="text" name="direccion" class="form-control" id="direccion" required>
-              </div>
               <div class="col-xl-4">
-                <label for="telefono" class="form-label">Teléfono:</label>
-                <input type="text" name="telefonoOrganizacion" class="form-control" id="telefonoOrganizacion" required>
+                <label for="calle" class="form-label">Calle:</label>
+                <input type="text" name="calle" class="form-control" id="calle" required>
+              </div>
+              <div class="col-xl-3">
+                <label for="noExterior" class="form-label">No Exterior:</label>
+                <input type="text" name="noExterior" class="form-control" id="noExterior" required>
+              </div>
+              <div class="col-xl-3">
+                <label for="noInterior" class="form-label">No Interior:</label>
+                <input type="text" name="noInterior" class="form-control" id="noInterior" required>
               </div>
             </div>
             <!-- Tercera linea-->
             <div class="row mt-2">
+              <div class="col-xl-4">
+                <label for="colonia" class="form-label">Colonia:</label>
+                <input type="text" name="colonia" class="form-control" id="colonia" required>
+              </div>
+              <div class="col-xl-4">
+                <label for="municipio" class="form-label">Municipio:</label>
+                <input type="text" name="municipio" class="form-control" id="municipio" required>
+              </div>
+              <div class="col-xl-4">
+                <label for="estado" class="form-label">Estado:</label>
+                <input type="text" name="estado" class="form-control" id="estado" required>
+              </div>
+
+            </div>
+            <!-- Cuarta linea-->
+            <div class="row mt-2">
+              <div class="col-xl-4">
+                <label for="telefono" class="form-label">Teléfono:</label>
+                <input type="text" name="telefonoOrganizacion" class="form-control" id="telefonoOrganizacion" required>
+              </div>
               <div class="col-xl-4">
                 <label for="correo" class="form-label">Email:</label>
                 <input type="email" name="correoOrganizacion" class="form-control" id="correoOrganizacion" required>
@@ -128,11 +152,7 @@
             </div>
             <!-- Segunda Fila-->
             <div class="row mt-2">
-              <div class="col-xl-4">
-                <label for="telefono" class="form-label">Teléfono:</label>
-                <input type="text" name="telefono" class="form-control" id="telefono">
-              </div>
-              <div class="col-xl-8">
+              <div class="col-xl-6">
                 <label for="curp" class="form-label">Curp:</label>
                 <input type="text" name="curp" class="form-control" id="curp">
               </div>
@@ -140,7 +160,11 @@
             <!-- Tercera linea-->
             <div class="row mt-2">
               <div class="col-xl-4">
-                <label for="correo" class="form-label">CORREO:</label>
+                <label for="telefono" class="form-label">Teléfono:</label>
+                <input type="text" name="telefono" class="form-control" id="telefono">
+              </div>
+              <div class="col-xl-4">
+                <label for="correo" class="form-label">Email:</label>
                 <input type="text" name="correo" class="form-control" id="correo">
               </div>
               <div class="col-xl-4">
