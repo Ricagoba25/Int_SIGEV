@@ -2,19 +2,18 @@ package mx.edu.utez.sigev.controller;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import mx.edu.utez.sigev.model.*;
-import mx.edu.utez.sigev.model.DAO.DaoOrganizacion;
+import mx.edu.utez.sigev.model.BeanPersona;
+import mx.edu.utez.sigev.model.BeanRol;
+import mx.edu.utez.sigev.model.BeanUsuario;
 import mx.edu.utez.sigev.model.DAO.DaoPersona;
 import mx.edu.utez.sigev.model.DAO.DaoUsuario;
-import mx.edu.utez.sigev.model.DAO.DaoVoluntario;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.io.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,18 +52,24 @@ public class AdministradorServlet extends HttpServlet {
 
         DaoUsuario daoUsuario = new DaoUsuario();
         DaoPersona daoPersona = new DaoPersona();
+        Boolean respuesta;
+        int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
+        int idPersona = Integer.parseInt(request.getParameter("idPersona"));
 
         switch (accion) {
             case "registrar":
-                Boolean resUsuario = daoUsuario.insert(usuario);
+                respuesta = daoUsuario.insert(usuario);
 
-                System.out.println("resUsuario " + resUsuario);
-                if (resUsuario) {
-
-                    Boolean resPersona = daoPersona.insert(persona);
-                    System.out.println("resUsuario " + resUsuario);
-                    if (resPersona) {
-
+                System.out.println("resUsuario " + respuesta);
+                if (respuesta) {
+                    usuario = (BeanUsuario) daoUsuario.findbyCorreo(correo);
+                    persona.setUsuario(usuario);
+                    respuesta = daoPersona.insert(persona);
+                    System.out.println("resPersona " + respuesta);
+                    if (respuesta) {
+                        jsonResponse.addProperty("error", 0);
+                        jsonResponse.addProperty("title", "");
+                        jsonResponse.addProperty("message", "Administrador registrado exitosamente");
                     } else {
                         jsonResponse.addProperty("error", 1);
                         jsonResponse.addProperty("title", "Administrador no registrado, problemas en persona");
@@ -75,8 +80,42 @@ public class AdministradorServlet extends HttpServlet {
                 }
                 break;
             case "modificar":
+                usuario.setIdUsuario(idUsuario);
+                persona.setIdPersona(idPersona);
+
+                respuesta = daoUsuario.update(usuario.getIdUsuario(), usuario);
+
+                System.out.println("resUsuario " + respuesta);
+                if (respuesta) {
+                    usuario = (BeanUsuario) daoUsuario.findbyCorreo(correo);
+                    persona.setUsuario(usuario);
+                    respuesta = daoPersona.update(persona.getIdPersona(), persona);
+                    System.out.println("resPersona " + respuesta);
+                    if (respuesta) {
+                        jsonResponse.addProperty("error", 0);
+                        jsonResponse.addProperty("title", "");
+                        jsonResponse.addProperty("message", "Administrador modificado exitosamente");
+                    } else {
+                        jsonResponse.addProperty("error", 1);
+                        jsonResponse.addProperty("title", "Administrador no modificado, problemas en persona");
+                    }
+                } else {
+                    jsonResponse.addProperty("error", 1);
+                    jsonResponse.addProperty("title", "Administrador no modificado, problemas en usuario");
+                }
                 break;
             case "eliminar":
+                respuesta = daoUsuario.delete(idUsuario);
+
+                System.out.println("resUsuario " + respuesta);
+                if (respuesta) {
+                    jsonResponse.addProperty("error", 0);
+                    jsonResponse.addProperty("title", "");
+                    jsonResponse.addProperty("message", "Administrador eliminado exitosamente");
+                } else {
+                    jsonResponse.addProperty("error", 1);
+                    jsonResponse.addProperty("title", "Administrador no eliminado");
+                }
                 break;
             default:
                 jsonResponse.addProperty("error", 1);
@@ -84,7 +123,6 @@ public class AdministradorServlet extends HttpServlet {
                 jsonResponse.addProperty("message", "Parámetros incorrectos");
                 break;
         }
-
 
         // Establecer el tipo de contenido de la respuesta a JSON
         response.setContentType("application/json");
@@ -99,9 +137,9 @@ public class AdministradorServlet extends HttpServlet {
 
         List<BeanPersona> listaAdmins = new ArrayList<>();
 
-        try{
-            listaAdmins =  daoPersona.findAll();
-        }catch (NumberFormatException e){
+        try {
+            listaAdmins = daoPersona.findAll();
+        } catch (NumberFormatException e) {
             e.printStackTrace();
         }
 
@@ -110,6 +148,5 @@ public class AdministradorServlet extends HttpServlet {
 
         resp.setContentType("text/json");
         resp.getWriter().write(json);
-
     }
 }

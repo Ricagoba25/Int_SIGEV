@@ -11,7 +11,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6867e21e-5850-4c68-9edf-2957e5a99de1" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/jsp/seguridad/registro.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/jsp/seguridad/registro.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/controller/AdministradorServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/controller/AdministradorServlet.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,7 +101,8 @@
   <component name="RunManager">
     <configuration name="Tomcat 9.0.76" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.76" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
       <option name="BROWSER_ID" value="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
-      <option name="UPDATING_POLICY" value="restart-server" />
+      <option name="UPDATE_ON_FRAME_DEACTIVATION" value="true" />
+      <option name="UPDATE_CLASSES_ON_FRAME_DEACTIVATION" value="true" />
       <deployment>
         <artifact name="demoRuiz:war exploded">
           <settings>
@@ -190,6 +191,9 @@
     </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="6867e21e-5850-4c68-9edf-2957e5a99de1" name="Changes" comment="" />
@@ -259,7 +263,39 @@
       <option name="project" value="LOCAL" />
       <updated>1690617952026</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Se crea y se utiliza SesionServlet">
+      <option name="closed" value="true" />
+      <created>1691271917384</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1691271917384</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Se corrige boton de cerrar sesión">
+      <option name="closed" value="true" />
+      <created>1691272222524</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1691272222524</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Se sube AdministradorServlet">
+      <option name="closed" value="true" />
+      <created>1691285891837</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1691285891837</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Se corrige DaoOrganizacion">
+      <option name="closed" value="true" />
+      <created>1691293022168</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1691293022168</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -282,7 +318,11 @@
     <MESSAGE value="Se convierten estaticas las variables para poder usarlas en los dao" />
     <MESSAGE value="Se realiza DaoUsuario completo" />
     <MESSAGE value="Se refactorizan daos" />
-    <option name="LAST_COMMIT_MESSAGE" value="Se refactorizan daos" />
+    <MESSAGE value="Se crea y se utiliza SesionServlet" />
+    <MESSAGE value="Se corrige boton de cerrar sesión" />
+    <MESSAGE value="Se sube AdministradorServlet" />
+    <MESSAGE value="Se corrige DaoOrganizacion" />
+    <option name="LAST_COMMIT_MESSAGE" value="Se corrige DaoOrganizacion" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
