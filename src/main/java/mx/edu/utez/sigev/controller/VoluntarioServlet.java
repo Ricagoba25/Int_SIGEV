@@ -5,8 +5,10 @@ import com.google.gson.JsonObject;
 import mx.edu.utez.sigev.model.BeanPersona;
 import mx.edu.utez.sigev.model.BeanRol;
 import mx.edu.utez.sigev.model.BeanUsuario;
+import mx.edu.utez.sigev.model.BeanVoluntario;
 import mx.edu.utez.sigev.model.DAO.DaoPersona;
 import mx.edu.utez.sigev.model.DAO.DaoUsuario;
+import mx.edu.utez.sigev.model.DAO.DaoVoluntario;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,8 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@WebServlet(name = "AdministradorServlet", value = "/administrador")
-public class AdministradorServlet extends HttpServlet {
+@WebServlet(name = "VoluntarioServlet", value = "/voluntario")
+public class VoluntarioServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -35,9 +37,10 @@ public class AdministradorServlet extends HttpServlet {
         String nombrePersona = request.getParameter("nombrePersona");
         String primerapellido = request.getParameter("primerapellido");
         String segundoapellido = request.getParameter("segundoapellido");
+        String curp = request.getParameter("curp");
 
         BeanRol beanRol = new BeanRol();
-        beanRol.setIdRol(1);
+        beanRol.setIdRol(3);
 
         BeanUsuario usuario = new BeanUsuario();
         usuario.setCorreo(correo);
@@ -50,11 +53,16 @@ public class AdministradorServlet extends HttpServlet {
         persona.setPrimerApellido(primerapellido);
         persona.setSegundoApellido(segundoapellido);
 
+        BeanVoluntario voluntario = new BeanVoluntario();
+        voluntario.setCurp(curp);
+
         DaoUsuario daoUsuario = new DaoUsuario();
         DaoPersona daoPersona = new DaoPersona();
+        DaoVoluntario daoVoluntario = new DaoVoluntario();
         Boolean respuesta;
         int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
         int idPersona = Integer.parseInt(request.getParameter("idPersona"));
+        int idVoluntario = Integer.parseInt(request.getParameter("idVoluntario"));
 
         switch (accion) {
             case "registrar":
@@ -67,21 +75,31 @@ public class AdministradorServlet extends HttpServlet {
                     respuesta = daoPersona.insert(persona);
                     System.out.println("resPersona " + respuesta);
                     if (respuesta) {
-                        jsonResponse.addProperty("error", 0);
-                        jsonResponse.addProperty("title", "");
-                        jsonResponse.addProperty("message", "Administrador registrado exitosamente");
+                        persona = (BeanPersona) daoPersona.findOne(usuario.getIdUsuario());
+                        voluntario.setPersona(persona);
+                        respuesta = daoVoluntario.insert(voluntario);
+                        System.out.println("resVoluntario " + respuesta);
+                        if (respuesta) {
+                            jsonResponse.addProperty("error", 0);
+                            jsonResponse.addProperty("title", "");
+                            jsonResponse.addProperty("message", "Voluntario registrado exitosamente");
+                        } else {
+                            jsonResponse.addProperty("error", 1);
+                            jsonResponse.addProperty("title", "Voluntario no registrado, problemas en persona");
+                        }
                     } else {
                         jsonResponse.addProperty("error", 1);
-                        jsonResponse.addProperty("title", "Administrador no registrado, problemas en persona");
+                        jsonResponse.addProperty("title", "Voluntario no registrado, problemas en persona");
                     }
                 } else {
                     jsonResponse.addProperty("error", 1);
-                    jsonResponse.addProperty("title", "Administrador no registrado, problemas en usuario");
+                    jsonResponse.addProperty("title", "Voluntario no registrado, problemas en usuario");
                 }
                 break;
             case "modificar":
                 usuario.setIdUsuario(idUsuario);
                 persona.setIdPersona(idPersona);
+                voluntario.setIdVoluntario(idVoluntario);
 
                 respuesta = daoUsuario.update(usuario.getIdUsuario(), usuario);
 
@@ -90,16 +108,23 @@ public class AdministradorServlet extends HttpServlet {
                     respuesta = daoPersona.update(persona.getIdPersona(), persona);
                     System.out.println("resPersona " + respuesta);
                     if (respuesta) {
-                        jsonResponse.addProperty("error", 0);
-                        jsonResponse.addProperty("title", "");
-                        jsonResponse.addProperty("message", "Administrador modificado exitosamente");
+                        respuesta = daoVoluntario.update(voluntario.getIdVoluntario(), voluntario);
+                        System.out.println("resVoluntario " + respuesta);
+                        if (respuesta) {
+                            jsonResponse.addProperty("error", 0);
+                            jsonResponse.addProperty("title", "");
+                            jsonResponse.addProperty("message", "Voluntario modificado exitosamente");
+                        } else {
+                            jsonResponse.addProperty("error", 1);
+                            jsonResponse.addProperty("title", "Voluntario no modificado, problemas en persona");
+                        }
                     } else {
                         jsonResponse.addProperty("error", 1);
-                        jsonResponse.addProperty("title", "Administrador no modificado, problemas en persona");
+                        jsonResponse.addProperty("title", "Voluntario no modificado, problemas en persona");
                     }
                 } else {
                     jsonResponse.addProperty("error", 1);
-                    jsonResponse.addProperty("title", "Administrador no modificado, problemas en usuario");
+                    jsonResponse.addProperty("title", "Voluntario no modificado, problemas en usuario");
                 }
                 break;
             case "eliminar":
@@ -109,10 +134,10 @@ public class AdministradorServlet extends HttpServlet {
                 if (respuesta) {
                     jsonResponse.addProperty("error", 0);
                     jsonResponse.addProperty("title", "");
-                    jsonResponse.addProperty("message", "Administrador eliminado exitosamente");
+                    jsonResponse.addProperty("message", "Voluntario eliminado exitosamente");
                 } else {
                     jsonResponse.addProperty("error", 1);
-                    jsonResponse.addProperty("title", "Administrador no eliminado");
+                    jsonResponse.addProperty("title", "Voluntario no eliminado");
                 }
                 break;
             default:
@@ -131,18 +156,18 @@ public class AdministradorServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        DaoPersona daoPersona = new DaoPersona();
+        DaoVoluntario daoVoluntario = new DaoVoluntario();
 
-        List<BeanPersona> listaAdmins = new ArrayList<>();
+        List<BeanVoluntario> listaVoluntarios = new ArrayList<>();
 
         try {
-            listaAdmins = daoPersona.findAll();
+            listaVoluntarios = daoVoluntario.findAll();
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
 
         Gson gson = new Gson();
-        String json = gson.toJson(listaAdmins);
+        String json = gson.toJson(listaVoluntarios);
 
         resp.setContentType("text/json");
         resp.getWriter().write(json);
