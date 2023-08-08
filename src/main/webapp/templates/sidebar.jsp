@@ -103,30 +103,30 @@
                 <!-- User Administrador-->
                 <c:if test="${tipoSesion == 'Administrador'}">
                     <li>
-                        <a href="./administradores.jsp" class="nav-link">
+                        <a href="./template_admin_administradores.jsp" class="nav-link">
                             <i class="fa-solid fa-user-gear"></i>
                             <p>Administradores</p>
                         </a>
                     <li>
                     <li>
-                        <a href="./organizaciones.jsp" class="nav-link">
+                        <a href="./template_admin_organizaciones.jsp" class="nav-link">
                             <i class="fa fa-building"></i>
                             <p>Organizaciones</p>
                         </a>
                     <li>
                     <li class="nav-item">
-                        <a href="./eventos.jsp" class="nav-link">
+                        <a href="./template_admin_eventos.jsp" class="nav-link">
                             <i class="fa-solid fa-calendar-check"></i>
                             <p>Eventos </p>
                         </a>
                     </li>
                     <li>
-                        <a href="./voluntarios.jsp" class="nav-link">
+                        <a href="./template_admin_voluntarios.jsp" class="nav-link">
                             <i class="fa fa-users"></i>
                             <p>Voluntarios</p>
                         </a>
                     </li>
-                    <a href="./generarReportes.jsp" class="nav-link">
+                    <a href="./template_admin_generarReportes.jsp" class="nav-link">
                         <i class="fa fa-file"></i>
                         <p style="margin-left: 10px">Generar Reportes</p>
                     </a>

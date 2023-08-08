@@ -4,5 +4,5 @@
     request.setAttribute("url_parent", "./contenido_admin_index.jsp");
 %>
 <!-- Incluye el template -->
-<jsp:include page="../../../templates/dashboard/template_dashboard.jsp" />
+<jsp:include page="../templates/dashboard/template_dashboard.jsp" />
 
