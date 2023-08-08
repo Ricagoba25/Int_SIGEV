@@ -12,15 +12,15 @@
             <div class="info">
                 <c:if test="${tipoSesion == 'Administrador'}">
                     <a href="#" class="d-block"> ${sesion.getNombreCompleto()}</a>
-                    <p class="mb-0 mt-0" style="color: #fff;">Eres <strong>Administrador</strong></p>
+                    <p class="mb-0 mt-0" style="color: #fff;">Eres un <strong>Administrador</strong></p>
                 </c:if>
                 <c:if test="${tipoSesion == 'Organización'}">
                     <a href="#" class="d-block"> ${sesion.getNombreOrganizacion()}</a>
-                    <p class="mb-0 mt-0" style="color: #fff;">Eres <strong>Organizacion</strong></p>
+                    <p class="mb-0 mt-0" style="color: #fff;">Eres una <strong>Organizacion</strong></p>
                 </c:if>
                 <c:if test="${tipoSesion == 'Voluntario'}">
                     <a href="#" class="d-block"> ${sesion.getPersona().getNombreCompleto()}</a>
-                    <p class="mb-0 mt-0" style="color: #fff;">Eres <strong>Voluntario</strong></p>
+                    <p class="mb-0 mt-0" style="color: #fff;">Eres un <strong>Voluntario</strong></p>
                 </c:if>
             </div>
 
@@ -45,51 +45,91 @@
     <nav class="mt-2">
         <c:if test="${not empty sesion}">
             <ul class="nav nav-pills nav-sidebar nav-child-indent flex-column">
-                <c:if test="${tipoSesion == 'Administrador'}">
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="fa fa-building"></i>
-                            <p>Organización </p>
-                        </a>
-                    </li>
-                </c:if>
-
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="fa fa-building"></i>
-                        <p>Eventos </p>
-                    </a>
-                </li>
-
-
                 <!-- User Voluntario-->
                 <c:if test="${tipoSesion == 'Voluntario'}">
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="fa fa-building"></i>
-                            <p>Notificaciones </p>
+                        <a href="./eventosVoluntario.jsp" class="nav-link">
+                            <i class="fa-solid fa-calendar-check"></i>
+                            <p>Eventos Disponibles </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="./eventosPendientes.jsp" class="nav-link">
+                            <i class="fa-solid fa-calendar-xmark"></i>
+                            <p>Eventos Pendientes </p>
+                        </a>
+                    </li>
+                </c:if>
+                <!-- User Organizacion-->
+                <c:if test="${tipoSesion == 'Organización'}">
+                    <li>
+                        <a href="./nuevosVoluntarios.jsp" class="nav-link">
+                            <i class="fa fa-users"></i>
+                            <p>Nuevos Voluntarios</p>
+                        </a>
+                    <li>
+                    <li class="nav-item">
+                        <a href="./eventosPublicados.jsp" class="nav-link">
+                            <i class="fa-solid fa-calendar-check"></i>
+                            <p>Eventos Publicados </p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./crearEvento.jsp" class="nav-link">
+                            <i class="fa-regular fa-calendar-plus"></i>
+                            <p>Crear Evento</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./eventoPendiente.jsp" class="nav-link">
+                            <i class="fa-regular fa-calendar-xmark"></i>
+                            <p style="margin-left: 10px">Eventos Pendientes</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./crearTest.jsp" class="nav-link">
+                            <i class="fa-solid fa-folder-plus"></i>
+                            <p style="margin-left: 10px">Crear Test</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./testDisponibles.jsp" class="nav-link">
+                            <i class="fa fa-file"></i>
+                            <p style="margin-left: 10px">Test Disponibles</p>
                         </a>
                     </li>
                 </c:if>
 
-
+                <!-- User Administrador-->
                 <c:if test="${tipoSesion == 'Administrador'}">
                     <li>
-                        <a href="#" class="nav-link">
-                            <i class="fa fa-users"></i>
-                            <p>Voluntarios </p>
+                        <a href="./administradores.jsp" class="nav-link">
+                            <i class="fa-solid fa-user-gear"></i>
+                            <p>Administradores</p>
+                        </a>
+                    <li>
+                    <li>
+                        <a href="./organizaciones.jsp" class="nav-link">
+                            <i class="fa fa-building"></i>
+                            <p>Organizaciones</p>
+                        </a>
+                    <li>
+                    <li class="nav-item">
+                        <a href="./eventos.jsp" class="nav-link">
+                            <i class="fa-solid fa-calendar-check"></i>
+                            <p>Eventos </p>
                         </a>
                     </li>
                     <li>
-                        <a href="./usuarios.jsp" class="nav-link">
-                            <i class="fa fa-user"></i>
-                            <p>Usuarios </p>
+                        <a href="./voluntarios.jsp" class="nav-link">
+                            <i class="fa fa-users"></i>
+                            <p>Voluntarios</p>
                         </a>
-                    <li>
-                        <a href="#" class="nav-link">
-                            <i class="fa fa-file"></i>
-                            <p style="margin-left: 10px">Generar Reportes</p>
-                        </a>
+                    </li>
+                    <a href="./generarReportes.jsp" class="nav-link">
+                        <i class="fa fa-file"></i>
+                        <p style="margin-left: 10px">Generar Reportes</p>
+                    </a>
                     </li>
                 </c:if>
 

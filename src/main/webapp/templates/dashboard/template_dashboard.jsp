@@ -52,44 +52,31 @@
                     </form>
                 </div>
             </li>
+            <!-- Perfil voluntario-->
+            <c:if test="${tipoSesion == 'Voluntario'}">
+                <li class="nav-item">
+                    <a href="/jsp/administrador/perfilAdministrador.jsp">
+                        <button class="btn btn-info"> Mi Perfil</button>
+                    </a>
+                </li>
+            </c:if>
+            <!-- Perfil Organización-->
+            <c:if test="${tipoSesion == 'Organización'}">
+                <li class="nav-item">
+                    <a href="/jsp/administrador/perfilAdministrador.jsp">
+                        <button class="btn btn-info"> Mi Perfil</button>
+                    </a>
+                </li>
+            </c:if>
+            <!-- Perfil Administrador-->
+            <c:if test="${tipoSesion == 'Administrador'}">
+                <li class="nav-item">
+                    <a href="/jsp/administrador/perfilAdministrador.jsp">
+                        <button class="btn btn-info"> Mi Perfil</button>
+                    </a>
+                </li>
+            </c:if>
 
-            <!-- Notifications Dropdown Menu -->
-            <li class="nav-item dropdown">
-                <a class="nav-link" data-toggle="dropdown" href="#">
-                    <i class="far fa-bell"></i>
-                    <span class="badge badge-warning navbar-badge">15</span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                    <span class="dropdown-header">15 Notifications</span>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
-                        <i class="fas fa-envelope mr-2"></i> 4 new messages
-                        <span class="float-right text-muted text-sm">3 mins</span>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
-                        <i class="fas fa-users mr-2"></i> 8 friend requests
-                        <span class="float-right text-muted text-sm">12 hours</span>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
-                        <i class="fas fa-file mr-2"></i> 3 new reports
-                        <span class="float-right text-muted text-sm">2 days</span>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-                    <i class="fas fa-expand-arrows-alt"></i>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="/jsp/administrador/perfilAdministrador.jsp">
-                    <button class="btn btn-info"> Mi Perfil</button>
-                </a>
-            </li>
 
             <li class="nav-item">
                 <a>
@@ -135,12 +122,7 @@
 
     <!-- Main Footer -->
     <footer class="main-footer">
-        <!-- To the right -->
-        <div class="float-right d-none d-sm-inline">
-            Anything you want
-        </div>
-        <!-- Default to the left -->
-        <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+        <br>
     </footer>
 </div>
 <!-- ./wrapper -->
@@ -193,11 +175,6 @@
         });
     });
 </script>
-
-
-<!-- AdminLTE App -->
-<script src="../../assets/js/adminlte.min.js"></script>
-
 
 </body>
 </html>
