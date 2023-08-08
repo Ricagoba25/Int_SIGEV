@@ -31,8 +31,8 @@
       <list>
         <option value="Interface" />
         <option value="Jsp File" />
-        <option value="Class" />
         <option value="Sevlet" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -222,6 +222,7 @@
       <workItem from="1691263742296" duration="7143000" />
       <workItem from="1691281002918" duration="4497000" />
       <workItem from="1691370523739" duration="3400000" />
+      <workItem from="1691464388435" duration="9851000" />
     </task>
     <task id="LOCAL-00001" summary="Se agrega clase para enviar correos">
       <option name="closed" value="true" />
