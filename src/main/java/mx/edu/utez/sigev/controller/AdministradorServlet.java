@@ -35,15 +35,14 @@ public class AdministradorServlet extends HttpServlet {
         String nombrePersona = request.getParameter("nombrePersona");
         String primerapellido = request.getParameter("primerapellido");
         String segundoapellido = request.getParameter("segundoapellido");
-
-        BeanRol beanRol = new BeanRol();
-        beanRol.setIdRol(1);
+        int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
+        int idPersona = Integer.parseInt(request.getParameter("idPersona"));
 
         BeanUsuario usuario = new BeanUsuario();
         usuario.setCorreo(correo);
         usuario.setContrasena(contrasena);
         usuario.setTelefono(telefono);
-        usuario.setRol(beanRol);
+        usuario.setRol(new BeanRol(1));
 
         BeanPersona persona = new BeanPersona();
         persona.setNombrePersona(nombrePersona);
@@ -53,8 +52,6 @@ public class AdministradorServlet extends HttpServlet {
         DaoUsuario daoUsuario = new DaoUsuario();
         DaoPersona daoPersona = new DaoPersona();
         Boolean respuesta;
-        int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
-        int idPersona = Integer.parseInt(request.getParameter("idPersona"));
 
         switch (accion) {
             case "registrar":

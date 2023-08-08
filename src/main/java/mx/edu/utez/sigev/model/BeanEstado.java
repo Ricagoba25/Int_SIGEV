@@ -9,6 +9,10 @@ public class BeanEstado implements Serializable {
     public BeanEstado() {
     }
 
+    public BeanEstado(int idEstado) {
+        this.idEstado = idEstado;
+    }
+
     public int getIdEstado() {
         return idEstado;
     }

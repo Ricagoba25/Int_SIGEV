@@ -64,13 +64,19 @@ public class DaoNotificacion implements DaoRepository {
     }
 
     @Override
-    public boolean update(int id, Object object) {return false;}
+    public boolean update(int id, Object object) {
+        return false;
+    }
 
     @Override
-    public boolean delete(int id) {return false;}
+    public boolean delete(int id) {
+        return false;
+    }
 
     @Override
-    public boolean insert(Object object) {return false;}
+    public boolean insert(Object object) {
+        return false;
+    }
 
     private void cerrarConexiones(String metodo) {
         try {

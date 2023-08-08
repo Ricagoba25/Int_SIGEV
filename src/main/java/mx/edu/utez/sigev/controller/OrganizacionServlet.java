@@ -2,13 +2,10 @@ package mx.edu.utez.sigev.controller;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import mx.edu.utez.sigev.model.BeanPersona;
-import mx.edu.utez.sigev.model.BeanRol;
-import mx.edu.utez.sigev.model.BeanUsuario;
-import mx.edu.utez.sigev.model.BeanVoluntario;
-import mx.edu.utez.sigev.model.DAO.DaoPersona;
+import mx.edu.utez.sigev.model.*;
+import mx.edu.utez.sigev.model.DAO.DaoDireccion;
+import mx.edu.utez.sigev.model.DAO.DaoOrganizacion;
 import mx.edu.utez.sigev.model.DAO.DaoUsuario;
-import mx.edu.utez.sigev.model.DAO.DaoVoluntario;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,8 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@WebServlet(name = "VoluntarioServlet", value = "/voluntario")
-public class VoluntarioServlet extends HttpServlet {
+@WebServlet(name = "OrganizacionServlet", value = "/organizacion")
+public class OrganizacionServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -34,32 +31,47 @@ public class VoluntarioServlet extends HttpServlet {
         String correo = request.getParameter("correo");
         String contrasena = request.getParameter("contrasena");
         String telefono = request.getParameter("telefono");
-        String nombrePersona = request.getParameter("nombrePersona");
-        String primerapellido = request.getParameter("primerapellido");
-        String segundoapellido = request.getParameter("segundoapellido");
-        String curp = request.getParameter("curp");
+        String rfc = request.getParameter("rfc");
+        String nombreOrganizacion = request.getParameter("nombreOrganizacion");
+        String razonSocial = request.getParameter("razonSocial");
+        String calle = request.getParameter("calle");
+        String colonia = request.getParameter("colonia");
+        String municipio = request.getParameter("municipio");
+        String noExterior = request.getParameter("noExterior");
+        String noInterior = request.getParameter("noInterior");
+        int idEstado = Integer.parseInt(request.getParameter("idColor"));
+        int idColor = Integer.parseInt(request.getParameter("idEstado"));
         int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
         int idPersona = Integer.parseInt(request.getParameter("idPersona"));
-        int idVoluntario = Integer.parseInt(request.getParameter("idVoluntario"));
+        int idDireccion = Integer.parseInt(request.getParameter("idDireccion"));
+        int idOrganizacion = Integer.parseInt(request.getParameter("idOrganizacion"));
 
         BeanUsuario usuario = new BeanUsuario();
         usuario.setCorreo(correo);
         usuario.setContrasena(contrasena);
         usuario.setTelefono(telefono);
-        usuario.setRol(new BeanRol(3));
+        usuario.setRol(new BeanRol(2));
 
-        BeanPersona persona = new BeanPersona();
-        persona.setNombrePersona(nombrePersona);
-        persona.setPrimerApellido(primerapellido);
-        persona.setSegundoApellido(segundoapellido);
+        BeanDireccion direccion = new BeanDireccion();
+        direccion.setCalle(calle);
+        direccion.setColonia(colonia);
+        direccion.setMunicipio(municipio);
+        direccion.setNoExterior(noExterior);
+        direccion.setNoInterior(noInterior);
+        direccion.setEstado(new BeanEstado(idEstado));
 
-        BeanVoluntario voluntario = new BeanVoluntario();
-        voluntario.setCurp(curp);
+        BeanOrganizacion organizacion = new BeanOrganizacion();
+        organizacion.setRfc(rfc);
+        organizacion.setNombreOrganizacion(nombreOrganizacion);
+        organizacion.setRazonSocial(razonSocial);
+        organizacion.setImagenLogotipo(null);
+        organizacion.setColor(new BeanColor(idColor));
 
         DaoUsuario daoUsuario = new DaoUsuario();
-        DaoPersona daoPersona = new DaoPersona();
-        DaoVoluntario daoVoluntario = new DaoVoluntario();
+        DaoDireccion daoDireccion = new DaoDireccion();
+        DaoOrganizacion daoOrganizacion = new DaoOrganizacion();
         Boolean respuesta;
+
 
         switch (accion) {
             case "registrar":
@@ -68,60 +80,60 @@ public class VoluntarioServlet extends HttpServlet {
                 System.out.println("resUsuario " + respuesta);
                 if (respuesta) {
                     usuario = (BeanUsuario) daoUsuario.findbyCorreo(correo);
-                    persona.setUsuario(usuario);
-                    respuesta = daoPersona.insert(persona);
-                    System.out.println("resPersona " + respuesta);
-                    if (respuesta) {
-                        persona = (BeanPersona) daoPersona.findOne(usuario.getIdUsuario());
-                        voluntario.setPersona(persona);
-                        respuesta = daoVoluntario.insert(voluntario);
-                        System.out.println("resVoluntario " + respuesta);
+                    organizacion.setUsuario(usuario);
+                    idDireccion = daoDireccion.registrar(direccion);
+                    System.out.println("resDireccion " + idDireccion);
+                    if (idDireccion > 0) {
+                        direccion.setIdDireccion(idDireccion);
+                        organizacion.setDireccion(direccion);
+                        respuesta = daoOrganizacion.insert(organizacion);
+                        System.out.println("resOrganizacion " + respuesta);
                         if (respuesta) {
                             jsonResponse.addProperty("error", 0);
                             jsonResponse.addProperty("title", "");
-                            jsonResponse.addProperty("message", "Voluntario registrado exitosamente");
+                            jsonResponse.addProperty("message", "Organización registrada exitosamente");
                         } else {
                             jsonResponse.addProperty("error", 1);
-                            jsonResponse.addProperty("title", "Voluntario no registrado, problemas en persona");
+                            jsonResponse.addProperty("title", "Organización no registrada, problemas en organización");
                         }
                     } else {
                         jsonResponse.addProperty("error", 1);
-                        jsonResponse.addProperty("title", "Voluntario no registrado, problemas en persona");
+                        jsonResponse.addProperty("title", "Organización no registrada, problemas en direccion");
                     }
                 } else {
                     jsonResponse.addProperty("error", 1);
-                    jsonResponse.addProperty("title", "Voluntario no registrado, problemas en usuario");
+                    jsonResponse.addProperty("title", "Organización no registrada, problemas en usuario");
                 }
                 break;
             case "modificar":
                 usuario.setIdUsuario(idUsuario);
-                persona.setIdPersona(idPersona);
-                voluntario.setIdVoluntario(idVoluntario);
+                direccion.setIdDireccion(idDireccion);
+                organizacion.setIdOrganizacion(idOrganizacion);
 
                 respuesta = daoUsuario.update(usuario.getIdUsuario(), usuario);
 
                 System.out.println("resUsuario " + respuesta);
                 if (respuesta) {
-                    respuesta = daoPersona.update(persona.getIdPersona(), persona);
-                    System.out.println("resPersona " + respuesta);
+                    respuesta = daoDireccion.update(direccion.getIdDireccion(), direccion);
+                    System.out.println("resDireccion " + respuesta);
                     if (respuesta) {
-                        respuesta = daoVoluntario.update(voluntario.getIdVoluntario(), voluntario);
-                        System.out.println("resVoluntario " + respuesta);
+                        respuesta = daoOrganizacion.update(organizacion.getIdOrganizacion(), organizacion);
+                        System.out.println("resOrganizacion " + respuesta);
                         if (respuesta) {
                             jsonResponse.addProperty("error", 0);
                             jsonResponse.addProperty("title", "");
-                            jsonResponse.addProperty("message", "Voluntario modificado exitosamente");
+                            jsonResponse.addProperty("message", "Organización modificada exitosamente");
                         } else {
                             jsonResponse.addProperty("error", 1);
-                            jsonResponse.addProperty("title", "Voluntario no modificado, problemas en persona");
+                            jsonResponse.addProperty("title", "Organización no modificada, problemas en persona");
                         }
                     } else {
                         jsonResponse.addProperty("error", 1);
-                        jsonResponse.addProperty("title", "Voluntario no modificado, problemas en persona");
+                        jsonResponse.addProperty("title", "Organización no modificada, problemas en persona");
                     }
                 } else {
                     jsonResponse.addProperty("error", 1);
-                    jsonResponse.addProperty("title", "Voluntario no modificado, problemas en usuario");
+                    jsonResponse.addProperty("title", "Organización no modificada, problemas en usuario");
                 }
                 break;
             case "eliminar":
@@ -131,10 +143,10 @@ public class VoluntarioServlet extends HttpServlet {
                 if (respuesta) {
                     jsonResponse.addProperty("error", 0);
                     jsonResponse.addProperty("title", "");
-                    jsonResponse.addProperty("message", "Voluntario eliminado exitosamente");
+                    jsonResponse.addProperty("message", "Organización eliminada exitosamente");
                 } else {
                     jsonResponse.addProperty("error", 1);
-                    jsonResponse.addProperty("title", "Voluntario no eliminado");
+                    jsonResponse.addProperty("title", "Organización no eliminada");
                 }
                 break;
             default:
@@ -153,18 +165,18 @@ public class VoluntarioServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        DaoVoluntario daoVoluntario = new DaoVoluntario();
+        DaoOrganizacion daoOrganizacion = new DaoOrganizacion();
 
-        List<BeanVoluntario> listaVoluntarios = new ArrayList<>();
+        List<BeanPersona> listaOrganizaciones = new ArrayList<>();
 
         try {
-            listaVoluntarios = daoVoluntario.findAll();
+            listaOrganizaciones = daoOrganizacion.findAll();
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
 
         Gson gson = new Gson();
-        String json = gson.toJson(listaVoluntarios);
+        String json = gson.toJson(listaOrganizaciones);
 
         resp.setContentType("text/json");
         resp.getWriter().write(json);

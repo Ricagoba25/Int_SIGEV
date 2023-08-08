@@ -1,12 +1,10 @@
 package mx.edu.utez.sigev.model.DAO;
 
-import mx.edu.utez.sigev.model.BeanColor;
 import mx.edu.utez.sigev.model.BeanDireccion;
 import mx.edu.utez.sigev.model.BeanEstado;
 import mx.edu.utez.sigev.model.BeanEvento;
 import mx.edu.utez.sigev.utils.MysqlConector;
 
-import  java.sql.Date;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -43,7 +41,7 @@ public class DaoEvento implements DaoRepository {
                 beanDireccion.setNoInterior(rs.getString("noInterior"));
                 beanDireccion.setEstado(beanEstado);
 
-                BeanEvento beanEvento =  new BeanEvento();
+                BeanEvento beanEvento = new BeanEvento();
                 beanEvento.setNombreEvento(rs.getString("nombreEvento"));
                 beanEvento.setDescripcion(rs.getString("descripcion"));
                 beanEvento.setFecha(rs.getDate("fecha"));
@@ -150,14 +148,11 @@ public class DaoEvento implements DaoRepository {
 
             con = MysqlConector.connect();
             pstm = con.prepareStatement(query);
-
-
             pstm.setString(1, evento.getNombreEvento());
             pstm.setString(2, evento.getDescripcion());
-            pstm.setString(3,evento.getFecha().toString());
+            pstm.setString(3, evento.getFecha().toString());
             pstm.setInt(4, evento.getEstatusEvento());
             pstm.setInt(5, evento.getDireccion().getIdDireccion());
-
 
             registrado = pstm.executeUpdate() > 0;
         } catch (SQLException e) {

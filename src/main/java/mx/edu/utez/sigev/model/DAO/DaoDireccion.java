@@ -26,22 +26,17 @@ public class DaoDireccion implements DaoRepository {
             rs = pstm.executeQuery();
 
             while (rs.next()) {
-
-
                 BeanEstado beanEstado = new BeanEstado();
                 beanEstado.setIdEstado(rs.getInt("idEstado"));
                 beanEstado.setNombre(rs.getString("nombre"));
 
                 BeanDireccion beanDireccion = new BeanDireccion();
-
                 beanDireccion.setIdDireccion(rs.getInt("idDireccion"));
                 beanDireccion.setCalle(rs.getString("calle"));
                 beanDireccion.setColonia(rs.getString("Colonia"));
                 beanDireccion.setMunicipio(rs.getString("municipio"));
                 beanDireccion.setNoExterior(rs.getString("noExterior"));
                 beanDireccion.setNoInterior(rs.getString("noInterior"));
-
-                //Seteas un objeto sobre otro
                 beanDireccion.setEstado(beanEstado);
 
                 listaBeanDireccion.add(beanDireccion);
@@ -64,11 +59,9 @@ public class DaoDireccion implements DaoRepository {
             pstm.setInt(1, id);
             rs = pstm.executeQuery();
             if (rs.next()) {
-
                 BeanEstado beanEstado = new BeanEstado();
                 beanEstado.setIdEstado(rs.getInt("idEstado"));
                 beanEstado.setNombre(rs.getString("nombre"));
-
 
                 beanDireccion.setIdDireccion(rs.getInt("idDireccion"));
                 beanDireccion.setCalle(rs.getString("calle"));
@@ -77,7 +70,6 @@ public class DaoDireccion implements DaoRepository {
                 beanDireccion.setNoExterior(rs.getString("noExterior"));
                 beanDireccion.setNoInterior(rs.getString("noInterior"));
                 beanDireccion.setEstado(beanEstado);
-
             }
         } catch (SQLException e) {
             System.err.println("Error en el método findOne() - DaoColor -> " + e.getMessage());
@@ -99,9 +91,9 @@ public class DaoDireccion implements DaoRepository {
             pstm.setString(1, direccion.getCalle());
             pstm.setString(2, direccion.getColonia());
             pstm.setString(3, direccion.getMunicipio());
-            pstm.setString(4,direccion.getNoExterior());
-            pstm.setString(5,direccion.getNoExterior());
-            pstm.setInt(6,direccion.getEstado().getIdEstado());
+            pstm.setString(4, direccion.getNoExterior());
+            pstm.setString(5, direccion.getNoExterior());
+            pstm.setInt(6, direccion.getEstado().getIdEstado());
             modificado = pstm.executeUpdate() > 0;
         } catch (SQLException e) {
             System.err.println("Error en el método update() - DaoDireccion -> " + e.getMessage());
@@ -131,8 +123,13 @@ public class DaoDireccion implements DaoRepository {
 
     @Override
     public boolean insert(Object object) {
+        return false;
+    }
+
+    public int registrar(Object object) {
         BeanDireccion direccion = (BeanDireccion) object;
         boolean registrado = false;
+        int idRegistro = 0;
         try {
             String query = "INSERT INTO direcion (calle, colonia, municipio, noExterior, noInterior, estado_idEstado) values(?,?,?,?,?,?)";
 
@@ -147,12 +144,19 @@ public class DaoDireccion implements DaoRepository {
             pstm.setInt(6, direccion.getEstado().getIdEstado());
 
             registrado = pstm.executeUpdate() > 0;
+
+            if (registrado) {
+                rs = pstm.getGeneratedKeys();
+                if (rs.next()) {
+                    idRegistro = rs.getInt(1);
+                }
+            }
         } catch (SQLException e) {
-            System.err.println("Error en el método insert() - DaoDireccion -> " + e.getMessage());
+            System.err.println("Error en el método registrar() - DaoDireccion -> " + e.getMessage());
         } finally {
             cerrarConexiones("insert");
         }
-        return registrado;
+        return idRegistro;
     }
 
     private void cerrarConexiones(String metodo) {

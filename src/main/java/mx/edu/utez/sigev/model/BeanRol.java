@@ -10,6 +10,10 @@ public class BeanRol implements Serializable {
     public BeanRol() {
     }
 
+    public BeanRol(int idRol) {
+        this.idRol = idRol;
+    }
+
     public int getIdRol() {
         return idRol;
     }

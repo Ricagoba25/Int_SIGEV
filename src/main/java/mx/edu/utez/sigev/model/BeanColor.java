@@ -10,6 +10,10 @@ public class BeanColor implements Serializable {
     public BeanColor() {
     }
 
+    public BeanColor(int idColor) {
+        this.idColor = idColor;
+    }
+
     public int getIdColor() {
         return idColor;
     }

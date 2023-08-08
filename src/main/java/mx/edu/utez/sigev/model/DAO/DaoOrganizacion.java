@@ -150,11 +150,16 @@ public class DaoOrganizacion implements DaoRepository {
         boolean modificado = false;
         BeanOrganizacion organizacion = (BeanOrganizacion) object;
         try {
-            String query = "UPDATE organizacion SET nombreOrganizacion = ?, codigo = ? WHERE idOrganizacion = ?";
+            String query = "UPDATE organizacion SET rfc = ?, nombreOrganizacion = ?, razonSocial = ?, imagenLogotipo = ?, color_idColor = ? WHERE idOrganizacion = ?";
+
             con = MysqlConector.connect();
             pstm = con.prepareStatement(query);
-            pstm.setString(1, organizacion.getNombreOrganizacion());
-            pstm.setInt(3, organizacion.getIdOrganizacion());
+            pstm.setString(1, organizacion.getRfc());
+            pstm.setString(2, organizacion.getNombreOrganizacion());
+            pstm.setString(3, organizacion.getRazonSocial());
+            pstm.setString(4, organizacion.getImagenLogotipo());
+            pstm.setInt(5, organizacion.getColor().getIdColor());
+            pstm.setInt(6, organizacion.getIdOrganizacion());
             modificado = pstm.executeUpdate() > 0;
         } catch (SQLException e) {
             System.err.println("Error en el método update() - DaoOrganizacion -> " + e.getMessage());
@@ -168,11 +173,12 @@ public class DaoOrganizacion implements DaoRepository {
     public boolean delete(int id) {
         boolean eliminado = false;
         try {
-            String query = "DELETE FROM organizacion WHERE idOrganizacion = ?";
+            String query = "UPDATE organizacion SET estatusOrganizacion = ? WHERE idOrganizacion = ?";
 
             con = MysqlConector.connect();
             pstm = con.prepareStatement(query);
-            pstm.setInt(1, id);
+            pstm.setInt(1, 0);
+            pstm.setInt(2, id);
             eliminado = pstm.executeUpdate() > 0;
         } catch (SQLException e) {
             System.err.println("Error en el método delete() - DaoOrganizacion -> " + e.getMessage());
@@ -187,11 +193,17 @@ public class DaoOrganizacion implements DaoRepository {
         BeanOrganizacion organizacion = (BeanOrganizacion) object;
         boolean registrado = false;
         try {
-            String query = "INSERT INTO organizacion (nombreOrganizacion, codigo) values(?,?)";
+            String query = "INSERT INTO organizacion (rfc, nombreOrganizacion, razonSocial, imagenLogotipo, usuario_idUsuario, color_idColor, direccion_idDireccion) values(?,?,?,?,?,?,?)";
 
             con = MysqlConector.connect();
             pstm = con.prepareStatement(query);
-            pstm.setString(1, organizacion.getNombreOrganizacion());
+            pstm.setString(1, organizacion.getRfc());
+            pstm.setString(2, organizacion.getNombreOrganizacion());
+            pstm.setString(3, organizacion.getRazonSocial());
+            pstm.setString(4, organizacion.getImagenLogotipo());
+            pstm.setInt(5, organizacion.getUsuario().getIdUsuario());
+            pstm.setInt(6, organizacion.getColor().getIdColor());
+            pstm.setInt(7, organizacion.getDireccion().getIdDireccion());
             registrado = pstm.executeUpdate() > 0;
         } catch (SQLException e) {
             System.err.println("Error en el método insert() - DaoOrganizacion -> " + e.getMessage());
