@@ -1,5 +1,6 @@
 <link href="https://cdn.datatables.net/v/bs5/dt-1.13.6/datatables.min.css" rel="stylesheet">
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <section class="content-header">
   <div class="container-fluid">
@@ -25,6 +26,7 @@
                 <th>Descripción</th>
                 <th>Fecha</th>
                 <th>Dirección</th>
+                <th>Acciones</th>
               </tr>
               </thead>
             </table>
@@ -42,28 +44,28 @@
     $('#example1').DataTable({
       ajax:
               {
-                url: URL_API + 'administrador',
+                url: URL_API + 'evento',
                 dataSrc: ''
               },
       columns: [
-        { "data": "idevento" },
-        { "data": "nombreEvento" },
-        { "data": "descripcion" },
-        { "data": "fecha" },
-        { "data": "direccion.colonia" },
-        { "data": "direccion.estado_idEstado.nombre" },
+        {"data": "idEvento"},
+        {"data": "nombreEvento"},
+        {"data": "descripcion"},
+        {"data": "fecha"},
+        {"data": "direccion_idDireccion.estado_idEstado.nombre"},
         {
           // Añadir los botones de acciones "Editar" y "Borrar"
           data: null,
-          render: function(data, type, row) {
+          render: function (data, type, row) {
             // El contenido de esta función se ejecutará para cada celda de esta columna
             // Utilizamos data para acceder a los datos de la fila actual
 
-            let editarBtn = '<a href="#" onclick="aceptar(' + data.idEvento + ')">  <i class="fa fa-pen"></i> </a> &nbsp;';
-            let borrarBtn = '<a href="#" onclick="cancelar(' + data.idEvento + ')">  <i class="fa fa-trash-alt"></i> </a>';
+            //me quede en cambiar el icono de aceptar evento
+            let aceptarBtn = '<a href="#" onclick="aceptar(' + data.idEvento + ')">  <i class="fa fa-pen"></i> </a> &nbsp;';
+            let rechazarBtn = '<a href="#" onclick="rechazar(' + data.idPersona + ')">  <i class="fa fa-trash-alt"></i> </a>';
 
             // Devolvemos los botones como una cadena HTML
-            return aceptarBtn + ' ' + cancelarBtn;
+            return editarBtn + ' ' + borrarBtn;
           }
         }
 
@@ -72,21 +74,69 @@
     });
 
 
-
   });
 
-  function aceptar(id) {
-    // Lógica para editar un usuario con el ID proporcionado
-    console.log('aceptar evento con ID:', id);
-  }
+  /*function editar(id) {
+      // Lógica para editar un usuario con el ID proporcionado
+      console.log('Editar usuario con ID:', id);
+  }*/
 
-  function cancelar(id) {
-    //$('#datatable').DataTable().ajax.reload();
-    // Lógica para borrar un usuario con el ID proporcionado
-    console.log('cancelar usuario con ID:', id);
+  //Boton de editar Usuario
+  function aceptar(id) {
+    // Abrir el modal de confirmación
+    $('#modalEditar').modal('show');
+
+    // Agregar un evento al botón de confirmación dentro del modal
+    $('#confirmareditar').click(function () {
+      console.log('Editar usuario con ID:', id);
+
+      // Cerrar el modal después de borrar
+      $('#confirmModal').modal('hide');
+
+      // Recargar la tabla o realizar otras acciones necesarias
+      //$('#datatable').DataTable().ajax.reload();
+    });
+  }
+  //Boton de eliminar usuario
+  function rechazar(id) {
+    // Abrir el modal de confirmación
+    $('#confirmModal').modal('show');
+
+    // Agregar un evento al botón de confirmación dentro del modal
+    $('#confirmarBorrar').click(function () {
+      console.log('Borrando usuario con ID:', id);
+
+      // Cerrar el modal después de borrar
+      $('#confirmModal').modal('hide');
+
+      // Recargar la tabla o realizar otras acciones necesarias
+      //$('#datatable').DataTable().ajax.reload();
+    });
   }
 
 </script>
+<!-- Modal de confirmación -->
+<div id="confirmModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmModalLabel">Confirmar Rechazado</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ¿Estás seguro de que deseas rechazar este Evento?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button id="confirmarBorrar" type="button" class="btn btn-danger">Rechazar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
 
 <script src="https://cdn.datatables.net/v/bs5/dt-1.13.6/datatables.min.js"></script>
