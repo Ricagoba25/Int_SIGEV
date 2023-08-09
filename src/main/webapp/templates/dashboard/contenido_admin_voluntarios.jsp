@@ -22,8 +22,8 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Nombre Voluntario</th>
-                                <th>Primer Apellido</th>
-                                <th>Segundo Apellido</th>
+                                <th>Apellido Paterno</th>
+                                <th>Apellido Materno</th>
                                 <th>Curp</th>
                                 <th>Correo</th>
                                 <th>Telefono</th>

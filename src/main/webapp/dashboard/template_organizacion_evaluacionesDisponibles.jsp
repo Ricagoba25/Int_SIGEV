@@ -2,7 +2,7 @@
 
 <%
   request.setAttribute("pageTitle", "Test Disponibles | SIGEV");
-  request.setAttribute("url_parent", "./contenido_organizacion_testDisponibles.jsp");
+  request.setAttribute("url_parent", "./contenido_organizacion_evaluacionesDisponibles.jsp");
 %>
 <!-- Incluye el template -->
 <jsp:include page="../templates/dashboard/template_dashboard.jsp" />
