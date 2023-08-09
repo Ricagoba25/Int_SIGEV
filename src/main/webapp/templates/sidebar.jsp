@@ -48,13 +48,13 @@
                 <!-- User Voluntario-->
                 <c:if test="${tipoSesion == 'Voluntario'}">
                     <li class="nav-item">
-                        <a href="./eventosVoluntario.jsp" class="nav-link">
+                        <a href="./template_voluntario_disponibles.jsp" class="nav-link">
                             <i class="fa-solid fa-calendar-check"></i>
                             <p>Eventos Disponibles </p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="./eventosPendientes.jsp" class="nav-link">
+                        <a href="./template_voluntario_pendientes.jsp" class="nav-link">
                             <i class="fa-solid fa-calendar-xmark"></i>
                             <p>Eventos Pendientes </p>
                         </a>
