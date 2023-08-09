@@ -69,7 +69,7 @@
                         </a>
                     <li>
                     <li class="nav-item">
-                        <a href="./eventosPublicados.jsp" class="nav-link">
+                        <a href="./template_organizacion_eventosPublicados.jsp" class="nav-link">
                             <i class="fa-solid fa-calendar-check"></i>
                             <p>Eventos Publicados </p>
                         </a>
@@ -81,7 +81,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="./eventoPendiente.jsp" class="nav-link">
+                        <a href="./template_organizacion_eventosPendientes.jsp" class="nav-link">
                             <i class="fa-regular fa-calendar-xmark"></i>
                             <p style="margin-left: 10px">Eventos Pendientes</p>
                         </a>
@@ -93,7 +93,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="./testDisponibles.jsp" class="nav-link">
+                        <a href="./template_organizacion_testDisponibles.jsp" class="nav-link">
                             <i class="fa fa-file"></i>
                             <p style="margin-left: 10px">Test Disponibles</p>
                         </a>
