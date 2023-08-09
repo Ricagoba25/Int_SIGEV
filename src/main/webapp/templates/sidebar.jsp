@@ -63,7 +63,7 @@
                 <!-- User Organizacion-->
                 <c:if test="${tipoSesion == 'Organización'}">
                     <li>
-                        <a href="./nuevosVoluntarios.jsp" class="nav-link">
+                        <a href="./template_organizacion_voluntarios.jsp" class="nav-link">
                             <i class="fa fa-users"></i>
                             <p>Nuevos Voluntarios</p>
                         </a>
