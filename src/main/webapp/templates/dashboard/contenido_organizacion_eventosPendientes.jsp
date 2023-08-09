@@ -6,7 +6,7 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>Test Disponibles</h1>
+        <h1>Eventos Pendientes</h1>
       </div>
     </div>
   </div>

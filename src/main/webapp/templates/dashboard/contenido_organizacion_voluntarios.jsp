@@ -5,7 +5,7 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>Voluntarios</h1>
+        <h1>Nuevos Voluntarios</h1>
       </div>
     </div>
   </div>
@@ -63,6 +63,7 @@
             // Utilizamos data para acceder a los datos de la fila actual
 
             let aceptarBtn = '<a href="#" onclick="aceptar(' + data.idVoluntario + ')">  <i class="fa fa-pen"></i> </a> &nbsp;';
+
             let cancelarBtn = '<a href="#" onclick="cancelar(' + data.idVoluntario + ')">  <i class="fa fa-trash-alt"></i> </a>';
 
             // Devolvemos los botones como una cadena HTML
