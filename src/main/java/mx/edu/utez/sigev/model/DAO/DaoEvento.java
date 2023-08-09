@@ -21,7 +21,7 @@ public class DaoEvento implements DaoRepository {
     public List findAll() {
         List<BeanEvento> listaBeanEvento = new ArrayList<>();
         try {
-            String query = "SELECT * FROM evento";
+            String query = "SELECT * FROM evento e";
             con = MysqlConector.connect();
             pstm = con.prepareStatement(query);
             rs = pstm.executeQuery();

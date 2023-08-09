@@ -6,7 +6,7 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>Eventos</h1>
+        <h1>Organizaciones</h1>
       </div>
     </div>
   </div>
@@ -22,11 +22,11 @@
               <thead>
               <tr>
                 <th>ID</th>
-                <th>Nombre Evento</th>
-                <th>Descripción</th>
-                <th>Fecha</th>
-                <th>Dirección</th>
+                <th>Nombre Organización</th>
+                <th>Razon Social</th>
+                <th>Direccion</th>
                 <th>Acciones</th>
+
               </tr>
               </thead>
             </table>
@@ -44,15 +44,15 @@
     $('#example1').DataTable({
       ajax:
               {
-                url: URL_API + 'evento',
+                url: URL_API + 'administrador',
                 dataSrc: ''
               },
       columns: [
-        {"data": "idEvento"},
-        {"data": "nombreEvento"},
-        {"data": "descripcion"},
-        {"data": "fecha"},
+        {"data": "idOrganizacion"},
+        {"data": "nombreOrganizacion"},
+        {"data": "razonSocial"},
         {"data": "direccion_idDireccion.estado_idEstado.nombre"},
+
         {
           // Añadir los botones de acciones "Editar" y "Borrar"
           data: null,
@@ -60,12 +60,11 @@
             // El contenido de esta función se ejecutará para cada celda de esta columna
             // Utilizamos data para acceder a los datos de la fila actual
 
-
-            let aceptarBtn = '<a href="#" onclick="aceptar(' + data.idEvento + ')">  <i class="fa-solid fa-clipboard-check"></i> </a> &nbsp;';
-            let rechazarBtn = '<a href="#" onclick="rechazar(' + data.idPersona + ')">  <i class="fa-solid fa-ban"></i></i> </a>';
+            let aceptatBtn = '<a href="#" onclick="aceptar(' + data.idPersona + ')">  <i class="fa-solid fa-clipboard-check"> </a> &nbsp;';
+            let rechazarBtn = '<a href="#" onclick="rechazar(' + data.idPersona + ')">  <i class="fa-solid fa-ban"></i></i></i> </a>';
 
             // Devolvemos los botones como una cadena HTML
-            return editarBtn + ' ' + borrarBtn;
+            return aceptarBtn + ' ' + rechazarBtn;
           }
         }
 
@@ -120,13 +119,34 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
+        <h5 class="modal-title" id="confirmModalLabel1">Confirmar Aceptacion</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ¿Estás seguro de que deseas aceptar esta Organizacion?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button id="confirmarAceptar" type="button" class="btn btn-danger">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de confirmación -->
+<div id="confirmModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
         <h5 class="modal-title" id="confirmModalLabel">Confirmar Rechazado</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        ¿Estás seguro de que deseas rechazar este Evento?
+        ¿Estás seguro de que deseas rechazar esta organización?
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -135,7 +155,6 @@
     </div>
   </div>
 </div>
-
 
 
 
