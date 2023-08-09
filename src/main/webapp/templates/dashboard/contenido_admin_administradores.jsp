@@ -62,11 +62,20 @@
                         // El contenido de esta función se ejecutará para cada celda de esta columna
                         // Utilizamos data para acceder a los datos de la fila actual
 
-                        let editarBtn = '<a href="#" onclick="editar(' + data.idPersona + ')">  <i class="fa fa-pen"></i> </a> &nbsp;';
+                        return '<button onclick=\'editar(' + JSON.stringify(data) + ')\'>Editar</button>' +
+                            '<button onclick=\'borrar(' + JSON.stringify(data) + ')\'>Borrar</button>';
+
+                        /*
+
+                        let editarBtn = '<a href="#" onclick="editar('+JSON.stringify(data)+')"> <i class="fa fa-pen"></i> </a> &nbsp;';
+
                         let borrarBtn = '<a href="#" onclick="borrar(' + data.idPersona + ')">  <i class="fa fa-trash-alt"></i> </a>';
 
                         // Devolvemos los botones como una cadena HTML
                         return editarBtn + ' ' + borrarBtn;
+
+
+                         */
                     }
                 }
 
@@ -83,13 +92,21 @@
     }*/
 
     //Boton de editar Usuario
-    function editar(id) {
+    const  editar = (data) => {
         // Abrir el modal de confirmación
         $('#modalEditar').modal('show');
 
+        //fill fields
+
+        let { nombrePersona, primerApellido, segundoApellido, usuario.correo } = data;
+
+
+
+        console.log('Editar usuario con ID:', data);
+
         // Agregar un evento al botón de confirmación dentro del modal
         $('#confirmareditar').click(function () {
-            console.log('Editar usuario con ID:', id);
+
 
             // Cerrar el modal después de borrar
             $('#confirmModal').modal('hide');
