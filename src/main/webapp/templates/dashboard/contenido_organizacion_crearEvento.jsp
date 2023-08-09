@@ -32,7 +32,7 @@
                                     <input type="date" name="fecha" class="form-control" id="fecha" required>
                                 </div>
                                 <div class="col-xl-4 d-flex justify-content-center align-items-center">
-                                    <button class="btn btn-primary" id="modalSeleccionarTest"> Seleccionar Evaluación
+                                    <button class="btn btn-success" id="modalSeleccionarTest"> Seleccionar Evaluación
                                     </button>
                                 </div>
 

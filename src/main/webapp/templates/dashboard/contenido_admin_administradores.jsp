@@ -8,6 +8,9 @@
             <div class="col-sm-6">
                 <h1>Administradores</h1>
             </div>
+            <div class="col-sm-6 text-sm-right">
+                <button id="agregarAdmin" class="btn btn-success"> Agregar Administrador</button>
+            </div>
         </div>
     </div>
 </section>
@@ -172,6 +175,57 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                 <button id="guardarCambios" type="button" class="btn btn-primary">Actualizar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        // Abrir el modal cuando se haga clic en el botón "Cerrar sesión"
+        $("#agregarAdmin").click(function () {
+            $("#modalAgregarAdmin").modal("show");
+        });
+    });
+</script>
+
+<div id="modalAgregarAdmin" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="miModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="miModalLabel2">Crear Administrador</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formulario2">
+                    <div class="form-group">
+                        <label for="nombreAdmin">Nombre:</label>
+                        <input type="text" class="form-control" id="nombreAdmin" >
+                    </div>
+                    <div class="form-group">
+                        <label for="primerApellidoAdmin">Apellido Paterno:</label>
+                        <input type="text" class="form-control" id="primerApellidoAdmin" >
+                    </div>
+                    <div class="form-group">
+                        <label for="segundoApellidoAdmin">Apellido Materno:</label>
+                        <input type="text"  class="form-control" id="segundoApellidoAdmin" >
+                    </div>
+                    <div class="form-group">
+                        <label for="correoAdmin">Correo:</label>
+                        <input type="email"  class="form-control" id="correoAdmin" >
+                    </div>
+                    <div class="form-group">
+                        <label for="telefonoAdmin">Teléfono:</label>
+                        <input type="tel"  class="form-control" id="telefonoAdmin">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button id="guardarCambios2" type="button" class="btn btn-primary">Crear</button>
             </div>
         </div>
     </div>
