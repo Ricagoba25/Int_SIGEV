@@ -75,7 +75,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="./crearEvento.jsp" class="nav-link">
+                        <a href="./template_organizacion_crearEvento.jsp" class="nav-link">
                             <i class="fa-regular fa-calendar-plus"></i>
                             <p>Crear Evento</p>
                         </a>
@@ -83,19 +83,19 @@
                     <li>
                         <a href="./template_organizacion_eventosPendientes.jsp" class="nav-link">
                             <i class="fa-regular fa-calendar-xmark"></i>
-                            <p style="margin-left: 10px">Eventos Pendientes</p>
+                            <p>Eventos Pendientes</p>
                         </a>
                     </li>
                     <li>
                         <a href="./crearTest.jsp" class="nav-link">
                             <i class="fa-solid fa-folder-plus"></i>
-                            <p style="margin-left: 10px">Crear Test</p>
+                            <p>Crear Test</p>
                         </a>
                     </li>
                     <li>
                         <a href="./template_organizacion_testDisponibles.jsp" class="nav-link">
                             <i class="fa fa-file"></i>
-                            <p style="margin-left: 10px">Test Disponibles</p>
+                            <p>Test Disponibles</p>
                         </a>
                     </li>
                 </c:if>
@@ -128,7 +128,7 @@
                     </li>
                     <a href="./template_admin_generarReportes.jsp" class="nav-link">
                         <i class="fa fa-file"></i>
-                        <p style="margin-left: 10px">Generar Reportes</p>
+                        <p>Generar Reportes</p>
                     </a>
                     </li>
                 </c:if>
