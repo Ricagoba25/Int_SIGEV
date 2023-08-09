@@ -6,7 +6,7 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>Test Disponibles</h1>
+        <h1>Evaluaciones Disponibles</h1>
       </div>
     </div>
   </div>
@@ -22,7 +22,7 @@
               <thead>
               <tr>
                 <th>ID</th>
-                <th>Nombre Test</th>
+                <th>Nombre Evaluación</th>
                 <th>Acciones</th>
               </tr>
               </thead>
