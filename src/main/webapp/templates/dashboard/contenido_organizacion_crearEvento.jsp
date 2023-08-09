@@ -24,7 +24,8 @@
                             <div class="row mt-2">
                                 <div class="col-xl-4">
                                     <label for="nombreEvento" class="form-label">Nombre Evento:</label>
-                                    <input type="text" name="nombreEvento" class="form-control" id="nombreEvento" required>
+                                    <input type="text" name="nombreEvento" class="form-control" id="nombreEvento"
+                                           required>
                                 </div>
                                 <div class="col-xl-4">
                                     <label for="fecha" class="form-label">Fecha:</label>
@@ -87,11 +88,11 @@
                             </div>
                         </form>
                     </div>
-
                 </div>
-
-
+            </div>
+        </div>
     </main>
+
 </section>
 
 
