@@ -10,11 +10,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6867e21e-5850-4c68-9edf-2957e5a99de1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/dashboard/template_admin_organizaciones.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/templates/dashboard/contenido_admin_organizaciones.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/dashboard/template_admin_perfil.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/dashboard/template_voluntario_perfil.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/templates/dashboard/contenido_voluntario_perfil.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/model/DAO/DaoEvento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/model/DAO/DaoEvento.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/dashboard/contenido_admin_eventos.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/templates/dashboard/contenido_admin_eventos.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/dashboard/contenido_admin_perfil.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/templates/dashboard/contenido_admin_perfil.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/dashboard/template_dashboard.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/templates/dashboard/template_dashboard.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -220,7 +221,7 @@
       <workItem from="1691370523739" duration="3400000" />
       <workItem from="1691464388435" duration="9851000" />
       <workItem from="1691482150581" duration="4949000" />
-      <workItem from="1691566732333" duration="3966000" />
+      <workItem from="1691566732333" duration="5772000" />
     </task>
     <task id="LOCAL-00001" summary="Se agrega clase para enviar correos">
       <option name="closed" value="true" />

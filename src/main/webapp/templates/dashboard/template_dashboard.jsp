@@ -55,7 +55,7 @@
             <!-- Perfil voluntario-->
             <c:if test="${tipoSesion == 'Voluntario'}">
                 <li class="nav-item">
-                    <a href="/jsp/administrador/perfilAdministrador.jsp">
+                    <a href="./template_voluntario_perfil.jsp">
                         <button class="btn btn-info"> Mi Perfil</button>
                     </a>
                 </li>
@@ -63,7 +63,7 @@
             <!-- Perfil Organización-->
             <c:if test="${tipoSesion == 'Organización'}">
                 <li class="nav-item">
-                    <a href="/jsp/administrador/perfilAdministrador.jsp">
+                    <a href="./template_organizacion_perfil.jsp">
                         <button class="btn btn-info"> Mi Perfil</button>
                     </a>
                 </li>
@@ -71,7 +71,7 @@
             <!-- Perfil Administrador-->
             <c:if test="${tipoSesion == 'Administrador'}">
                 <li class="nav-item">
-                    <a href="/jsp/administrador/perfilAdministrador.jsp">
+                    <a href="./template_admin_perfil.jsp">
                         <button class="btn btn-info"> Mi Perfil</button>
                     </a>
                 </li>
