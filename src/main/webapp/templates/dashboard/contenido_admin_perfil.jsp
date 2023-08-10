@@ -8,7 +8,7 @@
     <c:if test="${not empty sesion}">
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4" style="margin-left: 100px">
             <div class=" pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2 mt-4 text-center">PERFIL DE ${sesion.getNombreCompleto()}</h1>
+                <h1 class="h2 mt-4 text-center">Perfil de ${sesion.getNombreCompleto()}</h1>
             </div>
             <!--Contenido-->
 
@@ -53,7 +53,7 @@
                             </div>
                             <div class="col-xl-4">
                                 <label for="telefono" class="form-label">Teléfono:</label>
-                                <input type="text" value="${telefono}" name="telefono" class="form-control"
+                                <input type="text" value="${Telefono}" name="telefono" class="form-control"
                                        id="telefono">
                             </div>
                         </div>

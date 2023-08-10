@@ -25,7 +25,8 @@
                 <th>Nombre Evento</th>
                 <th>Descripción</th>
                 <th>Fecha</th>
-                <th>Dirección</th>
+                <th>Colonia</th>
+                <th>Estado</th>
                 <th>Acciones</th>
               </tr>
               </thead>
@@ -52,6 +53,7 @@
         {"data": "nombreEvento"},
         {"data": "descripcion"},
         {"data": "fecha"},
+        {"data": "direccion.colonia"},
         {"data": "direccion.estado.nombre"},
         {
           // Añadir los botones de acciones "Editar" y "Borrar"

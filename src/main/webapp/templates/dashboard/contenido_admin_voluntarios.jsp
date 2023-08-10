@@ -24,9 +24,10 @@
                                 <th>Nombre Voluntario</th>
                                 <th>Apellido Paterno</th>
                                 <th>Apellido Materno</th>
-                                <th>Curp</th>
+                                <th>CURP</th>
                                 <th>Correo</th>
                                 <th>Telefono</th>
+                                <th>Estado</th>
                                 <th>Acciones</th>
                             </tr>
                             </thead>
@@ -45,17 +46,18 @@
         $('#example1').DataTable({
             ajax:
                 {
-                    url: URL_API + 'administrador',
+                    url: URL_API + 'voluntario',
                     dataSrc: ''
                 },
             columns: [
                 {"data": "idVoluntario"},
-                {"data": "persona_idPersona.nombrePersona"},
-                {"data": "persona_idPersona.primerApellido"},
-                {"data": "persona_idPersona.segundoApellido"},
+                {"data": "persona.nombrePersona"},
+                {"data": "persona.primerApellido"},
+                {"data": "persona.segundoApellido"},
                 {"data": "curp"},
-                {"data": "usuario_idUsuario.correo"},
-                {"data": "usuario_idUsuario.telefono"},
+                {"data": "persona.usuario.correo"},
+                {"data": "persona.usuario.telefono"},
+                {"data": "estatusVoluntario"},
                 {
                     // Añadir los botones de acciones "Editar" y "Borrar"
                     data: null,
@@ -63,11 +65,11 @@
                         // El contenido de esta función se ejecutará para cada celda de esta columna
                         // Utilizamos data para acceder a los datos de la fila actual
 
-                        let aceptarBtn = '<a href="#" onclick="aceptar(' + data.idVoluntario + ')">  <i class="fa fa-pen"></i> </a> &nbsp;';
-                        let cancelarBtn = '<a href="#" onclick="cancelar(' + data.idVoluntario + ')">  <i class="fa fa-trash-alt"></i> </a>';
+                        let bloquearBtn = '<a href="#" title="Bloquear" onclick="bloquear(' + data.idVoluntario + ')">  <i class="fa-solid fa-ban"></i> </a> &nbsp;';
+
 
                         // Devolvemos los botones como una cadena HTML
-                        return aceptarBtn + ' ' + cancelarBtn;
+                        return bloquearBtn;
                     }
                 }
 
@@ -78,15 +80,10 @@
 
     });
 
-    function aceptar(id) {
-        // Lógica para editar un usuario con el ID proporcionado
-        console.log('aceptar voluntario con ID:', id);
-    }
-
-    function cancelar(id) {
+    function bloquear(id) {
         //$('#datatable').DataTable().ajax.reload();
         // Lógica para borrar un usuario con el ID proporcionado
-        console.log('cancelar voluntario con ID:', id);
+        console.log('bloquear voluntario con ID:', id);
     }
 
 </script>

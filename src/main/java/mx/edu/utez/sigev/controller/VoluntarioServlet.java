@@ -165,7 +165,7 @@ public class VoluntarioServlet extends HttpServlet {
 
         Gson gson = new Gson();
         String json = gson.toJson(listaVoluntarios);
-
+        System.out.println(json);
         resp.setContentType("text/json");
         resp.getWriter().write(json);
     }

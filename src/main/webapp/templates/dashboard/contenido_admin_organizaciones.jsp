@@ -24,8 +24,9 @@
                 <th>ID</th>
                 <th>Nombre Organización</th>
                 <th>Razon Social</th>
-                <th>Rfc</th>
-                <th>Direccion</th>
+                <th>RFC</th>
+                <th>Colonia</th>
+                <th>Estado</th>
                 <th>Acciones</th>
 
               </tr>
@@ -54,6 +55,7 @@
         {"data": "razonSocial"},
         {"data": "rfc"},
         {"data": "direccion.colonia"},
+        {"data": "direccion.estado.nombre"},
         {
           // Añadir los botones de acciones "Editar" y "Borrar"
           data: null,
@@ -61,8 +63,8 @@
             // El contenido de esta función se ejecutará para cada celda de esta columna
             // Utilizamos data para acceder a los datos de la fila actual
 
-            let aceptatBtn = '<a href="#" onclick="aceptar(' + data.idOrganizacion + ')"> <i class="fa fa-check"></i> </a> &nbsp;';
-            let rechazarBtn = '<a href="#" onclick="rechazar(' + data.idOrganizacion + ')"> <i class="fa fa-times"></i> </a> &nbsp;';
+            let aceptatBtn = '<a href="#" title="Aceptar" onclick="aceptar(' + data.idOrganizacion + ')"> <i class="fa fa-check"></i> </a> &nbsp;';
+            let rechazarBtn = '<a href="#" title="Rechazar" onclick="rechazar(' + data.idOrganizacion + ')"> <i class="fa fa-times"></i> </a> &nbsp;';
 
             // Devolvemos los botones como una cadena HTML
             return aceptatBtn + ' ' + rechazarBtn;
