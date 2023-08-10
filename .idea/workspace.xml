@@ -10,10 +10,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6867e21e-5850-4c68-9edf-2957e5a99de1" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/controller/AdministradorServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/controller/AdministradorServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/controller/OrganizacionServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/controller/OrganizacionServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/css/dashboard.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/css/dashboard.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/dashboard/contenido_admin_administradores.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/templates/dashboard/contenido_admin_administradores.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/dashboard/contenido_admin_organizaciones.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/templates/dashboard/contenido_admin_organizaciones.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/dashboard/contenido_admin_perfil.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/templates/dashboard/contenido_admin_perfil.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,8 +27,8 @@
       <list>
         <option value="Interface" />
         <option value="Sevlet" />
-        <option value="Class" />
         <option value="Jsp File" />
+        <option value="Class" />
       </list>
     </option>
   </component>

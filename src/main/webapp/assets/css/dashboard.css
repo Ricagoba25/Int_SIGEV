@@ -40,3 +40,8 @@
 .menu-ul {
     list-style:none;
 }
+
+#formulario_administrador .form-group .is-invalid {
+    color: red;
+    font-size: 12px;
+}
