@@ -41,7 +41,7 @@
     list-style:none;
 }
 
-#formulario_administrador .form-group .is-invalid {
+#formulario_administrador .form-group .is-invalid .formulario_evento {
     color: red;
     font-size: 12px;
 }

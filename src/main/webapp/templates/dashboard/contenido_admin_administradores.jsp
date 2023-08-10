@@ -20,7 +20,9 @@
                     <div class="card-body">
 
                         <div class="buttons-header text-right mb-4">
-                            <button type="button" class="btn btn-success" onclick="nuevoAdministrador()"> Crear adminstrador</button>
+                            <button type="button" class="btn btn-success" onclick="nuevoAdministrador()"> Crear
+                                adminstrador
+                            </button>
                         </div>
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
@@ -69,20 +71,20 @@
             },
             messages: {
                 nombre: {
-                    required: "El nombre es requerido.",
+                    required: "El Nombre es requerido.",
                 },
                 primerApellido: {
-                    required: "El apellido paterno es requerido.",
+                    required: "El Apellido paterno es requerido.",
                 },
                 segundoApellido: {
-                    required: "El apellido materno es requerido.",
+                    required: "El Apellido materno es requerido.",
                 },
                 correo: {
-                    required: "El correo es requerido.",
-                    email: "El correo electrónico debe ser en el siguiente formato nombre@dominio.com."
+                    required: "El Correo es requerido.",
+                    email: "El correo debe ser en el siguiente formato nombre@dominio.com."
                 },
                 telefono: {
-                    required: "El telefono es requerido.",
+                    required: "El Telefono es requerido.",
                 },
             },
             submitHandler: function (form) {
@@ -117,22 +119,19 @@
 
 
                         let editarBtn = '<a href="#" id="editarBtn" onclick=\'editar(' + JSON.stringify(data) + ')\'> <i class="fa fa-pen"></i> </a> &nbsp;';
-                        let borrarBtn = '<a href="#" onclick=\'borrar(' + JSON.stringify(data) + ')\'>  <i class="fa fa-trash-alt"></i> </a>';
+                        let borrarBtn = '<a href="#" onclick=\'borrar(' + JSON.stringify(data) + ')\'>  <i class="fa fa-trash-alt"></i> </a> &nbsp;';
 
                         // Devolvemos los botones como una cadena HTML
                         return editarBtn + ' ' + borrarBtn;
-
-
                     }
                 }
 
             ]
-
         });
     });
 
     const nuevoAdministrador = () => {
-      //  let validator = $("#formulario_administrador").validate();
+        //  let validator = $("#formulario_administrador").validate();
         //validator.resetForm();
 
         $("#formulario_administrador").validate().resetForm();
@@ -148,8 +147,6 @@
         $('#segundoApellido').val("");
         $('#correo').val("");
         $('#telefono').val("");
-
-
 
 
         $('#modalAdministrador').modal('show');
@@ -181,14 +178,7 @@
         $('#telefono').val(telefono);
 
 
-
         console.log('Editar usuario con ID:', data);
-
-
-
-
-
-
 
 
     }
@@ -232,7 +222,8 @@
     </div>
 </div>
 
-<div id="modalAdministrador" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="miModalLabel" aria-hidden="true">
+<div id="modalAdministrador" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="miModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <form id="formulario_administrador">
@@ -269,7 +260,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary"> <span id="guardarCambios"> </span>  </button>
+                    <button type="submit" class="btn btn-primary"><span id="guardarCambios"> </span></button>
                 </div>
             </form>
         </div>
