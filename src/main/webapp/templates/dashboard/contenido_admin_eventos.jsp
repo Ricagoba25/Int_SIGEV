@@ -52,7 +52,7 @@
         {"data": "nombreEvento"},
         {"data": "descripcion"},
         {"data": "fecha"},
-        {"data": "direccion_idDireccion.estado_idEstado.nombre"},
+        {"data": "direccion.estado.nombre"},
         {
           // Añadir los botones de acciones "Editar" y "Borrar"
           data: null,
@@ -61,11 +61,12 @@
             // Utilizamos data para acceder a los datos de la fila actual
 
 
-            let aceptarBtn = '<a href="#" onclick="aceptar(' + data.idEvento + ')">  <i class="fa-solid fa-clipboard-check"></i> </a> &nbsp;';
-            let rechazarBtn = '<a href="#" onclick="rechazar(' + data.idPersona + ')">  <i class="fa-solid fa-ban"></i></i> </a>';
+            let aceptatBtn = '<a href="#" title="Aceptar" onclick="aceptar(' + data.idEvento + ')"> <i class="fa fa-check"></i> </a> &nbsp;';
+
+            let rechazarBtn = '<a href="#" title="Rechazar" onclick="rechazar(' + data.idEvento + ')"> <i class="fa fa-times"></i> </a> &nbsp;';
 
             // Devolvemos los botones como una cadena HTML
-            return editarBtn + ' ' + borrarBtn;
+            return aceptatBtn + ' ' + rechazarBtn;
           }
         }
 
@@ -97,7 +98,7 @@
       //$('#datatable').DataTable().ajax.reload();
     });
   }
-  //Boton de eliminar usuario
+  //Boton de rechazar evento
   function rechazar(id) {
     // Abrir el modal de confirmación
     $('#confirmModal').modal('show');

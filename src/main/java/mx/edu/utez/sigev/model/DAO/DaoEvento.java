@@ -21,19 +21,21 @@ public class DaoEvento implements DaoRepository {
     public List findAll() {
         List<BeanEvento> listaBeanEvento = new ArrayList<>();
         try {
-            String query = "SELECT * FROM evento e";
+            String query = "SELECT * FROM evento e " +
+                    "JOIN direccion d ON e.direccion_idDireccion = d.idDireccion " +
+                    "JOIN estado es ON d.estado_idEstado = es.idEstado";
+
             con = MysqlConector.connect();
             pstm = con.prepareStatement(query);
             rs = pstm.executeQuery();
 
             while (rs.next()) {
-
                 BeanEstado beanEstado = new BeanEstado();
                 beanEstado.setIdEstado(rs.getInt("idEstado"));
                 beanEstado.setNombre(rs.getString("nombre"));
 
                 BeanDireccion beanDireccion = new BeanDireccion();
-
+                beanDireccion.setIdDireccion(rs.getInt("idDireccion"));
                 beanDireccion.setCalle(rs.getString("calle"));
                 beanDireccion.setColonia(rs.getString("colonia"));
                 beanDireccion.setMunicipio(rs.getString("municipio"));
@@ -42,6 +44,7 @@ public class DaoEvento implements DaoRepository {
                 beanDireccion.setEstado(beanEstado);
 
                 BeanEvento beanEvento = new BeanEvento();
+                beanEvento.setIdEvento(rs.getInt("idEvento"));
                 beanEvento.setNombreEvento(rs.getString("nombreEvento"));
                 beanEvento.setDescripcion(rs.getString("descripcion"));
                 beanEvento.setFecha(rs.getDate("fecha"));
@@ -51,11 +54,13 @@ public class DaoEvento implements DaoRepository {
                 listaBeanEvento.add(beanEvento);
             }
         } catch (SQLException e) {
-            System.err.println("Error en el método findAll() - DaoColor -> " + e.getMessage());
+            System.err.println("Error en el método findAll() - DaoEvento -> " + e.getMessage());
         } finally {
             cerrarConexiones("findAll");
         }
+        System.out.println("tengo estos datos del evento " + listaBeanEvento);
         return listaBeanEvento;
+
     }
 
     @Override
