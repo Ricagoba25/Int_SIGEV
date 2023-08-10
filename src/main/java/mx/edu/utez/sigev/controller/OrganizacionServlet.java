@@ -39,8 +39,8 @@ public class OrganizacionServlet extends HttpServlet {
         String municipio = request.getParameter("municipio");
         String noExterior = request.getParameter("noExterior");
         String noInterior = request.getParameter("noInterior");
-        int idEstado = Integer.parseInt(request.getParameter("idColor"));
-        int idColor = Integer.parseInt(request.getParameter("idEstado"));
+        int idEstado = Integer.parseInt(request.getParameter("idEstado"));
+        int idColor = Integer.parseInt(request.getParameter("idColor"));
         int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
         int idPersona = Integer.parseInt(request.getParameter("idPersona"));
         int idDireccion = Integer.parseInt(request.getParameter("idDireccion"));

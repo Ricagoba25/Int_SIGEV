@@ -51,7 +51,7 @@
       </div>
       <div class="container__formulario" style="margin-bottom: 200px">
         <div class="container__formulario_contenido">
-          <form class="form-signin" action="../../ServletOrganizacion" method="post">
+          <form class="form-signin" action="./../../organizacion" method="post">
             <!-- Primera fila-->
 
             <div class="row mt-2">
@@ -117,7 +117,7 @@
             <!-- Button -->
             <div class="row justify-content-center mt-2">
               <div class="col-xl-4">
-                <button type="submit" name="accion" value="agregarOrganizacion" class="btn btn-primary btn-login mb-4 mt-4"> Registrarse</button>
+                <button type="submit" name="accion" value="registrar" class="btn btn-primary btn-login mb-4 mt-4"> Registrarse</button>
               </div>
             </div>
           </form>
@@ -134,16 +134,16 @@
       </div>
       <div class="container__formulario" style="margin-bottom: 200px">
         <div class="container__formulario_contenido">
-          <form action="/ServletVoluntario" method="post">
+          <form action="./../../voluntario" method="post">
             <!-- Primera fila-->
             <div class="row mt-2">
               <div class="col-xl-4">
                 <label for="nombre" class="form-label">Nombre:</label>
-                <input type="text" name="nombreVoluntario" class="form-control" id="nombreVoluntario">
+                <input type="text" name="nombreVoluntario" class="form-control" id="nombreVoluntario" required>
               </div>
               <div class="col-xl-4">
                 <label for="apellidoPaterno" class="form-label">Apellido Paterno:</label>
-                <input type="text" name="apellido1" class="form-control" id="apellidoPaterno">
+                <input type="text" name="apellido1" class="form-control" id="apellidoPaterno" required>
               </div>
               <div class="col-xl-4">
                 <label for="apellidoMaterno" class="form-label">Apellido Materno:</label>
@@ -154,29 +154,29 @@
             <div class="row mt-2">
               <div class="col-xl-6">
                 <label for="curp" class="form-label">Curp:</label>
-                <input type="text" name="curp" class="form-control" id="curp">
+                <input type="text" name="curp" class="form-control" id="curp" required>
               </div>
             </div>
             <!-- Tercera linea-->
             <div class="row mt-2">
               <div class="col-xl-4">
                 <label for="telefono" class="form-label">Teléfono:</label>
-                <input type="text" name="telefono" class="form-control" id="telefono">
+                <input type="text" name="telefono" class="form-control" id="telefono" required>
               </div>
               <div class="col-xl-4">
                 <label for="correo" class="form-label">Email:</label>
-                <input type="text" name="correo" class="form-control" id="correo">
+                <input type="text" name="correo" class="form-control" id="correo" required>
               </div>
               <div class="col-xl-4">
                 <label for="contrasena" class="form-label">Contraseña:</label>
-                <input type="password" name="contrasenia" class="form-control" id="contrasena">
+                <input type="password" name="contrasenia" class="form-control" id="contrasena" required>
               </div>
             </div>
             <!-- Button -->
 
             <div class="row justify-content-center mt-2">
               <div class="col-xl-4">
-                <button type="submit" name="accion" value="agregarVoluntario" class="btn btn-primary btn-login mb-4 mt-4"> Registrarse</button>
+                <button type="submit" name="accion" value="registrar" class="btn btn-primary btn-login mb-4 mt-4"> Registrarse</button>
               </div>
             </div>
           </form>
