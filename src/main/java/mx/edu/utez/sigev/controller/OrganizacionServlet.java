@@ -168,7 +168,7 @@ public class OrganizacionServlet extends HttpServlet {
 
 
         DaoOrganizacion daoOrganizacion = new DaoOrganizacion();
-        List<BeanPersona> listaOrganizaciones = new ArrayList<>();
+        List<BeanOrganizacion> listaOrganizaciones = new ArrayList<>();
 
         try {
             listaOrganizaciones = daoOrganizacion.findAll();

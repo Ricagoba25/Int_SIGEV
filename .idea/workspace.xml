@@ -11,8 +11,8 @@
   <component name="ChangeListManager">
     <list default="true" id="6867e21e-5850-4c68-9edf-2957e5a99de1" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/dashboard/contenido_admin_administradores.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/templates/dashboard/contenido_admin_administradores.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/dashboard/contenido_organizacion_crearEvento.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/templates/dashboard/contenido_organizacion_crearEvento.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demoRuiz.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/controller/OrganizacionServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mx/edu/utez/sigev/controller/OrganizacionServlet.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,9 +23,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
+        <option value="Jsp File" />
         <option value="Sevlet" />
         <option value="Class" />
-        <option value="Jsp File" />
       </list>
     </option>
   </component>
@@ -46,6 +46,7 @@
     <option name="generalSettings">
       <MavenGeneralSettings>
         <option name="mavenHome" value="Use Maven wrapper" />
+        <option name="useMavenConfig" value="true" />
       </MavenGeneralSettings>
     </option>
   </component>
@@ -345,7 +346,8 @@
     <MESSAGE value="Se corrige DaoOrganizacion" />
     <MESSAGE value="Se termina servlet de administrador" />
     <MESSAGE value="Se termina servlet de voluntario" />
-    <option name="LAST_COMMIT_MESSAGE" value="Se termina servlet de voluntario" />
+    <MESSAGE value="Se termina servlet de organizacion" />
+    <option name="LAST_COMMIT_MESSAGE" value="Se termina servlet de organizacion" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
