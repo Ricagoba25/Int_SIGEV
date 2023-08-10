@@ -86,7 +86,7 @@
   //Boton de editar Usuario
   function aceptar(id) {
     // Abrir el modal de confirmación
-    $('#modalEditar').modal('show');
+    $('#modalAceptar').modal('show');
 
     // Agregar un evento al botón de confirmación dentro del modal
     $('#confirmareditar').click(function () {
@@ -102,7 +102,7 @@
   //Boton de eliminar usuario
   function rechazar(id) {
     // Abrir el modal de confirmación
-    $('#confirmModal').modal('show');
+    $('#modalRechazar').modal('show');
 
     // Agregar un evento al botón de confirmación dentro del modal
     $('#confirmarBorrar').click(function () {
@@ -118,11 +118,11 @@
 
 </script>
 <!-- Modal de confirmación -->
-<div id="confirmModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
+<div id="modalAceptar" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="confirmModalLabel1">Confirmar Aceptacion</h5>
+        <h5 class="modal-title" id="confirmModalLabel1">Confirmar Aceptación</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -139,21 +139,21 @@
 </div>
 
 <!-- Modal de confirmación -->
-<div id="confirmModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
+<div id="modalRechazar" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="confirmModalLabel">Confirmar Rechazado</h5>
+        <h5 class="modal-title" id="confirmModalLabel2">Confirmar Rechazado</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        ¿Estás seguro de que deseas rechazar esta organización?
+        ¿Estás seguro de que deseas rechazar esta Organización?
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button id="confirmarBorrar" type="button" class="btn btn-danger">Rechazar</button>
+        <button id="confirmarRechazar" type="button" class="btn btn-danger">Aceptar</button>
       </div>
     </div>
   </div>

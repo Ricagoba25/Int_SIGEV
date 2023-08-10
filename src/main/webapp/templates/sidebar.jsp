@@ -49,8 +49,14 @@
                 <c:if test="${tipoSesion == 'Voluntario'}">
                     <li class="nav-item">
                         <a href="./template_voluntario_disponibles.jsp" class="nav-link">
-                            <i class="fa-solid fa-calendar-check"></i>
+                            <i class="fa-regular fa-calendar-days"></i>
                             <p>Eventos Disponibles </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="./template_voluntario_postulados.jsp" class="nav-link">
+                            <i class="fa-solid fa-calendar-check"></i>
+                            <p>Eventos Postulados </p>
                         </a>
                     </li>
                     <li class="nav-item">
