@@ -35,6 +35,7 @@ public class AdministradorServlet extends HttpServlet {
         String nombrePersona = request.getParameter("nombrePersona");
         String primerapellido = request.getParameter("primerapellido");
         String segundoapellido = request.getParameter("segundoapellido");
+
         int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
         int idPersona = Integer.parseInt(request.getParameter("idPersona"));
 

@@ -24,6 +24,7 @@
                 <th>ID</th>
                 <th>Nombre Organización</th>
                 <th>Razon Social</th>
+                <th>Rfc</th>
                 <th>Direccion</th>
                 <th>Acciones</th>
 
@@ -44,15 +45,15 @@
     $('#example1').DataTable({
       ajax:
               {
-                url: URL_API + 'administrador',
+                url: URL_API + 'organizacion',
                 dataSrc: ''
               },
       columns: [
         {"data": "idOrganizacion"},
         {"data": "nombreOrganizacion"},
         {"data": "razonSocial"},
-        {"data": "direccion_idDireccion.estado_idEstado.nombre"},
-
+        {"data": "rfc"},
+        {"data": "direccion.colonia"},
         {
           // Añadir los botones de acciones "Editar" y "Borrar"
           data: null,
@@ -60,11 +61,11 @@
             // El contenido de esta función se ejecutará para cada celda de esta columna
             // Utilizamos data para acceder a los datos de la fila actual
 
-            let aceptatBtn = '<a href="#" onclick="aceptar(' + data.idPersona + ')">  <i class="fa-solid fa-clipboard-check"> </a> &nbsp;';
-            let rechazarBtn = '<a href="#" onclick="rechazar(' + data.idPersona + ')">  <i class="fa-solid fa-ban"></i></i></i> </a>';
+            let aceptatBtn = '<a href="#" onclick="aceptar(' + data.idOrganizacion + ')"> <i class="fa fa-check"></i> </a> &nbsp;';
+            let rechazarBtn = '<a href="#" onclick="rechazar(' + data.idOrganizacion + ')"> <i class="fa fa-times"></i> </a> &nbsp;';
 
             // Devolvemos los botones como una cadena HTML
-            return aceptarBtn + ' ' + rechazarBtn;
+            return aceptatBtn + ' ' + rechazarBtn;
           }
         }
 

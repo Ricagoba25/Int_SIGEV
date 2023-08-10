@@ -8,9 +8,6 @@
             <div class="col-sm-6">
                 <h1>Administradores</h1>
             </div>
-            <div class="col-sm-6 text-sm-right">
-                <button id="agregarAdmin" class="btn btn-success"> Agregar Administrador</button>
-            </div>
         </div>
     </div>
 </section>
@@ -21,6 +18,10 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
+
+                        <div class="buttons-header text-right mb-4">
+                            <button type="button" class="btn btn-success" onclick="nuevoAdministrador()"> Crear adminstrador</button>
+                        </div>
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                             <tr>
@@ -43,7 +44,56 @@
 
 
 <script>
-    $(function () {
+    $(document).ready(function () {
+
+        $("#formulario_administrador").validate({
+            errorClass: "is-invalid",
+            validClass: "is-valid",
+            rules: {
+                nombre: {
+                    required: true
+                },
+                primerApellido: {
+                    required: true
+                },
+                segundoApellido: {
+                    required: true
+                },
+                correo: {
+                    required: true,
+                    email: true
+                },
+                telefono: {
+                    required: true
+                },
+            },
+            messages: {
+                nombre: {
+                    required: "El nombre es requerido.",
+                },
+                primerApellido: {
+                    required: "El apellido paterno es requerido.",
+                },
+                segundoApellido: {
+                    required: "El apellido materno es requerido.",
+                },
+                correo: {
+                    required: "El correo es requerido.",
+                    email: "El correo electrónico debe ser en el siguiente formato nombre@dominio.com."
+                },
+                telefono: {
+                    required: "El telefono es requerido.",
+                },
+            },
+            submitHandler: function (form) {
+                // do other things for a valid form
+                //editar o nuevo
+
+                console.log("llamar funcion de enviar")
+
+            }
+        })
+
         const URL_API = "http://localhost:8080/"
         $('#example1').DataTable({
             ajax:
@@ -65,44 +115,85 @@
                         // El contenido de esta función se ejecutará para cada celda de esta columna
                         // Utilizamos data para acceder a los datos de la fila actual
 
-                        let editarBtn = '<a href="#" onclick="editar(' + data.idPersona + ')">  <i class="fa fa-pen"></i> </a> &nbsp;';
-                        let borrarBtn = '<a href="#" onclick="borrar(' + data.idPersona + ')">  <i class="fa fa-trash-alt"></i> </a>';
+
+                        let editarBtn = '<a href="#" id="editarBtn" onclick=\'editar(' + JSON.stringify(data) + ')\'> <i class="fa fa-pen"></i> </a> &nbsp;';
+                        let borrarBtn = '<a href="#" onclick=\'borrar(' + JSON.stringify(data) + ')\'>  <i class="fa fa-trash-alt"></i> </a>';
 
                         // Devolvemos los botones como una cadena HTML
                         return editarBtn + ' ' + borrarBtn;
+
+
                     }
                 }
 
             ]
 
         });
-
-
     });
 
-    /*function editar(id) {
-        // Lógica para editar un usuario con el ID proporcionado
-        console.log('Editar usuario con ID:', id);
-    }*/
+    const nuevoAdministrador = () => {
+      //  let validator = $("#formulario_administrador").validate();
+        //validator.resetForm();
+
+        $("#formulario_administrador").validate().resetForm();
+
+
+        //editamos el titulo y el nombre del boton submit
+
+        $("#modalTitle").text("Registrar nuevo Administrador");
+        $("#guardarCambios").text("Crear");
+
+        $('#nombre').val("");
+        $('#primerApellido').val("");
+        $('#segundoApellido').val("");
+        $('#correo').val("");
+        $('#telefono').val("");
+
+
+
+
+        $('#modalAdministrador').modal('show');
+    }
 
     //Boton de editar Usuario
-    function editar(id) {
+    const editar = (data) => {
+        $("#formulario_administrador").validate().resetForm();
+        //let validator = $("#formulario_administrador").validate();
+        //validator.resetForm();
+
+
+        //editamos el titulo y el nombre del boton submit
+        $("#modalTitle").text("Editar Administrador");
+        $("#guardarCambios").text("Actualizar");
+
         // Abrir el modal de confirmación
-        $('#modalEditar').modal('show');
+        $('#modalAdministrador').modal('show');
 
-        // Agregar un evento al botón de confirmación dentro del modal
-        $('#confirmareditar').click(function () {
-            console.log('Editar usuario con ID:', id);
+        //fill fields
+        let {nombrePersona, primerApellido, segundoApellido} = data;
+        let correo = data.usuario.correo;
+        let telefono = data.usuario.telefono;
 
-            // Cerrar el modal después de borrar
-            $('#confirmModal').modal('hide');
+        $('#nombre').val(nombrePersona);
+        $('#primerApellido').val(primerApellido);
+        $('#segundoApellido').val(segundoApellido);
+        $('#correo').val(correo);
+        $('#telefono').val(telefono);
 
-            // Recargar la tabla o realizar otras acciones necesarias
-            //$('#datatable').DataTable().ajax.reload();
-        });
+
+
+        console.log('Editar usuario con ID:', data);
+
+
+
+
+
+
+
+
     }
     //Boton de eliminar usuario
-    function borrar(id) {
+    const borrar = (id) => {
         // Abrir el modal de confirmación
         $('#confirmModal').modal('show');
 
@@ -120,7 +211,8 @@
 
 </script>
 <!-- Modal de confirmación -->
-<div id="confirmModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
+<div id="confirmModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -139,99 +231,52 @@
         </div>
     </div>
 </div>
-<div id="modalEditar" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="miModalLabel" aria-hidden="true">
+
+<div id="modalAdministrador" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="miModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="miModalLabel">Editar Administrador</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="formulario">
+            <form id="formulario_administrador">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">Editar Administrador</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
                     <div class="form-group">
                         <label for="nombre">Nombre:</label>
-                        <input type="text" value="${nombre}" class="form-control" id="nombre" >
+                        <input type="text" class="form-control" id="nombre" name="nombre">
                     </div>
                     <div class="form-group">
                         <label for="primerApellido">Apellido Paterno:</label>
-                        <input type="text" value="${primerApellido}" class="form-control" id="primerApellido" >
+                        <input type="text" class="form-control" id="primerApellido"
+                               name="primerApellido">
                     </div>
                     <div class="form-group">
                         <label for="segundoApellido">Apellido Materno:</label>
-                        <input type="text" value="${segundoApellido}" class="form-control" id="segundoApellido" >
+                        <input type="text" class="form-control" id="segundoApellido" name="segundoApellido">
                     </div>
                     <div class="form-group">
                         <label for="correo">Correo:</label>
-                        <input type="email" value="${correo}" class="form-control" id="correo" >
+                        <input type="email" class="form-control" id="correo" name="correo">
                     </div>
                     <div class="form-group">
                         <label for="telefono">Teléfono:</label>
-                        <input type="tel" value="${telefono}" class="form-control" id="telefono">
+                        <input type="text" class="form-control" id="telefono" name="telefono">
                     </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button id="guardarCambios" type="button" class="btn btn-primary">Actualizar</button>
-            </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary"> <span id="guardarCambios"> </span>  </button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
-
-
-<script>
-    $(document).ready(function () {
-        // Abrir el modal cuando se haga clic en el botón "Cerrar sesión"
-        $("#agregarAdmin").click(function () {
-            $("#modalAgregarAdmin").modal("show");
-        });
-    });
-</script>
-
-<div id="modalAgregarAdmin" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="miModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="miModalLabel2">Crear Administrador</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="formulario2">
-                    <div class="form-group">
-                        <label for="nombreAdmin">Nombre:</label>
-                        <input type="text" class="form-control" id="nombreAdmin" >
-                    </div>
-                    <div class="form-group">
-                        <label for="primerApellidoAdmin">Apellido Paterno:</label>
-                        <input type="text" class="form-control" id="primerApellidoAdmin" >
-                    </div>
-                    <div class="form-group">
-                        <label for="segundoApellidoAdmin">Apellido Materno:</label>
-                        <input type="text"  class="form-control" id="segundoApellidoAdmin" >
-                    </div>
-                    <div class="form-group">
-                        <label for="correoAdmin">Correo:</label>
-                        <input type="email"  class="form-control" id="correoAdmin" >
-                    </div>
-                    <div class="form-group">
-                        <label for="telefonoAdmin">Teléfono:</label>
-                        <input type="tel"  class="form-control" id="telefonoAdmin">
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button id="guardarCambios2" type="button" class="btn btn-primary">Crear</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
 
 
 <script src="https://cdn.datatables.net/v/bs5/dt-1.13.6/datatables.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>

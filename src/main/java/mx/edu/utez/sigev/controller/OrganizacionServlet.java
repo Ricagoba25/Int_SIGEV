@@ -165,8 +165,9 @@ public class OrganizacionServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        DaoOrganizacion daoOrganizacion = new DaoOrganizacion();
 
+
+        DaoOrganizacion daoOrganizacion = new DaoOrganizacion();
         List<BeanPersona> listaOrganizaciones = new ArrayList<>();
 
         try {
