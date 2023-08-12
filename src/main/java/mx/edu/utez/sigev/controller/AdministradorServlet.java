@@ -29,12 +29,12 @@ public class AdministradorServlet extends HttpServlet {
         // Obtener los datos del formulario
         String accion = request.getParameter("accion");
 
-        String correo = request.getParameter("correo");
-        String contrasena = request.getParameter("contrasena");
-        String telefono = request.getParameter("telefono");
         String nombrePersona = request.getParameter("nombrePersona");
-        String primerapellido = request.getParameter("primerapellido");
-        String segundoapellido = request.getParameter("segundoapellido");
+        String primerapellido = request.getParameter("primerApellido");
+        String segundoapellido = request.getParameter("segundoApellido");
+        String correo = request.getParameter("correo");
+        String telefono = request.getParameter("telefono");
+        String contrasena = request.getParameter("contrasena");
 
         int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
         int idPersona = Integer.parseInt(request.getParameter("idPersona"));
@@ -56,6 +56,7 @@ public class AdministradorServlet extends HttpServlet {
 
         switch (accion) {
             case "registrar":
+                usuario.setContrasena("123456");
                 respuesta = daoUsuario.insert(usuario);
 
                 System.out.println("resUsuario " + respuesta);

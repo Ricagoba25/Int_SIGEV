@@ -41,7 +41,12 @@
     list-style:none;
 }
 
-#formulario_administrador .form-group .is-invalid .formulario_evento {
+#modalAdministrador .form-group .is-invalid .formulario_evento {
     color: red;
     font-size: 12px;
+}
+
+.div-msg-error {
+    padding: 5px;
+    color: #ff0000;
 }

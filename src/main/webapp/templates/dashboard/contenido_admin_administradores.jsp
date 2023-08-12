@@ -47,7 +47,6 @@
 
 <script>
     $(document).ready(function () {
-
         $("#formulario_administrador").validate({
             errorClass: "is-invalid",
             validClass: "is-valid",
@@ -90,12 +89,25 @@
             submitHandler: function (form) {
                 // do other things for a valid form
                 //editar o nuevo
+                let accion = $('#accionForm').val();
+                let data = {
+                    //
+                }
+                if (accion === 'editar') {
+                    enviarDatosEditar();
+                } else {
+                    enviarDatosNuevo();
+                }
 
-                console.log("llamar funcion de enviar")
+                // accions === 'editar' ? sendDataEdit(data) : sendDataRegister(data);
+
+                //sendData usuario registre
+                //sendData editar
+
+                console.log("Enviar datos" + accion)
 
             }
         })
-
         const URL_API = "http://localhost:8080/"
         $('#example1').DataTable({
             ajax:
@@ -130,6 +142,68 @@
         });
     });
 
+    /**** registrar ***/
+    const enviarDatosNuevo = () => {
+        //Obtenemos los datos de los inputs para registrar en el backend
+        let nombre = $('#nombre').val();
+        let primerApellido = $('#primerApellido').val();
+        let segundoApellido = $('#segundoApellido').val();
+        let correo = $('#correo').val();
+        let telefono = $('#telefono').val();
+
+        let formData = {
+            accion: 'registrar',
+            nombrePersona: nombre,
+            primerApellido: primerApellido,
+            segundoApellido: segundoApellido,
+            correo: correo,
+            telefono: telefono,
+            idUsuario: 0,
+            idPersona: 0,
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/administrador",
+            data: formData,
+            success: function (response) {
+                loading = false;
+                // Procesar la respuesta del servlet si es necesario
+                console.log("Respuesta del servidor:", response);
+
+                if (response.error) {
+                    Swal.fire({
+                        position: 'bottom-end',
+                        icon: 'error',
+                        title: 'Error',
+                        text: response.title,
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                } else {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Registro exitoso',
+                        text: "El administrador se ha registrado correctamente.",
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+
+                    let table = $('#example1').DataTable();
+                    table.ajax.reload();
+
+                    $('#modalAdministrador').modal('hide');
+                }
+            },
+            error: function (error) {
+                loading = false;
+                console.error("Error en la petición AJAX:", error);
+            }
+        });
+
+
+    }
     const nuevoAdministrador = () => {
         //  let validator = $("#formulario_administrador").validate();
         //validator.resetForm();
@@ -149,10 +223,81 @@
         $('#telefono').val("");
 
 
+        //Setear Accion
+        $('#accionForm').val("nuevo");
+
+
         $('#modalAdministrador').modal('show');
     }
+    /**** editar ***/
+    const enviarDatosEditar = () => {
+        //Obtenemos los datos de los inputs para registrar en el backend
+        let nombre = $('#nombre').val();
+        let primerApellido = $('#primerApellido').val();
+        let segundoApellido = $('#segundoApellido').val();
+        let correo = $('#correo').val();
+        let telefono = $('#telefono').val();
 
-    //Boton de editar Usuario
+        //IDS
+        let idUsuario = $('#idUsuario').val();
+        let idPersona = $('#idPersona').val();
+
+        let formData = {
+            accion: 'modificar',
+            nombrePersona: nombre,
+            primerApellido: primerApellido,
+            segundoApellido: segundoApellido,
+            correo: correo,
+            telefono: telefono,
+            idUsuario: idUsuario,
+            idPersona: idPersona
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/administrador",
+            data: formData,
+            success: function (response) {
+                loading = false;
+                // Procesar la respuesta del servlet si es necesario
+                console.log("Respuesta del servidor:", response);
+
+                if (response.error) {
+                    Swal.fire({
+                        position: 'bottom-end',
+                        icon: 'error',
+                        title: 'Error',
+                        text: response.title,
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+
+                } else {
+                    // si la respuesta es exitosa
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Registro exitoso',
+                        text: "El administrador se ha modificado correctamente.",
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    let table = $('#example1').DataTable();
+                    table.ajax.reload();
+
+                    $('#modalAdministrador').modal('hide');
+
+                    //window.location.href = '../dashboard/index.jsp';
+                }
+            },
+            error: function (error) {
+                loading = false;
+                console.error("Error en la petición AJAX:", error);
+            }
+        });
+
+
+    }
     const editar = (data) => {
         $("#formulario_administrador").validate().resetForm();
         //let validator = $("#formulario_administrador").validate();
@@ -167,15 +312,24 @@
         $('#modalAdministrador').modal('show');
 
         //fill fields
-        let {nombrePersona, primerApellido, segundoApellido} = data;
+        let {idPersona, nombrePersona, primerApellido, segundoApellido} = data;
         let correo = data.usuario.correo;
         let telefono = data.usuario.telefono;
+        let idUsuario = data.usuario.idUsuario;
 
         $('#nombre').val(nombrePersona);
         $('#primerApellido').val(primerApellido);
         $('#segundoApellido').val(segundoApellido);
         $('#correo').val(correo);
         $('#telefono').val(telefono);
+
+        //IDS
+        $('#idUsuario').val(idUsuario);
+        $('#idPersona').val(idPersona);
+
+
+        //Setear Accion
+        $('#accionForm').val("editar");
 
 
         console.log('Editar usuario con ID:', data);
@@ -198,6 +352,7 @@
             //$('#datatable').DataTable().ajax.reload();
         });
     }
+
 
 </script>
 <!-- Modal de confirmación -->
@@ -228,13 +383,15 @@
         <div class="modal-content">
             <form id="formulario_administrador">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalTitle">Editar Administrador</h5>
+                    <h5 class="modal-title" id="modalTitle"></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-
+                    <input type="hidden" value="" id="accionForm">
+                    <input type="hidden" value="" id="idUsuario">
+                    <input type="hidden" value="" id="idPersona">
                     <div class="form-group">
                         <label for="nombre">Nombre:</label>
                         <input type="text" class="form-control" id="nombre" name="nombre">
@@ -267,7 +424,7 @@
     </div>
 </div>
 
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.datatables.net/v/bs5/dt-1.13.6/datatables.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
