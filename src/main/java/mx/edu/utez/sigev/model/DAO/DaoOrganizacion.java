@@ -169,6 +169,24 @@ public class DaoOrganizacion implements DaoRepository {
         return modificado;
     }
 
+    public boolean changeStatus(int id, int estatus) {
+        boolean modificado = false;
+        try {
+            String query = "UPDATE organizacion SET estatusOrganizacion = ? WHERE idOrganizacion = ?";
+
+            con = MysqlConector.connect();
+            pstm = con.prepareStatement(query);
+            pstm.setInt(1, estatus);
+            pstm.setInt(2, id);
+            modificado = pstm.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.err.println("Error en el método update() - DaoOrganizacion -> " + e.getMessage());
+        } finally {
+            cerrarConexiones("update");
+        }
+        return modificado;
+    }
+
     @Override
     public boolean delete(int id) {
         boolean eliminado = false;

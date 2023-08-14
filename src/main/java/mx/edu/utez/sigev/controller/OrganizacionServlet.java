@@ -45,6 +45,7 @@ public class OrganizacionServlet extends HttpServlet {
         int idPersona = Integer.parseInt(request.getParameter("idPersona"));
         int idDireccion = Integer.parseInt(request.getParameter("idDireccion"));
         int idOrganizacion = Integer.parseInt(request.getParameter("idOrganizacion"));
+        int estatus = Integer.parseInt(request.getParameter("estatus"));
 
         BeanUsuario usuario = new BeanUsuario();
         usuario.setCorreo(correo);
@@ -147,6 +148,19 @@ public class OrganizacionServlet extends HttpServlet {
                 } else {
                     jsonResponse.addProperty("error", 1);
                     jsonResponse.addProperty("title", "Organización no eliminada");
+                }
+                break;
+            case "changeStatus":
+                respuesta = daoOrganizacion.changeStatus(idOrganizacion, estatus);
+
+                System.out.println("resUsuario " + respuesta);
+                if (respuesta) {
+                    jsonResponse.addProperty("error", 0);
+                    jsonResponse.addProperty("title", "");
+                    jsonResponse.addProperty("message", "Estatus de organización modificado exitosamente");
+                } else {
+                    jsonResponse.addProperty("error", 1);
+                    jsonResponse.addProperty("title", "El estatus de de la organización no se cambio");
                 }
                 break;
             default:
