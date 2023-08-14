@@ -87,22 +87,13 @@
                 },
             },
             submitHandler: function (form) {
-                // do other things for a valid form
                 //editar o nuevo
                 let accion = $('#accionForm').val();
-                let data = {
-                    //
-                }
                 if (accion === 'editar') {
                     enviarDatosEditar();
                 } else {
                     enviarDatosNuevo();
                 }
-
-                // accions === 'editar' ? sendDataEdit(data) : sendDataRegister(data);
-
-                //sendData usuario registre
-                //sendData editar
 
                 console.log("Enviar datos" + accion)
 
@@ -205,14 +196,8 @@
 
     }
     const nuevoAdministrador = () => {
-        //  let validator = $("#formulario_administrador").validate();
-        //validator.resetForm();
-
         $("#formulario_administrador").validate().resetForm();
-
-
         //editamos el titulo y el nombre del boton submit
-
         $("#modalTitle").text("Registrar nuevo Administrador");
         $("#guardarCambios").text("Crear");
 
@@ -221,12 +206,8 @@
         $('#segundoApellido').val("");
         $('#correo').val("");
         $('#telefono').val("");
-
-
         //Setear Accion
         $('#accionForm').val("nuevo");
-
-
         $('#modalAdministrador').modal('show');
     }
     /**** editar ***/
@@ -282,9 +263,8 @@
                         showConfirmButton: false,
                         timer: 1500
                     })
-                    let table = $('#example1').DataTable();
-                    table.ajax.reload();
 
+                    recargarTabla();
                     $('#modalAdministrador').modal('hide');
 
                     //window.location.href = '../dashboard/index.jsp';
@@ -337,22 +317,80 @@
 
     }
     //Boton de eliminar usuario
-    const borrar = (id) => {
+    const borrar = (data) => {
         // Abrir el modal de confirmación
         $('#confirmModal').modal('show');
 
         // Agregar un evento al botón de confirmación dentro del modal
         $('#confirmarBorrar').click(function () {
-            console.log('Borrando usuario con ID:', id);
+            console.log('Borrando usuario con ID:', data);
+
+            let formData = {
+                accion: "eliminar",
+                nombrePersona: "",
+                primerApellido: "",
+                segundoApellido: "",
+                correo: "",
+                telefono: "",
+                idUsuario: data.usuario.idUsuario,
+                idPersona: 0
+            }
+
+            console.log(data.usuario.idUsuario)
+
+
+            $.ajax({
+                type: "POST",
+                url: "/administrador",
+                data: formData,
+                success: function (response) {
+                    loading = false;
+                    // Procesar la respuesta del servlet si es necesario
+                    console.log("Respuesta del servidor:", response);
+
+                    if (response.error) {
+                        Swal.fire({
+                            position: 'bottom-end',
+                            icon: 'error',
+                            title: 'Error',
+                            text: response.title,
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+
+                    } else {
+                        // si la respuesta es exitosa
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Registro exitoso',
+                            text: "El administrador se ha eliminado correctamente.",
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+
+                        recargarTabla();
+                        $('#modalAdministrador').modal('hide');
+
+                        //window.location.href = '../dashboard/index.jsp';
+                    }
+                },
+                error: function (error) {
+                    loading = false;
+                    console.error("Error en la petición AJAX:", error);
+                }
+            });
+
 
             // Cerrar el modal después de borrar
             $('#confirmModal').modal('hide');
-
-            // Recargar la tabla o realizar otras acciones necesarias
-            //$('#datatable').DataTable().ajax.reload();
         });
     }
 
+    const recargarTabla = () => {
+        let table = $('#example1').DataTable();
+        table.ajax.reload();
+    }
 
 </script>
 <!-- Modal de confirmación -->

@@ -18,7 +18,7 @@
       <div class="col-12">
         <div class="card">
           <div class="card-body">
-            <table id="example1" class="table table-bordered table-striped">
+            <table id="dataTableOrganizacion" class="table table-bordered table-striped">
               <thead>
               <tr>
                 <th>ID</th>
@@ -43,7 +43,7 @@
 <script>
   $(function () {
     const URL_API = "http://localhost:8080/"
-    $('#example1').DataTable({
+    $('#dataTableOrganizacion').DataTable({
       ajax:
               {
                 url: URL_API + 'organizacion',
