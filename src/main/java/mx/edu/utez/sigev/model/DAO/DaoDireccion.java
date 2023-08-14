@@ -131,7 +131,7 @@ public class DaoDireccion implements DaoRepository {
         boolean registrado = false;
         int idRegistro = 0;
         try {
-            String query = "INSERT INTO direcion (calle, colonia, municipio, noExterior, noInterior, estado_idEstado) values(?,?,?,?,?,?)";
+            String query = "INSERT INTO direccion (calle, colonia, municipio, noExterior, noInterior, estado_idEstado) values(?,?,?,?,?,?)";
 
             con = MysqlConector.connect();
             pstm = con.prepareStatement(query);

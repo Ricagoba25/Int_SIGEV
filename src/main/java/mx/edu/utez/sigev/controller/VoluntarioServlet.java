@@ -10,6 +10,7 @@ import mx.edu.utez.sigev.model.DAO.DaoPersona;
 import mx.edu.utez.sigev.model.DAO.DaoUsuario;
 import mx.edu.utez.sigev.model.DAO.DaoVoluntario;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -80,6 +81,7 @@ public class VoluntarioServlet extends HttpServlet {
                             jsonResponse.addProperty("error", 0);
                             jsonResponse.addProperty("title", "");
                             jsonResponse.addProperty("message", "Voluntario registrado exitosamente");
+
                         } else {
                             jsonResponse.addProperty("error", 1);
                             jsonResponse.addProperty("title", "Voluntario no registrado, problemas en persona");

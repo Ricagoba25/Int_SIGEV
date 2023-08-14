@@ -164,12 +164,12 @@
 
                 if (response.error) {
                     Swal.fire({
-                        position: 'bottom-end',
+                        position: 'center',
                         icon: 'error',
                         title: 'Error',
                         text: response.title,
                         showConfirmButton: false,
-                        timer: 1500
+                        timer: 2500
                     })
                 } else {
                     Swal.fire({
@@ -178,7 +178,7 @@
                         title: 'Registro exitoso',
                         text: "El administrador se ha registrado correctamente.",
                         showConfirmButton: false,
-                        timer: 1500
+                        timer: 2500
                     })
 
                     let table = $('#example1').DataTable();
@@ -245,12 +245,12 @@
 
                 if (response.error) {
                     Swal.fire({
-                        position: 'bottom-end',
+                        position: 'center',
                         icon: 'error',
                         title: 'Error',
                         text: response.title,
                         showConfirmButton: false,
-                        timer: 1500
+                        timer: 2500
                     })
 
                 } else {
@@ -258,10 +258,10 @@
                     Swal.fire({
                         position: 'center',
                         icon: 'success',
-                        title: 'Registro exitoso',
+                        title: 'Actualizacion exitosa',
                         text: "El administrador se ha modificado correctamente.",
                         showConfirmButton: false,
-                        timer: 1500
+                        timer: 2500
                     })
 
                     recargarTabla();
@@ -350,12 +350,12 @@
 
                     if (response.error) {
                         Swal.fire({
-                            position: 'bottom-end',
+                            position: 'center',
                             icon: 'error',
                             title: 'Error',
                             text: response.title,
                             showConfirmButton: false,
-                            timer: 1500
+                            timer: 2500
                         })
 
                     } else {
@@ -363,10 +363,10 @@
                         Swal.fire({
                             position: 'center',
                             icon: 'success',
-                            title: 'Registro exitoso',
+                            title: 'Eliminación exitosa',
                             text: "El administrador se ha eliminado correctamente.",
                             showConfirmButton: false,
-                            timer: 1500
+                            timer: 2500
                         })
 
                         recargarTabla();
