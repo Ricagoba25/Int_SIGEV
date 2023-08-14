@@ -132,11 +132,12 @@
                             <p>Voluntarios</p>
                         </a>
                     </li>
+                    <!--<li>
                     <a href="./template_admin_generarReportes.jsp" class="nav-link">
                         <i class="fa fa-file"></i>
                         <p>Generar Reportes</p>
                     </a>
-                    </li>
+                    </li>-->
                 </c:if>
 
             </ul>
