@@ -35,8 +35,8 @@ public class VoluntarioServlet extends HttpServlet {
         String contrasena = request.getParameter("contrasena");
         String telefono = request.getParameter("telefono");
         String nombrePersona = request.getParameter("nombrePersona");
-        String primerapellido = request.getParameter("primerapellido");
-        String segundoapellido = request.getParameter("segundoapellido");
+        String primerapellido = request.getParameter("primerApellido");
+        String segundoapellido = request.getParameter("segundoApellido");
         String curp = request.getParameter("curp");
         int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
         int idPersona = Integer.parseInt(request.getParameter("idPersona"));

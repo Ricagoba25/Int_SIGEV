@@ -11,6 +11,7 @@
     <title>Registro</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="/assets/css/styles.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 <body>
 
@@ -51,7 +52,7 @@
       </div>
       <div class="container__formulario" style="margin-bottom: 200px">
         <div class="container__formulario_contenido">
-          <form class="form-signin" action="./../../organizacion" method="post">
+          <form class="form-organizacion">
             <!-- Primera fila-->
 
             <div class="row mt-2">
@@ -117,7 +118,7 @@
             <!-- Button -->
             <div class="row justify-content-center mt-2">
               <div class="col-xl-4">
-                <button type="submit" name="accion" value="registrar" class="btn btn-primary btn-login mb-4 mt-4"> Registrarse</button>
+                <button type="submit" class="btn btn-primary btn-login mb-4 mt-4"> Registrarse</button>
               </div>
             </div>
           </form>
@@ -134,20 +135,24 @@
       </div>
       <div class="container__formulario" style="margin-bottom: 200px">
         <div class="container__formulario_contenido">
-          <form action="./../../voluntario" method="post">
+          <form id="formulario_voluntario">
             <!-- Primera fila-->
             <div class="row mt-2">
+
+              <input type="hidden" value="" id="idUsuario">
+              <input type="hidden" value="" id="idPersona">
+              <input type="hidden" value="" id="idVoluntario">
               <div class="col-xl-4">
-                <label for="nombre" class="form-label">Nombre:</label>
+                <label for="nombreVoluntario" class="form-label">Nombre:</label>
                 <input type="text" name="nombreVoluntario" class="form-control" id="nombreVoluntario" required>
               </div>
               <div class="col-xl-4">
-                <label for="apellidoPaterno" class="form-label">Apellido Paterno:</label>
-                <input type="text" name="apellido1" class="form-control" id="apellidoPaterno" required>
+                <label for="primerApellido" class="form-label">Apellido Paterno:</label>
+                <input type="text" name="primerApellido" class="form-control" id="primerApellido" required>
               </div>
               <div class="col-xl-4">
-                <label for="apellidoMaterno" class="form-label">Apellido Materno:</label>
-                <input type="text" name="apellido2" class="form-control" id="apellidoMaterno">
+                <label for="segundoApellido" class="form-label">Apellido Materno:</label>
+                <input type="text" name="segundoApellido" class="form-control" id="segundoApellido">
               </div>
             </div>
             <!-- Segunda Fila-->
@@ -176,7 +181,7 @@
 
             <div class="row justify-content-center mt-2">
               <div class="col-xl-4">
-                <button type="submit" name="accion" value="registrar" class="btn btn-primary btn-login mb-4 mt-4"> Registrarse</button>
+                <button type="submit" class="btn btn-primary btn-login mb-4 mt-4"> Registrarse</button>
               </div>
             </div>
           </form>
@@ -196,6 +201,106 @@
   </footer>
 
   <script>
+
+    $(document).ready(function () {
+
+
+      $("form-organizacion").validate({
+        errorClass: "is-invalid",
+        validClass: "is-valid",
+        rules: {
+          nombreVoluntario: {
+            required: true
+          },
+          primerApellido: {
+            required: true
+          },
+          segundoApellido: {
+            required: true
+          },
+          correo: {
+            required: true,
+            email: true
+          },
+          telefono: {
+            required: true
+          },
+        },
+        messages: {
+          nombreVoluntario: {
+            required: "El Nombre es requerido.",
+          },
+          primerApellido: {
+            required: "El Apellido paterno es requerido.",
+          },
+          segundoApellido: {
+            required: "El Apellido materno es requerido.",
+          },
+          correo: {
+            required: "El Correo es requerido.",
+            email: "El correo debe ser en el siguiente formato nombre@dominio.com."
+          },
+          telefono: {
+            required: "El Telefono es requerido.",
+          },
+        },
+        submitHandler: function (form) {
+          nuevaOrganizacion();
+        }
+      })
+
+
+
+
+
+      $("#formulario_voluntario").validate({
+        errorClass: "is-invalid",
+        validClass: "is-valid",
+        rules: {
+          nombreVoluntario: {
+            required: true
+          },
+          primerApellido: {
+            required: true
+          },
+          segundoApellido: {
+            required: true
+          },
+          correo: {
+            required: true,
+            email: true
+          },
+          telefono: {
+            required: true
+          },
+        },
+        messages: {
+          nombreVoluntario: {
+            required: "El Nombre es requerido.",
+          },
+          primerApellido: {
+            required: "El Apellido paterno es requerido.",
+          },
+          segundoApellido: {
+            required: "El Apellido materno es requerido.",
+          },
+          correo: {
+            required: "El Correo es requerido.",
+            email: "El correo debe ser en el siguiente formato nombre@dominio.com."
+          },
+          telefono: {
+            required: "El Telefono es requerido.",
+          },
+        },
+        submitHandler: function (form) {
+            nuevoVoluntario();
+        }
+      })
+    });
+
+
+
+
     function changeForm(radio) {
       var formType = radio.value;
       var formContainerOrganizacion = document.getElementById("formContainerOrganizacion");
@@ -214,6 +319,72 @@
         formContainerOrganizacion.style.display = 'none';
       }
     }
+
+
+    const nuevoVoluntario = () => {
+      //Obtenemos los datos de los inputs para registrar en el backend
+      let nombreVoluntario = $('#nombreVoluntario').val();
+      let primerApellido = $('#primerApellido').val();
+      let segundoApellido = $('#segundoApellido').val();
+      let curp = $('#curp').val();
+      let correo = $('#correo').val();
+      let telefono = $('#telefono').val();
+      let contrasena = $('#contrasena').val();
+
+      let formData = {
+        accion: 'registrar',
+        nombrePersona: nombreVoluntario,
+        primerApellido: primerApellido,
+        segundoApellido: segundoApellido,
+        curp: curp,
+        correo: correo,
+        telefono: telefono,
+        contrasena: contrasena,
+        idUsuario: 0,
+        idPersona: 0,
+        idVoluntario: 0,
+      }
+
+      console.log("formData " + formData)
+      $.ajax({
+        type: "POST",
+        url: "/voluntario",
+        data: formData,
+        success: function (response) {
+          loading = false;
+          // Procesar la respuesta del servlet si es necesario
+          console.log("Respuesta del servidor:", response);
+
+          if (response.error) {
+            Swal.fire({
+              position: 'bottom-end',
+              icon: 'error',
+              title: 'Error',
+              text: response.title,
+              showConfirmButton: false,
+              timer: 1500
+            })
+          } else {
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Registro exitoso',
+              text: "El Voluntario se ha registrado correctamente.",
+              showConfirmButton: false,
+              timer: 1500
+            })
+
+
+          }
+        },
+        error: function (error) {
+          loading = false;
+          console.error("Error en la petición AJAX:", error);
+        }
+      });
+
+
+    }
   </script>
 
 
@@ -221,4 +392,8 @@
 </div>
 
 </body>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.datatables.net/v/bs5/dt-1.13.6/datatables.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
 </html>
