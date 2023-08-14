@@ -59,7 +59,8 @@
                         <div class="row mt-2">
                             <div class="col-xl-4">
                                 <label for="nombreOrganizacion" class="form-label">Nombre:</label>
-                                <input type="text" name="nombreOrganizacion" class="form-control" id="nombreOrganizacion" required>
+                                <input type="text" name="nombreOrganizacion" class="form-control"
+                                       id="nombreOrganizacion" required>
                             </div>
                             <div class="col-xl-4">
                                 <label for="razonSocial" class="form-label">Razón Social:</label>
@@ -206,8 +207,8 @@
     </footer>
 
     <script>
-
         $(document).ready(function () {
+
             $("#formulario_organizacion").validate({
                 errorClass: "is-invalid",
                 validClass: "is-valid",
@@ -251,8 +252,51 @@
                     nuevaOrganizacion();
                 }
             })
+            // ******************************************** Voluntario *************************************************
+            $("#formulario_voluntario").validate({
+                errorClass: "is-invalid",
+                validClass: "is-valid",
+                rules: {
+                    nombreVoluntario: {
+                        required: true
+                    },
+                    primerApellido: {
+                        required: true
+                    },
+                    segundoApellido: {
+                        required: true
+                    },
+                    correo: {
+                        required: true,
+                        email: true
+                    },
+                    telefono: {
+                        required: true
+                    },
+                },
+                messages: {
+                    nombreVoluntario: {
+                        required: "El Nombre es requerido.",
+                    },
+                    primerApellido: {
+                        required: "El Apellido paterno es requerido.",
+                    },
+                    segundoApellido: {
+                        required: "El Apellido materno es requerido.",
+                    },
+                    correo: {
+                        required: "El Correo es requerido.",
+                        email: "El correo debe ser en el siguiente formato nombre@dominio.com."
+                    },
+                    telefono: {
+                        required: "El Telefono es requerido.",
+                    },
+                },
+                submitHandler: function (form) {
+                    nuevoVoluntario();
+                }
+            });
         });
-
 
         const nuevaOrganizacion = () => {
             //Obtenemos los datos de los inputs para registrar en el backend
@@ -279,14 +323,13 @@
                 noInterior: noInterior,
                 colonia: colonia,
                 municipio: municipio,
-                estado: estado,
                 correo: correo,
                 telefono: telefono,
                 contrasena: contrasena,
-                idUsuario: 0,
+
                 idPersona: 0,
                 idOrganizacion: 0,
-                idEstado: 0,
+                idEstado: 17,
                 idColor: 0,
                 idDireccion: 0,
                 estatus: 0,
@@ -331,53 +374,6 @@
             });
 
         }
-
-       // ******************************************** Voluntario *************************************************
-
-            $("#formulario_voluntario").validate({
-                errorClass: "is-invalid",
-                validClass: "is-valid",
-                rules: {
-                    nombreVoluntario: {
-                        required: true
-                    },
-                    primerApellido: {
-                        required: true
-                    },
-                    segundoApellido: {
-                        required: true
-                    },
-                    correo: {
-                        required: true,
-                        email: true
-                    },
-                    telefono: {
-                        required: true
-                    },
-                },
-                messages: {
-                    nombreVoluntario: {
-                        required: "El Nombre es requerido.",
-                    },
-                    primerApellido: {
-                        required: "El Apellido paterno es requerido.",
-                    },
-                    segundoApellido: {
-                        required: "El Apellido materno es requerido.",
-                    },
-                    correo: {
-                        required: "El Correo es requerido.",
-                        email: "El correo debe ser en el siguiente formato nombre@dominio.com."
-                    },
-                    telefono: {
-                        required: "El Telefono es requerido.",
-                    },
-                },
-                submitHandler: function (form) {
-                    nuevoVoluntario();
-                }
-        });
-
 
         const nuevoVoluntario = () => {
             //Obtenemos los datos de los inputs para registrar en el backend

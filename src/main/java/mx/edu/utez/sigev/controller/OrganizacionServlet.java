@@ -77,7 +77,6 @@ public class OrganizacionServlet extends HttpServlet {
         switch (accion) {
             case "registrar":
                 respuesta = daoUsuario.insert(usuario);
-
                 System.out.println("resUsuario " + respuesta);
                 if (respuesta) {
                     usuario = (BeanUsuario) daoUsuario.findbyCorreo(correo);
