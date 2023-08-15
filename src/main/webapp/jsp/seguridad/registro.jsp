@@ -326,7 +326,7 @@
                 correo: correo,
                 telefono: telefono,
                 contrasena: contrasena,
-
+                idUsuario: 0,
                 idPersona: 0,
                 idOrganizacion: 0,
                 idEstado: 17,

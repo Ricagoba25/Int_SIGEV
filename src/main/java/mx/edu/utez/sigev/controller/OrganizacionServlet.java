@@ -84,7 +84,12 @@ public class OrganizacionServlet extends HttpServlet {
                     usuario = (BeanUsuario) daoUsuario.findbyCorreo(correo);
                     organizacion.setUsuario(usuario);
                     idDireccion = daoDireccion.registrar(direccion);
+
+                    System.out.println(direccion);
+
                     System.out.println("resDireccion " + idDireccion);
+
+                    
                     if (idDireccion > 0) {
                         direccion.setIdDireccion(idDireccion);
                         organizacion.setDireccion(direccion);

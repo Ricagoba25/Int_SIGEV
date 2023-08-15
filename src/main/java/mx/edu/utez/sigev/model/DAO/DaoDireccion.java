@@ -83,6 +83,8 @@ public class DaoDireccion implements DaoRepository {
         try {
             String query = "UPDATE  direccion SET calle = ?, colonia = ?, municipio = ?, noExterior = ?, noInterior = ?, estado_idEstado = ? where = idDireccion = ?";
             con = MysqlConector.connect();
+
+            System.out.println(query);
             pstm = con.prepareStatement(query);
 
             pstm.setString(1, direccion.getCalle());
@@ -144,6 +146,8 @@ public class DaoDireccion implements DaoRepository {
 
             if (registrado) {
                 rs = pstm.getGeneratedKeys();
+
+                System.out.println("getGenerateKEy: "+rs);
                 if (rs.next()) {
                     idRegistro = rs.getInt(1);
                 }

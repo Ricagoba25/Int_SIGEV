@@ -133,14 +133,13 @@
         {
           data: null,
           render: function (data, type, row) {
-            let estatus = "Rechazado"
-
+            let estatus = "Rechazado";
             if(data.estatusEvento == 1) {
               estatus = "Aceptado"
-            } else if (data.estatusEvento == 3) {
+            }
+            if (data.estatusEvento == 3) {
               estatus = "Pendiente"
             }
-
             return estatus;
           }
         },
