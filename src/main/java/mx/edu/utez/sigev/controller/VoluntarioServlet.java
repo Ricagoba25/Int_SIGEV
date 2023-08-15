@@ -9,6 +9,7 @@ import mx.edu.utez.sigev.model.BeanVoluntario;
 import mx.edu.utez.sigev.model.DAO.DaoPersona;
 import mx.edu.utez.sigev.model.DAO.DaoUsuario;
 import mx.edu.utez.sigev.model.DAO.DaoVoluntario;
+import mx.edu.utez.sigev.utils.Utilidades;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -26,6 +27,7 @@ public class VoluntarioServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        Utilidades utilidades = new Utilidades();
         // Crear una respuesta en formato JSON
         JsonObject jsonResponse = new JsonObject();
 
@@ -39,9 +41,9 @@ public class VoluntarioServlet extends HttpServlet {
         String primerapellido = request.getParameter("primerApellido");
         String segundoapellido = request.getParameter("segundoApellido");
         String curp = request.getParameter("curp");
-        int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
-        int idPersona = Integer.parseInt(request.getParameter("idPersona"));
-        int idVoluntario = Integer.parseInt(request.getParameter("idVoluntario"));
+        int idUsuario = utilidades.numeroInt(request.getParameter("idUsuario"));
+        int idPersona = utilidades.numeroInt(request.getParameter("idPersona"));
+        int idVoluntario = utilidades.numeroInt(request.getParameter("idVoluntario"));
 
         BeanUsuario usuario = new BeanUsuario();
         usuario.setCorreo(correo);

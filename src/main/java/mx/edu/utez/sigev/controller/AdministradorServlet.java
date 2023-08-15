@@ -7,6 +7,7 @@ import mx.edu.utez.sigev.model.BeanRol;
 import mx.edu.utez.sigev.model.BeanUsuario;
 import mx.edu.utez.sigev.model.DAO.DaoPersona;
 import mx.edu.utez.sigev.model.DAO.DaoUsuario;
+import mx.edu.utez.sigev.utils.Utilidades;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,6 +24,7 @@ public class AdministradorServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        Utilidades utilidades = new Utilidades();
         // Crear una respuesta en formato JSON
         JsonObject jsonResponse = new JsonObject();
 
@@ -36,8 +38,8 @@ public class AdministradorServlet extends HttpServlet {
         String telefono = request.getParameter("telefono");
         String contrasena = request.getParameter("contrasena");
 
-        int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
-        int idPersona = Integer.parseInt(request.getParameter("idPersona"));
+        int idUsuario = utilidades.numeroInt(request.getParameter("idUsuario"));
+        int idPersona = utilidades.numeroInt(request.getParameter("idPersona"));
 
         BeanUsuario usuario = new BeanUsuario();
         usuario.setCorreo(correo);

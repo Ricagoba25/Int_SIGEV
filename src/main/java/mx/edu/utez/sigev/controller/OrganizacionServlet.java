@@ -6,6 +6,7 @@ import mx.edu.utez.sigev.model.*;
 import mx.edu.utez.sigev.model.DAO.DaoDireccion;
 import mx.edu.utez.sigev.model.DAO.DaoOrganizacion;
 import mx.edu.utez.sigev.model.DAO.DaoUsuario;
+import mx.edu.utez.sigev.utils.Utilidades;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,6 +23,7 @@ public class OrganizacionServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        Utilidades utilidades = new Utilidades();
         // Crear una respuesta en formato JSON
         JsonObject jsonResponse = new JsonObject();
 
@@ -39,13 +41,13 @@ public class OrganizacionServlet extends HttpServlet {
         String municipio = request.getParameter("municipio");
         String noExterior = request.getParameter("noExterior");
         String noInterior = request.getParameter("noInterior");
-        int idEstado = Integer.parseInt(request.getParameter("idEstado"));
-        int idColor = Integer.parseInt(request.getParameter("idColor"));
-        int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
-        int idPersona = Integer.parseInt(request.getParameter("idPersona"));
-        int idDireccion = Integer.parseInt(request.getParameter("idDireccion"));
-        int idOrganizacion = Integer.parseInt(request.getParameter("idOrganizacion"));
-        int estatus = Integer.parseInt(request.getParameter("estatus"));
+        int idEstado = utilidades.numeroInt(request.getParameter("idEstado"));
+        int idColor = utilidades.numeroInt(request.getParameter("idColor"));
+        int idUsuario = utilidades.numeroInt(request.getParameter("idUsuario"));
+        int idPersona = utilidades.numeroInt(request.getParameter("idPersona"));
+        int idDireccion = utilidades.numeroInt(request.getParameter("idDireccion"));
+        int idOrganizacion = utilidades.numeroInt(request.getParameter("idOrganizacion"));
+        int estatus = utilidades.numeroInt(request.getParameter("estatus"));
 
         BeanUsuario usuario = new BeanUsuario();
         usuario.setCorreo(correo);
@@ -66,7 +68,7 @@ public class OrganizacionServlet extends HttpServlet {
         organizacion.setNombreOrganizacion(nombreOrganizacion);
         organizacion.setRazonSocial(razonSocial);
         organizacion.setImagenLogotipo(null);
-        organizacion.setColor(new BeanColor(idColor));
+        organizacion.setColor(new BeanColor(1));
 
         DaoUsuario daoUsuario = new DaoUsuario();
         DaoDireccion daoDireccion = new DaoDireccion();

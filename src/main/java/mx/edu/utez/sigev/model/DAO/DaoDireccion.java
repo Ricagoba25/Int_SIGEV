@@ -4,10 +4,7 @@ import mx.edu.utez.sigev.model.BeanDireccion;
 import mx.edu.utez.sigev.model.BeanEstado;
 import mx.edu.utez.sigev.utils.MysqlConector;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -134,7 +131,7 @@ public class DaoDireccion implements DaoRepository {
             String query = "INSERT INTO direccion (calle, colonia, municipio, noExterior, noInterior, estado_idEstado) values(?,?,?,?,?,?)";
 
             con = MysqlConector.connect();
-            pstm = con.prepareStatement(query);
+            pstm = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
             pstm.setString(1, direccion.getCalle());
             pstm.setString(2, direccion.getColonia());
