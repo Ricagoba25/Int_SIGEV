@@ -130,7 +130,20 @@
         {"data": "direccion.colonia"},
         {"data": "direccion.municipio"},
         {"data": "direccion.estado.nombre"},
-        {"data": "estatusEvento"},
+        {
+          data: null,
+          render: function (data, type, row) {
+            let estatus = "Rechazado"
+
+            if(data.estatusEvento == 1) {
+              estatus = "Aceptado"
+            } else if (data.estatusEvento == 3) {
+              estatus = "Pendiente"
+            }
+
+            return estatus;
+          }
+        },
         {
           // Añadir los botones de acciones "Editar" y "Borrar"
           data: null,

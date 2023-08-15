@@ -60,7 +60,6 @@ public class DaoEvento implements DaoRepository {
         }
         System.out.println("tengo estos datos del evento " + listaBeanEvento);
         return listaBeanEvento;
-
     }
 
     @Override
