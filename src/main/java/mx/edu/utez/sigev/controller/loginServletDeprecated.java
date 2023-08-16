@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 @WebServlet(name = "user", value = "/user-servlet")
-public class userServlet extends HttpServlet {
+public class loginServletDeprecated extends HttpServlet {
 
 
     @Override
@@ -37,20 +37,16 @@ public class userServlet extends HttpServlet {
             //Set rol
             BeanRol beanRol = new BeanRol();
             beanRol.setNombreRol(usr.getRol().getNombreRol());
-
-            System.out.println("llegue aqui jeje");
-            System.out.println(beanRol.getNombreRol());
-            System.out.println(usr);
-
             request.getSession().setAttribute("tipoSesion", beanRol.getNombreRol());
-            request.getSession().setAttribute("sesion",usr);
+            request.getSession().setAttribute("sesion", usr);
 
 
             jsonResponse.addProperty("error", 0);
             jsonResponse.addProperty("title", "");
             jsonResponse.addProperty("message", "Inicio se sesión exitoso");
-            System.out.println("este es el rol" + beanRol.getNombreRol());
-            jsonResponse.addProperty("tipoSesion", beanRol.getNombreRol() );
+
+
+            jsonResponse.addProperty("tipoSesion", beanRol.getNombreRol());
 
         } else {
 
@@ -77,8 +73,6 @@ public class userServlet extends HttpServlet {
         System.out.println("Entra al get");
         resp.sendRedirect("index.jsp");
     }
-
-
 
 
 }

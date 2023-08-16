@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -81,18 +82,30 @@ public class AdministradorServlet extends HttpServlet {
                 }
                 break;
             case "modificar":
+
                 usuario.setIdUsuario(idUsuario);
                 persona.setIdPersona(idPersona);
 
                 respuesta = daoUsuario.update(usuario.getIdUsuario(), usuario);
+
 
                 System.out.println("resUsuario " + respuesta);
                 if (respuesta) {
                     respuesta = daoPersona.update(persona.getIdPersona(), persona);
                     System.out.println("resPersona " + respuesta);
                     if (respuesta) {
+
+                        //actualizar session
+                        BeanPersona personaSesion = (BeanPersona) daoPersona.findOne(usuario.getIdUsuario());
+                        request.getSession().setAttribute("sesion", personaSesion);
+                        request.getSession().setAttribute("usuario", usuario);
+                        //Actualizar sesion end
+
+
+
                         jsonResponse.addProperty("error", 0);
                         jsonResponse.addProperty("title", "");
+                        jsonResponse.addProperty("newGetNombreCompleto", personaSesion.getNombreCompleto());
                         jsonResponse.addProperty("message", "Administrador modificado exitosamente");
                     } else {
                         jsonResponse.addProperty("error", 1);

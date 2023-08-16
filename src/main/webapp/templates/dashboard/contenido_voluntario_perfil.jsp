@@ -8,7 +8,7 @@
     <c:if test="${not empty sesion}">
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4" style="margin-left: 100px">
             <div class=" pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2 mt-4 text-center">Perfil de </h1>
+                <h1 class="h2 mt-4 text-center">${sesion.getPersona().getNombreCompleto() } </h1>
             </div>
             <!--Contenido-->
 
@@ -31,16 +31,16 @@
                         <div class="row mt-2">
                             <div class="col-xl-4">
                                 <label for="nombre" class="form-label">Nombre:</label>
-                                <input type="text" value="" name="nombre" class="form-control" id="nombre">
+                                <input type="text" value="${sesion.getPersona().getNombrePersona()}" name="nombre" class="form-control" id="nombre">
                             </div>
                             <div class="col-xl-4">
                                 <label for="primerApellido" class="form-label">Apellido Paterno:</label>
-                                <input type="text" class="form-control" value="" name="primerApellido"
+                                <input type="text" class="form-control" value="${sesion.getPersona().getPrimerApellido()}" name="primerApellido"
                                        id="primerApellido">
                             </div>
                             <div class="col-xl-4">
                                 <label for="segundoApellido" class="form-label">Apellido Materno:</label>
-                                <input type="text" value="" name="segundoApellido"
+                                <input type="text" value="${sesion.getPersona().getSegundoApellido()}" name="segundoApellido"
                                        class="form-control" id="segundoApellido">
                             </div>
                         </div>
@@ -48,17 +48,17 @@
                         <div class="row mt-2">
                             <div class="col-xl-4">
                                 <label for="correo" class="form-label">Correo*:</label>
-                                <input type="text" value="" name="correo" class="form-control"
+                                <input type="text" value="${usuario.getCorreo()}" name="correo" class="form-control"
                                        id="correo">
                             </div>
                             <div class="col-xl-4">
                                 <label for="telefono" class="form-label">Teléfono:</label>
-                                <input type="text" value="" name="telefono" class="form-control"
+                                <input type="text" value="${usuario.getTelefono()}" name="telefono" class="form-control"
                                        id="telefono">
                             </div>
                             <div class="col-xl-4">
                                 <label for="curp" class="form-label">Curp*:</label>
-                                <input type="text" value="" name="curp" class="form-control"
+                                <input type="text" value="${sesion.getCurp()}" name="curp" class="form-control"
                                        id="curp">
                             </div>
                         </div>

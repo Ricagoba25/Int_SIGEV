@@ -278,6 +278,9 @@
 
 
     }
+
+
+
     const editar = (data) => {
         $("#formulario_administrador").validate().resetForm();
         //let validator = $("#formulario_administrador").validate();

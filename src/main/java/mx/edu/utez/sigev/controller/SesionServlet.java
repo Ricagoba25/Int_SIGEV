@@ -35,17 +35,15 @@ public class SesionServlet extends HttpServlet {
             case "iniciarSesion":
                 BeanUsuario usuarioSesion = (BeanUsuario) daoUsuario.iniciarSesion(email, pass);
 
-                System.out.println("Id usuario logueado " + usuarioSesion.getIdUsuario());
                 if (usuarioSesion.getIdUsuario() != 0) {
                     if (usuarioSesion.getEstatusUsuario() == 1) {
-                        System.out.println("Inicie sesion con");
-                        System.out.println(usuarioSesion.getIdUsuario());
-                        System.out.println(usuarioSesion.getRol().getNombreRol());
 
                         request.getSession().setAttribute("tipoSesion", usuarioSesion.getRol().getNombreRol());
+                        request.getSession().setAttribute("usuario", usuarioSesion);
 
                         switch (usuarioSesion.getRol().getNombreRol()) {
                             case "Administrador":
+
                                 DaoPersona daoPersona = new DaoPersona();
                                 BeanPersona personaSesion = (BeanPersona) daoPersona.findOne(usuarioSesion.getIdUsuario());
                                 request.getSession().setAttribute("sesion", personaSesion);
@@ -59,6 +57,10 @@ public class SesionServlet extends HttpServlet {
                                 DaoVoluntario daoVoluntario = new DaoVoluntario();
                                 BeanVoluntario voluntarioSesion = (BeanVoluntario) daoVoluntario.findOne(usuarioSesion.getIdUsuario());
                                 request.getSession().setAttribute("sesion", voluntarioSesion);
+
+                                System.out.println(voluntarioSesion.getPersona().getPrimerApellido());
+
+
                                 break;
                         }
 
@@ -82,13 +84,12 @@ public class SesionServlet extends HttpServlet {
             case "cerrarSesion":
                 request.getSession().removeAttribute("tipoSesion");
                 request.getSession().removeAttribute("sesion");
+                request.getSession().removeAttribute("usuario");
                 HttpSession session = request.getSession(false);
 
                 if (session != null) {
                     session.invalidate();
                 }
-
-                System.out.println("llego a cerrar sesion");
                 jsonResponse.addProperty("success", true);
                 break;
             default:

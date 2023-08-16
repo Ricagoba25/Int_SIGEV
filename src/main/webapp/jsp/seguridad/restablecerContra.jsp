@@ -6,7 +6,6 @@
     <title>Inicio Sesión</title>
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="/assets/css/styles.css" rel="stylesheet">
-
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 <body>
@@ -19,7 +18,6 @@
             <div class="login">
 
                 <form id="form_enviarCorreo">
-
                     <div class="row d-flex justify-content-center align-items-center">
                         <div class="col-xl-12">
                             <img src="/assets/img/Logo%20SIGEV.JPG" alt="LOGO" class="logo">
@@ -36,9 +34,9 @@
                             </div>
                             <div class="text-start">
                                 <div class="col-12">
-                                    <label for="pass" class="form-label">Correo:</label>
+                                    <label for="correo" class="form-label">Correo:</label>
                                 </div>
-                                <input type="text" class="form-control" id="pass" placeholder="Correo"
+                                <input type="text" class="form-control" id="correo" placeholder="Correo"
                                        name="correo">
                             </div>
                         </div>
@@ -78,38 +76,50 @@
                 sendData();
             }
         })
+
+
+        let sendData = () => {
+
+            let loading = true;
+            let correo = $("#correo").val();
+            let formData = {
+                correo: correo
+            }
+            console.log(formData)
+
+
+            // Realizar la petición AJAX
+            $.ajax({
+                type: "POST",
+                url: "/reset-password",
+                data: formData,
+                success: function (response) {
+                    loading = false;
+
+                    // Procesar la respuesta del servlet si es necesario
+                    console.log("Respuesta del servidor:", response);
+
+                    $("#loading").hide();
+                    $("#txt-btn").show();
+
+                    if (response.error) {
+                        $(".div-msg-error").show();
+                        $('#msg-error').text(response.message);
+                    } else {
+
+                        console.log(response)
+                    }
+                },
+                error: function (error) {
+                    loading = false;
+                    console.error("Error en la petición AJAX:", error);
+                }
+            });
+
+        }
     });
 
-    let sendData = () => {
-        let loading = true;
-        // Realizar la petición AJAX
-        $.ajax({
-            type: "POST",
-            url: "/reset-password",
-            data: formData,
-            success: function (response) {
-                loading = false;
 
-                // Procesar la respuesta del servlet si es necesario
-                console.log("Respuesta del servidor:", response);
-
-                $("#loading").hide();
-                $("#txt-btn").show();
-
-                if (response.error) {
-                    $(".div-msg-error").show();
-                    $('#msg-error').text(response.message);
-                } else {
-                    window.location.href = '../dashboard/index.jsp';
-                }
-            },
-            error: function (error) {
-                loading = false;
-                console.error("Error en la petición AJAX:", error);
-            }
-        });
-
-    }
 
 </script>
 
