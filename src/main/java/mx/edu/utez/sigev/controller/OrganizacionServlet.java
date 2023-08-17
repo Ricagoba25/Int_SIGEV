@@ -120,11 +120,18 @@ public class OrganizacionServlet extends HttpServlet {
 
                 System.out.println("resUsuario " + respuesta);
                 if (respuesta) {
+
                     respuesta = daoOrganizacion.update(organizacion.getIdOrganizacion(), organizacion);
                     System.out.println("resOrganizacion " + respuesta);
+
+                    //update session vars
+                    BeanOrganizacion organizacionSesion = (BeanOrganizacion) daoOrganizacion.findOne(usuario.getIdUsuario());
+                    request.getSession().setAttribute("sesion", organizacionSesion);
+
                     if (respuesta) {
                         jsonResponse.addProperty("error", 0);
                         jsonResponse.addProperty("title", "");
+                        jsonResponse.addProperty("newGetNombreCompleto", organizacionSesion.getNombreOrganizacion());
                         jsonResponse.addProperty("message", "Organización modificada exitosamente");
                     } else {
                         jsonResponse.addProperty("error", 1);

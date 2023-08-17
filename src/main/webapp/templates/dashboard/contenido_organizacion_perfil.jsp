@@ -8,7 +8,7 @@
     <c:if test="${not empty sesion}">
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4" style="margin-left: 100px">
             <div class=" pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2 mt-4 text-center">${sesion.getNombreOrganizacion()}</h1>
+                <h1 class="h2 mt-4 text-center" id="nombreCompleto">${sesion.getNombreOrganizacion()}</h1>
             </div>
             <!--Contenido-->
 
@@ -131,11 +131,16 @@
     let enviarDatosEditar = () => {
 
         //Obtenemos los datos de los inputs para registrar en el backend
-        let nombre = $('#nombreOrganizacion').val();
+        let nombre = $('#nombre').val();
         let razonSocial = $('#razonSocial').val();
         let rfc = $('#rfc').val();
-        let telefono = $('#telefonoOrganizacion').val();
-        let correo = $('#correoOrganizacion').val();
+        let telefono = $('#telefono').val();
+        let correo = $('#correo').val();
+
+
+
+        let idOrganizacion = $('#idOrganizacion').val();
+        let idUsuario = $('#idUsuario').val();
 
         let formData = {
             accion: 'modificar',
@@ -144,8 +149,8 @@
             rfc: rfc,
             correo: correo,
             telefono: telefono,
-            idOrganizacion: 0,
-            idUsuario: 0,
+            idOrganizacion: idOrganizacion,
+            idUsuario: idUsuario,
         }
 
         console.log("formData " + formData)
@@ -168,6 +173,8 @@
                         timer: 2500
                     })
                 } else {
+
+                    $("#nombreCompleto").text(response.newGetNombreCompleto);
                     Swal.fire({
                         position: 'center',
                         icon: 'success',
@@ -175,9 +182,7 @@
                         text: "La Organización se ha registrado correctamente.",
                         showConfirmButton: false,
                         timer: 2500
-                    }).then(() => {
-                        window.location.href = './../../../index.jsp'; // Redirigir al index.jsp
-                    });
+                    })
                 }
             },
             error: function (error) {
