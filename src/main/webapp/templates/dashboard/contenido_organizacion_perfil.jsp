@@ -126,6 +126,71 @@
     })
 
 
+    let enviarDatosEditar = () => {
+
+        //Obtenemos los datos de los inputs para registrar en el backend
+        let nombre = $('#nombre').val();
+        let razonSocial = $('#razonSocial').val();
+        let rfc = $('#rfc').val();
+        let telefono = $('#telefono').val();
+        let correo = $('#correo').val();
+
+
+
+        let idOrganizacion = $('#idOrganizacion').val();
+        let idUsuario = $('#idUsuario').val();
+
+        let formData = {
+            accion: 'modificar',
+            nombreOrganizacion: nombre,
+            razonSocial: razonSocial,
+            rfc: rfc,
+            correo: correo,
+            telefono: telefono,
+            idOrganizacion: idOrganizacion,
+            idUsuario: idUsuario,
+        }
+
+        console.log("formData " + formData)
+        $.ajax({
+            type: "POST",
+            url: "/organizacion",
+            data: formData,
+            success: function (response) {
+                loading = false;
+                // Procesar la respuesta del servlet si es necesario
+                console.log("Respuesta del servidor:", response);
+
+                if (response.error) {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'Error',
+                        text: response.title,
+                        showConfirmButton: false,
+                        timer: 2500
+                    })
+                } else {
+
+                    $("#nombreCompleto").text(response.newGetNombreCompleto);
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Registro exitoso',
+                        text: "La Organización se ha registrado correctamente.",
+                        showConfirmButton: false,
+                        timer: 2500
+                    })
+                }
+            },
+            error: function (error) {
+                loading = false;
+                console.error("Error en la petición AJAX:", error);
+            }
+        });
+    }
+
+
 </script>
 
 

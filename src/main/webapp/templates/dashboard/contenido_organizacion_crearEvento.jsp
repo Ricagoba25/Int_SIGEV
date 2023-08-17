@@ -75,7 +75,7 @@
                                 <div class="input-group col-xl-12">
                                     <span class="input-group-text">Descripción:</span>
                                     <textarea class="form-control" aria-label="With textarea"
-                                              name="descripcion"></textarea>
+                                              name="descripcion" id="descripcion"></textarea>
                                 </div>
                             </div>
                             <!-- Button -->
@@ -166,7 +166,7 @@
 
             },
             submitHandler: function (form) {
-
+                crearEvento();
             }
         })
 
@@ -176,6 +176,10 @@
             $("#modalElegir").modal("show");
         });
     });
+
+    function crearEvento(){
+
+    }
 
     let obtenerEstados = () => {
         $.ajax({
