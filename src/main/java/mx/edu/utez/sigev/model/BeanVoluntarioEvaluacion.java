@@ -3,7 +3,7 @@ package mx.edu.utez.sigev.model;
 import java.io.Serializable;
 
 public class BeanVoluntarioEvaluacion implements Serializable {
-    private int iVoluntarioEvaluacion;
+    private int idVoluntarioEvaluacion;
     private BeanVoluntario voluntario;
     private BeanEvaluacionOrganizacionEvento evaluacionOrganizacionEvento;
     private int estatusVoluntarioEvaluacion;
@@ -11,12 +11,12 @@ public class BeanVoluntarioEvaluacion implements Serializable {
     public BeanVoluntarioEvaluacion() {
     }
 
-    public int getiVoluntarioEvaluacion() {
-        return iVoluntarioEvaluacion;
+    public int getIdVoluntarioEvaluacion() {
+        return idVoluntarioEvaluacion;
     }
 
-    public void setiVoluntarioEvaluacion(int iVoluntarioEvaluacion) {
-        this.iVoluntarioEvaluacion = iVoluntarioEvaluacion;
+    public void setIdVoluntarioEvaluacion(int idVoluntarioEvaluacion) {
+        this.idVoluntarioEvaluacion = idVoluntarioEvaluacion;
     }
 
     public BeanVoluntario getVoluntario() {

@@ -158,9 +158,12 @@ public class DaoVoluntario implements DaoRepository {
                     "join rol r on u.rol_idRol = r.idRol " +
                     "join voluntario_evaluacion ve on v.idVoluntario = ve.voluntario_idVoluntario " +
                     "join evaluacion_organizacion_evento eoe on ve.evaluacion_organizacion_evento_idEvaluacionOrganizacionEvento = eoe.idEvaluacionOrganizacionEvento " +
-                    "join evento e2 on e2.idEvento = eoe.evento_idEvento " +
+                    "join evento eve on eve.idEvento = eoe.evento_idEvento " +
                     "join evaluacion e on e.idEvaluacion = eoe.evaluacion_idEvaluacion " +
-                    "join organizacion o on eoe.organizacion_idOrganizacion = o.idOrganizacion WHERE v.idVoluntario = ? AND ve.estatusVoluntarioEvaluacion = ?;";
+                    "join organizacion o on eoe.organizacion_idOrganizacion = o.idOrganizacion " +
+                    "JOIN direccion d on d.idDireccion = eve.direccion_idDireccion " +
+                    "JOIN estado es ON es.idEstado = d.estado_idEstado " +
+                    "WHERE v.idVoluntario = ? AND ve.estatusVoluntarioEvaluacion = ?;";
 
             con = MysqlConector.connect();
             pstm = con.prepareStatement(query);
@@ -193,7 +196,27 @@ public class DaoVoluntario implements DaoRepository {
                 beanVoluntario.setEstatusVoluntario(rs.getInt("estatusVoluntario"));
                 beanVoluntario.setPersona(beanPersona);
 
-                BeanEvento beanEvento = new BeanEvento(rs.getInt("idEvento"));
+                BeanEstado beanEstado = new BeanEstado();
+                beanEstado.setIdEstado(rs.getInt("idEstado"));
+                beanEstado.setNombre(rs.getString("nombre"));
+
+                BeanDireccion beanDireccion = new BeanDireccion();
+                beanDireccion.setIdDireccion(rs.getInt("idDireccion"));
+                beanDireccion.setCalle(rs.getString("calle"));
+                beanDireccion.setColonia(rs.getString("colonia"));
+                beanDireccion.setMunicipio(rs.getString("municipio"));
+                beanDireccion.setNoExterior(rs.getString("noExterior"));
+                beanDireccion.setNoInterior(rs.getString("noInterior"));
+                beanDireccion.setEstado(beanEstado);
+
+                BeanEvento beanEvento = new BeanEvento();
+                beanEvento.setIdEvento(rs.getInt("idEvento"));
+                beanEvento.setNombreEvento(rs.getString("nombreEvento"));
+                beanEvento.setDescripcion(rs.getString("descripcion"));
+                beanEvento.setFecha(rs.getDate("fecha"));
+                beanEvento.setEstatusEvento(rs.getInt("estatusEvento"));
+                beanEvento.setDireccion(beanDireccion);
+
                 BeanOrganizacion beanOrganizacion = new BeanOrganizacion(rs.getInt("idOrganizacion"));
                 BeanEvaluacion beanEvaluacion = new BeanEvaluacion(rs.getInt("idEvaluacion"));
 
@@ -204,6 +227,7 @@ public class DaoVoluntario implements DaoRepository {
 
 
                 BeanVoluntarioEvaluacion beanVoluntarioEvaluacion = new BeanVoluntarioEvaluacion();
+                beanVoluntarioEvaluacion.setIdVoluntarioEvaluacion(rs.getInt("idVoluntarioEvaluacion"));
                 beanVoluntarioEvaluacion.setVoluntario(beanVoluntario);
                 beanVoluntarioEvaluacion.setEvaluacionOrganizacionEvento(beanEvaluacionOrganizacionEvento);
                 listaVoluntarios.add(beanVoluntarioEvaluacion);
