@@ -120,24 +120,24 @@
                 dataSrc: ''
               },
       columns: [
-        {"data": "idEvento"},
-        {"data": "nombreEvento"},
-        {"data": "descripcion"},
-        {"data": "fecha"},
-        {"data": "direccion.calle"},
-        {"data": "direccion.noExterior"},
-        {"data": "direccion.noInterior"},
-        {"data": "direccion.colonia"},
-        {"data": "direccion.municipio"},
-        {"data": "direccion.estado.nombre"},
+        {"data": "evento.idEvento"},
+        {"data": "evento.nombreEvento"},
+        {"data": "evento.descripcion"},
+        {"data": "evento.fecha"},
+        {"data": "evento.direccion.calle"},
+        {"data": "evento.direccion.noExterior"},
+        {"data": "evento.direccion.noInterior"},
+        {"data": "evento.direccion.colonia"},
+        {"data": "evento.direccion.municipio"},
+        {"data": "evento.direccion.estado.nombre"},
         {
           data: null,
           render: function (data, type, row) {
             let estatus = "Rechazado";
-            if(data.estatusEvento == 1) {
+            if(data.evento.estatusEvento == 1) {
               estatus = "Aceptado"
             }
-            if (data.estatusEvento == 3) {
+            if (data.evento.estatusEvento == 3) {
               estatus = "Pendiente"
             }
             return estatus;
@@ -151,7 +151,7 @@
             // Utilizamos data para acceder a los datos de la fila actual
 
               let editarBtn = '<a href="#" id="editarBtn" onclick=\'editar(' + JSON.stringify(data) + ')\'> <i class="fa fa-pen"></i> </a> &nbsp;';
-            let eliminarBtn = '<a href="#" title="Eliminar Evento" onclick="eliminar(' + data.idEvento + ')"> <i class="fa-solid fa-xmark"></i> </a> &nbsp;';
+            let eliminarBtn = '<a href="#" title="Eliminar Evento" onclick="eliminar(' + data.evento.idEvento + ')"> <i class="fa-solid fa-xmark"></i> </a> &nbsp;';
 
             // Devolvemos los botones como una cadena HTML
             return editarBtn + ' ' + eliminarBtn;

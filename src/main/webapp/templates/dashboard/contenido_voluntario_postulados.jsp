@@ -55,17 +55,17 @@
                 dataSrc: ''
               },
       columns: [
-        {"data": "idEvento"},
-        {"data": "nombreEvento"},
-        {"data": "descripcion"},
-        {"data": "fecha"},
-        {"data": "direccion.calle"},
-        {"data": "direccion.noExterior"},
-        {"data": "direccion.noInterior"},
-        {"data": "direccion.colonia"},
-        {"data": "direccion.municipio"},
-        {"data": "direccion.estado.nombre"},
-        {"data": "estatusEvento"},
+        {"data": "evento.idEvento"},
+        {"data": "evento.nombreEvento"},
+        {"data": "evento.descripcion"},
+        {"data": "evento.fecha"},
+        {"data": "evento.direccion.calle"},
+        {"data": "evento.direccion.noExterior"},
+        {"data": "evento.direccion.noInterior"},
+        {"data": "evento.direccion.colonia"},
+        {"data": "evento.direccion.municipio"},
+        {"data": "evento.direccion.estado.nombre"},
+        {"data": "evento.estatusEvento"},
         {
           // Añadir los botones de acciones "Editar" y "Borrar"
           data: null,
