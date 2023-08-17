@@ -18,6 +18,7 @@
       <div class="col-12">
         <div class="card">
           <div class="card-body">
+            <input type="hidden" id="idOrganizacion" value="${sesion.getIdOrganizacion()}">
             <table id="example1" class="table table-bordered table-striped">
               <thead>
               <tr>
@@ -47,6 +48,10 @@
 
 <script>
   $(document).ready(function () {
+
+
+    let id = $("#idOrganizacion").val();
+
 
       $("#formulario_evento").validate({
           errorClass: "is-invalid",
@@ -116,7 +121,7 @@
     $('#example1').DataTable({
       ajax:
               {
-                url: URL_API + 'evento',
+                url: URL_API + 'evento?consulta=propios&idOrganizacion='+id,
                 dataSrc: ''
               },
       columns: [

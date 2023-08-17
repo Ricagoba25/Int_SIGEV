@@ -45,16 +45,16 @@
         $('#example2').DataTable({
             ajax:
                 {
-                    url: URL_API + 'evento',
+                    url: URL_API + 'evento?consulta=todos',
                     dataSrc: ''
                 },
             columns: [
-                {"data": "idEvento"},
-                {"data": "nombreEvento"},
-                {"data": "descripcion"},
-                {"data": "fecha"},
-                {"data": "direccion.municipio"},
-                {"data": "direccion.estado.nombre"},
+                {"data": "evento.idEvento"},
+                {"data": "evento.nombreEvento"},
+                {"data": "evento.descripcion"},
+                {"data": "evento.fecha"},
+                {"data": "evento.direccion.municipio"},
+                {"data": "evento.direccion.estado.nombre"},
 
                 {
                     // Añadir los botones de acciones "Editar" y "Borrar"
