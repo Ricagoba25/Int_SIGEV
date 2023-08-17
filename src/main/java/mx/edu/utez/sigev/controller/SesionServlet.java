@@ -43,7 +43,6 @@ public class SesionServlet extends HttpServlet {
 
                         switch (usuarioSesion.getRol().getNombreRol()) {
                             case "Administrador":
-
                                 DaoPersona daoPersona = new DaoPersona();
                                 BeanPersona personaSesion = (BeanPersona) daoPersona.findOne(usuarioSesion.getIdUsuario());
                                 request.getSession().setAttribute("sesion", personaSesion);
@@ -54,9 +53,14 @@ public class SesionServlet extends HttpServlet {
                                 request.getSession().setAttribute("sesion", organizacionSesion);
                                 break;
                             case "Voluntario":
+
                                 DaoVoluntario daoVoluntario = new DaoVoluntario();
                                 BeanVoluntario voluntarioSesion = (BeanVoluntario) daoVoluntario.findOne(usuarioSesion.getIdUsuario());
                                 request.getSession().setAttribute("sesion", voluntarioSesion);
+
+                                System.out.println(voluntarioSesion.getIdVoluntario());
+                                System.out.println(voluntarioSesion.getPersona().getIdPersona());
+                                System.out.println(voluntarioSesion.getPersona().getUsuario().getIdUsuario());
 
                                 System.out.println(voluntarioSesion.getPersona().getPrimerApellido());
 

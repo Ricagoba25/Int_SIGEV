@@ -125,8 +125,6 @@
             },
             submitHandler: function (form) {
                 //editar o nuevo
-
-                console.log("llamar funcion")
                 enviarDatosEditar();
 
             }
@@ -158,8 +156,6 @@
             idPersona: idPersona
         }
 
-        console.log(formData)
-
         $.ajax({
             type: "POST",
             url: "/administrador",
@@ -182,8 +178,6 @@
                 } else {
 
                     $("#nombreCompleto").text(response.newGetNombreCompleto);
-
-
                     // si la respuesta es exitosa
                     Swal.fire({
                         position: 'center',

@@ -88,8 +88,6 @@ public class OrganizacionServlet extends HttpServlet {
                     System.out.println(direccion);
 
                     System.out.println("resDireccion " + idDireccion);
-
-                    
                     if (idDireccion > 0) {
                         direccion.setIdDireccion(idDireccion);
                         organizacion.setDireccion(direccion);

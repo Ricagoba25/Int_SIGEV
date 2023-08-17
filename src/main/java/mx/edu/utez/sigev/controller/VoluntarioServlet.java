@@ -80,6 +80,9 @@ public class VoluntarioServlet extends HttpServlet {
                         respuesta = daoVoluntario.insert(voluntario);
                         System.out.println("resVoluntario " + respuesta);
                         if (respuesta) {
+
+
+
                             jsonResponse.addProperty("error", 0);
                             jsonResponse.addProperty("title", "");
                             jsonResponse.addProperty("message", "Voluntario registrado exitosamente");
@@ -98,6 +101,7 @@ public class VoluntarioServlet extends HttpServlet {
                 }
                 break;
             case "modificar":
+
                 usuario.setIdUsuario(idUsuario);
                 persona.setIdPersona(idPersona);
                 voluntario.setIdVoluntario(idVoluntario);
@@ -112,7 +116,14 @@ public class VoluntarioServlet extends HttpServlet {
                         respuesta = daoVoluntario.update(voluntario.getIdVoluntario(), voluntario);
                         System.out.println("resVoluntario " + respuesta);
                         if (respuesta) {
+
+                            //actualizar session vars
+                            BeanVoluntario voluntarioSesion = (BeanVoluntario) daoVoluntario.findOne(usuario.getIdUsuario());
+                            request.getSession().setAttribute("sesion", voluntarioSesion);
+
+
                             jsonResponse.addProperty("error", 0);
+                            jsonResponse.addProperty("newGetNombreCompleto", voluntarioSesion.getPersona().getNombreCompleto());
                             jsonResponse.addProperty("title", "");
                             jsonResponse.addProperty("message", "Voluntario modificado exitosamente");
                         } else {

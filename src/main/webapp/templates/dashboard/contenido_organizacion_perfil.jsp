@@ -27,15 +27,19 @@
             <div class="container__formulario">
                 <div class="container__formulario_contenido">
                     <!-- Primera fila-->
-                    <form action="../../index.jsp" method="post">
+                    <form id="form_organizacion">
+                        <input type="hidden" id="idOrganizacion" value="${sesion.getIdOrganizacion()}">
+                        <input type="hidden" id="idUsuario" value="${sesion.getUsuario().getIdUsuario()}">
                         <div class="row mt-2">
                             <div class="col-xl-4">
                                 <label for="nombre" class="form-label">Nombre:</label>
-                                <input type="text" value="${sesion.getNombreOrganizacion()}" name="nombre" class="form-control" id="nombre">
+                                <input type="text" value="${sesion.getNombreOrganizacion()}" name="nombre"
+                                       class="form-control" id="nombre">
                             </div>
                             <div class="col-xl-4">
                                 <label for="razonSocial" class="form-label">Razón Social*:</label>
-                                <input type="text" class="form-control" value="${sesion.getRazonSocial()}" name="razonSocial"
+                                <input type="text" class="form-control" value="${sesion.getRazonSocial()}"
+                                       name="razonSocial"
                                        id="razonSocial">
                             </div>
                             <div class="col-xl-4">
@@ -45,24 +49,16 @@
                         </div>
                         <!-- Segunda Fila-->
                         <div class="row mt-2">
-                            <div class="col-xl-8">
-                                <label for="direccion" class="form-label">Dirección:</label>
-                                <input type="text" value="${sesion.getDireccion().getCalle()}" name="direccion" class="form-control"
-                                       id="direccion">
-                            </div>
                             <div class="col-xl-4">
                                 <label for="telefono" class="form-label">Teléfono:</label>
                                 <input type="text" value="${usuario.getTelefono()}" name="telefono" class="form-control"
                                        id="telefono">
                             </div>
-                        </div>
-                        <!-- Tercera linea-->
-                        <div class="row mt-2">
                             <div class="col-xl-8">
                                 <label for="correo" class="form-label">Email*:</label>
-                                <input type="text" value="${usuario.getCorreo()}" name="correo" class="form-control" id="correo">
+                                <input type="text" value="${usuario.getCorreo()}" name="correo" class="form-control"
+                                       id="correo">
                             </div>
-
                         </div>
                         <!-- Button -->
                         <div class="m-auto mt-5 text-center">
@@ -78,14 +74,120 @@
                         </div>
                     </form>
                 </div>
-
             </div>
-
-
         </main>
     </c:if>
     <!-- /.content -->
 </section>
 
+<script>
 
-<script src="https://cdn.datatables.net/v/bs5/dt-1.13.6/datatables.min.js"></script>
+
+    $(document).ready(function () {
+
+
+        $("#form_organizacion").validate({
+            errorClass: "is-invalid",
+            validClass: "is-valid",
+            rules: {
+                nombre: {
+                    required: true
+                },
+                razonSocial: {
+                    required: true
+                },
+                rfc: {
+                    required: true
+                },
+                correo: {
+                    required: true,
+                    email: true
+                },
+
+            },
+            messages: {
+                nombre: {
+                    required: "El Nombre es requerido.",
+                },
+                razonSocial: {
+                    required: "El Apellido paterno es requerido.",
+                },
+                rfc: {
+                    required: "El Apellido materno es requerido.",
+                },
+                correo: {
+                    required: "El Correo es requerido.",
+                    email: "El correo debe ser en el siguiente formato nombre@dominio.com."
+                },
+
+            },
+            submitHandler: function (form) {
+                enviarDatosEditar();
+            }
+        })
+    })
+
+
+    let enviarDatosEditar = () => {
+
+        //Obtenemos los datos de los inputs para registrar en el backend
+        let nombre = $('#nombreOrganizacion').val();
+        let razonSocial = $('#razonSocial').val();
+        let rfc = $('#rfc').val();
+        let telefono = $('#telefonoOrganizacion').val();
+        let correo = $('#correoOrganizacion').val();
+
+        let formData = {
+            accion: 'modificar',
+            nombreOrganizacion: nombre,
+            razonSocial: razonSocial,
+            rfc: rfc,
+            correo: correo,
+            telefono: telefono,
+            idOrganizacion: 0,
+            idUsuario: 0,
+        }
+
+        console.log("formData " + formData)
+        $.ajax({
+            type: "POST",
+            url: "/organizacion",
+            data: formData,
+            success: function (response) {
+                loading = false;
+                // Procesar la respuesta del servlet si es necesario
+                console.log("Respuesta del servidor:", response);
+
+                if (response.error) {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'Error',
+                        text: response.title,
+                        showConfirmButton: false,
+                        timer: 2500
+                    })
+                } else {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Registro exitoso',
+                        text: "La Organización se ha registrado correctamente.",
+                        showConfirmButton: false,
+                        timer: 2500
+                    }).then(() => {
+                        window.location.href = './../../../index.jsp'; // Redirigir al index.jsp
+                    });
+                }
+            },
+            error: function (error) {
+                loading = false;
+                console.error("Error en la petición AJAX:", error);
+            }
+        });
+    }
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>

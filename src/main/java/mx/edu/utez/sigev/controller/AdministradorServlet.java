@@ -97,6 +97,7 @@ public class AdministradorServlet extends HttpServlet {
 
                         //actualizar session
                         BeanPersona personaSesion = (BeanPersona) daoPersona.findOne(usuario.getIdUsuario());
+
                         request.getSession().setAttribute("sesion", personaSesion);
                         request.getSession().setAttribute("usuario", usuario);
                         //Actualizar sesion end
