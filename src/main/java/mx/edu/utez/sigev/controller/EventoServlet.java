@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import mx.edu.utez.sigev.model.*;
 import mx.edu.utez.sigev.model.DAO.DaoDireccion;
 import mx.edu.utez.sigev.model.DAO.DaoEvento;
+import mx.edu.utez.sigev.model.DAO.DaoVoluntario;
 import mx.edu.utez.sigev.utils.Utilidades;
 
 import javax.servlet.ServletException;
@@ -155,6 +156,7 @@ public class EventoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         DaoEvento daoEvento = new DaoEvento();
+        DaoVoluntario daoVoluntario = new DaoVoluntario();
         Utilidades utilidades = new Utilidades();
 
         List<BeanEvento> listaEventos = new ArrayList<>();
@@ -169,6 +171,10 @@ public class EventoServlet extends HttpServlet {
                 listaEventos = daoEvento.eventosPorEstatus(1);
             } else if (req.getParameter("consulta").equals("propios")) {
                 listaEventos = daoEvento.eventosPorOrganizacion(utilidades.numeroInt(req.getParameter("idOrganizacion")));
+            } else if (req.getParameter("consulta").equals("voluntarioAceptado")) {
+                listaEventos = daoVoluntario.voluntariosPorEvento(utilidades.numeroInt(req.getParameter("idVoluntario")), 1);
+            } else if (req.getParameter("consulta").equals("voluntarioPendiente")) {
+                listaEventos = daoVoluntario.voluntariosPorEvento(utilidades.numeroInt(req.getParameter("idVoluntario")), 3);
             }
         } catch (NumberFormatException e) {
             e.printStackTrace();

@@ -6,6 +6,7 @@ public class BeanVoluntarioEvaluacion implements Serializable {
     private int iVoluntarioEvaluacion;
     private BeanVoluntario voluntario;
     private BeanEvaluacionOrganizacionEvento evaluacionOrganizacionEvento;
+    private int estatusVoluntarioEvaluacion;
 
     public BeanVoluntarioEvaluacion() {
     }
@@ -24,6 +25,14 @@ public class BeanVoluntarioEvaluacion implements Serializable {
 
     public void setVoluntario(BeanVoluntario voluntario) {
         this.voluntario = voluntario;
+    }
+
+    public int getEstatusVoluntarioEvaluacion() {
+        return estatusVoluntarioEvaluacion;
+    }
+
+    public void setEstatusVoluntarioEvaluacion(int estatusVoluntarioEvaluacion) {
+        this.estatusVoluntarioEvaluacion = estatusVoluntarioEvaluacion;
     }
 
     public BeanEvaluacionOrganizacionEvento getEvaluacionOrganizacionEvento() {
