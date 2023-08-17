@@ -135,7 +135,7 @@ public class OrganizacionServlet extends HttpServlet {
                         jsonResponse.addProperty("message", "Organización modificada exitosamente");
                     } else {
                         jsonResponse.addProperty("error", 1);
-                        jsonResponse.addProperty("title", "Organización no modificada, problemas en persona");
+                        jsonResponse.addProperty("title", "Organización no modificada, problemas en organizacion");
                     }
                 } else {
                     jsonResponse.addProperty("error", 1);
