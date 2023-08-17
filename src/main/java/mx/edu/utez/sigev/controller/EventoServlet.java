@@ -157,9 +157,16 @@ public class EventoServlet extends HttpServlet {
         DaoEvento daoEvento = new DaoEvento();
 
         List<BeanEvento> listaEventos = new ArrayList<>();
-
         try {
-            listaEventos = daoEvento.findAll();
+            if (req.getParameter("consulta").equals("todos")) {
+                listaEventos = daoEvento.findAll();
+            } else if (req.getParameter("consulta").equals("pendientes")) {
+                listaEventos = daoEvento.eventosPorEstatus(3);
+            } else if (req.getParameter("consulta").equals("aceptados")) {
+                listaEventos = daoEvento.eventosPorEstatus(2);
+            } else if (req.getParameter("consulta").equals("rechazados")) {
+                listaEventos = daoEvento.eventosPorEstatus(1);
+            }
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
