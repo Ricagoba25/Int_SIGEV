@@ -15,6 +15,10 @@ public class BeanUsuario implements Serializable {
     public BeanUsuario() {
     }
 
+    public BeanUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
     public int getIdUsuario() {
         return idUsuario;
     }
