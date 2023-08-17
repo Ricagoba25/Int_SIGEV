@@ -45,7 +45,7 @@
     $('#example1').DataTable({
       ajax:
               {
-                url: URL_API + 'evento',
+                url: URL_API + 'evento?consulta=todos',
                 dataSrc: ''
               },
       columns: [
