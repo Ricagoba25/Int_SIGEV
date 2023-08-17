@@ -92,7 +92,7 @@
                             <p>Eventos Pendientes</p>
                         </a>
                     </li>
-                    <li>
+                   <!-- <li>
                         <a href="./crearTest.jsp" class="nav-link">
                             <i class="fa-solid fa-folder-plus"></i>
                             <p>Crear Evaluación</p>
@@ -103,7 +103,7 @@
                             <i class="fa fa-file"></i>
                             <p>Evaluaciones Disponibles</p>
                         </a>
-                    </li>
+                    </li> -->
                 </c:if>
 
                 <!-- User Administrador-->

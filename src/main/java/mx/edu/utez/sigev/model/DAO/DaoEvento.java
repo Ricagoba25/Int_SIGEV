@@ -59,7 +59,7 @@ public class DaoEvento implements DaoRepository {
                 beanEvento.setIdEvento(rs.getInt("idEvento"));
                 beanEvento.setNombreEvento(rs.getString("nombreEvento"));
                 beanEvento.setDescripcion(rs.getString("descripcion"));
-                beanEvento.setFecha(rs.getDate("fecha"));
+                beanEvento.setFecha(rs.getString("fecha"));
                 beanEvento.setEstatusEvento(rs.getInt("estatusEvento"));
                 beanEvento.setDireccion(beanDireccion);
 
@@ -126,7 +126,7 @@ public class DaoEvento implements DaoRepository {
                 beanEvento.setIdEvento(rs.getInt("idEvento"));
                 beanEvento.setNombreEvento(rs.getString("nombreEvento"));
                 beanEvento.setDescripcion(rs.getString("descripcion"));
-                beanEvento.setFecha(rs.getDate("fecha"));
+                beanEvento.setFecha(rs.getString("fecha"));
                 beanEvento.setEstatusEvento(rs.getInt("estatusEvento"));
                 beanEvento.setDireccion(beanDireccion);
 
@@ -169,7 +169,7 @@ public class DaoEvento implements DaoRepository {
 
                 beanEvento.setNombreEvento(rs.getString("nombreEvento"));
                 beanEvento.setDescripcion(rs.getString("descripcion"));
-                beanEvento.setFecha(rs.getDate("fecha"));
+                beanEvento.setFecha(rs.getString("fecha"));
                 beanEvento.setEstatusEvento(rs.getInt("estatusEvento"));
                 beanEvento.setDireccion(beanDireccion);
             }
@@ -192,7 +192,7 @@ public class DaoEvento implements DaoRepository {
 
             pstm.setString(1, evento.getNombreEvento());
             pstm.setString(2, evento.getDescripcion());
-            pstm.setDate(3, (Date) evento.getFecha());
+            pstm.setString(3,evento.getFecha());
             pstm.setInt(4, evento.getIdEvento());
 
             modificado = pstm.executeUpdate() > 0;
@@ -251,13 +251,13 @@ public class DaoEvento implements DaoRepository {
         boolean registrado = false;
         int idRegistro = 0;
         try {
-            String query = "INSERT INTO evento (nombreEvento, descripcion, fecha, estatusEvento, direccion_idDirecion) values(?,?,?,?,?,?)";
+            String query = "INSERT INTO evento (nombreEvento, descripcion, fecha, estatusEvento, direccion_idDireccion) values(?,?,?,?,?)";
 
             con = MysqlConector.connect();
             pstm = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             pstm.setString(1, evento.getNombreEvento());
             pstm.setString(2, evento.getDescripcion());
-            pstm.setDate(3, (Date) evento.getFecha());
+            pstm.setString(3, evento.getFecha());
             pstm.setInt(4, 3);
             pstm.setInt(5, evento.getDireccion().getIdDireccion());
 

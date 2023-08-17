@@ -21,6 +21,8 @@
                         <form id="form_crear_evento">
                             <!-- Primera fila-->
 
+                            <input type="hidden" id="idOrganizacion" value="${sesion.getIdOrganizacion()}">
+
                             <div class="row mt-2">
                                 <div class="col-xl-4">
                                     <label for="nombreEvento" class="form-label">Nombre Evento:</label>
@@ -32,10 +34,13 @@
                                     <input type="date" name="fecha" class="form-control" id="fecha" name="fecha"
                                            required>
                                 </div>
+
+                                <!--
                                 <div class="col-xl-4 d-flex justify-content-center align-items-center">
                                     <button class="btn btn-success" id="modalSeleccionarTest"> Seleccionar Evaluación
                                     </button>
                                 </div>
+                                -->
 
 
                             </div>
@@ -178,6 +183,59 @@
     });
 
     function crearEvento(){
+
+        let formData = {
+            accion: 'registrar',
+            nombreEvento: $("#nombreEvento").val() ,
+            fecha:  $("#fecha").val(),
+            calle:  $("#calle").val(),
+            noExterior:  $("#noExterior").val(),
+            noInterior:  $("#noInterior").val(),
+            colonia:  $("#colonia").val(),
+            municipio:  $("#municipio").val(),
+            idEstado:  $("#stateSelect").val(),
+            descripcion:  $("#descripcion").val(),
+            idOrganizacion: $("#idOrganizacion").val()
+        }
+
+
+        $.ajax({
+            type: "POST",
+            url: "/evento",
+            data: formData,
+            success: function (response) {
+                loading = false;
+                // Procesar la respuesta del servlet si es necesario
+                console.log("Respuesta del servidor:", response);
+
+                if (response.error) {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'Error',
+                        text: response.title,
+                        showConfirmButton: false,
+                        timer: 2500
+                    })
+
+                } else {
+                    // si la respuesta es exitosa
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Actualizacion exitosa',
+                        text: "El administrador se ha modificado correctamente.",
+                        showConfirmButton: false,
+                        timer: 2500
+                    })
+
+                }
+            },
+            error: function (error) {
+                loading = false;
+                console.error("Error en la petición AJAX:", error);
+            }
+        });
 
     }
 

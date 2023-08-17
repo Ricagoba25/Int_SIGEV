@@ -7,7 +7,7 @@ public class BeanEvento implements Serializable {
     private int idEvento;
     private String nombreEvento;
     private String descripcion;
-    private Date fecha;
+    private String fecha;
     private int estatusEvento;
     private BeanDireccion direccion;
 
@@ -38,11 +38,11 @@ public class BeanEvento implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 

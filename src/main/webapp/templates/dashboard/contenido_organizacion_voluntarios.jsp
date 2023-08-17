@@ -20,13 +20,15 @@
             <table id="example1" class="table table-bordered table-striped">
               <thead>
               <tr>
-                <th>ID</th>
-                <th>Nombre Voluntario</th>
-                <th>Apellido Paterno</th>
-                <th>Apellido Materno</th>
-                <th>Correo</th>
-                <th>Telefono</th>
-                <th>Acciones</th>
+                  <th>ID</th>
+                  <th>Nombre Voluntario</th>
+                  <th>Apellido Paterno</th>
+                  <th>Apellido Materno</th>
+                  <th>CURP</th>
+                  <th>Correo</th>
+                  <th>Telefono</th>
+                  <th>Estado</th>
+                  <th>Acciones</th>
               </tr>
               </thead>
             </table>
@@ -39,41 +41,41 @@
 
 
 <script>
-  $(function () {
+    $(document).ready(function () {
     const URL_API = "http://localhost:8080/"
-    $('#example1').DataTable({
-      ajax:
-              {
-                url: URL_API + 'administrador',
-                dataSrc: ''
-              },
-      columns: [
-        {"data": "idVoluntario"},
-        {"data": "persona_idPersona.nombrePersona"},
-        {"data": "persona_idPersona.primerApellido"},
-        {"data": "persona_idPersona.segundoApellido"},
-        {"data": "curp"},
-        {"data": "usuario_idUsuario.correo"},
-        {"data": "usuario_idUsuario.telefono"},
-        {
-          // Añadir los botones de acciones "Editar" y "Borrar"
-          data: null,
-          render: function (data, type, row) {
-            // El contenido de esta función se ejecutará para cada celda de esta columna
-            // Utilizamos data para acceder a los datos de la fila actual
+        $('#example1').DataTable({
+            ajax:
+                {
+                    url: URL_API + 'voluntario',
+                    dataSrc: ''
+                },
+            columns: [
+                {"data": "idVoluntario"},
+                {"data": "persona.nombrePersona"},
+                {"data": "persona.primerApellido"},
+                {"data": "persona.segundoApellido"},
+                {"data": "curp"},
+                {"data": "persona.usuario.correo"},
+                {"data": "persona.usuario.telefono"},
+                {"data": "estatusVoluntario"},
+                {
+                    // Añadir los botones de acciones "Editar" y "Borrar"
+                    data: null,
+                    render: function (data, type, row) {
+                        // El contenido de esta función se ejecutará para cada celda de esta columna
+                        // Utilizamos data para acceder a los datos de la fila actual
 
-            let aceptarBtn = '<a href="#" onclick="aceptar(' + data.idVoluntario + ')">  <i class="fa fa-pen"></i> </a> &nbsp;';
+                        let bloquearBtn = '<a href="#" title="Bloquear" onclick="bloquear(' + data.idVoluntario + ')">  <i class="fa-solid fa-ban"></i> </a> &nbsp;';
 
-            let cancelarBtn = '<a href="#" onclick="cancelar(' + data.idVoluntario + ')">  <i class="fa fa-trash-alt"></i> </a>';
 
-            // Devolvemos los botones como una cadena HTML
-            return aceptarBtn + ' ' + cancelarBtn;
-          }
-        }
+                        // Devolvemos los botones como una cadena HTML
+                        return bloquearBtn;
+                    }
+                }
 
-      ]
+            ]
 
-    });
+        });
 
 
   });

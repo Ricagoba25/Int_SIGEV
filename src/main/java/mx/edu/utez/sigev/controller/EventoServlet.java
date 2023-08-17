@@ -32,7 +32,7 @@ public class EventoServlet extends HttpServlet {
 
         String nombreEvento = request.getParameter("nombreEvento");
         String descripcion = request.getParameter("descripcion");
-        Date fecha = utilidades.validaFecha("fecha");
+        String fecha = request.getParameter("fecha");
         String calle = request.getParameter("calle");
         String colonia = request.getParameter("colonia");
         String municipio = request.getParameter("municipio");
@@ -68,9 +68,9 @@ public class EventoServlet extends HttpServlet {
 
         switch (accion) {
             case "registrar":
+                System.out.println("direccion; " + direccion.getEstado().getIdEstado());
                 idDireccion = daoDireccion.registrar(direccion);
 
-                System.out.println(direccion);
 
                 System.out.println("resDireccion " + idDireccion);
                 if (idDireccion > 0) {
