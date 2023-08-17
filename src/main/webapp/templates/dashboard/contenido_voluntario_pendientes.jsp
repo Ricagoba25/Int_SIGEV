@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<section class="content-header mt-5">
+<section class="content-header">
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
@@ -18,16 +18,23 @@
       <div class="col-12">
         <div class="card">
           <div class="card-body">
-            <table id="example2" class="table table-bordered table-striped">
+            <input type="hidden" id="idVoluntario" value="${sesion.getIdVoluntario()}">
+            <table id="example1" class="table table-bordered table-striped">
               <thead>
               <tr>
                 <th>ID</th>
                 <th>Nombre Evento</th>
                 <th>Descripción</th>
                 <th>Fecha</th>
+                <th>Calle</th>
+                <th>No Exterior</th>
+                <th>No Interior</th>
+                <th>Colonia</th>
                 <th>Municipio</th>
                 <th>Estado</th>
+                <th>Estado del Evento</th>
                 <th>Acciones</th>
+
               </tr>
               </thead>
             </table>
@@ -42,28 +49,35 @@
 <script>
   $(function () {
     const URL_API = "http://localhost:8080/"
-    $('#example2').DataTable({
+
+    let id = $("#idVoluntario").val()
+    $('#example1').DataTable({
       ajax:
               {
-                url: URL_API + 'evento',
+                url: URL_API + 'evento?consulta=voluntarioPendiente&idVoluntario='+id,
                 dataSrc: ''
               },
       columns: [
-        {"data": "idEvento"},
-        {"data": "nombreEvento"},
-        {"data": "descripcion"},
-        {"data": "fecha"},
-        {"data": "direccion.municipio"},
-        {"data": "direccion.estado.nombre"},
-
+        {"data": "evaluacionOrganizacionEvento.evento.idEvento"},
+        {"data": "evaluacionOrganizacionEvento.evento.nombreEvento"},
+        {"data": "evaluacionOrganizacionEvento.evento.descripcion"},
+        {"data": "evaluacionOrganizacionEvento.evento.fecha"},
+        {"data": "evaluacionOrganizacionEvento.evento.direccion.calle"},
+        {"data": "evaluacionOrganizacionEvento.evento.direccion.noExterior"},
+        {"data": "evaluacionOrganizacionEvento.evento.direccion.noInterior"},
+        {"data": "evaluacionOrganizacionEvento.evento.direccion.colonia"},
+        {"data": "evaluacionOrganizacionEvento.evento.direccion.municipio"},
+        {"data": "evaluacionOrganizacionEvento.evento.direccion.estado.nombre"},
+        {"data": "evaluacionOrganizacionEvento.evento.estatusEvento"},
         {
           // Añadir los botones de acciones "Editar" y "Borrar"
           data: null,
           render: function (data, type, row) {
-            // El contenido de esta función se ejecutará para cada celda de esta columna
-            // Utilizamos data para acceder a los datos de la fila actual
 
-            let cancelarBtn = '<a href="#" title="Cancelar Postulación" onclick="cancelar(' + data.idEvento + ')"> <i class="fa-solid fa-xmark"></i> </a> &nbsp;';
+
+            console.log(data)
+
+            let cancelarBtn = '<a href="#" title="Cancelar Postulación" onclick="cancelar(' + data.evaluacionOrganizacionEvento.evento.idEvento + ')"> <i class="fa-solid fa-xmark"></i> </a> &nbsp;';
 
             // Devolvemos los botones como una cadena HTML
             return cancelarBtn;
@@ -114,7 +128,6 @@
     </div>
   </div>
 </div>
-
 
 
 <script src="https://cdn.datatables.net/v/bs5/dt-1.13.6/datatables.min.js"></script>
