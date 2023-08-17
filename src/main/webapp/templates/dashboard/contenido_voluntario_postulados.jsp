@@ -49,10 +49,12 @@
 <script>
   $(function () {
     const URL_API = "http://localhost:8080/"
+
+    let id = $("#idVoluntario").val()
     $('#example1').DataTable({
       ajax:
               {
-                url: URL_API + 'evento',
+                url: URL_API + 'evento?consulta=voluntarioAceptado&idVoluntario='+id,
                 dataSrc: ''
               },
       columns: [

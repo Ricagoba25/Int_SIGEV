@@ -191,7 +191,7 @@ public class DaoEvento implements DaoRepository {
                 beanEvento.setIdEvento(rs.getInt("idEvento"));
                 beanEvento.setNombreEvento(rs.getString("nombreEvento"));
                 beanEvento.setDescripcion(rs.getString("descripcion"));
-                beanEvento.setFecha(rs.getDate("fecha"));
+                beanEvento.setFecha(rs.getString("fecha"));
                 beanEvento.setEstatusEvento(rs.getInt("estatusEvento"));
                 beanEvento.setDireccion(beanDireccion);
 
