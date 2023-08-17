@@ -88,6 +88,8 @@ public class OrganizacionServlet extends HttpServlet {
                     System.out.println(direccion);
 
                     System.out.println("resDireccion " + idDireccion);
+
+
                     if (idDireccion > 0) {
                         direccion.setIdDireccion(idDireccion);
                         organizacion.setDireccion(direccion);
@@ -112,26 +114,18 @@ public class OrganizacionServlet extends HttpServlet {
                 break;
             case "modificar":
                 usuario.setIdUsuario(idUsuario);
-                direccion.setIdDireccion(idDireccion);
                 organizacion.setIdOrganizacion(idOrganizacion);
 
                 respuesta = daoUsuario.update(usuario.getIdUsuario(), usuario);
 
                 System.out.println("resUsuario " + respuesta);
                 if (respuesta) {
-                    respuesta = daoDireccion.update(direccion.getIdDireccion(), direccion);
-                    System.out.println("resDireccion " + respuesta);
+                    respuesta = daoOrganizacion.update(organizacion.getIdOrganizacion(), organizacion);
+                    System.out.println("resOrganizacion " + respuesta);
                     if (respuesta) {
-                        respuesta = daoOrganizacion.update(organizacion.getIdOrganizacion(), organizacion);
-                        System.out.println("resOrganizacion " + respuesta);
-                        if (respuesta) {
-                            jsonResponse.addProperty("error", 0);
-                            jsonResponse.addProperty("title", "");
-                            jsonResponse.addProperty("message", "Organización modificada exitosamente");
-                        } else {
-                            jsonResponse.addProperty("error", 1);
-                            jsonResponse.addProperty("title", "Organización no modificada, problemas en persona");
-                        }
+                        jsonResponse.addProperty("error", 0);
+                        jsonResponse.addProperty("title", "");
+                        jsonResponse.addProperty("message", "Organización modificada exitosamente");
                     } else {
                         jsonResponse.addProperty("error", 1);
                         jsonResponse.addProperty("title", "Organización no modificada, problemas en persona");

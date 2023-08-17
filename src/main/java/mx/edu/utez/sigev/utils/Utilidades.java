@@ -1,9 +1,8 @@
 package mx.edu.utez.sigev.utils;
 
-public class Utilidades {
+import java.util.Date;
 
-    public Utilidades() {
-    }
+public class Utilidades {
 
     public int numeroInt(String numero) {
         try {
@@ -14,5 +13,17 @@ public class Utilidades {
         } catch (NumberFormatException nfe) {
             return 0;
         }
+    }
+
+    public Date validaFecha(String fecha){
+        try {
+            if (fecha != null)
+                return new Date(fecha);
+            else
+                return new Date();
+        } catch (NumberFormatException e) {
+            return new Date();
+        }
+
     }
 }

@@ -16,6 +16,10 @@ public class BeanOrganizacion implements Serializable {
     public BeanOrganizacion() {
     }
 
+    public BeanOrganizacion(int idOrganizacion) {
+        this.idOrganizacion = idOrganizacion;
+    }
+
     public int getIdOrganizacion() {
         return idOrganizacion;
     }

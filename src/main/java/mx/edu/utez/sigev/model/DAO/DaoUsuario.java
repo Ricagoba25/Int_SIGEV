@@ -110,12 +110,10 @@ public class DaoUsuario implements DaoRepository {
         boolean modificado = false;
         BeanUsuario usuario = (BeanUsuario) object;
         try {
-           //String query = "UPDATE usuario SET correo = ?, contrasena = sha2(?,256), telefono = ? WHERE idUsuario = ?";
             String query = "UPDATE usuario SET correo = ?, telefono = ? WHERE idUsuario = ?";
             con = MysqlConector.connect();
             pstm = con.prepareStatement(query);
             pstm.setString(1, usuario.getCorreo());
-            //pstm.setString(2, usuario.getContrasena());
             pstm.setString(2, usuario.getTelefono());
             pstm.setInt(3, usuario.getIdUsuario());
             modificado = pstm.executeUpdate() > 0;

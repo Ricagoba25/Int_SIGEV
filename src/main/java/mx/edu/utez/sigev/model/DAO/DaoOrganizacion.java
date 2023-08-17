@@ -150,16 +150,14 @@ public class DaoOrganizacion implements DaoRepository {
         boolean modificado = false;
         BeanOrganizacion organizacion = (BeanOrganizacion) object;
         try {
-            String query = "UPDATE organizacion SET rfc = ?, nombreOrganizacion = ?, razonSocial = ?, imagenLogotipo = ?, color_idColor = ? WHERE idOrganizacion = ?";
+            String query = "UPDATE organizacion SET rfc = ?, nombreOrganizacion = ?, razonSocial = ? WHERE idOrganizacion = ?";
 
             con = MysqlConector.connect();
             pstm = con.prepareStatement(query);
             pstm.setString(1, organizacion.getRfc());
             pstm.setString(2, organizacion.getNombreOrganizacion());
             pstm.setString(3, organizacion.getRazonSocial());
-            pstm.setString(4, organizacion.getImagenLogotipo());
-            pstm.setInt(5, organizacion.getColor().getIdColor());
-            pstm.setInt(6, organizacion.getIdOrganizacion());
+            pstm.setInt(4, organizacion.getIdOrganizacion());
             modificado = pstm.executeUpdate() > 0;
         } catch (SQLException e) {
             System.err.println("Error en el método update() - DaoOrganizacion -> " + e.getMessage());
