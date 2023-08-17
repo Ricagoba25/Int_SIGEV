@@ -93,7 +93,6 @@ public class DaoEvento implements DaoRepository {
 
             con = MysqlConector.connect();
             pstm = con.prepareStatement(query);
-
             pstm.setInt(1, estatus);
             rs = pstm.executeQuery();
 

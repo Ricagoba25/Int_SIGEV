@@ -1,9 +1,6 @@
 package mx.edu.utez.sigev.model.DAO;
 
-import mx.edu.utez.sigev.model.BeanPersona;
-import mx.edu.utez.sigev.model.BeanRol;
-import mx.edu.utez.sigev.model.BeanUsuario;
-import mx.edu.utez.sigev.model.BeanVoluntario;
+import mx.edu.utez.sigev.model.*;
 import mx.edu.utez.sigev.utils.MysqlConector;
 
 import java.sql.Connection;
@@ -22,12 +19,17 @@ public class DaoVoluntario implements DaoRepository {
 
     @Override
     public List findAll() {
-        List<BeanVoluntario> listaBeanVoluntario = new ArrayList<>();
+        List<BeanVoluntarioEvaluacion> listaVoluntarios = new ArrayList<>();
         try {
             String query = "SELECT * FROM voluntario v " +
                     "join persona p on v.persona_idPersona = p.idPersona " +
                     "join usuario u on u.idUsuario = p.usuario_idUsuario " +
-                    "join rol r on u.rol_idRol = r.idRol";
+                    "join rol r on u.rol_idRol = r.idRol " +
+                    "join voluntario_evaluacion ve on v.idVoluntario = ve.voluntario_idVoluntario " +
+                    "join evaluacion_organizacion_evento eoe on ve.evaluacion_organizacion_evento_idEvaluacionOrganizacionEvento = eoe.idEvaluacionOrganizacionEvento " +
+                    "join evento e2 on e2.idEvento = eoe.evento_idEvento " +
+                    "join evaluacion e on e.idEvaluacion = eoe.evaluacion_idEvaluacion " +
+                    "join organizacion o on eoe.organizacion_idOrganizacion = o.idOrganizacion ";
 
             con = MysqlConector.connect();
             pstm = con.prepareStatement(query);
@@ -57,14 +59,94 @@ public class DaoVoluntario implements DaoRepository {
                 beanVoluntario.setCurp(rs.getString("curp"));
                 beanVoluntario.setEstatusVoluntario(rs.getInt("estatusVoluntario"));
                 beanVoluntario.setPersona(beanPersona);
-                listaBeanVoluntario.add(beanVoluntario);
+
+                BeanEvento beanEvento = new BeanEvento(rs.getInt("idEvento"));
+                BeanOrganizacion beanOrganizacion = new BeanOrganizacion(rs.getInt("idOrganizacion"));
+                BeanEvaluacion beanEvaluacion = new BeanEvaluacion(rs.getInt("idEvaluacion"));
+
+                BeanEvaluacionOrganizacionEvento beanEvaluacionOrganizacionEvento = new BeanEvaluacionOrganizacionEvento();
+                beanEvaluacionOrganizacionEvento.setEvaluacion(beanEvaluacion);
+                beanEvaluacionOrganizacionEvento.setOrganizacion(beanOrganizacion);
+                beanEvaluacionOrganizacionEvento.setEvento(beanEvento);
+
+
+                BeanVoluntarioEvaluacion beanVoluntarioEvaluacion = new BeanVoluntarioEvaluacion();
+                beanVoluntarioEvaluacion.setVoluntario(beanVoluntario);
+                beanVoluntarioEvaluacion.setEvaluacionOrganizacionEvento(beanEvaluacionOrganizacionEvento);
+                listaVoluntarios.add(beanVoluntarioEvaluacion);
             }
         } catch (SQLException e) {
             System.err.println("Error en el método findAll() - DaoVoluntario -> " + e.getMessage());
         } finally {
             cerrarConexiones("findAll");
         }
-        return listaBeanVoluntario;
+        return listaVoluntarios;
+    }
+
+    public List voluntariosPorEstatus(int estatus) {
+        List<BeanVoluntarioEvaluacion> listaVoluntarios = new ArrayList<>();
+        try {
+            String query = "SELECT * FROM voluntario v " +
+                    "join persona p on v.persona_idPersona = p.idPersona " +
+                    "join usuario u on u.idUsuario = p.usuario_idUsuario " +
+                    "join rol r on u.rol_idRol = r.idRol " +
+                    "join voluntario_evaluacion ve on v.idVoluntario = ve.voluntario_idVoluntario " +
+                    "join evaluacion_organizacion_evento eoe on ve.evaluacion_organizacion_evento_idEvaluacionOrganizacionEvento = eoe.idEvaluacionOrganizacionEvento " +
+                    "join evento e2 on e2.idEvento = eoe.evento_idEvento " +
+                    "join evaluacion e on e.idEvaluacion = eoe.evaluacion_idEvaluacion " +
+                    "join organizacion o on eoe.organizacion_idOrganizacion = o.idOrganizacion WHERE ve.estatusVoluntarioEvaluacion = ?";
+
+            con = MysqlConector.connect();
+            pstm = con.prepareStatement(query);
+            pstm.setInt(1, estatus);
+            rs = pstm.executeQuery();
+
+            while (rs.next()) {
+                BeanRol beanRol = new BeanRol();
+                beanRol.setIdRol(rs.getInt("idRol"));
+                beanRol.setNombreRol(rs.getString("nombreRol"));
+
+                BeanUsuario beanUsuario = new BeanUsuario();
+                beanUsuario.setIdUsuario(rs.getInt("idUsuario"));
+                beanUsuario.setCorreo(rs.getString("correo"));
+                beanUsuario.setContrasena(rs.getString("contrasena"));
+                beanUsuario.setTelefono(rs.getString("telefono"));
+                beanUsuario.setRol(beanRol);
+
+                BeanPersona beanPersona = new BeanPersona();
+                beanPersona.setIdPersona(rs.getInt("idPersona"));
+                beanPersona.setNombrePersona(rs.getString("nombrePersona"));
+                beanPersona.setPrimerApellido(rs.getString("primerApellido"));
+                beanPersona.setSegundoApellido(rs.getString("segundoApellido"));
+                beanPersona.setUsuario(beanUsuario);
+
+                BeanVoluntario beanVoluntario = new BeanVoluntario();
+                beanVoluntario.setIdVoluntario(rs.getInt("idVoluntario"));
+                beanVoluntario.setCurp(rs.getString("curp"));
+                beanVoluntario.setEstatusVoluntario(rs.getInt("estatusVoluntario"));
+                beanVoluntario.setPersona(beanPersona);
+
+                BeanEvento beanEvento = new BeanEvento(rs.getInt("idEvento"));
+                BeanOrganizacion beanOrganizacion = new BeanOrganizacion(rs.getInt("idOrganizacion"));
+                BeanEvaluacion beanEvaluacion = new BeanEvaluacion(rs.getInt("idEvaluacion"));
+
+                BeanEvaluacionOrganizacionEvento beanEvaluacionOrganizacionEvento = new BeanEvaluacionOrganizacionEvento();
+                beanEvaluacionOrganizacionEvento.setEvaluacion(beanEvaluacion);
+                beanEvaluacionOrganizacionEvento.setOrganizacion(beanOrganizacion);
+                beanEvaluacionOrganizacionEvento.setEvento(beanEvento);
+
+
+                BeanVoluntarioEvaluacion beanVoluntarioEvaluacion = new BeanVoluntarioEvaluacion();
+                beanVoluntarioEvaluacion.setVoluntario(beanVoluntario);
+                beanVoluntarioEvaluacion.setEvaluacionOrganizacionEvento(beanEvaluacionOrganizacionEvento);
+                listaVoluntarios.add(beanVoluntarioEvaluacion);
+            }
+        } catch (SQLException e) {
+            System.err.println("Error en el método voluntariosPorEstatus() - DaoVoluntario -> " + e.getMessage());
+        } finally {
+            cerrarConexiones("voluntariosPorEstatus");
+        }
+        return listaVoluntarios;
     }
 
     @Override

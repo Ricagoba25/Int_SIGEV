@@ -14,6 +14,10 @@ public class BeanEvento implements Serializable {
     public BeanEvento() {
     }
 
+    public BeanEvento(int idEvento) {
+        this.idEvento = idEvento;
+    }
+
     public int getIdEvento() {
         return idEvento;
     }
