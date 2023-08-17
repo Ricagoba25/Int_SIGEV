@@ -162,10 +162,10 @@ public class OrganizacionServlet extends HttpServlet {
                 if (respuesta) {
                     jsonResponse.addProperty("error", 0);
                     jsonResponse.addProperty("title", "");
-                    jsonResponse.addProperty("message", "Estatus de organización modificado exitosamente");
+                    jsonResponse.addProperty("message", "Estatus de la organización modificado exitosamente");
                 } else {
                     jsonResponse.addProperty("error", 1);
-                    jsonResponse.addProperty("title", "El estatus de de la organización no se cambio");
+                    jsonResponse.addProperty("title", "El estatus de la organización no se cambio");
                 }
                 break;
             default:

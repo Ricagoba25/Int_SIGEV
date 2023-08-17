@@ -49,12 +49,12 @@
                 dataSrc: ''
               },
       columns: [
-        {"data": "idEvento"},
-        {"data": "nombreEvento"},
-        {"data": "descripcion"},
-        {"data": "fecha"},
-        {"data": "direccion.colonia"},
-        {"data": "direccion.estado.nombre"},
+        {"data": "evento.idEvento"},
+        {"data": "evento.nombreEvento"},
+        {"data": "evento.descripcion"},
+        {"data": "evento.fecha"},
+        {"data": "evento.direccion.colonia"},
+        {"data": "evento.direccion.estado.nombre"},
         {
           // Añadir los botones de acciones "Editar" y "Borrar"
           data: null,
@@ -63,9 +63,9 @@
             // Utilizamos data para acceder a los datos de la fila actual
 
 
-            let aceptatBtn = '<a href="#" title="Aceptar" onclick="aceptar(' + data.idEvento + ')"> <i class="fa fa-check"></i> </a> &nbsp;';
+            let aceptatBtn = '<a href="#" title="Aceptar" onclick="aceptar(' + data.evento.idEvento + ')"> <i class="fa fa-check"></i> </a> &nbsp;';
 
-            let rechazarBtn = '<a href="#" title="Rechazar" onclick="rechazar(' + data.idEvento + ')"> <i class="fa fa-times"></i> </a> &nbsp;';
+            let rechazarBtn = '<a href="#" title="Rechazar" onclick="rechazar(' + data.evento.idEvento + ')"> <i class="fa fa-times"></i> </a> &nbsp;';
 
             // Devolvemos los botones como una cadena HTML
             return aceptatBtn + ' ' + rechazarBtn;

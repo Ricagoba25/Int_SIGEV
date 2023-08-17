@@ -1,14 +1,9 @@
 package mx.edu.utez.sigev.model.DAO;
 
-import mx.edu.utez.sigev.model.BeanDireccion;
-import mx.edu.utez.sigev.model.BeanEstado;
-import mx.edu.utez.sigev.model.BeanEvento;
+import mx.edu.utez.sigev.model.*;
 import mx.edu.utez.sigev.utils.MysqlConector;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,17 +14,34 @@ public class DaoEvento implements DaoRepository {
 
     @Override
     public List findAll() {
-        List<BeanEvento> listaBeanEvento = new ArrayList<>();
+        List<BeanEvaluacionOrganizacionEvento> listaEventos = new ArrayList<>();
         try {
-            String query = "SELECT * FROM evento e " +
-                    "JOIN direccion d ON e.direccion_idDireccion = d.idDireccion " +
-                    "JOIN estado es ON d.estado_idEstado = es.idEstado";
+            String query = "SELECT es.idEstado, es.nombre, d.idDireccion, d.calle, d.colonia, d.municipio, d.noExterior, d.noInterior, " +
+                    "eve.idEvento, eve.nombreEvento, eve.descripcion, eve.fecha, eve.estatusEvento, eva.idEvaluacion, eva.nombreEvaluacion, " +
+                    "o.idOrganizacion, o.rfc, o.nombreOrganizacion, o.razonSocial, o.estatusOrganizacion, eoe.idEvaluacionOrganizacionEvento " +
+                    "FROM evaluacion_organizacion_evento eoe " +
+                    "JOIN evaluacion eva on eva.idEvaluacion = eoe.evaluacion_idEvaluacion " +
+                    "JOIN organizacion o on eoe.organizacion_idOrganizacion = o.idOrganizacion " +
+                    "JOIN evento eve on eve.idEvento = eoe.evento_idEvento " +
+                    "JOIN direccion d on d.idDireccion = eve.direccion_idDireccion " +
+                    "JOIN estado es ON es.idEstado = d.estado_idEstado";
 
             con = MysqlConector.connect();
             pstm = con.prepareStatement(query);
             rs = pstm.executeQuery();
 
             while (rs.next()) {
+                BeanEvaluacion beanEvaluacion = new BeanEvaluacion();
+                beanEvaluacion.setIdEvaluacion(rs.getInt("idEvaluacion"));
+                beanEvaluacion.setNombreEvaluacion(rs.getString("nombreEvaluacion"));
+
+                BeanOrganizacion beanOrganizacion = new BeanOrganizacion();
+                beanOrganizacion.setIdOrganizacion(rs.getInt("idOrganizacion"));
+                beanOrganizacion.setRfc(rs.getString("rfc"));
+                beanOrganizacion.setNombreOrganizacion(rs.getString("nombreOrganizacion"));
+                beanOrganizacion.setRazonSocial(rs.getString("razonSocial"));
+                beanOrganizacion.setEstatusOrganizacion(rs.getInt("estatusOrganizacion"));
+
                 BeanEstado beanEstado = new BeanEstado();
                 beanEstado.setIdEstado(rs.getInt("idEstado"));
                 beanEstado.setNombre(rs.getString("nombre"));
@@ -51,15 +63,86 @@ public class DaoEvento implements DaoRepository {
                 beanEvento.setEstatusEvento(rs.getInt("estatusEvento"));
                 beanEvento.setDireccion(beanDireccion);
 
-                listaBeanEvento.add(beanEvento);
+                BeanEvaluacionOrganizacionEvento beanEvaluacionOrganizacionEvento = new BeanEvaluacionOrganizacionEvento();
+                beanEvaluacionOrganizacionEvento.setIdEvaluacionOrganizacionEvento(rs.getInt("idEvaluacionOrganizacionEvento"));
+                beanEvaluacionOrganizacionEvento.setOrganizacion(beanOrganizacion);
+                beanEvaluacionOrganizacionEvento.setEvaluacion(beanEvaluacion);
+                beanEvaluacionOrganizacionEvento.setEvento(beanEvento);
+                listaEventos.add(beanEvaluacionOrganizacionEvento);
             }
         } catch (SQLException e) {
             System.err.println("Error en el método findAll() - DaoEvento -> " + e.getMessage());
         } finally {
             cerrarConexiones("findAll");
         }
-        System.out.println("tengo estos datos del evento " + listaBeanEvento);
-        return listaBeanEvento;
+        return listaEventos;
+    }
+
+    public List eventosPorEstatus(int estatus) {
+        List<BeanEvaluacionOrganizacionEvento> listaEventos = new ArrayList<>();
+        try {
+            String query = "SELECT es.idEstado, es.nombre, d.idDireccion, d.calle, d.colonia, d.municipio, d.noExterior, d.noInterior, " +
+                    "eve.idEvento, eve.nombreEvento, eve.descripcion, eve.fecha, eve.estatusEvento, eva.idEvaluacion, eva.nombreEvaluacion, " +
+                    "o.idOrganizacion, o.rfc, o.nombreOrganizacion, o.razonSocial, o.estatusOrganizacion, eoe.idEvaluacionOrganizacionEvento " +
+                    "FROM evaluacion_organizacion_evento eoe " +
+                    "JOIN evaluacion eva on eva.idEvaluacion = eoe.evaluacion_idEvaluacion " +
+                    "JOIN organizacion o on eoe.organizacion_idOrganizacion = o.idOrganizacion " +
+                    "JOIN evento eve on eve.idEvento = eoe.evento_idEvento " +
+                    "JOIN direccion d on d.idDireccion = eve.direccion_idDireccion " +
+                    "JOIN estado es ON es.idEstado = d.estado_idEstado WHERE eve.estatusEvento = ?";
+
+            con = MysqlConector.connect();
+            pstm = con.prepareStatement(query);
+
+            pstm.setInt(1, estatus);
+            rs = pstm.executeQuery();
+
+            while (rs.next()) {
+                BeanEvaluacion beanEvaluacion = new BeanEvaluacion();
+                beanEvaluacion.setIdEvaluacion(rs.getInt("idEvaluacion"));
+                beanEvaluacion.setNombreEvaluacion(rs.getString("nombreEvaluacion"));
+
+                BeanOrganizacion beanOrganizacion = new BeanOrganizacion();
+                beanOrganizacion.setIdOrganizacion(rs.getInt("idOrganizacion"));
+                beanOrganizacion.setRfc(rs.getString("rfc"));
+                beanOrganizacion.setNombreOrganizacion(rs.getString("nombreOrganizacion"));
+                beanOrganizacion.setRazonSocial(rs.getString("razonSocial"));
+                beanOrganizacion.setEstatusOrganizacion(rs.getInt("estatusOrganizacion"));
+
+                BeanEstado beanEstado = new BeanEstado();
+                beanEstado.setIdEstado(rs.getInt("idEstado"));
+                beanEstado.setNombre(rs.getString("nombre"));
+
+                BeanDireccion beanDireccion = new BeanDireccion();
+                beanDireccion.setIdDireccion(rs.getInt("idDireccion"));
+                beanDireccion.setCalle(rs.getString("calle"));
+                beanDireccion.setColonia(rs.getString("colonia"));
+                beanDireccion.setMunicipio(rs.getString("municipio"));
+                beanDireccion.setNoExterior(rs.getString("noExterior"));
+                beanDireccion.setNoInterior(rs.getString("noInterior"));
+                beanDireccion.setEstado(beanEstado);
+
+                BeanEvento beanEvento = new BeanEvento();
+                beanEvento.setIdEvento(rs.getInt("idEvento"));
+                beanEvento.setNombreEvento(rs.getString("nombreEvento"));
+                beanEvento.setDescripcion(rs.getString("descripcion"));
+                beanEvento.setFecha(rs.getDate("fecha"));
+                beanEvento.setEstatusEvento(rs.getInt("estatusEvento"));
+                beanEvento.setDireccion(beanDireccion);
+
+                BeanEvaluacionOrganizacionEvento beanEvaluacionOrganizacionEvento = new BeanEvaluacionOrganizacionEvento();
+                beanEvaluacionOrganizacionEvento.setIdEvaluacionOrganizacionEvento(rs.getInt("idEvaluacionOrganizacionEvento"));
+                beanEvaluacionOrganizacionEvento.setOrganizacion(beanOrganizacion);
+                beanEvaluacionOrganizacionEvento.setEvaluacion(beanEvaluacion);
+                beanEvaluacionOrganizacionEvento.setEvento(beanEvento);
+                listaEventos.add(beanEvaluacionOrganizacionEvento);
+            }
+        } catch (SQLException e) {
+            System.err.println("Error en el método findAll() - DaoEvento -> " + e.getMessage());
+        } finally {
+            cerrarConexiones("findAll");
+        }
+        return listaEventos;
     }
 
     @Override
@@ -72,13 +155,11 @@ public class DaoEvento implements DaoRepository {
             pstm.setInt(1, id);
             rs = pstm.executeQuery();
             if (rs.next()) {
-
                 BeanEstado beanEstado = new BeanEstado();
                 beanEstado.setIdEstado(rs.getInt("idEstado"));
                 beanEstado.setNombre(rs.getString("nombre"));
 
                 BeanDireccion beanDireccion = new BeanDireccion();
-
                 beanDireccion.setCalle(rs.getString("calle"));
                 beanDireccion.setColonia(rs.getString("colonia"));
                 beanDireccion.setMunicipio(rs.getString("municipio"));
@@ -91,7 +172,6 @@ public class DaoEvento implements DaoRepository {
                 beanEvento.setFecha(rs.getDate("fecha"));
                 beanEvento.setEstatusEvento(rs.getInt("estatusEvento"));
                 beanEvento.setDireccion(beanDireccion);
-
             }
         } catch (SQLException e) {
             System.err.println("Error en el método findOne() - DaoEvento -> " + e.getMessage());
@@ -106,19 +186,18 @@ public class DaoEvento implements DaoRepository {
         boolean modificado = false;
         BeanEvento evento = (BeanEvento) object;
         try {
-            String query = "UPDATE evento SET nombreEvento = ?, descripcion = ?, fecha = ?, estatusEvento = ?, direccion ?  WHERE idEvento = ?";
+            String query = "UPDATE evento SET nombreEvento = ?, descripcion = ?, fecha = ? WHERE idEvento = ?";
             con = MysqlConector.connect();
             pstm = con.prepareStatement(query);
 
             pstm.setString(1, evento.getNombreEvento());
             pstm.setString(2, evento.getDescripcion());
-            pstm.setString(3, evento.getFecha().toString());
-            pstm.setInt(4, evento.getEstatusEvento());
-            pstm.setInt(5, evento.getDireccion().getIdDireccion());
+            pstm.setDate(3, (Date) evento.getFecha());
+            pstm.setInt(4, evento.getIdEvento());
 
             modificado = pstm.executeUpdate() > 0;
         } catch (SQLException e) {
-            System.err.println("Error en el método update() - DaoColor -> " + e.getMessage());
+            System.err.println("Error en el método update() - DaoEvento -> " + e.getMessage());
         } finally {
             cerrarConexiones("update");
         }
@@ -129,40 +208,93 @@ public class DaoEvento implements DaoRepository {
     public boolean delete(int id) {
         boolean eliminado = false;
         try {
-            String query = "DELETE FROM evento WHERE idevento = ?";
+            String query = "DELETE FROM evento WHERE idEvento = ?";
 
             con = MysqlConector.connect();
             pstm = con.prepareStatement(query);
             pstm.setInt(1, id);
             eliminado = pstm.executeUpdate() > 0;
         } catch (SQLException e) {
-            System.err.println("Error en el método delete() - DaoColor -> " + e.getMessage());
+            System.err.println("Error en el método delete() - DaoEvento -> " + e.getMessage());
         } finally {
             cerrarConexiones("delete");
         }
         return eliminado;
     }
 
+    public boolean changeStatus(int id, int estatus) {
+        boolean modificado = false;
+        try {
+            String query = "UPDATE evento SET estatusEvento = ? WHERE idEvento = ?";
+
+            con = MysqlConector.connect();
+            pstm = con.prepareStatement(query);
+            pstm.setInt(1, estatus);
+            pstm.setInt(2, id);
+            modificado = pstm.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.err.println("Error en el método update() - DaoOrganizacion -> " + e.getMessage());
+        } finally {
+            cerrarConexiones("update");
+        }
+        return modificado;
+    }
+
+
     @Override
     public boolean insert(Object object) {
+        return false;
+    }
+
+    public int registrar(Object object) {
         BeanEvento evento = (BeanEvento) object;
         boolean registrado = false;
+        int idRegistro = 0;
         try {
             String query = "INSERT INTO evento (nombreEvento, descripcion, fecha, estatusEvento, direccion_idDirecion) values(?,?,?,?,?,?)";
 
             con = MysqlConector.connect();
-            pstm = con.prepareStatement(query);
+            pstm = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             pstm.setString(1, evento.getNombreEvento());
             pstm.setString(2, evento.getDescripcion());
-            pstm.setString(3, evento.getFecha().toString());
-            pstm.setInt(4, evento.getEstatusEvento());
+            pstm.setDate(3, (Date) evento.getFecha());
+            pstm.setInt(4, 3);
             pstm.setInt(5, evento.getDireccion().getIdDireccion());
 
             registrado = pstm.executeUpdate() > 0;
+
+            if (registrado) {
+                rs = pstm.getGeneratedKeys();
+
+                System.out.println("getGenerateKEy: " + rs);
+                if (rs.next()) {
+                    idRegistro = rs.getInt(1);
+                }
+            }
         } catch (SQLException e) {
-            System.err.println("Error en el método insert() - DaoColor -> " + e.getMessage());
+            System.err.println("Error en el método registrar() - DaoEvento -> " + e.getMessage());
         } finally {
-            cerrarConexiones("insert");
+            cerrarConexiones("registrar");
+        }
+        return idRegistro;
+    }
+
+    public boolean registrarEvaluacionOrganizacionEvento(BeanEvaluacion evaluacion, BeanOrganizacion organizacion, BeanEvento evento) {
+        boolean registrado = false;
+        try {
+            String query = "INSERT INTO evaluacion_organizacion_evento (evaluacion_idEvaluacion, organizacion_idOrganizacion, evento_idEvento) values(?,?,?)";
+
+            con = MysqlConector.connect();
+            pstm = con.prepareStatement(query);
+            pstm.setInt(1, evaluacion.getIdEvaluacion());
+            pstm.setInt(2, organizacion.getIdOrganizacion());
+            pstm.setInt(3, evento.getIdEvento());
+
+            registrado = pstm.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.err.println("Error en el método registrarEvaluacionOrganizacionEvento() - DaoEvento -> " + e.getMessage());
+        } finally {
+            cerrarConexiones("registrarEvaluacionOrganizacionEvento");
         }
         return registrado;
     }
@@ -179,7 +311,7 @@ public class DaoEvento implements DaoRepository {
                 con.close();
             }
         } catch (SQLException e) {
-            System.err.println("Error al cerrar conexiones - DaoColor - en el método " + metodo + " -> " + e.getMessage());
+            System.err.println("Error al cerrar conexiones - DaoEvento - en el método " + metodo + " -> " + e.getMessage());
         }
     }
 }
