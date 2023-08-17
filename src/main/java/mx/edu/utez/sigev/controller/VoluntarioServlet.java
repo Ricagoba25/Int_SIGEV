@@ -178,9 +178,22 @@ public class VoluntarioServlet extends HttpServlet {
             e.printStackTrace();
         }
 
+        try {
+            if (req.getParameter("consulta").equals("todos")) {
+                listaVoluntarios = daoVoluntario.findAll();
+            } else if (req.getParameter("consulta").equals("pendientes")) {
+                listaVoluntarios = daoVoluntario.voluntariosPorEstatus(3);
+            } else if (req.getParameter("consulta").equals("aceptados")) {
+                listaVoluntarios = daoVoluntario.voluntariosPorEstatus(2);
+            } else if (req.getParameter("consulta").equals("rechazados")) {
+                listaVoluntarios = daoVoluntario.voluntariosPorEstatus(1);
+            }
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+
         Gson gson = new Gson();
         String json = gson.toJson(listaVoluntarios);
-        System.out.println(json);
         resp.setContentType("text/json");
         resp.getWriter().write(json);
     }

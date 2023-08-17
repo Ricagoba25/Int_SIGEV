@@ -155,6 +155,7 @@ public class EventoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         DaoEvento daoEvento = new DaoEvento();
+        Utilidades utilidades = new Utilidades();
 
         List<BeanEvento> listaEventos = new ArrayList<>();
         try {
@@ -166,6 +167,8 @@ public class EventoServlet extends HttpServlet {
                 listaEventos = daoEvento.eventosPorEstatus(2);
             } else if (req.getParameter("consulta").equals("rechazados")) {
                 listaEventos = daoEvento.eventosPorEstatus(1);
+            } else if (req.getParameter("consulta").equals("propios")) {
+                listaEventos = daoEvento.eventosPorOrganizacion(utilidades.numeroInt(req.getParameter("idOrganizacion")));
             }
         } catch (NumberFormatException e) {
             e.printStackTrace();
