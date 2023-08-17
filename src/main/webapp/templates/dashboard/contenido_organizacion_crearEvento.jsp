@@ -18,18 +18,19 @@
             <div class="container">
                 <div class="container__formulario" style="margin-bottom: 200px">
                     <div class="container__formulario_contenido">
-                        <form class="form-signin" action="../../ServletOrganizacion" method="post">
+                        <form id="form_crear_evento">
                             <!-- Primera fila-->
 
                             <div class="row mt-2">
                                 <div class="col-xl-4">
                                     <label for="nombreEvento" class="form-label">Nombre Evento:</label>
                                     <input type="text" name="nombreEvento" class="form-control" id="nombreEvento"
-                                           required>
+                                           name="nombreEvento" required>
                                 </div>
                                 <div class="col-xl-4">
                                     <label for="fecha" class="form-label">Fecha:</label>
-                                    <input type="date" name="fecha" class="form-control" id="fecha" required>
+                                    <input type="date" name="fecha" class="form-control" id="fecha" name="fecha"
+                                           required>
                                 </div>
                                 <div class="col-xl-4 d-flex justify-content-center align-items-center">
                                     <button class="btn btn-success" id="modalSeleccionarTest"> Seleccionar Evaluación
@@ -64,8 +65,8 @@
                                     <input type="text" name="municipio" class="form-control" id="municipio" required>
                                 </div>
                                 <div class="col-xl-4">
-                                    <label for="estado" class="form-label">Estado:</label>
-                                    <input type="text" name="estado" class="form-control" id="estado" required>
+                                    <label for="stateSelect" class="form-label">Estado:</label>
+                                    <select class="form-control" id="stateSelect" name="estado"></select>
                                 </div>
 
                             </div>
@@ -73,7 +74,8 @@
                             <div class="row mt-2 mt-5">
                                 <div class="input-group col-xl-12">
                                     <span class="input-group-text">Descripción:</span>
-                                    <textarea class="form-control" aria-label="With textarea"></textarea>
+                                    <textarea class="form-control" aria-label="With textarea"
+                                              name="descripcion"></textarea>
                                 </div>
                             </div>
                             <!-- Button -->
@@ -97,11 +99,116 @@
 
 <script>
     $(document).ready(function () {
+
+        obtenerEstados();
+
+        $("#form_crear_evento").validate({
+            errorClass: "is-invalid",
+            validClass: "is-valid",
+            rules: {
+                nombreEvento: {
+                    required: true
+                },
+                fecha: {
+                    required: true
+                },
+                calle: {
+                    required: true
+                },
+                noExterior: {
+                    required: true,
+                },
+                noInterior: {
+                    required: true,
+                },
+                colonia: {
+                    required: true,
+                },
+                municipio: {
+                    required: true,
+                },
+                estado: {
+                    required: true,
+                },
+                descripcion: {
+                    required: true,
+                },
+
+            },
+            messages: {
+                nombreEvento: {
+                    required: "El Nombre es requerido.",
+                },
+                fecha: {
+                    required: "La fecha es requerida.",
+                },
+                calle: {
+                    required: "La calle materno es requerido.",
+                },
+                noExterior: {
+                    required: "Este campo es requerido.",
+                },
+                noInterior: {
+                    required: "Este campo es requerido.",
+                },
+                colonia: {
+                    required: "La colonia es requerida.",
+                },
+                municipio: {
+                    required: "El municipio es requerido.",
+                },
+                estado: {
+                    required: "El estado es requerido.",
+                },
+                descripcion: {
+                    required: "La descripción es requerida.",
+                },
+
+            },
+            submitHandler: function (form) {
+
+            }
+        })
+
+
         // Abrir el modal cuando se haga clic en el botón "Cerrar sesión"
         $("#modalSeleccionarTest").click(function () {
             $("#modalElegir").modal("show");
         });
     });
+
+    let obtenerEstados = () => {
+        $.ajax({
+            url: '/estado',
+            method: 'GET',
+            dataType: 'json',
+            success: function (data) {
+
+                // Obtener el elemento select
+                let selectElement = $('#stateSelect');
+                selectElement.append($('<option>', {
+                    value: "",
+                    text: "Selecciona un estado"
+                }));
+
+                // Recorrer los datos y agregar opciones al select
+                $.each(data, function (index, state) {
+                    selectElement.append($('<option>', {
+                        value: state.idEstado,
+                        text: state.nombre
+                    }));
+                });
+            },
+            error: function () {
+                console.error('Error al cargar la lista de estados.');
+            }
+        });
+    }
+
+
+
+
+
 </script>
 
 
@@ -149,4 +256,12 @@
 </div>
 
 
-<script src="https://cdn.datatables.net/v/bs5/dt-1.13.6/datatables.min.js"></script>
+<style>
+
+    #form_crear_evento div div .is-invalid {
+        font-size: 12px;
+        color: red;
+    }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
