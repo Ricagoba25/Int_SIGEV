@@ -95,14 +95,54 @@
 
         // Agregar un evento al botón de confirmación dentro del modal
         $('#confirmareditar').click(function () {
-            console.log('Editar usuario con ID:', id);
 
-            // Cerrar el modal después de cancelar
-            $('#confirmModal').modal('hide');
+
+            $.ajax({
+                type: "POST",
+                url: "/voluntario",
+                data: {
+                    accion: "postular",
+                    idEvento: id,
+                    estatusEvento: 4
+                },
+                success: function (response) {
+                    // Procesar la respuesta del servlet si es necesario
+                    console.log("Respuesta del servidor:", response);
+                    if (response.error) {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'error',
+                            title: 'Error',
+                            text: "Tenemos algunos errores.",
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    } else {
+                        recargarTabla();
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Postulación exitosa',
+                            text: "Te haz postulado correctamente.",
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                        $('#modalcancelar').modal('hide');
+                    }
+                },
+                error: function (error) {
+                    console.error("Error en la petición AJAX:", error);
+                }
+            });
 
             // Recargar la tabla o realizar otras acciones necesarias
             //$('#datatable').DataTable().ajax.reload();
         });
+    }
+
+    const recargarTabla = () => {
+        let table = $('#example1').DataTable();
+        table.ajax.reload();
     }
 
 

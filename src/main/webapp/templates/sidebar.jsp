@@ -54,15 +54,15 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="./template_voluntario_postulados.jsp" class="nav-link">
-                            <i class="fa-solid fa-calendar-check"></i>
-                            <p>Eventos Postulados </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a href="./template_voluntario_pendientes.jsp" class="nav-link">
                             <i class="fa-solid fa-calendar-xmark"></i>
                             <p>Eventos Pendientes </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="./template_voluntario_postulados.jsp" class="nav-link">
+                            <i class="fa-solid fa-calendar-check"></i>
+                            <p>Eventos Postulados </p>
                         </a>
                     </li>
                 </c:if>

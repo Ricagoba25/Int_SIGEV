@@ -18,6 +18,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
+                        <input type="hidden" id="idVoluntario" value="${sesion.getIdVoluntario()}">
                         <table id="example2" class="table table-bordered table-striped">
                             <thead>
                             <tr>
@@ -40,12 +41,16 @@
 
 
 <script>
-    $(function () {
+    $(document).ready(function () {
+
         const URL_API = "http://localhost:8080/"
+        let id = $("#idVoluntario").val();
+
         $('#example2').DataTable({
             ajax:
                 {
-                    url: URL_API + 'evento?consulta=eventosActivos',
+                    // url: URL_API + 'evento?consulta=todos',
+                    url: URL_API + 'evento?consulta=eventosActivos&idVoluntario=' + id,
                     dataSrc: ''
                 },
             columns: [
@@ -82,20 +87,24 @@
 
         // Agregar un evento al botón de confirmación dentro del modal
         $('#guardarCambios').click(function () {
+
+
+
+
             console.log('Editar usuario con ID:', id);
 
             // Cerrar el modal después de borrar
             $('#modalPostularse').modal('hide');
 
-            // Recargar la tabla o realizar otras acciones necesarias
-            //$('#datatable').DataTable().ajax.reload();
+
         });
     }
 
 
 </script>
 
-<div id="modalPostularse" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="miModalLabel" aria-hidden="true">
+<div id="modalPostularse" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="miModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
