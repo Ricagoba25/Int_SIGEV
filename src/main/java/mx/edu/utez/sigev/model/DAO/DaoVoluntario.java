@@ -418,6 +418,26 @@ public class DaoVoluntario implements DaoRepository {
         return postulado;
     }
 
+    public boolean aceptarRechazarVoluntario(int idVoluntario, int idEvaluacionOrganizacionEvento, int estatus) {
+        boolean aceptadoRechazado = false;
+        try {
+            String query = "UPDATE voluntario_evaluacion SET estatusVoluntarioEvaluacion = ? WHERE voluntario_idVoluntario = ? AND evaluacion_organizacion_evento_idEvaluacionOrganizacionEvento = ?";
+
+            con = MysqlConector.connect();
+            pstm = con.prepareStatement(query);
+            pstm.setInt(1, estatus);
+            pstm.setInt(2, idVoluntario);
+            pstm.setInt(3, idEvaluacionOrganizacionEvento);
+
+            aceptadoRechazado = pstm.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.err.println("Error en el método aceptarRechazarVoluntario() - DaoVoluntario -> " + e.getMessage());
+        } finally {
+            cerrarConexiones("aceptarRechazarVoluntario");
+        }
+        return aceptadoRechazado;
+    }
+
     private void cerrarConexiones(String metodo) {
         try {
             if (rs != null) {

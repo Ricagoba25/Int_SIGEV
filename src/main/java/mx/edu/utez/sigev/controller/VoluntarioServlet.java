@@ -2,13 +2,15 @@ package mx.edu.utez.sigev.controller;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import mx.edu.utez.sigev.model.*;
+import mx.edu.utez.sigev.model.BeanPersona;
+import mx.edu.utez.sigev.model.BeanRol;
+import mx.edu.utez.sigev.model.BeanUsuario;
+import mx.edu.utez.sigev.model.BeanVoluntario;
 import mx.edu.utez.sigev.model.DAO.DaoPersona;
 import mx.edu.utez.sigev.model.DAO.DaoUsuario;
 import mx.edu.utez.sigev.model.DAO.DaoVoluntario;
 import mx.edu.utez.sigev.utils.Utilidades;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -42,6 +44,7 @@ public class VoluntarioServlet extends HttpServlet {
         int idPersona = utilidades.numeroInt(request.getParameter("idPersona"));
         int idVoluntario = utilidades.numeroInt(request.getParameter("idVoluntario"));
         int idEvaluacionOrganizacionEvento = utilidades.numeroInt(request.getParameter("idEvaluacionOrganizacionEvento"));
+        int idEstatusAceptadoRechazado = utilidades.numeroInt(request.getParameter("idEstatusAceptadoRechazado"));
 
         BeanUsuario usuario = new BeanUsuario();
         usuario.setCorreo(correo);
@@ -162,6 +165,26 @@ public class VoluntarioServlet extends HttpServlet {
                     jsonResponse.addProperty("title", "La postulación no se realizó");
                 }
                 break;
+            case "aceptarRechazar":
+                String resExitosa = "Voluntario aceptado al evento exitosamente";
+                String resError = "Problema al aceptar el voluntario";
+                if (idEstatusAceptadoRechazado == 3) {
+                    resExitosa = "Voluntario rechazado al evento exitosamente";
+                    resError = "Problema al rechazar el voluntario";
+                }
+
+                respuesta = daoVoluntario.aceptarRechazarVoluntario(idVoluntario, idEvaluacionOrganizacionEvento, idEstatusAceptadoRechazado);
+
+                System.out.println("resPostulacion " + respuesta);
+                if (respuesta) {
+                    jsonResponse.addProperty("error", 0);
+                    jsonResponse.addProperty("title", "");
+                    jsonResponse.addProperty("message", resExitosa);
+                } else {
+                    jsonResponse.addProperty("error", 1);
+                    jsonResponse.addProperty("title", resError);
+                }
+                break;
             default:
                 jsonResponse.addProperty("error", 1);
                 jsonResponse.addProperty("title", "Acción no encontrada");
@@ -192,11 +215,11 @@ public class VoluntarioServlet extends HttpServlet {
             if (req.getParameter("consulta").equals("todos")) {
                 listaVoluntarios = daoVoluntario.findAll();
             } else if (req.getParameter("consulta").equals("pendientes")) {
-                listaVoluntarios = daoVoluntario.voluntariosPorEstatus(utilidades.numeroInt(req.getParameter("idOrganizacion")),1);
+                listaVoluntarios = daoVoluntario.voluntariosPorEstatus(utilidades.numeroInt(req.getParameter("idOrganizacion")), 1);
             } else if (req.getParameter("consulta").equals("aceptados")) {
-                listaVoluntarios = daoVoluntario.voluntariosPorEstatus(utilidades.numeroInt(req.getParameter("idOrganizacion")),2);
+                listaVoluntarios = daoVoluntario.voluntariosPorEstatus(utilidades.numeroInt(req.getParameter("idOrganizacion")), 2);
             } else if (req.getParameter("consulta").equals("rechazados")) {
-                listaVoluntarios = daoVoluntario.voluntariosPorEstatus(utilidades.numeroInt(req.getParameter("idOrganizacion")),3);
+                listaVoluntarios = daoVoluntario.voluntariosPorEstatus(utilidades.numeroInt(req.getParameter("idOrganizacion")), 3);
             }
         } catch (NumberFormatException e) {
             e.printStackTrace();
