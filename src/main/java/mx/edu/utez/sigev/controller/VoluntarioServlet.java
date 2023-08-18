@@ -213,7 +213,7 @@ public class VoluntarioServlet extends HttpServlet {
 
         try {
             if (req.getParameter("consulta").equals("todos")) {
-                listaVoluntarios = daoVoluntario.findAll();
+                listaVoluntarios = daoVoluntario.voluntariosPorOrganizacion(utilidades.numeroInt(req.getParameter("idOrganizacion")));
             } else if (req.getParameter("consulta").equals("pendientes")) {
                 listaVoluntarios = daoVoluntario.voluntariosPorEstatus(utilidades.numeroInt(req.getParameter("idOrganizacion")), 1);
             } else if (req.getParameter("consulta").equals("aceptados")) {
