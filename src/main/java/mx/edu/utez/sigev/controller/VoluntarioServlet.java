@@ -2,10 +2,7 @@ package mx.edu.utez.sigev.controller;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import mx.edu.utez.sigev.model.BeanPersona;
-import mx.edu.utez.sigev.model.BeanRol;
-import mx.edu.utez.sigev.model.BeanUsuario;
-import mx.edu.utez.sigev.model.BeanVoluntario;
+import mx.edu.utez.sigev.model.*;
 import mx.edu.utez.sigev.model.DAO.DaoPersona;
 import mx.edu.utez.sigev.model.DAO.DaoUsuario;
 import mx.edu.utez.sigev.model.DAO.DaoVoluntario;
@@ -44,6 +41,7 @@ public class VoluntarioServlet extends HttpServlet {
         int idUsuario = utilidades.numeroInt(request.getParameter("idUsuario"));
         int idPersona = utilidades.numeroInt(request.getParameter("idPersona"));
         int idVoluntario = utilidades.numeroInt(request.getParameter("idVoluntario"));
+        int idEvaluacionOrganizacionEvento = utilidades.numeroInt(request.getParameter("idEvaluacionOrganizacionEvento"));
 
         BeanUsuario usuario = new BeanUsuario();
         usuario.setCorreo(correo);
@@ -80,7 +78,6 @@ public class VoluntarioServlet extends HttpServlet {
                         respuesta = daoVoluntario.insert(voluntario);
                         System.out.println("resVoluntario " + respuesta);
                         if (respuesta) {
-
 
 
                             jsonResponse.addProperty("error", 0);
@@ -150,6 +147,19 @@ public class VoluntarioServlet extends HttpServlet {
                 } else {
                     jsonResponse.addProperty("error", 1);
                     jsonResponse.addProperty("title", "Voluntario no eliminado");
+                }
+                break;
+            case "postular":
+                respuesta = daoVoluntario.postularEvento(idVoluntario, idEvaluacionOrganizacionEvento);
+
+                System.out.println("resPostulacion " + respuesta);
+                if (respuesta) {
+                    jsonResponse.addProperty("error", 0);
+                    jsonResponse.addProperty("title", "");
+                    jsonResponse.addProperty("message", "Te has postulado al evento exitosamente");
+                } else {
+                    jsonResponse.addProperty("error", 1);
+                    jsonResponse.addProperty("title", "La postulación no se realizó");
                 }
                 break;
             default:

@@ -396,6 +396,24 @@ public class DaoVoluntario implements DaoRepository {
         return registrado;
     }
 
+    public boolean postularEvento(int idVoluntario, int idEvaluacionOrganizacionEvento) {
+        boolean postulado = false;
+        try {
+            String query = "INSERT INTO voluntario_evaluacion (voluntario_idVoluntario, evaluacion_organizacion_evento_idEvaluacionOrganizacionEvento) VALUES (?,?)";
+
+            con = MysqlConector.connect();
+            pstm = con.prepareStatement(query);
+            pstm.setInt(1, idVoluntario);
+            pstm.setInt(2, idEvaluacionOrganizacionEvento);
+            postulado = pstm.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.err.println("Error en el método postularEvento() - DaoVoluntario -> " + e.getMessage());
+        } finally {
+            cerrarConexiones("postularEvento");
+        }
+        return postulado;
+    }
+
     private void cerrarConexiones(String metodo) {
         try {
             if (rs != null) {
