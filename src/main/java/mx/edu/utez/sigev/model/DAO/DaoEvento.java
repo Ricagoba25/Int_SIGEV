@@ -78,22 +78,25 @@ public class DaoEvento implements DaoRepository {
         return listaEventos;
     }
 
-    public List eventosPorEstatus(int estatus) {
+    public List eventosPorEstatus(int idVoluntario, int estatus) {
         List<BeanEvaluacionOrganizacionEvento> listaEventos = new ArrayList<>();
         try {
-            String query = "SELECT es.idEstado, es.nombre, d.idDireccion, d.calle, d.colonia, d.municipio, d.noExterior, d.noInterior, " +
-                    "eve.idEvento, eve.nombreEvento, eve.descripcion, eve.fecha, eve.estatusEvento, eva.idEvaluacion, eva.nombreEvaluacion, " +
-                    "o.idOrganizacion, o.rfc, o.nombreOrganizacion, o.razonSocial, o.estatusOrganizacion, eoe.idEvaluacionOrganizacionEvento " +
+            String query = "SELECT es.idEstado,es.nombre, d.idDireccion, d.calle, d.colonia, d.municipio, d.noExterior, d.noInterior, eve.idEvento, " +
+                    "eve.nombreEvento, eve.descripcion,  eve.fecha, eve.estatusEvento, eva.idEvaluacion, eva.nombreEvaluacion, o.idOrganizacion, " +
+                    "o.rfc, o.nombreOrganizacion, o.razonSocial, o.estatusOrganizacion, eoe.idEvaluacionOrganizacionEvento, ve.idVoluntarioEvaluacion, " +
                     "FROM evaluacion_organizacion_evento eoe " +
                     "JOIN evaluacion eva on eva.idEvaluacion = eoe.evaluacion_idEvaluacion " +
                     "JOIN organizacion o on eoe.organizacion_idOrganizacion = o.idOrganizacion " +
                     "JOIN evento eve on eve.idEvento = eoe.evento_idEvento " +
                     "JOIN direccion d on d.idDireccion = eve.direccion_idDireccion " +
-                    "JOIN estado es ON es.idEstado = d.estado_idEstado WHERE eve.estatusEvento = ?";
+                    "JOIN estado es ON es.idEstado = d.estado_idEstado " +
+                    "JOIN voluntario_evaluacion ve on eoe.idEvaluacionOrganizacionEvento = ve.evaluacion_organizacion_evento_idEvaluacionOrganizacionEvento " +
+                    "WHERE ve.voluntario_idVoluntario != ? AND ve.estatusVoluntarioEvaluacion = ?";
 
             con = MysqlConector.connect();
             pstm = con.prepareStatement(query);
-            pstm.setInt(1, estatus);
+            pstm.setInt(1, idVoluntario);
+            pstm.setInt(2, estatus);
             rs = pstm.executeQuery();
 
             while (rs.next()) {
