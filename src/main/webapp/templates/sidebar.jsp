@@ -86,23 +86,23 @@
                             <p>Crear Evento</p>
                         </a>
                     </li>
-                    <li>
-                        <a href="./template_organizacion_eventosPendientes.jsp" class="nav-link">
-                            <i class="fa-regular fa-calendar-xmark"></i>
-                            <p>Eventos Pendientes</p>
-                        </a>
-                    </li>
-                   <!-- <li>
-                        <a href="./crearTest.jsp" class="nav-link">
-                            <i class="fa-solid fa-folder-plus"></i>
-                            <p>Crear Evaluación</p>
-                        </a>
+                    <!--<li>
+                    <a href="./template_organizacion_eventosPendientes.jsp" class="nav-link">
+                    <i class="fa-regular fa-calendar-xmark"></i>
+                    <p>Eventos Pendientes</p>
+                    </a>
                     </li>
                     <li>
-                        <a href="./template_organizacion_evaluacionesDisponibles.jsp" class="nav-link">
-                            <i class="fa fa-file"></i>
-                            <p>Evaluaciones Disponibles</p>
-                        </a>
+                    <a href="./crearTest.jsp" class="nav-link">
+                    <i class="fa-solid fa-folder-plus"></i>
+                    <p>Crear Evaluación</p>
+                    </a>
+                    </li>
+                    <li>
+                    <a href="./template_organizacion_evaluacionesDisponibles.jsp" class="nav-link">
+                    <i class="fa fa-file"></i>
+                    <p>Evaluaciones Disponibles</p>
+                    </a>
                     </li> -->
                 </c:if>
 
@@ -134,8 +134,8 @@
                     </li>
                     <!--<li>
                     <a href="./template_admin_generarReportes.jsp" class="nav-link">
-                        <i class="fa fa-file"></i>
-                        <p>Generar Reportes</p>
+                    <i class="fa fa-file"></i>
+                    <p>Generar Reportes</p>
                     </a>
                     </li>-->
                 </c:if>

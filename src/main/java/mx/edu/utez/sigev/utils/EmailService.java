@@ -10,8 +10,12 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class EmailService {
-    final private String de = "int.sigev@gmail.com";
-    final private String pass = "djnzmigbndkbdoqxccxslportyv";
+//    final private String de = "int.sigev@gmail.com";
+//    final private String pass = "djnzmigbndkbdoqxccxslportyv";
+
+
+    final private String de = "zazilmail@gmail.com";
+    final private String pass = "avxbdgitrpwumbpl";
 
     public EmailService() {
     }

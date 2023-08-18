@@ -298,14 +298,33 @@ public class DaoEvento implements DaoRepository {
             pstm.setInt(2, id);
             modificado = pstm.executeUpdate() > 0;
         } catch (SQLException e) {
-            System.err.println("Error en el método update() - DaoOrganizacion -> " + e.getMessage());
+            System.err.println("Error en el método update() - DaoEvento -> " + e.getMessage());
         } finally {
             cerrarConexiones("update");
         }
         return modificado;
     }
 
+    public boolean postularse(int id, int estatusSolicitud){
+        boolean postulado = false;
 
+        try {
+            String query = "UPDATE evento SET estatusEvento = ? WHERE idEvento = ?";
+
+           con = MysqlConector.connect();
+            pstm = con.prepareStatement(query);
+            pstm.setInt(1, estatusSolicitud);
+            pstm.setInt(2, id);
+            postulado = pstm.executeUpdate() > 0;
+
+
+        } catch (SQLException e) {
+            System.err.println("Error en el método postularse() - daoEvento -> " + e.getMessage());
+        } finally {
+            cerrarConexiones("update");
+        }
+        return postulado;
+    }
     @Override
     public boolean insert(Object object) {
         return false;
@@ -323,7 +342,7 @@ public class DaoEvento implements DaoRepository {
             pstm.setString(1, evento.getNombreEvento());
             pstm.setString(2, evento.getDescripcion());
             pstm.setString(3, evento.getFecha());
-            pstm.setInt(4, 3);
+            pstm.setInt(4, evento.getEstatusEvento());
             pstm.setInt(5, evento.getDireccion().getIdDireccion());
 
             registrado = pstm.executeUpdate() > 0;

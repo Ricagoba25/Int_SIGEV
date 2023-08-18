@@ -45,7 +45,7 @@
         $('#example2').DataTable({
             ajax:
                 {
-                    url: URL_API + 'evento?consulta=todos',
+                    url: URL_API + 'evento?consulta=eventosActivos',
                     dataSrc: ''
                 },
             columns: [
@@ -63,7 +63,7 @@
                         // El contenido de esta función se ejecutará para cada celda de esta columna
                         // Utilizamos data para acceder a los datos de la fila actual
 
-                        let postularseBtn = '<a href="#" title="Postularse" onclick="postularse(' + data.idEvento + ')"> <i class="fa-solid fa-thumbs-up"></i> </a> &nbsp;';
+                        let postularseBtn = '<a href="#" title="Postularse" onclick="postularse(' + data.evento.idEvento + ')"> <i class="fa-solid fa-thumbs-up"></i> </a> &nbsp;';
 
                         // Devolvemos los botones como una cadena HTML
                         return postularseBtn;
@@ -81,11 +81,11 @@
         $('#modalPostularse').modal('show');
 
         // Agregar un evento al botón de confirmación dentro del modal
-        $('#confirmareditar').click(function () {
+        $('#guardarCambios').click(function () {
             console.log('Editar usuario con ID:', id);
 
             // Cerrar el modal después de borrar
-            $('#confirmModal').modal('hide');
+            $('#modalPostularse').modal('hide');
 
             // Recargar la tabla o realizar otras acciones necesarias
             //$('#datatable').DataTable().ajax.reload();

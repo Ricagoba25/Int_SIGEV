@@ -58,6 +58,7 @@ public class EventoServlet extends HttpServlet {
         evento.setNombreEvento(nombreEvento);
         evento.setDescripcion(descripcion);
         evento.setFecha(fecha);
+        evento.setEstatusEvento(estatusEvento);
 
         BeanOrganizacion organizacion = new BeanOrganizacion(idOrganizacion);
         BeanEvaluacion evaluacion = new BeanEvaluacion(idEvaluacion);
@@ -127,7 +128,7 @@ public class EventoServlet extends HttpServlet {
                 }
                 break;
             case "changeStatus":
-                respuesta = daoEvento.changeStatus(idOrganizacion, estatusEvento);
+                respuesta = daoEvento.changeStatus(idEvento, estatusEvento);
 
                 System.out.println("resUsuario " + respuesta);
                 if (respuesta) {
@@ -138,6 +139,10 @@ public class EventoServlet extends HttpServlet {
                     jsonResponse.addProperty("error", 1);
                     jsonResponse.addProperty("title", "El estatus del evento no se cambio");
                 }
+                break;
+            case "postularme":
+
+                //todo
                 break;
             default:
                 jsonResponse.addProperty("error", 1);
@@ -162,19 +167,32 @@ public class EventoServlet extends HttpServlet {
         List<BeanEvento> listaEventos = new ArrayList<>();
         try {
             if (req.getParameter("consulta").equals("todos")) {
+
                 listaEventos = daoEvento.findAll();
-            } else if (req.getParameter("consulta").equals("pendientes")) {
-                listaEventos = daoEvento.eventosPorEstatus(3);
+
+
+            } else if (req.getParameter("consulta").equals("eventosActivos")) {
+                listaEventos = daoEvento.eventosPorEstatus(2); // 2 = aceptados
+            }
+            else if(req.getParameter("consulta").equals("voluntarioPendientesId")){
+                System.out.println("entra a voluntarios pendientesid");
+
+                listaEventos = daoVoluntario.voluntariosPostuladosPorId(4);
+            }
+            else if (req.getParameter("consulta").equals("pendientes")) {
+                listaEventos = daoEvento.eventosPorEstatus(1);
             } else if (req.getParameter("consulta").equals("aceptados")) {
                 listaEventos = daoEvento.eventosPorEstatus(2);
             } else if (req.getParameter("consulta").equals("rechazados")) {
-                listaEventos = daoEvento.eventosPorEstatus(1);
+                listaEventos = daoEvento.eventosPorEstatus(3);
             } else if (req.getParameter("consulta").equals("propios")) {
                 listaEventos = daoEvento.eventosPorOrganizacion(utilidades.numeroInt(req.getParameter("idOrganizacion")));
             } else if (req.getParameter("consulta").equals("voluntarioAceptado")) {
-                listaEventos = daoVoluntario.voluntariosPorEvento(utilidades.numeroInt(req.getParameter("idVoluntario")), 1);
+
+                listaEventos = daoVoluntario.voluntariosPorEvento(utilidades.numeroInt(req.getParameter("idVoluntario")), 2);
+
             } else if (req.getParameter("consulta").equals("voluntarioPendiente")) {
-                listaEventos = daoVoluntario.voluntariosPorEvento(utilidades.numeroInt(req.getParameter("idVoluntario")), 3);
+                listaEventos = daoVoluntario.voluntariosPorEvento(utilidades.numeroInt(req.getParameter("idVoluntario")), 1);
             }
         } catch (NumberFormatException e) {
             e.printStackTrace();

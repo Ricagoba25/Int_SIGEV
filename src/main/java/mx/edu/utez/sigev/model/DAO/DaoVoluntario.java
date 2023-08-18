@@ -83,6 +83,58 @@ public class DaoVoluntario implements DaoRepository {
         return listaVoluntarios;
     }
 
+    public List voluntariosPostuladosPorId(int idVoluntario) {
+        List<BeanVoluntarioEvaluacion> listaVoluntarios = new ArrayList<>();
+        try {
+
+
+            String query =
+                    "SELECT * FROM voluntario v" +
+                            "join persona p on v.persona_idPersona = p.idPersona" +
+                            "JOIN voluntario_evento vx ON v.idVoluntario = vx.voluntario_idVoluntario" +
+                            "JOIN evento ev ON ev.idEvento = vx.evento_idEvento" +
+                            "JOIN direccion di ON ev.direccion_idDireccion = di.idDireccion" +
+                            "WHERE v.idVoluntario = ?";
+
+            con = MysqlConector.connect();
+            pstm = con.prepareStatement(query);
+            pstm.setInt(1, idVoluntario);
+            rs = pstm.executeQuery();
+
+            while (rs.next()) {
+
+                BeanEventoVoluntario beanEventoVoluntario = new BeanEventoVoluntario();
+                beanEventoVoluntario.setVoluntario_idVoluntario(rs.getInt("idVoluntario"));
+                beanEventoVoluntario.setEvento_idEvento(rs.getInt("idEvento"));
+                beanEventoVoluntario.setEstatusSolicitud(rs.getInt("estatusSolicitud"));
+
+                BeanPersona beanPersona = new BeanPersona();
+                beanPersona.setIdPersona(rs.getInt("idPersona"));
+                beanPersona.setNombrePersona(rs.getString("nombrePersona"));
+                beanPersona.setPrimerApellido(rs.getString("primerApellido"));
+                beanPersona.setSegundoApellido(rs.getString("segundoApellido"));
+
+                BeanVoluntario beanVoluntario = new BeanVoluntario();
+                beanVoluntario.setIdVoluntario(rs.getInt("idVoluntario"));
+                beanVoluntario.setCurp(rs.getString("curp"));
+                beanVoluntario.setEstatusVoluntario(rs.getInt("estatusVoluntario"));
+                beanVoluntario.setPersona(beanPersona);
+
+                BeanEvento beanEvento = new BeanEvento(rs.getInt("idEvento"));
+                BeanOrganizacion beanOrganizacion = new BeanOrganizacion(rs.getInt("idOrganizacion"));
+
+
+//                listaVoluntarios.add(beanVoluntarioEvaluacion);
+
+            }
+        } catch (SQLException e) {
+            System.err.println("Error en el método voluntariosPorEstatus() - DaoVoluntario -> " + e.getMessage());
+        } finally {
+            cerrarConexiones("voluntariosPorEstatus");
+        }
+        return listaVoluntarios;
+    }
+
     public List voluntariosPorEstatus(int estatus) {
         List<BeanVoluntarioEvaluacion> listaVoluntarios = new ArrayList<>();
         try {

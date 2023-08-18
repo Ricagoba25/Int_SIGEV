@@ -195,7 +195,8 @@
             municipio:  $("#municipio").val(),
             idEstado:  $("#stateSelect").val(),
             descripcion:  $("#descripcion").val(),
-            idOrganizacion: $("#idOrganizacion").val()
+            idOrganizacion: $("#idOrganizacion").val(),
+            estatusEvento: 1
         }
 
 
@@ -223,8 +224,8 @@
                     Swal.fire({
                         position: 'center',
                         icon: 'success',
-                        title: 'Actualizacion exitosa',
-                        text: "El administrador se ha modificado correctamente.",
+                        title: 'Creación exitosa',
+                        text: "Evento creado correctamente.",
                         showConfirmButton: false,
                         timer: 2500
                     })
