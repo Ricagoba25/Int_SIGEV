@@ -139,10 +139,6 @@ public class EventoServlet extends HttpServlet {
                     jsonResponse.addProperty("title", "El estatus del evento no se cambio");
                 }
                 break;
-            case "postularme":
-
-                //todo
-                break;
             default:
                 jsonResponse.addProperty("error", 1);
                 jsonResponse.addProperty("title", "Acción no encontrada");
