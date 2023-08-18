@@ -147,6 +147,75 @@ public class DaoEvento implements DaoRepository {
         return listaEventos;
     }
 
+    public List eventosPostulado(int idVoluntario) {
+        List<BeanEvaluacionOrganizacionEvento> listaEventos = new ArrayList<>();
+        try {
+            String query = "SELECT es.idEstado,es.nombre, d.idDireccion, d.calle, d.colonia, d.municipio, d.noExterior, d.noInterior, eve.idEvento, " +
+                    "eve.nombreEvento, eve.descripcion,  eve.fecha, eve.estatusEvento, eva.idEvaluacion, eva.nombreEvaluacion, o.idOrganizacion, " +
+                    "o.rfc, o.nombreOrganizacion, o.razonSocial, o.estatusOrganizacion, eoe.idEvaluacionOrganizacionEvento, ve.voluntario_idVoluntario," +
+                    "ve.estatusVoluntarioEvaluacion " +
+                    "FROM evaluacion_organizacion_evento eoe " +
+                    "JOIN evaluacion eva on eva.idEvaluacion = eoe.evaluacion_idEvaluacion " +
+                    "JOIN organizacion o on eoe.organizacion_idOrganizacion = o.idOrganizacion " +
+                    "JOIN evento eve on eve.idEvento = eoe.evento_idEvento " +
+                    "JOIN direccion d on d.idDireccion = eve.direccion_idDireccion " +
+                    "JOIN estado es ON es.idEstado = d.estado_idEstado " +
+                    "JOIN voluntario_evaluacion ve on eoe.idEvaluacionOrganizacionEvento = ve.evaluacion_organizacion_evento_idEvaluacionOrganizacionEvento\n" +
+                    "WHERE ve.voluntario_idVoluntario = ? AND ve.estatusVoluntarioEvaluacion = 2 ;";
+
+            con = MysqlConector.connect();
+            pstm = con.prepareStatement(query);
+            pstm.setInt(1, idVoluntario);
+            rs = pstm.executeQuery();
+
+            while (rs.next()) {
+                BeanEvaluacion beanEvaluacion = new BeanEvaluacion();
+                beanEvaluacion.setIdEvaluacion(rs.getInt("idEvaluacion"));
+                beanEvaluacion.setNombreEvaluacion(rs.getString("nombreEvaluacion"));
+
+                BeanOrganizacion beanOrganizacion = new BeanOrganizacion();
+                beanOrganizacion.setIdOrganizacion(rs.getInt("idOrganizacion"));
+                beanOrganizacion.setRfc(rs.getString("rfc"));
+                beanOrganizacion.setNombreOrganizacion(rs.getString("nombreOrganizacion"));
+                beanOrganizacion.setRazonSocial(rs.getString("razonSocial"));
+                beanOrganizacion.setEstatusOrganizacion(rs.getInt("estatusOrganizacion"));
+
+                BeanEstado beanEstado = new BeanEstado();
+                beanEstado.setIdEstado(rs.getInt("idEstado"));
+                beanEstado.setNombre(rs.getString("nombre"));
+
+                BeanDireccion beanDireccion = new BeanDireccion();
+                beanDireccion.setIdDireccion(rs.getInt("idDireccion"));
+                beanDireccion.setCalle(rs.getString("calle"));
+                beanDireccion.setColonia(rs.getString("colonia"));
+                beanDireccion.setMunicipio(rs.getString("municipio"));
+                beanDireccion.setNoExterior(rs.getString("noExterior"));
+                beanDireccion.setNoInterior(rs.getString("noInterior"));
+                beanDireccion.setEstado(beanEstado);
+
+                BeanEvento beanEvento = new BeanEvento();
+                beanEvento.setIdEvento(rs.getInt("idEvento"));
+                beanEvento.setNombreEvento(rs.getString("nombreEvento"));
+                beanEvento.setDescripcion(rs.getString("descripcion"));
+                beanEvento.setFecha(rs.getString("fecha"));
+                beanEvento.setEstatusEvento(rs.getInt("estatusEvento"));
+                beanEvento.setDireccion(beanDireccion);
+
+                BeanEvaluacionOrganizacionEvento beanEvaluacionOrganizacionEvento = new BeanEvaluacionOrganizacionEvento();
+                beanEvaluacionOrganizacionEvento.setIdEvaluacionOrganizacionEvento(rs.getInt("idEvaluacionOrganizacionEvento"));
+                beanEvaluacionOrganizacionEvento.setOrganizacion(beanOrganizacion);
+                beanEvaluacionOrganizacionEvento.setEvaluacion(beanEvaluacion);
+                beanEvaluacionOrganizacionEvento.setEvento(beanEvento);
+                listaEventos.add(beanEvaluacionOrganizacionEvento);
+            }
+        } catch (SQLException e) {
+            System.err.println("Error en el método eventosPorEstatus() - DaoEvento -> " + e.getMessage());
+        } finally {
+            cerrarConexiones("eventosPorEstatus");
+        }
+        return listaEventos;
+    }
+
     public List eventosPorEstatus(int idVoluntario, int estatus) {
         List<BeanEvaluacionOrganizacionEvento> listaEventos = new ArrayList<>();
         try {

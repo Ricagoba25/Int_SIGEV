@@ -172,19 +172,25 @@ public class EventoServlet extends HttpServlet {
                 System.out.println("entra a voluntarios pendientesid");
 
                 listaEventos = daoVoluntario.voluntariosPostuladosPorId(4);
+
             } else if (req.getParameter("consulta").equals("pendientes")) {
                 listaEventos = daoEvento.eventosPorEstatus(utilidades.numeroInt(req.getParameter("idVoluntario")), 1);
+
             } else if (req.getParameter("consulta").equals("aceptados")) {
                 listaEventos = daoEvento.eventosDisponibles(utilidades.numeroInt(req.getParameter("idVoluntario")));
+
             } else if (req.getParameter("consulta").equals("rechazados")) {
                 listaEventos = daoEvento.eventosPorEstatus(utilidades.numeroInt(req.getParameter("idVoluntario")), 3);
+
             } else if (req.getParameter("consulta").equals("cancelado")) {
                 listaEventos = daoEvento.eventosPorEstatus(utilidades.numeroInt(req.getParameter("idVoluntario")), 4);
+
             } else if (req.getParameter("consulta").equals("propios")) {
                 listaEventos = daoEvento.eventosPorOrganizacion(utilidades.numeroInt(req.getParameter("idOrganizacion")));
+
             } else if (req.getParameter("consulta").equals("voluntarioAceptado")) {
 
-                listaEventos = daoVoluntario.voluntariosPorEvento(utilidades.numeroInt(req.getParameter("idVoluntario")), 2);
+                listaEventos = daoEvento.eventosPostulado(utilidades.numeroInt(req.getParameter("idVoluntario")));
 
             } else if (req.getParameter("consulta").equals("voluntarioPendiente")) {
                 listaEventos = daoVoluntario.voluntariosPorEvento(utilidades.numeroInt(req.getParameter("idVoluntario")), 1);
