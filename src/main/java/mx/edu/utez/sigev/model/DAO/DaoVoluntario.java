@@ -135,7 +135,7 @@ public class DaoVoluntario implements DaoRepository {
         return listaVoluntarios;
     }
 
-    public List voluntariosPorEstatus(int estatus) {
+    public List voluntariosPorEstatus(int idOrganizacion, int estatus) {
         List<BeanVoluntarioEvaluacion> listaVoluntarios = new ArrayList<>();
         try {
             String query = "SELECT * FROM voluntario v " +
@@ -146,11 +146,13 @@ public class DaoVoluntario implements DaoRepository {
                     "join evaluacion_organizacion_evento eoe on ve.evaluacion_organizacion_evento_idEvaluacionOrganizacionEvento = eoe.idEvaluacionOrganizacionEvento " +
                     "join evento e2 on e2.idEvento = eoe.evento_idEvento " +
                     "join evaluacion e on e.idEvaluacion = eoe.evaluacion_idEvaluacion " +
-                    "join organizacion o on eoe.organizacion_idOrganizacion = o.idOrganizacion WHERE ve.estatusVoluntarioEvaluacion = ?";
+                    "join organizacion o on eoe.organizacion_idOrganizacion = o.idOrganizacion " +
+                    "WHERE ve.estatusVoluntarioEvaluacion = ? AND o.idOrganizacion = ?";
 
             con = MysqlConector.connect();
             pstm = con.prepareStatement(query);
             pstm.setInt(1, estatus);
+            pstm.setInt(2, idOrganizacion);
             rs = pstm.executeQuery();
 
             while (rs.next()) {
@@ -179,6 +181,7 @@ public class DaoVoluntario implements DaoRepository {
                 beanVoluntario.setPersona(beanPersona);
 
                 BeanEvento beanEvento = new BeanEvento(rs.getInt("idEvento"));
+                beanEvento.setNombreEvento(rs.getString("nombreEvento"));
                 BeanOrganizacion beanOrganizacion = new BeanOrganizacion(rs.getInt("idOrganizacion"));
                 BeanEvaluacion beanEvaluacion = new BeanEvaluacion(rs.getInt("idEvaluacion"));
 
