@@ -179,7 +179,7 @@ public class VoluntarioServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         DaoVoluntario daoVoluntario = new DaoVoluntario();
-
+        Utilidades utilidades = new Utilidades();
         List<BeanVoluntario> listaVoluntarios = new ArrayList<>();
 
         try {
@@ -192,11 +192,11 @@ public class VoluntarioServlet extends HttpServlet {
             if (req.getParameter("consulta").equals("todos")) {
                 listaVoluntarios = daoVoluntario.findAll();
             } else if (req.getParameter("consulta").equals("pendientes")) {
-                listaVoluntarios = daoVoluntario.voluntariosPorEstatus(3);
+                listaVoluntarios = daoVoluntario.voluntariosPorEstatus(utilidades.numeroInt(req.getParameter("idOrganizacion")),1);
             } else if (req.getParameter("consulta").equals("aceptados")) {
-                listaVoluntarios = daoVoluntario.voluntariosPorEstatus(2);
+                listaVoluntarios = daoVoluntario.voluntariosPorEstatus(utilidades.numeroInt(req.getParameter("idOrganizacion")),2);
             } else if (req.getParameter("consulta").equals("rechazados")) {
-                listaVoluntarios = daoVoluntario.voluntariosPorEstatus(1);
+                listaVoluntarios = daoVoluntario.voluntariosPorEstatus(utilidades.numeroInt(req.getParameter("idOrganizacion")),3);
             }
         } catch (NumberFormatException e) {
             e.printStackTrace();
