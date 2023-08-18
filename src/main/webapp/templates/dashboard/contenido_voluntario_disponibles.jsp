@@ -68,7 +68,7 @@
                         // El contenido de esta función se ejecutará para cada celda de esta columna
                         // Utilizamos data para acceder a los datos de la fila actual
 
-                        let postularseBtn = '<a href="#" title="Postularse" onclick="postularse(' + data.evento.idEvento + ')"> <i class="fa-solid fa-thumbs-up"></i> </a> &nbsp;';
+                        let postularseBtn = '<a href="#" title="Postularse" onclick="postularse(' + data.idEvaluacionOrganizacionEvento + ')"> <i class="fa-solid fa-thumbs-up"></i> </a> &nbsp;';
 
                         // Devolvemos los botones como una cadena HTML
                         return postularseBtn;
@@ -81,23 +81,58 @@
     });
 
     //Boton de postularse al Evento
-    function postularse(id) {
+    function postularse(idEvaluacionOrganizacionEvento) {
         // Abrir el modal de confirmación
         $('#modalPostularse').modal('show');
+        let idVoluntario = $("#idVoluntario").val();
 
         // Agregar un evento al botón de confirmación dentro del modal
         $('#guardarCambios').click(function () {
 
-
-
-
-            console.log('Editar usuario con ID:', id);
-
-            // Cerrar el modal después de borrar
-            $('#modalPostularse').modal('hide');
-
+            $.ajax({
+                type: "POST",
+                url: "/voluntario",
+                data: {
+                    accion: "postular",
+                    idEvaluacionOrganizacionEvento: idEvaluacionOrganizacionEvento,
+                    idVoluntario: idVoluntario,
+                },
+                success: function (response) {
+                    // Procesar la respuesta del servlet si es necesario
+                    console.log("Respuesta del servidor:", response);
+                    if (response.error) {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'error',
+                            title: 'Error',
+                            text: "Tenemos algunos errores.",
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    } else {
+                        recargarTabla();
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Voluntario postulado',
+                            text: "El voluntario ha sido aceptado correctamente.",
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                        $('#modalPostularse').modal('hide');
+                    }
+                },
+                error: function (error) {
+                    console.error("Error en la petición AJAX:", error);
+                }
+            });
 
         });
+    }
+
+    const recargarTabla = () => {
+        let table = $('#example2').DataTable();
+        table.ajax.reload();
     }
 
 
@@ -126,3 +161,5 @@
 
 
 <script src="https://cdn.datatables.net/v/bs5/dt-1.13.6/datatables.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
