@@ -32,7 +32,6 @@
                                 <th>Colonia</th>
                                 <th>Municipio</th>
                                 <th>Estado</th>
-                                <th>Estado del Evento</th>
                                 <th>Acciones</th>
 
                             </tr>
@@ -58,17 +57,16 @@
                     dataSrc: ''
                 },
             columns: [
-                {"data": "evaluacionOrganizacionEvento.evento.idEvento"},
-                {"data": "evaluacionOrganizacionEvento.evento.nombreEvento"},
-                {"data": "evaluacionOrganizacionEvento.evento.descripcion"},
-                {"data": "evaluacionOrganizacionEvento.evento.fecha"},
-                {"data": "evaluacionOrganizacionEvento.evento.direccion.calle"},
-                {"data": "evaluacionOrganizacionEvento.evento.direccion.noExterior"},
-                {"data": "evaluacionOrganizacionEvento.evento.direccion.noInterior"},
-                {"data": "evaluacionOrganizacionEvento.evento.direccion.colonia"},
-                {"data": "evaluacionOrganizacionEvento.evento.direccion.municipio"},
-                {"data": "evaluacionOrganizacionEvento.evento.direccion.estado.nombre"},
-                {"data": "evaluacionOrganizacionEvento.evento.estatusEvento"},
+                {"data": "evento.idEvento"},
+                {"data": "evento.nombreEvento"},
+                {"data": "evento.descripcion"},
+                {"data": "evento.fecha"},
+                {"data": "evento.direccion.calle"},
+                {"data": "evento.direccion.noExterior"},
+                {"data": "evento.direccion.noInterior"},
+                {"data": "evento.direccion.colonia"},
+                {"data": "evento.direccion.municipio"},
+                {"data": "evento.direccion.estado.nombre"},
                 {
                     // Añadir los botones de acciones "Editar" y "Borrar"
                     data: null,
@@ -76,7 +74,7 @@
                         // El contenido de esta función se ejecutará para cada celda de esta columna
                         // Utilizamos data para acceder a los datos de la fila actual
 
-                        let cancelarBtn = '<a href="#" title="Cancelar Postulación" onclick="cancelar(' + data.evaluacionOrganizacionEvento.evento.idEvento + ')"> <i class="fa-solid fa-xmark"></i> </a> &nbsp;';
+                        let cancelarBtn = '<a href="#" title="Cancelar Postulación" onclick="cancelar(' + data.evento.idEvento + ')"> <i class="fa-solid fa-xmark"></i> </a> &nbsp;';
 
                         // Devolvemos los botones como una cadena HTML
                         return cancelarBtn;

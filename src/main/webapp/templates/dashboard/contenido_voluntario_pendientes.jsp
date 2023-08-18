@@ -32,7 +32,6 @@
                 <th>Colonia</th>
                 <th>Municipio</th>
                 <th>Estado</th>
-                <th>Estado del Evento</th>
                 <th>Acciones</th>
 
               </tr>
@@ -68,7 +67,6 @@
         {"data": "evaluacionOrganizacionEvento.evento.direccion.colonia"},
         {"data": "evaluacionOrganizacionEvento.evento.direccion.municipio"},
         {"data": "evaluacionOrganizacionEvento.evento.direccion.estado.nombre"},
-        {"data": "evaluacionOrganizacionEvento.evento.estatusEvento"},
         {
           // Añadir los botones de acciones "Editar" y "Borrar"
           data: null,

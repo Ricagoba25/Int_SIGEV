@@ -133,8 +133,6 @@
         {
           data: null,
           render: function (data, type, row) {
-
-
             let estatus = "Rechazado";
             if (data.estatusOrganizacion == 1) {
               estatus = "Pendiente";

@@ -149,7 +149,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p> Aqui iran las preguntas de la evaluación</p>
+                <p> ¿Estás seguro que deseas postularte?</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
