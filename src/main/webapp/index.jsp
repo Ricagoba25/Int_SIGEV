@@ -31,10 +31,31 @@
                        placeholder="correo@gmail.com">
             </div>
 
-            <div class="mt-2 text-start">
+
+            <div class="form-group mb-2 mt-2 text-start">
                 <label for="contrasenia" class="form-label">Contraseña</label>
-                <input type="password" class="form-control" name="contrasenia" id="contrasenia" placeholder="********">
+                <div class="input-group" id="show_hide_password">
+                    <input class="form-control" type="password" name="contrasenia" id="contrasenia">
+                    <div class="input-group-addon">
+                        <a href="" class="my-pasword">
+                            <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
+
+
+            <%--            <div class="mt-2 text-start">--%>
+            <%--                <label for="contrasenia" class="form-label">Contraseña</label>--%>
+            <%--                <input type="password" class="form-control" name="contrasenia" id="contrasenia" placeholder="********">--%>
+            <%--                <div class="my-input-group">--%>
+            <%--                    <a href="" class="my-pasword">--%>
+            <%--                        <i class="fa fa-eye-slash" aria-hidden="true"></i>--%>
+            <%--                    </a>--%>
+            <%--                </div>--%>
+            <%--            </div>--%>
+
+
             <button type="submit" class="w-100 btn btn-primary mt-4">
                 <span id="txt-btn">Iniciar Sesión</span>
 
@@ -81,6 +102,9 @@
                 },
                 contrasenia: {
                     required: true,
+                },
+                contrasenia2: {
+                    required: true,
                 }
             },
             messages: {
@@ -89,6 +113,7 @@
                     email: "El correo electrónico debe ser en el siguiente formato nombre@dominio.com."
                 },
                 contrasenia: "La contraseña es requerida.",
+                contrasenia2: "La contraseña es requerida.",
             },
             errorLabelContainer: "#messageBox",
             submitHandler: function (form) {
@@ -131,7 +156,16 @@
                         $(".div-msg-error").show();
                         $('#msg-error').text(response.message);
                     } else {
-                        window.location.href = '../dashboard/index.jsp';
+                        let user = response.tipoUsuario;
+                        if (user === 'Administrador') {
+                            window.location.href = './dashboard/template_admin_administradores.jsp';
+                        }
+                        if (user === 'Organización') {
+                            window.location.href = './dashboard/template_organizacion_voluntarios.jsp';
+                        }
+                        if (user === 'Voluntario') {
+                            window.location.href = './dashboard/template_voluntario_disponibles.jsp';
+                        }
                     }
                 },
                 error: function (error) {
@@ -142,10 +176,56 @@
         }
     })
 
+
+    $("#show_hide_password a").on('click', function (event) {
+        event.preventDefault();
+        if ($('#show_hide_password input').attr("type") == "text") {
+            $('#show_hide_password input').attr('type', 'password');
+            $('#show_hide_password i').addClass("fa-eye-slash");
+            $('#show_hide_password i').removeClass("fa-eye");
+        } else if ($('#show_hide_password input').attr("type") == "password") {
+            $('#show_hide_password input').attr('type', 'text');
+            $('#show_hide_password i').removeClass("fa-eye-slash");
+            $('#show_hide_password i').addClass("fa-eye");
+        }
+    });
+
 </script>
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://use.fontawesome.com/b9bdbd120a.js"></script>
 </body>
+
+<style>
+    .is-invalid input-group-addon {
+        border: 1px solid red;
+    }
+
+    label#contrasenia-error {
+        position: absolute;
+        top: 37px;
+    }
+
+    .input-group-addon {
+        padding-left: 13px;
+        padding-right: 11px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #dee2e6;
+    }
+
+    .my-input-group {
+        position: absolute;
+        right: 49.5rem;
+        top: 284px;
+        z-index: 10;
+    }
+
+    .my-pasword {
+        color: #8f8f8f;
+    }
+</style>
 
 </html>

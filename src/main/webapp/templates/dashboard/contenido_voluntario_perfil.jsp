@@ -59,7 +59,7 @@
                             <div class="col-xl-4">
                                 <label for="correo" class="form-label">Correo*:</label>
                                 <input type="text" value="${usuario.getCorreo()}" name="correo" class="form-control"
-                                       id="correo">
+                                       id="correo" readonly>
                             </div>
                             <div class="col-xl-4">
                                 <label for="telefono" class="form-label">Teléfono:</label>
@@ -69,7 +69,7 @@
                             <div class="col-xl-4">
                                 <label for="curp" class="form-label">Curp*:</label>
                                 <input type="text" value="${sesion.getCurp()}" name="curp" class="form-control"
-                                       id="curp">
+                                       id="curp" readonly>
                             </div>
                         </div>
 

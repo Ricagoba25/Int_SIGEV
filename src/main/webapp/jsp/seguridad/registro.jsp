@@ -60,45 +60,47 @@
                             <div class="col-xl-4">
                                 <label for="nombreOrganizacion" class="form-label">Nombre:</label>
                                 <input type="text" name="nombreOrganizacion" class="form-control"
-                                       id="nombreOrganizacion" required>
+                                       id="nombreOrganizacion" >
                             </div>
                             <div class="col-xl-4">
                                 <label for="razonSocial" class="form-label">Razón Social:</label>
-                                <input type="text" name="razonSocial" class="form-control" id="razonSocial" required>
+                                <input type="text" name="razonSocial" class="form-control" id="razonSocial" >
                             </div>
                             <div class="col-xl-4">
                                 <label for="rfc" class="form-label">RFC:</label>
-                                <input type="text" name="rfc" class="form-control" id="rfc" required>
+                                <input type="text" name="rfc" class="form-control" id="rfc"  maxlength="13" size="13">
                             </div>
                         </div>
                         <!-- Segunda Fila-->
                         <div class="row mt-2">
                             <div class="col-xl-4">
                                 <label for="calle" class="form-label">Calle:</label>
-                                <input type="text" name="calle" class="form-control" id="calle" required>
+                                <input type="text" name="calle" class="form-control" id="calle" >
                             </div>
                             <div class="col-xl-3">
                                 <label for="noExterior" class="form-label">No Exterior:</label>
-                                <input type="text" name="noExterior" class="form-control" id="noExterior" required>
+                                <input type="text" name="noExterior" class="form-control" id="noExterior" >
                             </div>
                             <div class="col-xl-3">
                                 <label for="noInterior" class="form-label">No Interior:</label>
-                                <input type="text" name="noInterior" class="form-control" id="noInterior" required>
+                                <input type="text" name="noInterior" class="form-control" id="noInterior" >
                             </div>
                         </div>
                         <!-- Tercera linea-->
                         <div class="row mt-2">
                             <div class="col-xl-4">
                                 <label for="colonia" class="form-label">Colonia:</label>
-                                <input type="text" name="colonia" class="form-control" id="colonia" required>
+                                <input type="text" name="colonia" class="form-control" id="colonia" >
                             </div>
                             <div class="col-xl-4">
                                 <label for="municipio" class="form-label">Municipio:</label>
-                                <input type="text" name="municipio" class="form-control" id="municipio" required>
+                                <input type="text" name="municipio" class="form-control" id="municipio" >
                             </div>
                             <div class="col-xl-4">
                                 <label for="estado" class="form-label">Estado:</label>
-                                <input type="text" name="estado" class="form-control" id="estado" required>
+
+                                <select class="form-control" id="estado" name="estado"></select>
+
                             </div>
 
                         </div>
@@ -107,7 +109,7 @@
                             <div class="col-xl-4">
                                 <label for="telefono" class="form-label">Teléfono:</label>
                                 <input type="text" name="telefonoOrganizacion" class="form-control"
-                                       id="telefonoOrganizacion" required>
+                                       id="telefonoOrganizacion"  maxlength="10">
                             </div>
                             <div class="col-xl-4">
                                 <label for="correo" class="form-label">Email:</label>
@@ -146,15 +148,16 @@
                             <input type="hidden" value="" id="idUsuario">
                             <input type="hidden" value="" id="idPersona">
                             <input type="hidden" value="" id="idVoluntario">
+
                             <div class="col-xl-4">
                                 <label for="nombreVoluntario" class="form-label">Nombre:</label>
                                 <input type="text" name="nombreVoluntario" class="form-control" id="nombreVoluntario"
-                                       required>
+                                       >
                             </div>
                             <div class="col-xl-4">
                                 <label for="primerApellido" class="form-label">Apellido Paterno:</label>
                                 <input type="text" name="primerApellido" class="form-control" id="primerApellido"
-                                       required>
+                                       >
                             </div>
                             <div class="col-xl-4">
                                 <label for="segundoApellido" class="form-label">Apellido Materno:</label>
@@ -165,22 +168,22 @@
                         <div class="row mt-2">
                             <div class="col-xl-6">
                                 <label for="curp" class="form-label">Curp:</label>
-                                <input type="text" name="curp" class="form-control" id="curp" required>
+                                <input type="text" name="curp" class="form-control" id="curp" maxlength="18" size="18">
                             </div>
                         </div>
                         <!-- Tercera linea-->
                         <div class="row mt-2">
                             <div class="col-xl-4">
                                 <label for="telefono" class="form-label">Teléfono:</label>
-                                <input type="text" name="telefono" class="form-control" id="telefono" required>
+                                <input type="text" name="telefono" class="form-control" id="telefono" maxlength="10" >
                             </div>
                             <div class="col-xl-4">
                                 <label for="correo" class="form-label">Email:</label>
-                                <input type="text" name="correo" class="form-control" id="correo" required>
+                                <input type="text" name="correo" class="form-control" id="correo" >
                             </div>
                             <div class="col-xl-4">
                                 <label for="contrasena" class="form-label">Contraseña:</label>
-                                <input type="password" name="contrasenia" class="form-control" id="contrasena" required>
+                                <input type="password" name="contrasenia" class="form-control" id="contrasena" >
                             </div>
                         </div>
                         <!-- Button -->
@@ -208,6 +211,7 @@
 
     <script>
         $(document).ready(function () {
+            obtenerEstados();
 
             $("#formulario_organizacion").validate({
                 errorClass: "is-invalid",
@@ -222,11 +226,33 @@
                     rfc: {
                         required: true
                     },
-                    correo: {
+                    calle: {
+                        required: true
+                    },
+                    noExterior: {
+                        required: true
+                    },
+                    noInterior: {
+                        required: true
+                    },
+                    colonia: {
+                        required: true
+                    },
+                    municipio: {
+                        required: true
+                    },
+                    estado: {
+                        required: true
+                    },
+                    telefonoOrganizacion: {
+                        required: true,
+                        digits: true
+                    },
+                    correoOrganizacion: {
                         required: true,
                         email: true
                     },
-                    contrasena: {
+                    contrasenia: {
                         required: true
                     },
                 },
@@ -235,17 +261,42 @@
                         required: "El Nombre es requerido.",
                     },
                     razonSocial: {
-                        required: "El Apellido paterno es requerido.",
+                        required: "La razón social es requerida.",
                     },
                     rfc: {
-                        required: "El Apellido materno es requerido.",
+                        required: "El rfc es requerido.",
                     },
-                    correo: {
+                    calle: {
+                        required: "La calle es requerida.",
+                    },
+                    noExterior: {
+                        required: "El No/exterior es requerido.",
+                    },
+                    noInterior: {
+                        required: "El no/Interior es requerido.",
+                    },
+                    colonia: {
+                        required: "La colonia es requerida.",
+                    },
+                    municipio: {
+                        required: "El municipio es requerido.",
+                    },
+                    estado: {
+                        required: "El estado es requerido.",
+                    },
+                    telefonoOrganizacion: {
+                        required: "El teléfono es requerido.",
+                        digits: "Este campo solo acepta numeros."
+                    },
+
+
+
+                    correoOrganizacion: {
                         required: "El Correo es requerido.",
                         email: "El correo debe ser en el siguiente formato nombre@dominio.com."
                     },
-                    contrasena: {
-                        required: "El Telefono es requerido.",
+                    contrasenia: {
+                        required: "La contraseña es requerida.",
                     },
                 },
                 submitHandler: function (form) {
@@ -266,11 +317,18 @@
                     segundoApellido: {
                         required: true
                     },
+                    curp: {
+                        required: true
+                    },
+                    telefono: {
+                        required: true,
+                        digits: true
+                    },
                     correo: {
                         required: true,
                         email: true
                     },
-                    telefono: {
+                    contrasenia: {
                         required: true
                     },
                 },
@@ -284,12 +342,19 @@
                     segundoApellido: {
                         required: "El Apellido materno es requerido.",
                     },
+                    curp: {
+                        required: "La curp es requerida.",
+                    },
+                    telefono: {
+                        required: "El teléfono es requerido.",
+                        digits: "Este campo solo acepta numeros"
+                    },
                     correo: {
                         required: "El Correo es requerido.",
                         email: "El correo debe ser en el siguiente formato nombre@dominio.com."
                     },
-                    telefono: {
-                        required: "El Telefono es requerido.",
+                    contrasenia: {
+                        required: "La contraseña es requerida.",
                     },
                 },
                 submitHandler: function (form) {
@@ -329,7 +394,7 @@
                 idUsuario: 0,
                 idPersona: 0,
                 idOrganizacion: 0,
-                idEstado: 17,
+                idEstado: estado,
                 idColor: 0,
                 idDireccion: 0,
                 estatus: 0,
@@ -457,10 +522,48 @@
                 formContainerOrganizacion.style.display = 'none';
             }
         }
+
+        let obtenerEstados = () => {
+            $.ajax({
+                url: '/estado',
+                method: 'GET',
+                dataType: 'json',
+                success: function (data) {
+
+                    // Obtener el elemento select
+                    let selectElement = $('#estado');
+                    selectElement.append($('<option>', {
+                        value: "",
+                        text: "Selecciona un estado"
+                    }));
+
+                    // Recorrer los datos y agregar opciones al select
+                    $.each(data, function (index, state) {
+                        selectElement.append($('<option>', {
+                            value: state.idEstado,
+                            text: state.nombre
+                        }));
+                    });
+                },
+                error: function () {
+                    console.error('Error al cargar la lista de estados.');
+                }
+            });
+        }
+
+
     </script>
 
 
 </div>
+
+<style>
+    #formulario_organizacion div div .is-invalid, #formulario_voluntario div div .is-invalid {
+        font-size: 11px;
+        color: red;
+    }
+
+</style>
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

@@ -182,19 +182,19 @@
         });
     });
 
-    function crearEvento(){
+    function crearEvento() {
 
         let formData = {
             accion: 'registrar',
-            nombreEvento: $("#nombreEvento").val() ,
-            fecha:  $("#fecha").val(),
-            calle:  $("#calle").val(),
-            noExterior:  $("#noExterior").val(),
-            noInterior:  $("#noInterior").val(),
-            colonia:  $("#colonia").val(),
-            municipio:  $("#municipio").val(),
-            idEstado:  $("#stateSelect").val(),
-            descripcion:  $("#descripcion").val(),
+            nombreEvento: $("#nombreEvento").val(),
+            fecha: $("#fecha").val(),
+            calle: $("#calle").val(),
+            noExterior: $("#noExterior").val(),
+            noInterior: $("#noInterior").val(),
+            colonia: $("#colonia").val(),
+            municipio: $("#municipio").val(),
+            idEstado: $("#stateSelect").val(),
+            descripcion: $("#descripcion").val(),
             idOrganizacion: $("#idOrganizacion").val(),
             estatusEvento: 1
         }
@@ -221,6 +221,7 @@
 
                 } else {
                     // si la respuesta es exitosa
+
                     Swal.fire({
                         position: 'center',
                         icon: 'success',
@@ -228,7 +229,10 @@
                         text: "Evento creado correctamente.",
                         showConfirmButton: false,
                         timer: 2500
+                    }).then(() => {
+                        window.location = "./template_organizacion_eventosPublicados.jsp";
                     })
+
 
                 }
             },
@@ -267,9 +271,6 @@
             }
         });
     }
-
-
-
 
 
 </script>

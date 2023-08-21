@@ -121,8 +121,8 @@
                         // Utilizamos data para acceder a los datos de la fila actual
 
 
-                        let editarBtn = '<a href="#" id="editarBtn" onclick=\'editar(' + JSON.stringify(data) + ')\'> <i class="fa fa-pen"></i> </a> &nbsp;';
-                        let borrarBtn = '<a href="#" onclick=\'borrar(' + JSON.stringify(data) + ')\'>  <i class="fa fa-trash-alt"></i> </a> &nbsp;';
+                        let editarBtn = '<a href="#" id="editarBtn" onclick=\'editar(' + JSON.stringify(data) + ')\'> <i class="fa fa-pen"></i> Editar</a> &nbsp;';
+                        let borrarBtn = '<a href="#" onclick=\'borrar(' + JSON.stringify(data) + ')\'>  <i class="fa fa-trash-alt"></i> Borrar</a> &nbsp;';
 
                         // Devolvemos los botones como una cadena HTML
                         return editarBtn + ' ' + borrarBtn;

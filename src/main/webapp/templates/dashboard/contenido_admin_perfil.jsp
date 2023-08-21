@@ -54,12 +54,12 @@
                             <div class="col-xl-4">
                                 <label for="correo" class="form-label">Correo*:</label>
                                 <input type="text" value="${usuario.getCorreo()}" name="correo" class="form-control"
-                                       id="correo">
+                                       id="correo" readonly>
                             </div>
                             <div class="col-xl-4">
                                 <label for="telefono" class="form-label">Teléfono:</label>
                                 <input type="text" value="${usuario.getTelefono()}" name="telefono" class="form-control"
-                                       id="telefono">
+                                       id="telefono" readonly>
                             </div>
                         </div>
 

@@ -70,9 +70,9 @@ public class SesionServlet extends HttpServlet {
 
                         jsonResponse.addProperty("error", 0);
                         jsonResponse.addProperty("title", "");
+                        jsonResponse.addProperty("tipoUsuario",  usuarioSesion.getRol().getNombreRol());
                         jsonResponse.addProperty("message", "Inicio se sesión exitoso");
-                        System.out.println("este es el rol" + usuarioSesion.getRol().getNombreRol());
-                        jsonResponse.addProperty("tipoSesion", usuarioSesion.getRol().getNombreRol());
+
                     } else {
                         jsonResponse.addProperty("error", 1);
                         jsonResponse.addProperty("title", "Usuario eliminado");

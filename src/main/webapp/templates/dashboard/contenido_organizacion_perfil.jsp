@@ -44,7 +44,7 @@
                             </div>
                             <div class="col-xl-4">
                                 <label for="rfc" class="form-label">RFC*:</label>
-                                <input type="text" value="${sesion.getRfc()}" name="rfc" class="form-control" id="rfc">
+                                <input type="text" value="${sesion.getRfc()}" name="rfc" class="form-control" id="rfc" readonly>
                             </div>
                         </div>
                         <!-- Segunda Fila-->
@@ -57,7 +57,7 @@
                             <div class="col-xl-8">
                                 <label for="correo" class="form-label">Email*:</label>
                                 <input type="text" value="${usuario.getCorreo()}" name="correo" class="form-control"
-                                       id="correo">
+                                       id="correo" readonly>
                             </div>
                         </div>
                         <!-- Button -->

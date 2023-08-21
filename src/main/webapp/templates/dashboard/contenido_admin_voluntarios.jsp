@@ -46,7 +46,7 @@
         $('#example1').DataTable({
             ajax:
                 {
-                    url: URL_API + 'voluntario?consulta=todos',
+                    url: URL_API + 'voluntario?consulta=todosVoluntarios',
                     dataSrc: ''
                 },
             columns: [
