@@ -168,7 +168,7 @@ public class VoluntarioServlet extends HttpServlet {
             case "cancelar":
                 respuesta = daoVoluntario.cancelarPostulacion(idVoluntario, idEvaluacionOrganizacionEvento);
 
-                System.out.println("resPostulacion " + respuesta);
+                System.out.println("resCancelacion " + respuesta);
                 if (respuesta) {
                     jsonResponse.addProperty("error", 0);
                     jsonResponse.addProperty("title", "");

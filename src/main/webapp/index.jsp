@@ -35,7 +35,7 @@
             <div class="form-group mb-2 mt-2 text-start">
                 <label for="contrasenia" class="form-label">Contraseña</label>
                 <div class="input-group" id="show_hide_password">
-                    <input class="form-control" type="password" name="contrasenia" id="contrasenia">
+                    <input class="form-control" type="password" name="contrasenia" id="contrasenia" placeholder="Contraseña">
                     <div class="input-group-addon">
                         <a href="" class="my-pasword">
                             <i class="fa fa-eye-slash" aria-hidden="true"></i>

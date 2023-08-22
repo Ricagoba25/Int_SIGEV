@@ -159,7 +159,6 @@ public class EventoServlet extends HttpServlet {
         DaoEvento daoEvento = new DaoEvento();
         DaoVoluntario daoVoluntario = new DaoVoluntario();
         Utilidades utilidades = new Utilidades();
-        System.out.println("entra a DGET " + req.getParameter("consulta"));
         List<BeanEvento> listaEventos = new ArrayList<>();
         try {
             if (req.getParameter("consulta").equals("todos")) {
@@ -168,11 +167,8 @@ public class EventoServlet extends HttpServlet {
 
 
             } else if (req.getParameter("consulta").equals("eventosActivos")) {
-                System.out.println("entra a DGET eventosDisponibles " + req.getParameter("idVoluntario"));
                 listaEventos = daoEvento.eventosDisponibles(utilidades.numeroInt(req.getParameter("idVoluntario"))); // 2 = aceptados
             } else if (req.getParameter("consulta").equals("voluntarioPendientesId")) {
-                System.out.println("entra a voluntarios pendientesid");
-
                 listaEventos = daoVoluntario.voluntariosPostuladosPorId(4);
 
             } else if (req.getParameter("consulta").equals("pendientes")) {
@@ -201,7 +197,6 @@ public class EventoServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        System.out.println("listaEventos" + listaEventos);
         Gson gson = new Gson();
         String json = gson.toJson(listaEventos);
         resp.setContentType("text/json");

@@ -75,10 +75,7 @@
           data: null,
           render: function (data, type, row) {
 
-
-            console.log(data)
-
-            let cancelarBtn = '<a href="#" title="cancelar" onclick="cancelar(' + data.evaluacionOrganizacionEvento.evento.idEvento + ')"> <i class="fa-solid fa-xmark"></i> Cancelar</a> &nbsp;';
+            let cancelarBtn = '<a href="#" title="cancelar" onclick="cancelar(' +data.evaluacionOrganizacionEvento.idEvaluacionOrganizacionEvento + ')"> <i class="fa-solid fa-xmark"></i> Cancelar</a> &nbsp;';
 
             // Devolvemos los botones como una cadena HTML
             return cancelarBtn;
@@ -91,9 +88,12 @@
   });
 
   //Boton de postularse al Evento
-  function cancelar(id) {
+  function cancelar(idEvaluacionOrganizacionEvento) {
     // Abrir el modal de confirmación
     $('#modalcancelar').modal('show');
+    let idVoluntario = $("#idVoluntario").val();
+    console.log("idEvaluacionOrganizacionEvento");
+    console.log(idEvaluacionOrganizacionEvento);
 
 
       // Cerrar el modal después de cancelar
@@ -108,7 +108,7 @@
           url: "/voluntario",
           data: {
             accion: "cancelar",
-            evaluacionOrganizacionEvento: evaluacionOrganizacionEvento,
+            idEvaluacionOrganizacionEvento: idEvaluacionOrganizacionEvento,
             idVoluntario: idVoluntario,
           },
           success: function (response) {
@@ -143,9 +143,10 @@
       });
   }
 
-
-
-
+  const recargarTabla = () => {
+    let table = $('#example1').DataTable();
+    table.ajax.reload();
+  }
 
 </script>
 
@@ -171,3 +172,4 @@
 
 
 <script src="https://cdn.datatables.net/v/bs5/dt-1.13.6/datatables.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
