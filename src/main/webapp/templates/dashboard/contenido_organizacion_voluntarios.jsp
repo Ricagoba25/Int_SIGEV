@@ -83,8 +83,8 @@
                         // El contenido de esta función se ejecutará para cada celda de esta columna
                         // Utilizamos data para acceder a los datos de la fila actual
 
-                        let aceptarBtn = '<a href="#" title="Aceptar" onclick=\'aceptar(' + JSON.stringify(data) + ')\'>  <i class="fa-solid fa-check"></i> </a> &nbsp;';
-                        let bloquearBtn = '<a href="#" title="Bloquear" onclick=\'cancelar(' + JSON.stringify(data) + ')\'>  <i class="fa-solid fa-ban"></i> </a> &nbsp;';
+                        let aceptarBtn = '<a href="#" title="Aceptar" onclick=\'aceptar(' + JSON.stringify(data) + ')\'>  <i class="fa-solid fa-check"></i> Aceptar</a> &nbsp;';
+                        let bloquearBtn = '<a href="#" title="Bloquear" onclick=\'cancelar(' + JSON.stringify(data) + ')\'>  <i class="fa-solid fa-ban"></i> Cancelar</a> &nbsp;';
 
 
                         // Devolvemos los botones como una cadena HTML

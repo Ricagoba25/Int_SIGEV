@@ -68,7 +68,7 @@
                         // El contenido de esta función se ejecutará para cada celda de esta columna
                         // Utilizamos data para acceder a los datos de la fila actual
 
-                        let postularseBtn = '<a href="#" title="Postularse" onclick="postularse(' + data.idEvaluacionOrganizacionEvento + ')"> <i class="fa-solid fa-thumbs-up"></i> </a> &nbsp;';
+                        let postularseBtn = '<a href="#" title="Postularse" onclick="postularse(' + data.idEvaluacionOrganizacionEvento + ')"> <i class="fa-solid fa-thumbs-up"></i> Postularse</a> &nbsp;';
 
                         // Devolvemos los botones como una cadena HTML
                         return postularseBtn;

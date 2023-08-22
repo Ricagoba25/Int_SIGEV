@@ -65,7 +65,7 @@
                         // El contenido de esta función se ejecutará para cada celda de esta columna
                         // Utilizamos data para acceder a los datos de la fila actual
 
-                        let bloquearBtn = '<a href="#" title="Bloquear" onclick="bloquear(' + data.idVoluntario + ')">  <i class="fa-solid fa-ban"></i> </a> &nbsp;';
+                        let bloquearBtn = '<a href="#" title="Bloquear" onclick="bloquear(' + data.idVoluntario + ')">  <i class="fa-solid fa-ban"></i> Bloquear </a> &nbsp;';
 
 
                         // Devolvemos los botones como una cadena HTML

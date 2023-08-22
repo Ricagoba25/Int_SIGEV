@@ -31,8 +31,7 @@
                                 </div>
                                 <div class="col-xl-4">
                                     <label for="fecha" class="form-label">Fecha:</label>
-                                    <input type="date" name="fecha" class="form-control" id="fecha" name="fecha"
-                                           required>
+                                    <input type="date" name="fecha" class="form-control" id="fecha" name="fecha" required min="2023-08-22">
                                 </div>
 
                                 <!--

@@ -75,7 +75,7 @@
 
             console.log(data)
 
-            let cancelarBtn = '<a href="#" title="Cancelar Postulación" onclick="cancelar(' + data.evaluacionOrganizacionEvento.evento.idEvento + ')"> <i class="fa-solid fa-xmark"></i> </a> &nbsp;';
+            let cancelarBtn = '<a href="#" title="Cancelar Postulación" onclick="cancelar(' + data.evaluacionOrganizacionEvento.evento.idEvento + ')"> <i class="fa-solid fa-xmark"></i> Cancelar</a> &nbsp;';
 
             // Devolvemos los botones como una cadena HTML
             return cancelarBtn;

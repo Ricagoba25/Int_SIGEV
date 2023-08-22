@@ -80,9 +80,9 @@
                         // Utilizamos data para acceder a los datos de la fila actual
 
 
-                        let aceptatBtn = '<a href="#" title="Aceptar" onclick="aceptar(' + data.evento.idEvento + ')"> <i class="fa fa-check"></i> </a> &nbsp;';
+                        let aceptatBtn = '<a href="#" title="Aceptar" onclick="aceptar(' + data.evento.idEvento + ')"> <i class="fa fa-check"></i> Aceptar</a> &nbsp;';
 
-                        let rechazarBtn = '<a href="#" title="Rechazar" onclick="rechazar(' + data.evento.idEvento + ')"> <i class="fa fa-times"></i> </a> &nbsp;';
+                        let rechazarBtn = '<a href="#" title="Rechazar" onclick="rechazar(' + data.evento.idEvento + ')"> <i class="fa fa-times"></i> Rechazar</a> &nbsp;';
 
                         // Devolvemos los botones como una cadena HTML
                         return aceptatBtn + ' ' + rechazarBtn;
