@@ -1,7 +1,10 @@
 package mx.edu.utez.sigev.controller;
 
 import com.google.gson.JsonObject;
-import mx.edu.utez.sigev.model.*;
+import mx.edu.utez.sigev.model.BeanOrganizacion;
+import mx.edu.utez.sigev.model.BeanPersona;
+import mx.edu.utez.sigev.model.BeanUsuario;
+import mx.edu.utez.sigev.model.BeanVoluntario;
 import mx.edu.utez.sigev.model.DAO.DaoOrganizacion;
 import mx.edu.utez.sigev.model.DAO.DaoPersona;
 import mx.edu.utez.sigev.model.DAO.DaoUsuario;
@@ -13,7 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.*;
+import java.io.IOException;
 
 
 @WebServlet(name = "SesionServlet", value = "/sesion-servlet")
@@ -41,6 +44,8 @@ public class SesionServlet extends HttpServlet {
                         request.getSession().setAttribute("tipoSesion", usuarioSesion.getRol().getNombreRol());
                         request.getSession().setAttribute("usuario", usuarioSesion);
 
+                        boolean error = true;
+
                         switch (usuarioSesion.getRol().getNombreRol()) {
                             case "Administrador":
                                 DaoPersona daoPersona = new DaoPersona();
@@ -50,29 +55,33 @@ public class SesionServlet extends HttpServlet {
                             case "Organización":
                                 DaoOrganizacion daoOrganizacion = new DaoOrganizacion();
                                 BeanOrganizacion organizacionSesion = (BeanOrganizacion) daoOrganizacion.findOne(usuarioSesion.getIdUsuario());
-                                request.getSession().setAttribute("sesion", organizacionSesion);
+
+                                if (organizacionSesion.getEstatusOrganizacion() == 2) {
+                                    request.getSession().setAttribute("sesion", organizacionSesion);
+                                    error = false;
+                                }
                                 break;
                             case "Voluntario":
-
                                 DaoVoluntario daoVoluntario = new DaoVoluntario();
                                 BeanVoluntario voluntarioSesion = (BeanVoluntario) daoVoluntario.findOne(usuarioSesion.getIdUsuario());
-                                request.getSession().setAttribute("sesion", voluntarioSesion);
 
-                                System.out.println(voluntarioSesion.getIdVoluntario());
-                                System.out.println(voluntarioSesion.getPersona().getIdPersona());
-                                System.out.println(voluntarioSesion.getPersona().getUsuario().getIdUsuario());
-
-                                System.out.println(voluntarioSesion.getPersona().getPrimerApellido());
-
-
+                                if (voluntarioSesion.getEstatusVoluntario() == 2) {
+                                    request.getSession().setAttribute("sesion", voluntarioSesion);
+                                    error = false;
+                                }
                                 break;
                         }
 
-                        jsonResponse.addProperty("error", 0);
-                        jsonResponse.addProperty("title", "");
-                        jsonResponse.addProperty("tipoUsuario",  usuarioSesion.getRol().getNombreRol());
-                        jsonResponse.addProperty("message", "Inicio se sesión exitoso");
-
+                        if (error) {
+                            jsonResponse.addProperty("error", 1);
+                            jsonResponse.addProperty("title", "Usuario no verificado");
+                            jsonResponse.addProperty("message", "El usuario no ha sido aceptado porfavor contacta a un administrador");
+                        } else {
+                            jsonResponse.addProperty("error", 0);
+                            jsonResponse.addProperty("title", "");
+                            jsonResponse.addProperty("tipoUsuario", usuarioSesion.getRol().getNombreRol());
+                            jsonResponse.addProperty("message", "Inicio se sesión exitoso");
+                        }
                     } else {
                         jsonResponse.addProperty("error", 1);
                         jsonResponse.addProperty("title", "Usuario eliminado");
