@@ -85,18 +85,20 @@ public class DaoEvento implements DaoRepository {
                     "eve.nombreEvento, eve.descripcion,  eve.fecha, eve.estatusEvento, eva.idEvaluacion, eva.nombreEvaluacion, o.idOrganizacion, " +
                     "o.rfc, o.nombreOrganizacion, o.razonSocial, o.estatusOrganizacion, eoe.idEvaluacionOrganizacionEvento, ve.voluntario_idVoluntario," +
                     "ve.estatusVoluntarioEvaluacion " +
-                    "FROM evaluacion_organizacion_evento eoe " +
+                    "FROM voluntario_evaluacion ve " +
+                    "RIGHT JOIN evaluacion_organizacion_evento eoe ON eoe.idEvaluacionOrganizacionEvento = ve.evaluacion_organizacion_evento_idEvaluacionOrganizacionEvento " +
                     "JOIN evaluacion eva on eva.idEvaluacion = eoe.evaluacion_idEvaluacion " +
                     "JOIN organizacion o on eoe.organizacion_idOrganizacion = o.idOrganizacion " +
                     "JOIN evento eve on eve.idEvento = eoe.evento_idEvento " +
                     "JOIN direccion d on d.idDireccion = eve.direccion_idDireccion " +
                     "JOIN estado es ON es.idEstado = d.estado_idEstado " +
-                    "LEFT JOIN voluntario_evaluacion ve on eoe.idEvaluacionOrganizacionEvento = ve.evaluacion_organizacion_evento_idEvaluacionOrganizacionEvento\n" +
-                    "WHERE ve.idVoluntarioEvaluacion IS NULL OR ve.voluntario_idVoluntario != ?;";
+                    "WHERE ve.voluntario_idVoluntario IS NULL OR ve.voluntario_idVoluntario != ? AND eoe.idEvaluacionOrganizacionEvento NOT IN" +
+                    "(SELECT evaluacion_organizacion_evento_idEvaluacionOrganizacionEvento FROM voluntario_evaluacion WHERE voluntario_idVoluntario = ?)";
 
             con = MysqlConector.connect();
             pstm = con.prepareStatement(query);
             pstm.setInt(1, idVoluntario);
+            pstm.setInt(2, idVoluntario);
             rs = pstm.executeQuery();
 
             while (rs.next()) {
