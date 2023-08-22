@@ -117,8 +117,15 @@
                                        id="correoOrganizacion" required>
                             </div>
                             <div class="col-xl-4">
-                                <label for="contrasenia" class="form-label">Contraseña:</label>
-                                <input type="password" name="contrasenia" class="form-control" id="contrasenia">
+                                <label for="contrasenia" class="form-label">Contraseña</label>
+                                <div class="input-group show_hide_password">
+                                    <input class="form-control" type="password" name="contrasenia" id="contrasenia" placeholder="Contraseña">
+                                    <div class="input-group-addon">
+                                        <a href="" class="my-pasword">
+                                            <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <!-- Button -->
@@ -183,7 +190,14 @@
                             </div>
                             <div class="col-xl-4">
                                 <label for="contrasena" class="form-label">Contraseña:</label>
-                                <input type="password" name="contrasenia" class="form-control" id="contrasena" >
+                                <div class="input-group show_hide_password">
+                                    <input class="form-control" type="password" name="contrasena" id="contrasena" placeholder="Contraseña">
+                                    <div class="input-group-addon">
+                                        <a href="" class="my-pasword">
+                                            <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <!-- Button -->
@@ -551,6 +565,19 @@
             });
         }
 
+        $(".show_hide_password a").on('click', function (event) {
+            event.preventDefault();
+            if ($('.show_hide_password input').attr("type") == "text") {
+                $('.show_hide_password input').attr('type', 'password');
+                $('.show_hide_password i').addClass("fa-eye-slash");
+                $('.show_hide_password i').removeClass("fa-eye");
+            } else if ($('.show_hide_password input').attr("type") == "password") {
+                $('.show_hide_password input').attr('type', 'text');
+                $('.show_hide_password i').removeClass("fa-eye-slash");
+                $('.show_hide_password i').addClass("fa-eye");
+            }
+        });
+
 
     </script>
 
@@ -563,9 +590,39 @@
         color: red;
     }
 
+    .is-invalid input-group-addon {
+        border: 1px solid red;
+    }
+
+    label#contrasenia-error {
+        position: absolute;
+        top: 37px;
+    }
+
+    .input-group-addon {
+        padding-left: 13px;
+        padding-right: 11px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #dee2e6;
+    }
+
+    .my-input-group {
+        position: absolute;
+        right: 49.5rem;
+        top: 284px;
+        z-index: 10;
+    }
+
+    .my-pasword {
+        color: #8f8f8f;
+    }
 </style>
 
 </body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://use.fontawesome.com/b9bdbd120a.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.datatables.net/v/bs5/dt-1.13.6/datatables.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
