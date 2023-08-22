@@ -161,8 +161,8 @@
                         // El contenido de esta función se ejecutará para cada celda de esta columna
                         // Utilizamos data para acceder a los datos de la fila actual
 
-                        let editarBtn = '<a href="#" id="editarBtn" onclick=\'editar(' + JSON.stringify(data) + ')\'> <i class="fa fa-pen"></i> </a> &nbsp;';
-                        let eliminarBtn = '<a href="#" title="Eliminar Evento" onclick="eliminar(' + data.evento.idEvento + ')"> <i class="fa-solid fa-xmark"></i> </a> &nbsp;';
+                        let editarBtn = '<a href="#" id="editarBtn" onclick=\'editar(' + JSON.stringify(data) + ')\'> <i class="fa fa-pen"></i> Editar <br></a> &nbsp;';
+                        let eliminarBtn = '<a href="#" title="Eliminar Evento" onclick="eliminar(' + data.evento.idEvento + ')"> <i class="fa-solid fa-xmark"></i> Eliminar</a> &nbsp;';
 
                         // Devolvemos los botones como una cadena HTML
                         return editarBtn + ' ' + eliminarBtn;

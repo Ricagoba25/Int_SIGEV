@@ -77,7 +77,7 @@
                         // El contenido de esta función se ejecutará para cada celda de esta columna
                         // Utilizamos data para acceder a los datos de la fila actual
 
-                        let cancelarBtn = '<a href="#" title="Cancelar Postulación" onclick="cancelar(' + data.evento.idEvento + ')"> <i class="fa-solid fa-xmark"></i> </a> &nbsp;';
+                        let cancelarBtn = '<a href="#" title="Cancelar Postulación" onclick="cancelar(' + data.evento.idEvento + ')"> <i class="fa-solid fa-xmark"></i> Cancelar</a> &nbsp;';
 
                         // Devolvemos los botones como una cadena HTML
                         return cancelarBtn;
