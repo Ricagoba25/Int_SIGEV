@@ -93,7 +93,7 @@ public class DaoEvento implements DaoRepository {
                     "JOIN direccion d on d.idDireccion = eve.direccion_idDireccion " +
                     "JOIN estado es ON es.idEstado = d.estado_idEstado " +
                     "WHERE eve.estatusEvento = 2 AND ve.voluntario_idVoluntario IS NULL OR ve.voluntario_idVoluntario != ? " +
-                    "eoe.idEvaluacionOrganizacionEvento NOT IN" +
+                    "AND eoe.idEvaluacionOrganizacionEvento NOT IN " +
                     "(SELECT evaluacion_organizacion_evento_idEvaluacionOrganizacionEvento FROM voluntario_evaluacion WHERE voluntario_idVoluntario = ?)";
 
             con = MysqlConector.connect();
@@ -143,9 +143,9 @@ public class DaoEvento implements DaoRepository {
                 listaEventos.add(beanEvaluacionOrganizacionEvento);
             }
         } catch (SQLException e) {
-            System.err.println("Error en el método eventosPorEstatus() - DaoEvento -> " + e.getMessage());
+            System.err.println("Error en el método eventosDisponibles() - DaoEvento -> " + e.getMessage());
         } finally {
-            cerrarConexiones("eventosPorEstatus");
+            cerrarConexiones("eventosDisponibles");
         }
         return listaEventos;
     }

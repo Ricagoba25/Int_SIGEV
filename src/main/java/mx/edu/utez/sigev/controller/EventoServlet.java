@@ -9,6 +9,7 @@ import mx.edu.utez.sigev.model.DAO.DaoVoluntario;
 import mx.edu.utez.sigev.utils.Utilidades;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -158,7 +159,7 @@ public class EventoServlet extends HttpServlet {
         DaoEvento daoEvento = new DaoEvento();
         DaoVoluntario daoVoluntario = new DaoVoluntario();
         Utilidades utilidades = new Utilidades();
-
+        System.out.println("entra a DGET " + req.getParameter("consulta"));
         List<BeanEvento> listaEventos = new ArrayList<>();
         try {
             if (req.getParameter("consulta").equals("todos")) {
@@ -167,6 +168,7 @@ public class EventoServlet extends HttpServlet {
 
 
             } else if (req.getParameter("consulta").equals("eventosActivos")) {
+                System.out.println("entra a DGET eventosDisponibles " + req.getParameter("idVoluntario"));
                 listaEventos = daoEvento.eventosDisponibles(utilidades.numeroInt(req.getParameter("idVoluntario"))); // 2 = aceptados
             } else if (req.getParameter("consulta").equals("voluntarioPendientesId")) {
                 System.out.println("entra a voluntarios pendientesid");
@@ -199,6 +201,7 @@ public class EventoServlet extends HttpServlet {
             e.printStackTrace();
         }
 
+        System.out.println("listaEventos" + listaEventos);
         Gson gson = new Gson();
         String json = gson.toJson(listaEventos);
         resp.setContentType("text/json");

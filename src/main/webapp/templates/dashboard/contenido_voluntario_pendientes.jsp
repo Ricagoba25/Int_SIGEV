@@ -78,7 +78,7 @@
 
             console.log(data)
 
-            let cancelarBtn = '<a href="#" title="Cancelar Postulación" onclick="cancelar(' + data.evaluacionOrganizacionEvento.evento.idEvento + ')"> <i class="fa-solid fa-xmark"></i> Cancelar</a> &nbsp;';
+            let cancelarBtn = '<a href="#" title="cancelar" onclick="cancelar(' + data.evaluacionOrganizacionEvento.evento.idEvento + ')"> <i class="fa-solid fa-xmark"></i> Cancelar</a> &nbsp;';
 
             // Devolvemos los botones como una cadena HTML
             return cancelarBtn;
@@ -95,16 +95,52 @@
     // Abrir el modal de confirmación
     $('#modalcancelar').modal('show');
 
-    // Agregar un evento al botón de confirmación dentro del modal
-    $('#confirmareditar').click(function () {
-      console.log('Editar usuario con ID:', id);
 
       // Cerrar el modal después de cancelar
-      $('#confirmModal').modal('hide');
+      $('#modalcancelar').modal('hide');
 
       // Recargar la tabla o realizar otras acciones necesarias
       //$('#datatable').DataTable().ajax.reload();
-    });
+      $('#confirmarRechazar').click(function () {
+
+        $.ajax({
+          type: "POST",
+          url: "/voluntario",
+          data: {
+            accion: "cancelar",
+            evaluacionOrganizacionEvento: evaluacionOrganizacionEvento,
+            idVoluntario: idVoluntario,
+          },
+          success: function (response) {
+            // Procesar la respuesta del servlet si es necesario
+            console.log("Respuesta del servidor:", response);
+            if (response.error) {
+              Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Error',
+                text: "Tenemos algunos errores.",
+                showConfirmButton: false,
+                timer: 1500
+              })
+            } else {
+              recargarTabla();
+              Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Baja Exitosa',
+                text: "Te has dado de baja exitosamente.",
+                showConfirmButton: false,
+                timer: 1500
+              })
+              $('#modalcancelar').modal('hide');
+            }
+          },
+          error: function (error) {
+            console.error("Error en la petición AJAX:", error);
+          }
+        });
+      });
   }
 
 
