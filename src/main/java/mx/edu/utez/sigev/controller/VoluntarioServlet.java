@@ -232,12 +232,6 @@ public class VoluntarioServlet extends HttpServlet {
         List<BeanVoluntario> listaVoluntarios = new ArrayList<>();
 
         try {
-            listaVoluntarios = daoVoluntario.findAll();
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-        }
-
-        try {
             if (req.getParameter("consulta").equals("todosVoluntarios")) {
                 listaVoluntarios = daoVoluntario.findAll();
             }

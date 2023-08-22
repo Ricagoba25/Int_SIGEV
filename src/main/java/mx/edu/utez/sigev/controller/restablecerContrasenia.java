@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import mx.edu.utez.sigev.model.BeanUsuario;
+import mx.edu.utez.sigev.model.DAO.DaoUsuario;
 import mx.edu.utez.sigev.utils.EmailService;
 @WebServlet(name = "restablecerContrasenia", value = "/reset-password")
 public class restablecerContrasenia extends HttpServlet {
@@ -24,12 +26,17 @@ public class restablecerContrasenia extends HttpServlet {
 
         System.out.println(correo);
 
-        String correoPrueba = "fernando.beltran1010@gmail.com";
+        String correoPrueba = correo;
+        DaoUsuario daoUsuario = new DaoUsuario();
+
+        BeanUsuario usuario = (BeanUsuario) daoUsuario.findbyCorreo(correo);
+
+        System.out.println("Contra " + usuario.getContrasena());
 
 
         // Llamar al método sendEmail con los parámetros necesarios
         String asunto = "Restablecimiento de contraseña";
-        String mensaje = "Hola, para restablecer tu contraseña, haz clic en el siguiente enlace: ...";
+        String mensaje = "Hola, tu contraseña es: " + usuario.getContrasena();
         //File archivoAdjunto = new File("ruta/al/archivo.pdf"); // Cambia por la ruta de tu archivo adjunto
         emailSender.sendEmail(correoPrueba, asunto, mensaje);
 

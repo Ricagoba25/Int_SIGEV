@@ -19,17 +19,12 @@ public class DaoVoluntario implements DaoRepository {
 
     @Override
     public List findAll() {
-        List<BeanVoluntarioEvaluacion> listaVoluntarios = new ArrayList<>();
+        List<BeanVoluntario> listaVoluntarios = new ArrayList<>();
         try {
             String query = "SELECT * FROM voluntario v " +
                     "join persona p on v.persona_idPersona = p.idPersona " +
                     "join usuario u on u.idUsuario = p.usuario_idUsuario " +
-                    "join rol r on u.rol_idRol = r.idRol " +
-                    "join voluntario_evaluacion ve on v.idVoluntario = ve.voluntario_idVoluntario " +
-                    "join evaluacion_organizacion_evento eoe on ve.evaluacion_organizacion_evento_idEvaluacionOrganizacionEvento = eoe.idEvaluacionOrganizacionEvento " +
-                    "join evento e2 on e2.idEvento = eoe.evento_idEvento " +
-                    "join evaluacion e on e.idEvaluacion = eoe.evaluacion_idEvaluacion " +
-                    "join organizacion o on eoe.organizacion_idOrganizacion = o.idOrganizacion ";
+                    "join rol r on u.rol_idRol = r.idRol ";
 
             con = MysqlConector.connect();
             pstm = con.prepareStatement(query);
@@ -60,20 +55,7 @@ public class DaoVoluntario implements DaoRepository {
                 beanVoluntario.setEstatusVoluntario(rs.getInt("estatusVoluntario"));
                 beanVoluntario.setPersona(beanPersona);
 
-                BeanEvento beanEvento = new BeanEvento(rs.getInt("idEvento"));
-                BeanOrganizacion beanOrganizacion = new BeanOrganizacion(rs.getInt("idOrganizacion"));
-                BeanEvaluacion beanEvaluacion = new BeanEvaluacion(rs.getInt("idEvaluacion"));
-
-                BeanEvaluacionOrganizacionEvento beanEvaluacionOrganizacionEvento = new BeanEvaluacionOrganizacionEvento();
-                beanEvaluacionOrganizacionEvento.setEvaluacion(beanEvaluacion);
-                beanEvaluacionOrganizacionEvento.setOrganizacion(beanOrganizacion);
-                beanEvaluacionOrganizacionEvento.setEvento(beanEvento);
-
-
-                BeanVoluntarioEvaluacion beanVoluntarioEvaluacion = new BeanVoluntarioEvaluacion();
-                beanVoluntarioEvaluacion.setVoluntario(beanVoluntario);
-                beanVoluntarioEvaluacion.setEvaluacionOrganizacionEvento(beanEvaluacionOrganizacionEvento);
-                listaVoluntarios.add(beanVoluntarioEvaluacion);
+                listaVoluntarios.add(beanVoluntario);
             }
         } catch (SQLException e) {
             System.err.println("Error en el método findAll() - DaoVoluntario -> " + e.getMessage());

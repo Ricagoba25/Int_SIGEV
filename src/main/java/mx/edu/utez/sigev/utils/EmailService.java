@@ -14,8 +14,8 @@ public class EmailService {
 //    final private String pass = "djnzmigbndkbdoqxccxslportyv";
 
 
-    final private String de = "zazilmail@gmail.com";
-    final private String pass = "avxbdgitrpwumbpl";
+    final private String de = "vale45tom@gmail.com";
+    final private String pass = "ricardo2511";
 
     public EmailService() {
     }
@@ -26,13 +26,15 @@ public class EmailService {
 
 
         Properties props = new Properties();
-        props.put("mail.debug", "true"); //debug mode
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.port", "587");
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.ssl.trust", "*");
         props.put("mail.transport.protocol", "smtp");
+
+        System.out.println("de " + de);
+        System.out.println("pass " + pass);
 
         Authenticator auth = new Authenticator() {
             //override the getPasswordAuthentication method
@@ -51,12 +53,11 @@ public class EmailService {
             MimeBodyPart mimeBodyPart = new MimeBodyPart();
             mimeBodyPart.setContent(mensaje, "text/html");
 
-            // MimeBodyPart adjunto = new MimeBodyPart();
-            //adjunto.attachFile(archivo);
+            MimeBodyPart adjunto = new MimeBodyPart();
 
             Multipart multipart = new MimeMultipart();
             multipart.addBodyPart(mimeBodyPart);
-           // multipart.addBodyPart(adjunto);
+            multipart.addBodyPart(adjunto);
 
             message.setContent(multipart);
 
@@ -64,6 +65,7 @@ public class EmailService {
 
             System.out.println("Mensaje enviado!");
         } catch (MessagingException e) {
+            System.out.println("Error " + e);
             throw new RuntimeException(e);
         }
     }

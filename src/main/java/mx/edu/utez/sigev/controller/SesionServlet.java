@@ -76,7 +76,7 @@ public class SesionServlet extends HttpServlet {
                         if (error) {
                             jsonResponse.addProperty("error", 1);
                             jsonResponse.addProperty("title", "Usuario no verificado");
-                            jsonResponse.addProperty("message", "El usuario no ha sido aceptado porfavor contacta a un administrador");
+                            jsonResponse.addProperty("message", "El usuario no tiene permiso para iniciar sesion porfavor contacta a un administrador");
                         } else {
                             jsonResponse.addProperty("error", 0);
                             jsonResponse.addProperty("title", "");

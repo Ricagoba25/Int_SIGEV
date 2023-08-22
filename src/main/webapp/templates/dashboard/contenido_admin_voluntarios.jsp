@@ -53,21 +53,21 @@
                     dataSrc: ''
                 },
             columns: [
-                {"data": "voluntario.idVoluntario"},
-                {"data": "voluntario.persona.nombrePersona"},
-                {"data": "voluntario.persona.primerApellido"},
-                {"data": "voluntario.persona.segundoApellido"},
-                {"data": "voluntario.curp"},
-                {"data": "voluntario.persona.usuario.correo"},
-                {"data": "voluntario.persona.usuario.telefono"},
+                {"data": "idVoluntario"},
+                {"data": "persona.nombrePersona"},
+                {"data": "persona.primerApellido"},
+                {"data": "persona.segundoApellido"},
+                {"data": "curp"},
+                {"data": "persona.usuario.correo"},
+                {"data": "persona.usuario.telefono"},
                 {
                     data: null,
                     render: function (data, type, row) {
                         let estatus = "Bloqueado";
-                        if (data.voluntario.estatusVoluntario == 1) {
+                        if (data.estatusVoluntario == 1) {
                             estatus = "Pendiente";
                         }
-                        if (data.voluntario.estatusVoluntario == 2) {
+                        if (data.estatusVoluntario == 2) {
                             estatus = "Aceptado";
                         }
                         return estatus;
@@ -80,7 +80,7 @@
                         // El contenido de esta función se ejecutará para cada celda de esta columna
                         // Utilizamos data para acceder a los datos de la fila actual
 
-                        let bloquearBtn = '<a href="#" title="Bloquear" onclick="bloquear(' + data.voluntario.idVoluntario + ')">  <i class="fa-solid fa-ban"></i> Bloquear </a> &nbsp;';
+                        let bloquearBtn = '<a href="#" title="Bloquear" onclick="bloquear(' + data.idVoluntario + ')">  <i class="fa-solid fa-ban"></i> Bloquear </a> &nbsp;';
 
 
                         // Devolvemos los botones como una cadena HTML
