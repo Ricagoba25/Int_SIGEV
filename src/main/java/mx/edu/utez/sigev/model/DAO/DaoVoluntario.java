@@ -455,12 +455,13 @@ public class DaoVoluntario implements DaoRepository {
         BeanVoluntario voluntario = (BeanVoluntario) object;
         boolean registrado = false;
         try {
-            String query = "INSERT INTO voluntario (curp, persona_idPersona) values(?,?)";
+            String query = "INSERT INTO voluntario (curp, persona_idPersona,estatusVoluntario) values(?,?,?)";
 
             con = MysqlConector.connect();
             pstm = con.prepareStatement(query);
             pstm.setString(1, voluntario.getCurp());
             pstm.setInt(2, voluntario.getPersona().getIdPersona());
+            pstm.setInt(3, 2);
             registrado = pstm.executeUpdate() > 0;
         } catch (SQLException e) {
             System.err.println("Error en el método insert() - DaoVoluntario -> " + e.getMessage());

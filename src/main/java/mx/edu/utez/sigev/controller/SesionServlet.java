@@ -51,6 +51,7 @@ public class SesionServlet extends HttpServlet {
                                 DaoPersona daoPersona = new DaoPersona();
                                 BeanPersona personaSesion = (BeanPersona) daoPersona.findOne(usuarioSesion.getIdUsuario());
                                 request.getSession().setAttribute("sesion", personaSesion);
+                                error = false;
                                 break;
                             case "Organización":
                                 DaoOrganizacion daoOrganizacion = new DaoOrganizacion();
