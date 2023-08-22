@@ -99,15 +99,28 @@
                     // Procesar la respuesta del servlet si es necesario
                     console.log("Respuesta del servidor:", response);
 
-                    $("#loading").hide();
-                    $("#txt-btn").show();
-
                     if (response.error) {
-                        $(".div-msg-error").show();
-                        $('#msg-error').text(response.message);
-                    } else {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'error',
+                            title: 'Error',
+                            text: response.title,
+                            showConfirmButton: false,
+                            timer: 2500
+                        })
 
-                        console.log(response)
+                    } else {
+                        // si la respuesta es exitosa
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Reestablecimiento Enviado',
+                            text: "Verifica tu correo para reestablecer tu contraseña",
+                            showConfirmButton: false,
+                            timer: 2500
+                        }).then(() => {
+                            window.location.href = './../../../index.jsp'; // Redirigir al index.jsp
+                        });
                     }
                 },
                 error: function (error) {
@@ -124,6 +137,7 @@
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>
 
