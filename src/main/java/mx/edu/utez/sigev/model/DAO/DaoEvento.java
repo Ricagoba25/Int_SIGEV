@@ -92,7 +92,8 @@ public class DaoEvento implements DaoRepository {
                     "JOIN evento eve on eve.idEvento = eoe.evento_idEvento " +
                     "JOIN direccion d on d.idDireccion = eve.direccion_idDireccion " +
                     "JOIN estado es ON es.idEstado = d.estado_idEstado " +
-                    "WHERE ve.voluntario_idVoluntario IS NULL OR ve.voluntario_idVoluntario != ? AND eoe.idEvaluacionOrganizacionEvento NOT IN" +
+                    "WHERE eve.estatusEvento = 2 AND ve.voluntario_idVoluntario IS NULL OR ve.voluntario_idVoluntario != ? " +
+                    "eoe.idEvaluacionOrganizacionEvento NOT IN" +
                     "(SELECT evaluacion_organizacion_evento_idEvaluacionOrganizacionEvento FROM voluntario_evaluacion WHERE voluntario_idVoluntario = ?)";
 
             con = MysqlConector.connect();
