@@ -508,6 +508,23 @@ public class DaoVoluntario implements DaoRepository {
         return cancelado;
     }
 
+    public boolean bloquearVoluntario(int idVoluntario) {
+        boolean bloqueado = false;
+        try {
+            String query = "UPDATE voluntario SET estatusVoluntario = 3 WHERE idVoluntario = ?";
+
+            con = MysqlConector.connect();
+            pstm = con.prepareStatement(query);
+            pstm.setInt(1, idVoluntario);
+            bloqueado = pstm.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.err.println("Error en el método bloquearVoluntario() - DaoVoluntario -> " + e.getMessage());
+        } finally {
+            cerrarConexiones("bloquearVoluntario");
+        }
+        return bloqueado;
+    }
+
     public boolean aceptarRechazarVoluntario(int idVoluntario, int idEvaluacionOrganizacionEvento, int estatus) {
         boolean aceptadoRechazado = false;
         try {
