@@ -488,6 +488,24 @@ public class DaoVoluntario implements DaoRepository {
         return postulado;
     }
 
+    public boolean cancelarPostulacion(int idVoluntario, int idEvaluacionOrganizacionEvento) {
+        boolean cancelado = false;
+        try {
+            String query = "DELETE FROM voluntario_evaluacion WHERE voluntario_idVoluntario = ? AND evaluacion_organizacion_evento_idEvaluacionOrganizacionEvento = ?";
+
+            con = MysqlConector.connect();
+            pstm = con.prepareStatement(query);
+            pstm.setInt(1, idVoluntario);
+            pstm.setInt(2, idEvaluacionOrganizacionEvento);
+            cancelado = pstm.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.err.println("Error en el método cancelarPostulacion() - DaoVoluntario -> " + e.getMessage());
+        } finally {
+            cerrarConexiones("cancelarPostulacion");
+        }
+        return cancelado;
+    }
+
     public boolean aceptarRechazarVoluntario(int idVoluntario, int idEvaluacionOrganizacionEvento, int estatus) {
         boolean aceptadoRechazado = false;
         try {
