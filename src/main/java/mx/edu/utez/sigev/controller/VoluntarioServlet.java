@@ -165,6 +165,19 @@ public class VoluntarioServlet extends HttpServlet {
                     jsonResponse.addProperty("title", "La postulación no se realizó");
                 }
                 break;
+            case "cancelar":
+                respuesta = daoVoluntario.cancelarPostulacion(idVoluntario, idEvaluacionOrganizacionEvento);
+
+                System.out.println("resPostulacion " + respuesta);
+                if (respuesta) {
+                    jsonResponse.addProperty("error", 0);
+                    jsonResponse.addProperty("title", "");
+                    jsonResponse.addProperty("message", "Has cancelado la postulación al evento exitosamente");
+                } else {
+                    jsonResponse.addProperty("error", 1);
+                    jsonResponse.addProperty("title", "La cancelación a la postulación no se realizó");
+                }
+                break;
             case "aceptarRechazar":
                 String resExitosa = "Voluntario aceptado al evento exitosamente";
                 String resError = "Problema al aceptar el voluntario";
