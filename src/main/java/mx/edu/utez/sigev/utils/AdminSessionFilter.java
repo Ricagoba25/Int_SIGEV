@@ -46,7 +46,6 @@ public class AdminSessionFilter implements Filter {
         String requestURI = ((HttpServletRequest) request).getRequestURI();
 
 
-        System.out.println("Soy: " + userType);
         if (userType == null) {
             //.getWriter().write("Acceso denegado. Debes iniciar sesión.");
             request.getRequestDispatcher("/acceso-denegado.jsp").forward(request, response);
