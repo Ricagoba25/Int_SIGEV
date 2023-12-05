@@ -2,9 +2,8 @@ target/
 
 
 ### IntelliJ IDEA ###
-.idea/*
-.mvn/*
-.idea/workspace.xml
+.idea/
+
 
 ### Eclipse ###
 .apt_generated
