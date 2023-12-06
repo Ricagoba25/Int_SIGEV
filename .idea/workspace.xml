@@ -9,17 +9,30 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6867e21e-5850-4c68-9edf-2957e5a99de1" name="Changes" comment="Se termina servlet de voluntario">
+    <list default="true" id="6867e21e-5850-4c68-9edf-2957e5a99de1" name="Changes" comment="add data insert">
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/dashboard/template_organizacion_crearEvaluacion.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/templates/dashboard/contenido_organizacion_crearEvaluacion.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysql-data/auto.cnf" beforeDir="false" afterPath="$PROJECT_DIR$/mysql-data/auto.cnf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mysql-data/ib_buffer_pool" beforeDir="false" afterPath="$PROJECT_DIR$/mysql-data/ib_buffer_pool" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mysql-data/ib_logfile0" beforeDir="false" afterPath="$PROJECT_DIR$/mysql-data/ib_logfile0" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mysql-data/ibdata1" beforeDir="false" afterPath="$PROJECT_DIR$/mysql-data/ibdata1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysql-data/ibtmp1" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/mysql-data/mysql.sock" beforeDir="false" afterPath="$PROJECT_DIR$/mysql-data/mysql.sock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mysql-data/mysql/innodb_index_stats.ibd" beforeDir="false" afterPath="$PROJECT_DIR$/mysql-data/mysql/innodb_index_stats.ibd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mysql-data/mysql/innodb_table_stats.ibd" beforeDir="false" afterPath="$PROJECT_DIR$/mysql-data/mysql/innodb_table_stats.ibd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysql-data/sigev/direccion.ibd" beforeDir="false" afterPath="$PROJECT_DIR$/mysql-data/sigev/direccion.ibd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysql-data/sigev/evaluacion_organizacion_evento.ibd" beforeDir="false" afterPath="$PROJECT_DIR$/mysql-data/sigev/evaluacion_organizacion_evento.ibd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysql-data/sigev/evento.ibd" beforeDir="false" afterPath="$PROJECT_DIR$/mysql-data/sigev/evento.ibd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysql-data/sigev/organizacion.ibd" beforeDir="false" afterPath="$PROJECT_DIR$/mysql-data/sigev/organizacion.ibd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysql-data/sigev/persona.ibd" beforeDir="false" afterPath="$PROJECT_DIR$/mysql-data/sigev/persona.ibd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysql-data/sigev/usuario.ibd" beforeDir="false" afterPath="$PROJECT_DIR$/mysql-data/sigev/usuario.ibd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysql-data/sigev/voluntario.ibd" beforeDir="false" afterPath="$PROJECT_DIR$/mysql-data/sigev/voluntario.ibd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysql-data/sigev/voluntario_evaluacion.ibd" beforeDir="false" afterPath="$PROJECT_DIR$/mysql-data/sigev/voluntario_evaluacion.ibd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/dashboard/contenido_admin_organizaciones.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/templates/dashboard/contenido_admin_organizaciones.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/dashboard/contenido_organizacion_crearEvento.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/templates/dashboard/contenido_organizacion_crearEvento.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/dashboard/contenido_organizacion_eventosPublicados.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/templates/dashboard/contenido_organizacion_eventosPublicados.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/templates/sidebar.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/templates/sidebar.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,42 +97,42 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/manuelperezg/Documentos/java/Int_SIGEV&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.17&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/Manuel/Documents/cursos/java/Int_SIGEV/src/main/webapp/templates/dashboard",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.17",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.keymap",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
     ],
-    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
-      &quot;yaml&quot;
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "yaml"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Manuel\Documents\cursos\java\Int_SIGEV\src\main\webapp\templates\dashboard" />
+      <recent name="C:\Users\Manuel\Documents\cursos\java\Int_SIGEV\src\main\webapp\dashboard" />
       <recent name="C:\Users\richa\OneDrive\Documentos\Repositorios\SIGEV-demo\src\main\webapp\assets\js" />
       <recent name="C:\Users\richa\OneDrive\Documentos\Repositorios\SIGEV-demo\src\main\webapp\assets\css" />
       <recent name="C:\Users\richa\OneDrive\Documentos\Repositorios\SIGEV-demo\src\main\webapp\jsp\seguridad" />
-      <recent name="C:\Users\richa\OneDrive\Documentos\Repositorios\SIGEV-demo\src\main\java\mx\edu\utez\sigev\model\DAO" />
-      <recent name="C:\Users\richa\OneDrive\Documentos\Repositorios\SIGEV-demo\src\main\java\mx\edu\utez\sigev\controller" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\richa\Desktop\Repositorios\Int_SIGEV\src\main\webapp\dashboard" />
@@ -249,6 +262,7 @@
       <workItem from="1692071852019" duration="2869000" />
       <workItem from="1701802493727" duration="7969000" />
       <workItem from="1701814953633" duration="4211000" />
+      <workItem from="1701893712878" duration="11494000" />
     </task>
     <task id="LOCAL-00001" summary="Se agrega clase para enviar correos">
       <option name="closed" value="true" />
@@ -346,7 +360,15 @@
       <option name="project" value="LOCAL" />
       <updated>1691478709876</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="add data insert">
+      <option name="closed" value="true" />
+      <created>1701838456279</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1701838456279</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -375,7 +397,8 @@
     <MESSAGE value="Se corrige DaoOrganizacion" />
     <MESSAGE value="Se termina servlet de administrador" />
     <MESSAGE value="Se termina servlet de voluntario" />
-    <option name="LAST_COMMIT_MESSAGE" value="Se termina servlet de voluntario" />
+    <MESSAGE value="add data insert" />
+    <option name="LAST_COMMIT_MESSAGE" value="add data insert" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -1,7 +1,7 @@
 target/
 
 # .gitignore
-mysql-data/mysql.sock
+mysql-data/
 
 ### IntelliJ IDEA ###
 .idea/

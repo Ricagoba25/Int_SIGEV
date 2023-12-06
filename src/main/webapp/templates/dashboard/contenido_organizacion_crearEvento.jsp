@@ -16,8 +16,8 @@
         <!--Formulario-->
         <div id="formContainercrearEvento">
             <div class="container">
-                <div class="container__formulario" style="margin-bottom: 200px">
-                    <div class="container__formulario_contenido">
+                <div class="container__formulario " style="margin-bottom: 200px">
+                    <div class="container__formulario_contenido shadow">
                         <form id="form_crear_evento">
                             <!-- Primera fila-->
 
@@ -34,12 +34,12 @@
                                     <input type="date" name="fecha" class="form-control" id="fecha" name="fecha" required min="2023-08-22">
                                 </div>
 
-                                <!--
-                                <div class="col-xl-4 d-flex justify-content-center align-items-center">
-                                    <button class="btn btn-success" id="modalSeleccionarTest"> Seleccionar Evaluación
+
+                                <div class="col-xl-4">
+                                    <button class="btn btn-success" id="modalSeleccionarTest" style="margin-top: 30px"> Seleccionar Evaluación
                                     </button>
                                 </div>
-                                -->
+
 
 
                             </div>
@@ -49,11 +49,11 @@
                                     <label for="calle" class="form-label">Calle:</label>
                                     <input type="text" name="calle" class="form-control" id="calle" required>
                                 </div>
-                                <div class="col-xl-3">
+                                <div class="col-xl-4">
                                     <label for="noExterior" class="form-label">No Exterior:</label>
                                     <input type="text" name="noExterior" class="form-control" id="noExterior" required>
                                 </div>
-                                <div class="col-xl-3">
+                                <div class="col-xl-4">
                                     <label for="noInterior" class="form-label">No Interior:</label>
                                     <input type="text" name="noInterior" class="form-control" id="noInterior" required>
                                 </div>
@@ -141,19 +141,19 @@
             },
             messages: {
                 nombreEvento: {
-                    required: "El Nombre es requerido.",
+                    required: "El nombre del evento es requerido.",
                 },
                 fecha: {
                     required: "La fecha es requerida.",
                 },
                 calle: {
-                    required: "La calle materno es requerido.",
+                    required: "La calle es requerida.",
                 },
                 noExterior: {
-                    required: "Este campo es requerido.",
+                    required: "El no.exterior es requerido.",
                 },
                 noInterior: {
-                    required: "Este campo es requerido.",
+                    required: "El no.interior es requerido.",
                 },
                 colonia: {
                     required: "La colonia es requerida.",
@@ -179,6 +179,8 @@
         $("#modalSeleccionarTest").click(function () {
             $("#modalElegir").modal("show");
         });
+
+
     });
 
     function crearEvento() {

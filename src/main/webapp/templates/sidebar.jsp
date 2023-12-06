@@ -86,6 +86,12 @@
                             <p>Crear Evento</p>
                         </a>
                     </li>
+                    <li>
+                        <a href="./template_organizacion_crearEvaluacion.jsp" class="nav-link">
+                            <i class="fa-solid fa-folder-plus"></i>
+                            <p>Crear Evaluación</p>
+                        </a>
+                    </li>
                     <!--<li>
                     <a href="./template_organizacion_eventosPendientes.jsp" class="nav-link">
                     <i class="fa-regular fa-calendar-xmark"></i>
@@ -93,10 +99,10 @@
                     </a>
                     </li>
                     <li>
-                    <a href="./crearTest.jsp" class="nav-link">
-                    <i class="fa-solid fa-folder-plus"></i>
-                    <p>Crear Evaluación</p>
-                    </a>
+                        <a href="./crearTest.jsp" class="nav-link">
+                            <i class="fa-solid fa-folder-plus"></i>
+                            <p>Crear Evaluación</p>
+                         </a>
                     </li>
                     <li>
                     <a href="./template_organizacion_evaluacionesDisponibles.jsp" class="nav-link">
