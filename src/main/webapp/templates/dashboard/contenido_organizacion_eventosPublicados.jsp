@@ -48,7 +48,7 @@
 
 <script>
     $(document).ready(function () {
-
+        obtenerEstados();
 
         let id = $("#idOrganizacion").val();
 
@@ -113,6 +113,8 @@
                 //editar o nuevo
 
                 console.log("llamar funcion de enviar")
+
+                editarDatos()
 
             }
         })
@@ -188,7 +190,7 @@
         let noInterior = data.evento.direccion.noInterior;
         let colonia = data.evento.direccion.colonia;
         let municipio = data.evento.direccion.municipio;
-        let estado = data.evento.direccion.estado.nombre;
+        let estado = data.evento.direccion.estado.idEstado;
 
 
         $('#nombreEvento').val(nombreEvento);
@@ -199,10 +201,10 @@
         $('#noInterior').val(noInterior);
         $('#colonia').val(colonia);
         $('#municipio').val(municipio);
-        $('#estado').val(estado);
+        $('#stateSelect').val(estado);
 
 
-        console.log('Editar usuario con ID:', data);
+        //console.log('Editar usuario con ID:', data);
 
 
     }
@@ -259,6 +261,120 @@
         table.ajax.reload();
     }
 
+    function editarDatos() {
+        /**** editar ***/
+
+        // let {nombreEvento, descripcion, fecha} = data.evento;
+        // let calle = data.evento.direccion.calle;
+        // let noExterior = data.evento.direccion.noExterior;
+        // let noInterior = data.evento.direccion.noInterior;
+        // let colonia = data.evento.direccion.colonia;
+        // let municipio = data.evento.direccion.municipio;
+        // let estado = data.evento.direccion.estado.idEstado;
+
+
+
+        // //Obtenemos los datos de los inputs para registrar en el backend
+        // let nombre = $('#nombre').val();
+        // let primerApellido = $('#primerApellido').val();
+        // let segundoApellido = $('#segundoApellido').val();
+        // let correo = $('#correo').val();
+        // let telefono = $('#telefono').val();
+
+        //IDS
+        let idUsuario = $('#idUsuario').val();
+        let idPersona = $('#idPersona').val();
+
+        let formData = {
+            accion: 'modificar',
+            nombreEvento: $("#nombreEvento").val(),
+            descripcion: $("#descripcion").val(),
+            fecha: $("#fecha").val(),
+            calle: $("#calle").val(),
+            noExterior: $("#noExterior").val(),
+            noInterior: $("#noInterior").val(),
+            colonia: $("#colonia").val(),
+            municipio: $("#municipio").val(),
+            idEstado: $("#stateSelect").val(),
+
+
+            idDireccion: 4,
+            idEvento: 3,
+            idOrganizacion: $("#idOrganizacion").val(),
+            estatusEvento: 1
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/evento",
+            data: formData,
+            success: function (response) {
+                loading = false;
+                // Procesar la respuesta del servlet si es necesario
+                console.log("Respuesta del servidor:", response);
+
+                if (response.error) {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'Error',
+                        text: response.title,
+                        showConfirmButton: false,
+                        timer: 2500
+                    })
+
+                } else {
+                    // si la respuesta es exitosa
+
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Creación exitosa',
+                        text: "Evento actualizado correctamente.",
+                        showConfirmButton: false,
+                        timer: 2500
+                    }).then(() => {
+                        window.location = "./template_organizacion_eventosPublicados.jsp";
+                    })
+
+
+                }
+            },
+            error: function (error) {
+                loading = false;
+                console.error("Error en la petición AJAX:", error);
+            }
+        });
+
+
+    }
+    function obtenerEstados() {
+        $.ajax({
+            url: '/estado',
+            method: 'GET',
+            dataType: 'json',
+            success: function (data) {
+
+                // Obtener el elemento select
+                let selectElement = $('#stateSelect');
+                selectElement.append($('<option>', {
+                    value: "",
+                    text: "Selecciona un estado"
+                }));
+
+                // Recorrer los datos y agregar opciones al select
+                $.each(data, function (index, state) {
+                    selectElement.append($('<option>', {
+                        value: state.idEstado,
+                        text: state.nombre
+                    }));
+                });
+            },
+            error: function () {
+                console.error('Error al cargar la lista de estados.');
+            }
+        });
+    }
 
 </script>
 
@@ -331,8 +447,8 @@
                         <input type="text" class="form-control" id="municipio" name="municipio">
                     </div>
                     <div class="form-group">
-                        <label for="estado"> Estado:</label>
-                        <input type="text" class="form-control" id="estado" name="estado">
+                        <label for="stateSelect" class="form-label">Estado:</label>
+                        <select class="form-control" id="stateSelect" name="estado"></select>
                     </div>
 
                 </div>

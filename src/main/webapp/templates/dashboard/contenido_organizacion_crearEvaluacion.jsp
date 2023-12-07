@@ -29,17 +29,17 @@
                             <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Nombre Evento</th>
-                                <th>Descripción</th>
-                                <th>Fecha</th>
-                                <th>Calle</th>
-                                <th>No Exterior</th>
-                                <th>No Interior</th>
-                                <th>Colonia</th>
-                                <th>Municipio</th>
-                                <th>Estado</th>
-                                <th>Estado del Evento</th>
-                                <th>Acciones</th>
+                                <th>Nombre de la evaluación</th>
+                                <th>Fecha de creación</th>
+<%--                                <th>Fecha</th>--%>
+<%--                                <th>Calle</th>--%>
+<%--                                <th>No Exterior</th>--%>
+<%--                                <th>No Interior</th>--%>
+<%--                                <th>Colonia</th>--%>
+<%--                                <th>Municipio</th>--%>
+<%--                                <th>Estado</th>--%>
+<%--                                <th>Estado del Evento</th>--%>
+<%--                                <th>Acciones</th>--%>
 
                             </tr>
                             </thead>
@@ -149,7 +149,7 @@
                 </div>
                 <div class="modal-body">
                         <div class="mb-3">
-                            <label for="name" class="form-label">Nombre de la evaluación:</label>
+                            <label for="nameEvaluation" class="form-label">Nombre de la evaluación:</label>
                             <input type="text" class="form-control" id="nameEvaluation" name="nameEvaluation" required>
                         </div>
                         <div id="questionsContainer" class="questionsContainer">
@@ -268,58 +268,52 @@
             }
         })
         const URL_API = "http://localhost:8080/"
-        $('#tableEvaluaciones').DataTable({
-            "language": {
-                "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
-            },
-            ajax:
-                {
-                    url: URL_API + 'evento?consulta=propios&idOrganizacion=' + id,
-                    dataSrc: ''
-                },
-            columns: [
-                {"data": "evento.idEvento"},
-                {"data": "evento.nombreEvento"},
-                {"data": "evento.descripcion"},
-                {"data": "evento.fecha"},
-                {"data": "evento.direccion.calle"},
-                {"data": "evento.direccion.noExterior"},
-                {"data": "evento.direccion.noInterior"},
-                {"data": "evento.direccion.colonia"},
-                {"data": "evento.direccion.municipio"},
-                {"data": "evento.direccion.estado.nombre"},
-                {
-                    data: null,
-                    render: function (data, type, row) {
-                        let estatus = "Rechazado";
-                        if (data.evento.estatusEvento == 1) {
-                            estatus = "Pendiente";
-                        }
-                        if (data.evento.estatusEvento == 2) {
-                            estatus = "Aceptado";
-                        }
-                        if (data.evento.estatusEvento == 4) {
-                            estatus = "Cancelado";
-                        }
-                        return estatus;
-                    }
-                },
-                {
-                    // Añadir los botones de acciones "Editar" y "Borrar"
-                    data: null,
-                    render: function (data, type, row) {
-                        // El contenido de esta función se ejecutará para cada celda de esta columna
-                        // Utilizamos data para acceder a los datos de la fila actual
-
-                        let editarBtn = '<a href="#" id="editarBtn" onclick=\'editar(' + JSON.stringify(data) + ')\'> <i class="fa fa-pen"></i> Editar <br></a>';
-                        let eliminarBtn = '<a href="#" title="Eliminar Evento" onclick="eliminar(' + data.evento.idEvento + ')"> <i class="fa-solid fa-xmark"></i> Eliminar</a> &nbsp;';
-
-                        // Devolvemos los botones como una cadena HTML
-                        return editarBtn + ' ' + eliminarBtn;
-                    }
-                }
-            ]
-        });
+        // $('#tableEvaluaciones').DataTable({
+        //     "language": {
+        //         "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+        //     },
+        //     ajax:
+        //         {
+        //             url: URL_API + 'evento?consulta=propios&idOrganizacion=' + id,
+        //             dataSrc: ''
+        //         },
+        //     columns: [
+        //         {"data": "evento.idEvaluacion"},
+        //         {"data": "evento.nombreEvaluacion"},
+        //         {"data": "evento.descripcion"},
+        //
+        //         {
+        //             data: null,
+        //             render: function (data, type, row) {
+        //                 let estatus = "Rechazado";
+        //                 if (data.evento.estatusEvento == 1) {
+        //                     estatus = "Pendiente";
+        //                 }
+        //                 if (data.evento.estatusEvento == 2) {
+        //                     estatus = "Aceptado";
+        //                 }
+        //                 if (data.evento.estatusEvento == 4) {
+        //                     estatus = "Cancelado";
+        //                 }
+        //                 return estatus;
+        //             }
+        //         },
+        //         {
+        //             // Añadir los botones de acciones "Editar" y "Borrar"
+        //             data: null,
+        //             render: function (data, type, row) {
+        //                 // El contenido de esta función se ejecutará para cada celda de esta columna
+        //                 // Utilizamos data para acceder a los datos de la fila actual
+        //
+        //                 let editarBtn = '<a href="#" id="editarBtn" onclick=\'editar(' + JSON.stringify(data) + ')\'> <i class="fa fa-pen"></i> Editar <br></a>';
+        //                 let eliminarBtn = '<a href="#" title="Eliminar Evento" onclick="eliminar(' + data.evento.idEvento + ')"> <i class="fa-solid fa-xmark"></i> Eliminar</a> &nbsp;';
+        //
+        //                 // Devolvemos los botones como una cadena HTML
+        //                 return editarBtn + ' ' + eliminarBtn;
+        //             }
+        //         }
+        //     ]
+        // });
 
 
     });

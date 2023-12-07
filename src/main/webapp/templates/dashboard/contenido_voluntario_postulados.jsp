@@ -44,6 +44,27 @@
     </div>
 </section>
 
+<div id="modalcancelar" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmModalLabel2">Confirmar Cancelación</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ¿Estás seguro de que deseas darte de baja en esta Postulación?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button id="confirmarRechazar" type="button" class="btn btn-danger">Darme de Baja</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <script>
     $(function () {
@@ -74,9 +95,6 @@
                     // Añadir los botones de acciones "Editar" y "Borrar"
                     data: null,
                     render: function (data, type, row) {
-                        // El contenido de esta función se ejecutará para cada celda de esta columna
-                        // Utilizamos data para acceder a los datos de la fila actual
-
                         let cancelarBtn = '<a href="#" title="Cancelar Postulación" onclick="cancelar(' + data.evento.idEvento + ')"> <i class="fa-solid fa-xmark"></i> Cancelar</a> &nbsp;';
 
                         // Devolvemos los botones como una cadena HTML
@@ -95,50 +113,49 @@
         $('#modalcancelar').modal('show');
 
         // Agregar un evento al botón de confirmación dentro del modal
-        $('#confirmareditar').click(function () {
 
 
-            $.ajax({
-                type: "POST",
-                url: "/voluntario",
-                data: {
-                    accion: "postular",
-                    idEvento: id,
-                    estatusEvento: 4
-                },
-                success: function (response) {
-                    // Procesar la respuesta del servlet si es necesario
-                    console.log("Respuesta del servidor:", response);
-                    if (response.error) {
-                        Swal.fire({
-                            position: 'center',
-                            icon: 'error',
-                            title: 'Error',
-                            text: "Tenemos algunos errores.",
-                            showConfirmButton: false,
-                            timer: 1500
-                        })
-                    } else {
-                        recargarTabla();
-                        Swal.fire({
-                            position: 'center',
-                            icon: 'success',
-                            title: 'Postulación exitosa',
-                            text: "Te haz postulado correctamente.",
-                            showConfirmButton: false,
-                            timer: 1500
-                        })
-                        $('#modalcancelar').modal('hide');
-                    }
-                },
-                error: function (error) {
-                    console.error("Error en la petición AJAX:", error);
+        $.ajax({
+            type: "POST",
+            url: "/voluntario",
+            data: {
+                accion: "postular",
+                idEvento: id,
+                estatusEvento: 4
+            },
+            success: function (response) {
+                // Procesar la respuesta del servlet si es necesario
+                console.log("Respuesta del servidor:", response);
+                if (response.error) {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'Error',
+                        text: "Tenemos algunos errores.",
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                } else {
+                    recargarTabla();
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Postulación exitosa',
+                        text: "Te haz postulado correctamente.",
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    $('#modalcancelar').modal('hide');
                 }
-            });
-
-            // Recargar la tabla o realizar otras acciones necesarias
-            //$('#datatable').DataTable().ajax.reload();
+            },
+            error: function (error) {
+                console.error("Error en la petición AJAX:", error);
+            }
         });
+
+        // Recargar la tabla o realizar otras acciones necesarias
+        //$('#datatable').DataTable().ajax.reload();
+
     }
 
     const recargarTabla = () => {
@@ -148,27 +165,6 @@
 
 
 </script>
-
-<div id="modalcancelar" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="confirmModalLabel2">Confirmar Cancelación</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                ¿Estás seguro de que deseas darte de baja en esta Postulación?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button id="confirmarRechazar" type="button" class="btn btn-danger">Darme de Baja</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 
 <script src="https://cdn.datatables.net/v/bs5/dt-1.13.6/datatables.min.js"></script>

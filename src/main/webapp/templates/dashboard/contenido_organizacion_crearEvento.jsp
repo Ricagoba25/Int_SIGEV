@@ -186,7 +186,7 @@
     function crearEvento() {
 
         let formData = {
-            accion: 'registrar',
+            accion: 'modificar',
             nombreEvento: $("#nombreEvento").val(),
             fecha: $("#fecha").val(),
             calle: $("#calle").val(),
