@@ -39,6 +39,29 @@
     </div>
 </section>
 
+<div id="modalPostularse" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="miModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="miModalLabel">Proceso de postulación</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container-answers">
+
+                </div>
+                <%--                <p> ¿Estás seguro que deseas postularte?</p>--%>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button id="guardarCambios" type="button" class="btn btn-primary">Postularme</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
     $(document).ready(function () {
@@ -140,27 +163,6 @@
 
 
 </script>
-
-<div id="modalPostularse" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="miModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="miModalLabel">Proceso de Postulación</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p> ¿Estás seguro que deseas postularte?</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button id="guardarCambios" type="button" class="btn btn-primary">Postularme</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 
 <script src="https://cdn.datatables.net/v/bs5/dt-1.13.6/datatables.min.js"></script>
