@@ -5,6 +5,8 @@ import java.io.Serializable;
 public class BeanEvaluacion implements Serializable {
     private int idEvaluacion;
     private String nombreEvaluacion;
+    private int estatusEvaluacion;
+    private BeanOrganizacion organizacion;
 
     public BeanEvaluacion() {
     }
@@ -27,5 +29,21 @@ public class BeanEvaluacion implements Serializable {
 
     public void setNombreEvaluacion(String nombreEvaluacion) {
         this.nombreEvaluacion = nombreEvaluacion;
+    }
+
+    public int getEstatusEvaluacion() {
+        return estatusEvaluacion;
+    }
+
+    public void setEstatusEvaluacion(int estatusEvaluacion) {
+        this.estatusEvaluacion = estatusEvaluacion;
+    }
+
+    public BeanOrganizacion getOrganizacion() {
+        return organizacion;
+    }
+
+    public void setOrganizacion(BeanOrganizacion organizacion) {
+        this.organizacion = organizacion;
     }
 }

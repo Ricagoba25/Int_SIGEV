@@ -440,9 +440,9 @@ public class DaoEvento implements DaoRepository {
             pstm.setInt(2, id);
             modificado = pstm.executeUpdate() > 0;
         } catch (SQLException e) {
-            System.err.println("Error en el método update() - DaoEvento -> " + e.getMessage());
+            System.err.println("Error en el método changeStatus() - DaoEvento -> " + e.getMessage());
         } finally {
-            cerrarConexiones("update");
+            cerrarConexiones("changeStatus");
         }
         return modificado;
     }
@@ -463,7 +463,7 @@ public class DaoEvento implements DaoRepository {
         } catch (SQLException e) {
             System.err.println("Error en el método postularse() - daoEvento -> " + e.getMessage());
         } finally {
-            cerrarConexiones("update");
+            cerrarConexiones("postularse");
         }
         return postulado;
     }

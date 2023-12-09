@@ -6,6 +6,7 @@ public class BeanRespuesta implements Serializable {
     private int idRespuesta;
     private String textoRespuesta;
     private BeanPregunta pregunta;
+    private BeanVoluntarioEvaluacion voluntarioEvaluacion;
 
     public BeanRespuesta() {
     }
@@ -32,5 +33,13 @@ public class BeanRespuesta implements Serializable {
 
     public void setPregunta(BeanPregunta pregunta) {
         this.pregunta = pregunta;
+    }
+
+    public BeanVoluntarioEvaluacion getVoluntarioEvaluacion() {
+        return voluntarioEvaluacion;
+    }
+
+    public void setVoluntarioEvaluacion(BeanVoluntarioEvaluacion voluntarioEvaluacion) {
+        this.voluntarioEvaluacion = voluntarioEvaluacion;
     }
 }
