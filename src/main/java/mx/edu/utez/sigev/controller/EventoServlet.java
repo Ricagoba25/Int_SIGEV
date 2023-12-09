@@ -65,7 +65,7 @@ public class EventoServlet extends HttpServlet {
 
         DaoDireccion daoDireccion = new DaoDireccion();
         DaoEvento daoEvento = new DaoEvento();
-        Boolean respuesta;
+        boolean respuesta;
 
 
         switch (accion) {
@@ -108,7 +108,7 @@ public class EventoServlet extends HttpServlet {
                 direccion.setIdDireccion(idDireccion);
                 evento.setIdEvento(idEvento);
 
-                respuesta = daoDireccion.update(direccion.getIdDireccion(), daoDireccion);
+                respuesta = daoDireccion.update(direccion.getIdDireccion(), direccion);
 
                 System.out.println("resDireccion " + respuesta);
                 if (respuesta) {
