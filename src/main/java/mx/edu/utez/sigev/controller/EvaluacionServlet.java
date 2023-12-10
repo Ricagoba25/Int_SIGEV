@@ -61,9 +61,9 @@ public class EvaluacionServlet extends HttpServlet {
                     evaluacion.setIdEvaluacion(idEvaluacion);
                     //Registrar Pregunta
 
-                    for (int i = 0; i < preguntas.length; i++) {
+                    for (String s : preguntas) {
                         pregunta.setEvaluacion(evaluacion);
-                        pregunta.setTextoPregunta(preguntas[i]);
+                        pregunta.setTextoPregunta(s);
                         respuesta = daoPregunta.insert(pregunta);
                         System.out.println("resPregunta " + respuesta);
                     }

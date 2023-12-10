@@ -19,7 +19,7 @@ public class DaoEvaluacion implements DaoRepository {
         return null;
     }
 
-    public List evaluacionesPorOrganizacion(int idOrganizacion) {
+    public List<BeanEvaluacion> evaluacionesPorOrganizacion(int idOrganizacion) {
         List<BeanEvaluacion> listaEvaluaciones = new ArrayList<>();
         try {
             String query = "SELECT * FROM evaluacion e join organizacion o " +
@@ -39,6 +39,7 @@ public class DaoEvaluacion implements DaoRepository {
                 BeanEvaluacion beanEvaluacion = new BeanEvaluacion();
                 beanEvaluacion.setIdEvaluacion(rs.getInt("idEvaluacion"));
                 beanEvaluacion.setNombreEvaluacion(rs.getString("nombreEvaluacion"));
+                beanEvaluacion.setFechaRegistro(rs.getDate("fechaRegistro"));
                 beanEvaluacion.setEstatusEvaluacion(rs.getInt("estatusEvaluacion"));
                 beanEvaluacion.setOrganizacion(beanOrganizacion);
 
@@ -72,6 +73,7 @@ public class DaoEvaluacion implements DaoRepository {
                 BeanEvaluacion beanEvaluacion = new BeanEvaluacion();
                 beanEvaluacion.setIdEvaluacion(rs.getInt("idEvaluacion"));
                 beanEvaluacion.setNombreEvaluacion(rs.getString("nombreEvaluacion"));
+                beanEvaluacion.setFechaRegistro(rs.getDate("fechaRegistro"));
                 beanEvaluacion.setOrganizacion(beanOrganizacion);
 
                 listaEvaluaciones.add(beanEvaluacion);
@@ -156,12 +158,13 @@ public class DaoEvaluacion implements DaoRepository {
         boolean registrado = false;
         int idRegistro = 0;
         try {
-            String query = "INSERT INTO evaluacion (nombreEvaluacion, organizacion_idOrganizacion) values(?,?)";
+            String query = "INSERT INTO evaluacion (nombreEvaluacion, fechaRegistro, organizacion_idOrganizacion) values(?,?,?)";
 
             con = MysqlConector.connect();
             pstm = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             pstm.setString(1, evaluacion.getNombreEvaluacion());
-            pstm.setInt(2, evaluacion.getOrganizacion().getIdOrganizacion());
+            pstm.setDate(2, (Date) evaluacion.getFechaRegistro());
+            pstm.setInt(3, evaluacion.getOrganizacion().getIdOrganizacion());
 
             registrado = pstm.executeUpdate() > 0;
 
