@@ -63,6 +63,7 @@ public class EvaluacionServlet extends HttpServlet {
 
                     for (int i = 0; i < preguntas.length; i++) {
                         pregunta.setEvaluacion(evaluacion);
+                        pregunta.setTextoPregunta(preguntas[i]);
                         respuesta = daoPregunta.insert(pregunta);
                         System.out.println("resPregunta " + respuesta);
                     }
