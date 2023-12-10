@@ -5,7 +5,10 @@ import mx.edu.utez.sigev.model.BeanOrganizacion;
 import mx.edu.utez.sigev.utils.MysqlConector;
 
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class DaoEvaluacion implements DaoRepository {
@@ -38,14 +41,20 @@ public class DaoEvaluacion implements DaoRepository {
                 BeanEvaluacion beanEvaluacion = new BeanEvaluacion();
                 beanEvaluacion.setIdEvaluacion(rs.getInt("idEvaluacion"));
                 beanEvaluacion.setNombreEvaluacion(rs.getString("nombreEvaluacion"));
-                beanEvaluacion.setFechaRegistro(rs.getDate("fechaRegistro"));
                 beanEvaluacion.setEstatusEvaluacion(rs.getInt("estatusEvaluacion"));
+
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String dateInString = rs.getString("fechaRegistro");
+                Date date = formatter.parse(dateInString);
+                beanEvaluacion.setFechaRegistro(date);
                 beanEvaluacion.setOrganizacion(beanOrganizacion);
 
                 listaEvaluaciones.add(beanEvaluacion);
             }
         } catch (SQLException e) {
             System.err.println("Error en el método evaluacionesPorOrganizacion() - DaoEvaluacion -> " + e.getMessage());
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
         } finally {
             cerrarConexiones("evaluacionesPorOrganizacion");
         }
@@ -154,15 +163,17 @@ public class DaoEvaluacion implements DaoRepository {
 
     public int registrar(Object object) {
         BeanEvaluacion evaluacion = (BeanEvaluacion) object;
-        boolean registrado = false;
+        boolean registrado;
         int idRegistro = 0;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String fecha = sdf.format(evaluacion.getFechaRegistro());
         try {
             String query = "INSERT INTO evaluacion (nombreEvaluacion, fechaRegistro, organizacion_idOrganizacion) values(?,?,?)";
 
             con = MysqlConector.connect();
             pstm = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             pstm.setString(1, evaluacion.getNombreEvaluacion());
-            pstm.setDate(2, (Date) evaluacion.getFechaRegistro());
+            pstm.setObject(2, fecha);
             pstm.setInt(3, evaluacion.getOrganizacion().getIdOrganizacion());
 
             registrado = pstm.executeUpdate() > 0;
