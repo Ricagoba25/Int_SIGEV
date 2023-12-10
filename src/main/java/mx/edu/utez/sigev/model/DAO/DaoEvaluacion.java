@@ -1,13 +1,11 @@
 package mx.edu.utez.sigev.model.DAO;
 
 import mx.edu.utez.sigev.model.BeanEvaluacion;
+import mx.edu.utez.sigev.model.BeanEvento;
 import mx.edu.utez.sigev.model.BeanOrganizacion;
 import mx.edu.utez.sigev.utils.MysqlConector;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -161,7 +159,7 @@ public class DaoEvaluacion implements DaoRepository {
             String query = "INSERT INTO evaluacion (nombreEvaluacion, organizacion_idOrganizacion) values(?,?)";
 
             con = MysqlConector.connect();
-            pstm = con.prepareStatement(query);
+            pstm = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             pstm.setString(1, evaluacion.getNombreEvaluacion());
             pstm.setInt(2, evaluacion.getOrganizacion().getIdOrganizacion());
 
