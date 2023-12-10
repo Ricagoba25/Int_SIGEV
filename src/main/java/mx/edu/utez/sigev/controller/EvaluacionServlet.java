@@ -133,6 +133,7 @@ public class EvaluacionServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         DaoEvaluacion daoEvaluacion = new DaoEvaluacion();
+        DaoPregunta daoPregunta = new DaoPregunta();
         Utilidades utilidades = new Utilidades();
         List<BeanEvaluacion> listaEvaluaciones = new ArrayList<>();
         try {
@@ -140,6 +141,12 @@ public class EvaluacionServlet extends HttpServlet {
                 listaEvaluaciones = daoEvaluacion.evaluacionesActivas(utilidades.numeroInt(req.getParameter("idOrganizacion")));
             } else if (req.getParameter("consulta").equals("evaluacionesPorOrganizacion")) {
                 listaEvaluaciones = daoEvaluacion.evaluacionesPorOrganizacion(utilidades.numeroInt(req.getParameter("idOrganizacion")));
+
+                System.out.println("ListaEvaluaciones " + listaEvaluaciones.size());
+                for (BeanEvaluacion listaEvaluacion : listaEvaluaciones) {
+                    listaEvaluacion.setPreguntas(daoPregunta.preguntasPorEvaluacion(listaEvaluacion.getIdEvaluacion()));
+                    System.out.println("listaPreguntas " + listaEvaluacion.getPreguntas().size());
+                }
             }
         } catch (NumberFormatException e) {
             e.printStackTrace();

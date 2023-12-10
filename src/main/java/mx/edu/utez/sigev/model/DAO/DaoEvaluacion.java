@@ -1,7 +1,6 @@
 package mx.edu.utez.sigev.model.DAO;
 
 import mx.edu.utez.sigev.model.BeanEvaluacion;
-import mx.edu.utez.sigev.model.BeanEvento;
 import mx.edu.utez.sigev.model.BeanOrganizacion;
 import mx.edu.utez.sigev.utils.MysqlConector;
 
@@ -53,7 +52,7 @@ public class DaoEvaluacion implements DaoRepository {
         return listaEvaluaciones;
     }
 
-    public List evaluacionesActivas(int idOrganizacion) {
+    public List<BeanEvaluacion> evaluacionesActivas(int idOrganizacion) {
         List<BeanEvaluacion> listaEvaluaciones = new ArrayList<>();
         try {
             String query = "SELECT * FROM evaluacion e join organizacion o " +

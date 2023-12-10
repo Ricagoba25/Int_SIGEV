@@ -1,7 +1,9 @@
 package mx.edu.utez.sigev.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class BeanEvaluacion implements Serializable {
     private int idEvaluacion;
@@ -9,6 +11,8 @@ public class BeanEvaluacion implements Serializable {
     private Date fechaRegistro = new Date();
     private int estatusEvaluacion;
     private BeanOrganizacion organizacion;
+    private List<BeanPregunta> preguntas = new ArrayList<>();
+    private List<BeanRespuesta> respuestas = new ArrayList<>();
 
     public BeanEvaluacion() {
     }
@@ -55,5 +59,21 @@ public class BeanEvaluacion implements Serializable {
 
     public void setFechaRegistro(Date fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
+    }
+
+    public List<BeanPregunta> getPreguntas() {
+        return preguntas;
+    }
+
+    public void setPreguntas(List<BeanPregunta> preguntas) {
+        this.preguntas = preguntas;
+    }
+
+    public List<BeanRespuesta> getRespuestas() {
+        return respuestas;
+    }
+
+    public void setRespuestas(List<BeanRespuesta> respuestas) {
+        this.respuestas = respuestas;
     }
 }

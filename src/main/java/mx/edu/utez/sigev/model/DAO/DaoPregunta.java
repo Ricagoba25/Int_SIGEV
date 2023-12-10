@@ -1,7 +1,5 @@
 package mx.edu.utez.sigev.model.DAO;
 
-import mx.edu.utez.sigev.model.BeanEvaluacion;
-import mx.edu.utez.sigev.model.BeanOrganizacion;
 import mx.edu.utez.sigev.model.BeanPregunta;
 import mx.edu.utez.sigev.utils.MysqlConector;
 
@@ -22,7 +20,7 @@ public class DaoPregunta implements DaoRepository {
         return null;
     }
 
-    public List preguntasPorEvaluacion(int idEvaluacion) {
+    public List<BeanPregunta> preguntasPorEvaluacion(int idEvaluacion) {
         List<BeanPregunta> listaPreguntas = new ArrayList<>();
         try {
             String query = "SELECT * FROM pregunta p " +
@@ -36,18 +34,9 @@ public class DaoPregunta implements DaoRepository {
             rs = pstm.executeQuery();
 
             while (rs.next()) {
-                BeanOrganizacion beanOrganizacion = new BeanOrganizacion();
-                beanOrganizacion.setIdOrganizacion(rs.getInt("idOrganizacion"));
-
-                BeanEvaluacion beanEvaluacion = new BeanEvaluacion();
-                beanEvaluacion.setIdEvaluacion(rs.getInt("idEvaluacion"));
-                beanEvaluacion.setNombreEvaluacion(rs.getString("nombreEvaluacion"));
-                beanEvaluacion.setOrganizacion(beanOrganizacion);
-
                 BeanPregunta beanPregunta = new BeanPregunta();
                 beanPregunta.setIdPregunta(rs.getInt("idPregunta"));
                 beanPregunta.setTextoPregunta(rs.getString("textoPregunta"));
-                beanPregunta.setEvaluacion(beanEvaluacion);
 
                 listaPreguntas.add(beanPregunta);
             }
