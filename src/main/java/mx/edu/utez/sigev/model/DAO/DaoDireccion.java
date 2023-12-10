@@ -81,7 +81,7 @@ public class DaoDireccion implements DaoRepository {
         boolean modificado = false;
         BeanDireccion direccion = (BeanDireccion) object;
         try {
-            String query = "UPDATE  direccion SET calle = ?, colonia = ?, municipio = ?, noExterior = ?, noInterior = ?, estado_idEstado = ? where = idDireccion = ?";
+            String query = "UPDATE  direccion SET calle = ?, colonia = ?, municipio = ?, noExterior = ?, noInterior = ?, estado_idEstado = ? where idDireccion = ?";
             con = MysqlConector.connect();
 
             System.out.println(query);
@@ -93,6 +93,8 @@ public class DaoDireccion implements DaoRepository {
             pstm.setString(4, direccion.getNoExterior());
             pstm.setString(5, direccion.getNoExterior());
             pstm.setInt(6, direccion.getEstado().getIdEstado());
+            pstm.setInt(7, direccion.getIdDireccion());
+
             modificado = pstm.executeUpdate() > 0;
         } catch (SQLException e) {
             System.err.println("Error en el método update() - DaoDireccion -> " + e.getMessage());

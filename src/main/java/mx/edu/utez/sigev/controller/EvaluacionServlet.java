@@ -36,6 +36,7 @@ public class EvaluacionServlet extends HttpServlet {
         int idEvaluacion = utilidades.numeroInt(request.getParameter("idEvaluacion"));
         int estatusEvaluacion = utilidades.numeroInt(request.getParameter("estatusEvaluacion"));
 
+        String[] preguntas = request.getParameterValues("preguntas[]");
 
         BeanOrganizacion organizacion = new BeanOrganizacion(idOrganizacion);
         BeanEvaluacion evaluacion = new BeanEvaluacion();
@@ -47,7 +48,7 @@ public class EvaluacionServlet extends HttpServlet {
 
         DaoEvaluacion daoEvaluacion = new DaoEvaluacion();
         DaoPregunta daoPregunta = new DaoPregunta();
-        boolean respuesta;
+        boolean respuesta = false;
 
 
         switch (accion) {
@@ -59,9 +60,13 @@ public class EvaluacionServlet extends HttpServlet {
                 if (idEvaluacion > 0) {
                     evaluacion.setIdEvaluacion(idEvaluacion);
                     //Registrar Pregunta
-                    pregunta.setEvaluacion(evaluacion);
-                    respuesta = daoPregunta.insert(pregunta);
-                    System.out.println("resPregunta " + respuesta);
+
+                    for (int i = 0; i < preguntas.length; i++) {
+                        pregunta.setEvaluacion(evaluacion);
+                        respuesta = daoPregunta.insert(pregunta);
+                        System.out.println("resPregunta " + respuesta);
+                    }
+
                     if (respuesta) {
                         jsonResponse.addProperty("error", 0);
                         jsonResponse.addProperty("title", "");
