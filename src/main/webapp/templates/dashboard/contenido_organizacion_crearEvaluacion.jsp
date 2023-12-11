@@ -31,18 +31,7 @@
                                 <th>ID</th>
                                 <th>Nombre de la evaluación</th>
                                 <th>Fecha de registro</th>
-                                <%--                                <th>Fecha de creación</th>--%>
                                 <th>Acciones</th>
-                                <%--                                <th>Fecha</th>--%>
-                                <%--                                <th>Calle</th>--%>
-                                <%--                                <th>No Exterior</th>--%>
-                                <%--                                <th>No Interior</th>--%>
-                                <%--                                <th>Colonia</th>--%>
-                                <%--                                <th>Municipio</th>--%>
-                                <%--                                <th>Estado</th>--%>
-                                <%--                                <th>Estado del Evento</th>--%>
-                                <%--                                <th>Acciones</th>--%>
-
                             </tr>
                             </thead>
                         </table>
@@ -89,6 +78,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
+                    <input type="hidden" id="idEvaluationQuestion" value="">
                     <div class="mb-3">
                         <label for="nameEvaluation" class="form-label">Nombre de la evaluación:</label>
                         <input type="text" class="form-control" id="nameEvaluationQuestion"
@@ -257,7 +247,19 @@
             columns: [
                 {"data": "idEvaluacion"},
                 {"data": "nombreEvaluacion"},
-                {"data": "fechaRegistro"},
+                {
+                    // Añadir los botones de acciones "Editar" y "Borrar"
+                    data: null,
+                    render: function (data, type, row) {
+                        let d = new Date(data.fechaRegistro);
+                        let ye = new Intl.DateTimeFormat('es', { year: 'numeric' }).format(d);
+                        let mo = new Intl.DateTimeFormat('es', { month: 'short' }).format(d);
+                        let da = new Intl.DateTimeFormat('es', { day: 'numeric' }).format(d);
+                        let ho =  new Intl.DateTimeFormat('es', { timeStyle: 'medium' }).format(d);
+
+                        return da+"-"+mo+"-"+ye+" " +ho
+                    }
+                },
                 {
                     // Añadir los botones de acciones "Editar" y "Borrar"
                     data: null,
@@ -281,6 +283,7 @@
         preguntasContainer.empty();
 
         $('#nameEvaluationQuestion').val(datos.nombreEvaluacion)
+        $('#idEvaluationQuestion').val(datos.idEvaluacion)
         $.each(datos.preguntas, function (index, pregunta) {
             let newQuestionHtml =
                 '<div class="containerShowquestion">' +
@@ -331,19 +334,64 @@
     $("#modalVerPreguntas").submit(function (event) {
         event.preventDefault()
 
-        let preguntas = []
+        let preguntas = [];
+        let idPreguntas = [];
         $(".questionShow").each(function (index) {
-            preguntas.push({
-                idPregunta: $(this).attr('id'),
-                textoPregunta: $(this).val()
-            })
+            preguntas.push($(this).val());
+
+            idPreguntas.push($(this).attr('id'));
         });
-        let ouput = {
+
+        let output = {
+            accion: "modificar",
+            idEvaluacion: $('#idEvaluationQuestion').val(),
             nombreEvaluacion: $('#nameEvaluationQuestion').val(),
-            preguntas
+            preguntas,
+            idPreguntas
         }
 
-        console.log(ouput)
+        console.log(output)
+
+        $.ajax({
+            type: "POST",
+            url: "/evaluacion",
+            data: output,
+            success: function (response) {
+                // Procesar la respuesta del servlet si es necesario
+                console.log("Respuesta del servidor:", response);
+                if (response.error) {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'Error',
+                        text: "Tenemos algunos errores.",
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                } else {
+                    recargarTabla();
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Evaluación modificada',
+                        text: "La evaluación ha sido modificada correctamente.",
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    $('#modaleliminar').modal('hide');
+                }
+            },
+            error: function (error) {
+                console.error("Error en la petición AJAX:", error);
+            }
+        });
+
+
+        // Cerrar el modal después de obtener las respuestas
+        $('#modalVerPreguntas').modal('hide');
+        $(".questionInput").val('');
+        $("#idEvaluationQuestion").val('');
+        $("#nameEvaluation").val('');
     })
 
 

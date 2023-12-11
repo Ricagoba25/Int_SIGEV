@@ -109,7 +109,7 @@ public class DaoEvaluacion implements DaoRepository {
             pstm = con.prepareStatement(query);
 
             pstm.setString(1, evaluacion.getNombreEvaluacion());
-            pstm.setInt(2, evaluacion.getIdEvaluacion());
+            pstm.setInt(2, id);
 
             modificado = pstm.executeUpdate() > 0;
         } catch (SQLException e) {

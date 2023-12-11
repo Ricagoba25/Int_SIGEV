@@ -37,6 +37,7 @@ public class EvaluacionServlet extends HttpServlet {
         int estatusEvaluacion = utilidades.numeroInt(request.getParameter("estatusEvaluacion"));
 
         String[] preguntas = request.getParameterValues("preguntas[]");
+        String[] idPreguntas = request.getParameterValues("idPreguntas[]");
 
         BeanOrganizacion organizacion = new BeanOrganizacion(idOrganizacion);
         BeanEvaluacion evaluacion = new BeanEvaluacion();
@@ -59,7 +60,6 @@ public class EvaluacionServlet extends HttpServlet {
                 System.out.println("resEvaluacion " + idEvaluacion);
                 if (idEvaluacion > 0) {
                     evaluacion.setIdEvaluacion(idEvaluacion);
-                    //Registrar Pregunta
 
                     for (String s : preguntas) {
                         pregunta.setEvaluacion(evaluacion);
@@ -88,8 +88,14 @@ public class EvaluacionServlet extends HttpServlet {
 
                 System.out.println("resevaluacion " + respuesta);
                 if (respuesta) {
-                    respuesta = daoPregunta.update(pregunta.getIdPregunta(), pregunta);
-                    System.out.println("resEvento " + respuesta);
+                    for (int i = 0; i < preguntas.length; i++) {
+                        pregunta.setEvaluacion(evaluacion);
+                        pregunta.setIdPregunta(Integer.parseInt(idPreguntas[i]));
+                        pregunta.setTextoPregunta(preguntas[i]);
+                        respuesta = daoPregunta.update(pregunta.getIdPregunta(), pregunta);
+                        System.out.println("resPregunta " + respuesta);
+                    }
+
                     if (respuesta) {
                         jsonResponse.addProperty("error", 0);
                         jsonResponse.addProperty("title", "");
@@ -142,10 +148,8 @@ public class EvaluacionServlet extends HttpServlet {
             } else if (req.getParameter("consulta").equals("evaluacionesPorOrganizacion")) {
                 listaEvaluaciones = daoEvaluacion.evaluacionesPorOrganizacion(utilidades.numeroInt(req.getParameter("idOrganizacion")));
 
-                System.out.println("ListaEvaluaciones " + listaEvaluaciones.size());
                 for (BeanEvaluacion listaEvaluacion : listaEvaluaciones) {
                     listaEvaluacion.setPreguntas(daoPregunta.preguntasPorEvaluacion(listaEvaluacion.getIdEvaluacion()));
-                    System.out.println("listaPreguntas " + listaEvaluacion.getPreguntas().size());
                 }
             }
         } catch (NumberFormatException e) {

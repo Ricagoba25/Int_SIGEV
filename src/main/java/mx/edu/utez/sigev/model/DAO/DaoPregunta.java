@@ -63,7 +63,7 @@ public class DaoPregunta implements DaoRepository {
             pstm = con.prepareStatement(query);
 
             pstm.setString(1, pregunta.getTextoPregunta());
-            pstm.setInt(2, pregunta.getIdPregunta());
+            pstm.setInt(2, id);
 
             modificado = pstm.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -95,8 +95,6 @@ public class DaoPregunta implements DaoRepository {
     @Override
     public boolean insert(Object object) {
         BeanPregunta pregunta = (BeanPregunta) object;
-        System.out.println("textoPregunta " + pregunta.getTextoPregunta());
-        System.out.println("evaluacion_idEvaluacion " + pregunta.getEvaluacion().getIdEvaluacion());
         boolean registrado = false;
         try {
             String query = "INSERT INTO pregunta (textoPregunta, evaluacion_idEvaluacion) values(?,?)";
