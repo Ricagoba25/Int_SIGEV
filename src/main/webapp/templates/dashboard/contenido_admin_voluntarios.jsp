@@ -21,13 +21,13 @@
                             <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Nombre Voluntario</th>
-                                <th>Apellido Paterno</th>
-                                <th>Apellido Materno</th>
+                                <th>Nombre voluntario</th>
+                                <th>Apellido paterno</th>
+                                <th>Apellido materno</th>
                                 <th>CURP</th>
                                 <th>Correo</th>
-                                <th>Telefono</th>
-                                <th>Estado</th>
+                                <th>Teléfono</th>
+                                <th>Estatus</th>
                                 <th>Acciones</th>
                             </tr>
                             </thead>

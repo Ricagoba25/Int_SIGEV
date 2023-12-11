@@ -285,9 +285,10 @@
         $('#nameEvaluationQuestion').val(datos.nombreEvaluacion)
         $('#idEvaluationQuestion').val(datos.idEvaluacion)
         $.each(datos.preguntas, function (index, pregunta) {
+            let consecutivo = index +1
             let newQuestionHtml =
                 '<div class="containerShowquestion">' +
-                '   <label for="question' + index + '" class="form-label mt-2">Pregunta ' + index + ':</label>' +
+                '   <label for="question' + consecutivo + '" class="form-label mt-2">Pregunta ' + consecutivo + ':</label>' +
                 '   <input type="text" class="form-control  questionShow"  id="' + pregunta.idPregunta + '" name="question" required value="' + pregunta.textoPregunta + '">' +
                 '</div>';
             $('.containerShowquestions').append(newQuestionHtml);

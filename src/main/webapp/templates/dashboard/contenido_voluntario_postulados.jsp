@@ -23,12 +23,12 @@
                             <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Nombre Evento</th>
+                                <th>Nombre evento</th>
                                 <th>Descripción</th>
                                 <th>Fecha</th>
                                 <th>Calle</th>
-                                <th>No Exterior</th>
-                                <th>No Interior</th>
+                                <th>No exterior</th>
+                                <th>No interior</th>
                                 <th>Colonia</th>
                                 <th>Municipio</th>
                                 <th>Estado</th>

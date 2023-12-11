@@ -22,14 +22,14 @@
                             <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Nombre Voluntario</th>
-                                <th>Apellido Paterno</th>
-                                <th>Apellido Materno</th>
+                                <th>Nombre voluntario</th>
+                                <th>Apellido paterno</th>
+                                <th>Apellido materno</th>
                                 <th>Nombre evento</th>
                                 <th>CURP</th>
                                 <th>Correo</th>
-                                <th>Telefono</th>
-                                <th>Estado</th>
+                                <th>Teléfono</th>
+                                <th>Estatus</th>
                                 <th>Acciones</th>
                             </tr>
                             </thead>
@@ -87,11 +87,11 @@
                         // Utilizamos data para acceder a los datos de la fila actual
 
                         let aceptarBtn = '<a href="#" title="Aceptar" onclick=\'aceptar(' + JSON.stringify(data) + ')\'>  <i class="fa-solid fa-check"></i> Aceptar</a> &nbsp;';
-                        let bloquearBtn = '<a href="#" title="Bloquear" onclick=\'cancelar(' + JSON.stringify(data) + ')\'>  <i class="fa-solid fa-ban"></i> Cancelar</a> &nbsp;';
-
+                        let bloquearBtn = '<a href="#" title="Bloquear" onclick=\'cancelar(' + JSON.stringify(data) + ')\'>  <i class="fa-solid fa-ban"></i> Rechazar</a> &nbsp;';
+                        let verRespustas = '<a href="#" id="editarBtn" onclick=\'verDatos(' + JSON.stringify(data) + ')\'> <i class="fa fa-eye"></i> Ver Respuestas <br></a>';
 
                         // Devolvemos los botones como una cadena HTML
-                        return aceptarBtn + bloquearBtn;
+                        return aceptarBtn + bloquearBtn + verRespustas;
                     }
                 }
 

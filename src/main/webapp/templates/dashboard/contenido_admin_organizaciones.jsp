@@ -22,13 +22,13 @@
                             <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Nombre Organización</th>
-                                <th>Razon Social</th>
+                                <th>Nombre organización</th>
+                                <th>Razon social</th>
                                 <th>RFC</th>
                                 <th>Correo</th>
                                 <th>Colonia</th>
                                 <th>Estado</th>
-                                <th>Status</th>
+                                <th>Estatus</th>
                                 <th>Acciones</th>
 
                             </tr>

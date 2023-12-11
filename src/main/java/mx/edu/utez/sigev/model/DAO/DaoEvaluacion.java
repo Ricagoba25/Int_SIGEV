@@ -181,7 +181,6 @@ public class DaoEvaluacion implements DaoRepository {
             if (registrado) {
                 rs = pstm.getGeneratedKeys();
 
-                System.out.println("getGenerateKEy: " + rs);
                 if (rs.next()) {
                     idRegistro = rs.getInt(1);
                 }

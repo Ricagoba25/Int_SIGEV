@@ -26,17 +26,17 @@
                             <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Nombre Evento</th>
+                                <th>Nombre evento</th>
                                 <th>Descripción</th>
                                 <th>Fecha</th>
                                 <th>Calle</th>
-                                <th>No Exterior</th>
-                                <th>No Interior</th>
+                                <th>No exterior</th>
+                                <th>No interior</th>
                                 <th>Colonia</th>
                                 <th>Municipio</th>
                                 <th>Estado</th>
-                                <th>Estado del Evento</th>
-                                <th >Acciones</th>
+                                <th>Estatus evento</th>
+                                <th>Acciones</th>
 
                             </tr>
                             </thead>
@@ -147,13 +147,13 @@
                     data: null,
                     render: function (data, type, row) {
                         let estatus = "Rechazado";
-                        if (data.evento.estatusEvento == 1) {
+                        if (data.evento.estatusEvento === 1) {
                             estatus = "Pendiente";
                         }
-                        if (data.evento.estatusEvento == 2) {
+                        if (data.evento.estatusEvento === 2) {
                             estatus = "Aceptado";
                         }
-                        if (data.evento.estatusEvento == 4) {
+                        if (data.evento.estatusEvento === 4) {
                             estatus = "Cancelado";
                         }
                         return estatus;
@@ -173,8 +173,14 @@
                         }
                         let eliminarBtn = '<a href="#" title="Eliminar Evento" onclick=\'eliminar(' +  JSON.stringify(data.evento) + ')\'> <i class="fa-solid fa-xmark"></i> '+labelAccionActivar+'</a> &nbsp;';
 
+                        let btns = "";
+                        if (data.evento.estatusEvento === 2) {
+                            btns = editarBtn + ' ' + eliminarBtn;
+                        } else if (data.evento.estatusEvento === 4) {
+                            btns = eliminarBtn;
+                        }
                         // Devolvemos los botones como una cadena HTML
-                        return editarBtn + ' ' + eliminarBtn;
+                        return btns;
                     }
                 }
             ]

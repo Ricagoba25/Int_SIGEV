@@ -137,9 +137,9 @@ VALUES
 -- -----------------------------------------------------
 -- Table `SIGEV`.`evaluacion`
 -- -----------------------------------------------------
-INSERT INTO `sigev`.`evaluacion` (`nombreEvaluacion`,`organizacion_idOrganizacion`)
+INSERT INTO `sigev`.`evaluacion` (`nombreEvaluacion`,`fechaRegistro`,`organizacion_idOrganizacion`)
 VALUES
-('Evaluación psicométrica',1);
+('Evaluación psicométrica','2022-07-26', 1);
 
 -- -----------------------------------------------------
 -- Table `SIGEV`.`pregunta`

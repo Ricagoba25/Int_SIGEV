@@ -22,12 +22,12 @@
                             <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Nombre Evento</th>
+                                <th>Nombre evento</th>
                                 <th>Descripción</th>
                                 <th>Fecha</th>
                                 <th>Colonia</th>
                                 <th>Estado</th>
-                                <th>Status</th>
+                                <th>Estatus</th>
                                 <th>Acciones</th>
                             </tr>
                             </thead>

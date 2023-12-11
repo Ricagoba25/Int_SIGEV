@@ -23,7 +23,7 @@
                             <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Nombre Evento</th>
+                                <th>Nombre evento</th>
                                 <th>Descripción</th>
                                 <th>Fecha</th>
                                 <th>Municipio</th>

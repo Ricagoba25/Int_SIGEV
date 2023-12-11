@@ -29,8 +29,8 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Nombre</th>
-                                <th>Apellido Paterno</th>
-                                <th>Apellido Materno</th>
+                                <th>Apellido paterno</th>
+                                <th>Apellido materno</th>
                                 <th>Correo</th>
                                 <th>Teléfono</th>
                                 <th>Acciones</th>
