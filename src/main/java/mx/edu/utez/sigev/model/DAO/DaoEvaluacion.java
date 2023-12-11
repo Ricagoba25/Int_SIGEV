@@ -74,15 +74,9 @@ public class DaoEvaluacion implements DaoRepository {
             rs = pstm.executeQuery();
 
             while (rs.next()) {
-                BeanOrganizacion beanOrganizacion = new BeanOrganizacion();
-                beanOrganizacion.setIdOrganizacion(rs.getInt("idOrganizacion"));
-                beanOrganizacion.setNombreOrganizacion(rs.getString("nombreOrganizacion"));
-
                 BeanEvaluacion beanEvaluacion = new BeanEvaluacion();
                 beanEvaluacion.setIdEvaluacion(rs.getInt("idEvaluacion"));
                 beanEvaluacion.setNombreEvaluacion(rs.getString("nombreEvaluacion"));
-                beanEvaluacion.setFechaRegistro(rs.getDate("fechaRegistro"));
-                beanEvaluacion.setOrganizacion(beanOrganizacion);
 
                 listaEvaluaciones.add(beanEvaluacion);
             }

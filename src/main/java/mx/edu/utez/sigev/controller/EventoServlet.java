@@ -42,7 +42,7 @@ public class EventoServlet extends HttpServlet {
         int idEstado = utilidades.numeroInt(request.getParameter("idEstado"));
         int idDireccion = utilidades.numeroInt(request.getParameter("idDireccion"));
         int idOrganizacion = utilidades.numeroInt(request.getParameter("idOrganizacion"));
-        int idEvaluacion = 1;
+        int idEvaluacion = utilidades.numeroInt(request.getParameter("idEvaluacion"));
         int idEvento = utilidades.numeroInt(request.getParameter("idEvento"));
         int estatusEvento = utilidades.numeroInt(request.getParameter("estatusEvento"));
 

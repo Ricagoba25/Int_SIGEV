@@ -34,14 +34,10 @@
                                     <input type="date" name="fecha" class="form-control" id="fecha" name="fecha" required min="2023-08-22">
                                 </div>
 
-
                                 <div class="col-xl-4">
-                                    <button class="btn btn-success" id="modalSeleccionarTest" style="margin-top: 30px"> Seleccionar Evaluación
-                                    </button>
+                                    <label for="evaluationSelect" class="form-label">Evaluación:</label>
+                                    <select class="form-control" id="evaluationSelect" name="evaluacion"></select>
                                 </div>
-
-
-
                             </div>
                             <!-- Segunda Fila-->
                             <div class="row mt-2">
@@ -104,6 +100,7 @@
 <script>
     $(document).ready(function () {
 
+        obtenerEvaluaciones();
         obtenerEstados();
 
         $("#form_crear_evento").validate({
@@ -115,6 +112,9 @@
                 },
                 fecha: {
                     required: true
+                },
+                evaluacion: {
+                    required: true,
                 },
                 calle: {
                     required: true
@@ -145,6 +145,9 @@
                 },
                 fecha: {
                     required: "La fecha es requerida.",
+                },
+                evaluacion: {
+                    required: "El estado es requerido.",
                 },
                 calle: {
                     required: "La calle es requerida.",
@@ -195,6 +198,7 @@
             colonia: $("#colonia").val(),
             municipio: $("#municipio").val(),
             idEstado: $("#stateSelect").val(),
+            idEvaluacion: $("#evaluationSelect").val(),
             descripcion: $("#descripcion").val(),
             idOrganizacion: $("#idOrganizacion").val(),
             estatusEvento: 1
@@ -243,6 +247,39 @@
             }
         });
 
+    }
+
+    let obtenerEvaluaciones = () => {
+        let formData = {
+            consulta: 'evaluacionesActivas',
+            idOrganizacion: $("#idOrganizacion").val(),
+        }
+
+        $.ajax({
+            url: '/evaluacion',
+            method: 'GET',
+            data: formData,
+            dataType: 'json',
+            success: function (data) {
+                // Obtener el elemento select
+                let selectElement = $('#evaluationSelect');
+                selectElement.append($('<option>', {
+                    value: "",
+                    text: "Selecciona una evaluacion"
+                }));
+
+                // Recorrer los datos y agregar opciones al select
+                $.each(data, function (index, evaluacion) {
+                    selectElement.append($('<option>', {
+                        value: evaluacion.idEvaluacion,
+                        text: evaluacion.nombreEvaluacion
+                    }));
+                });
+            },
+            error: function () {
+                console.error('Error al cargar la lista de evaluaciones.');
+            }
+        });
     }
 
     let obtenerEstados = () => {
