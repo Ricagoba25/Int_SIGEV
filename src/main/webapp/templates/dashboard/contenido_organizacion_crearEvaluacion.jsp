@@ -6,7 +6,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Crear Evaluación</h1>
+                <h1>Evaluaciones</h1>
             </div>
         </div>
     </div>
@@ -30,16 +30,18 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Nombre de la evaluación</th>
-                                <th>Fecha de creación</th>
-<%--                                <th>Fecha</th>--%>
-<%--                                <th>Calle</th>--%>
-<%--                                <th>No Exterior</th>--%>
-<%--                                <th>No Interior</th>--%>
-<%--                                <th>Colonia</th>--%>
-<%--                                <th>Municipio</th>--%>
-<%--                                <th>Estado</th>--%>
-<%--                                <th>Estado del Evento</th>--%>
-<%--                                <th>Acciones</th>--%>
+                                <th>Fecha de registro</th>
+                                <%--                                <th>Fecha de creación</th>--%>
+                                <th>Acciones</th>
+                                <%--                                <th>Fecha</th>--%>
+                                <%--                                <th>Calle</th>--%>
+                                <%--                                <th>No Exterior</th>--%>
+                                <%--                                <th>No Interior</th>--%>
+                                <%--                                <th>Colonia</th>--%>
+                                <%--                                <th>Municipio</th>--%>
+                                <%--                                <th>Estado</th>--%>
+                                <%--                                <th>Estado del Evento</th>--%>
+                                <%--                                <th>Acciones</th>--%>
 
                             </tr>
                             </thead>
@@ -75,54 +77,28 @@
 
 
 <!-- Modal Editar -->
-<div id="modalEditarEvento" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="miModalLabel"
+<div id="modalVerPreguntas" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="miModalLabel"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form id="formulario_evento">
+            <form id="formulario_preguntas">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalTitle">Editar Evento</h5>
+                    <h5 class="modal-title" id="modalTitle">Preguntas</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label for="nombreEvento">Nombre Evento:</label>
-                        <input type="text" class="form-control" id="nombreEvento" name="nombreEvento" value="">
+                    <div class="mb-3">
+                        <label for="nameEvaluation" class="form-label">Nombre de la evaluación:</label>
+                        <input type="text" class="form-control" id="nameEvaluationQuestion"
+                               name="nameEvaluationQuestion" required>
                     </div>
-                    <div class="form-group">
-                        <label for="descripcion">Descripción:</label>
-                        <input type="text" class="form-control" id="descripcion"
-                               name="descripcion">
-                    </div>
-                    <div class="form-group">
-                        <label for="fecha">Fecha:</label>
-                        <input type="date" class="form-control" id="fecha" name="fecha">
-                    </div>
-                    <div class="form-group">
-                        <label for="calle">Calle:</label>
-                        <input type="test" class="form-control" id="calle" name="calle">
-                    </div>
-                    <div class="form-group">
-                        <label for="noExterior"> No Exterior:</label>
-                        <input type="text" class="form-control" id="noExterior" name="noExterior">
-                    </div>
-                    <div class="form-group">
-                        <label for="noInterior"> No Interior:</label>
-                        <input type="text" class="form-control" id="noInterior" name="noInterior">
-                    </div>
-                    <div class="form-group">
-                        <label for="colonia"> Colonia:</label>
-                        <input type="text" class="form-control" id="colonia" name="colonia">
-                    </div>
-                    <div class="form-group">
-                        <label for="municipio"> Municipio:</label>
-                        <input type="text" class="form-control" id="municipio" name="municipio">
-                    </div>
-                    <div class="form-group">
-                        <label for="estado"> Estado:</label>
-                        <input type="text" class="form-control" id="estado" name="estado">
+                    <div class="containerShowquestions">
+                        <%--                        <div class="containerShowquestion">--%>
+                        <%--                            <label class="form-label">Pregunta 1:</label>--%>
+                        <%--                            <input type="text" class="form-control " name="" required>--%>
+                        <%--                        </div>--%>
                     </div>
 
                 </div>
@@ -148,17 +124,17 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="nameEvaluation" class="form-label">Nombre de la evaluación:</label>
-                            <input type="text" class="form-control" id="nameEvaluation" name="nameEvaluation" required>
+                    <div class="mb-3">
+                        <label for="nameEvaluation" class="form-label">Nombre de la evaluación:</label>
+                        <input type="text" class="form-control" id="nameEvaluation" name="nameEvaluation" required>
+                    </div>
+                    <div id="questionsContainer" class="questionsContainer">
+                        <div class="questionContainer">
+                            <label class="form-label">Pregunta 1:</label>
+                            <input type="text" class="form-control questionInput" name="question[]" required>
                         </div>
-                        <div id="questionsContainer" class="questionsContainer">
-                            <div class="questionContainer">
-                                <label class="form-label">Pregunta 1:</label>
-                                <input type="text" class="form-control questionInput" name="question[]" required>
-                            </div>
-                        </div>
-                        <button type="button" class="btn btn-primary mt-3" id="btnAddQuestion">Agregar Pregunta</button>
+                    </div>
+                    <button type="button" class="btn btn-primary mt-3" id="btnAddQuestion">Agregar Pregunta</button>
 
                 </div>
                 <div class="modal-footer">
@@ -181,10 +157,10 @@
             if (questionCount <= maxQuestions) {
                 let newQuestionHtml =
                     '<div class="questionContainer">' +
-                        '<label for="question' + questionCount + '" class="form-label mt-2">Pregunta ' + questionCount + ':</label>' +
-                        ' <div class="question">'+
-                        '<input type="text" class="form-control  questionInput" name="question[]" required>' +
-                        ' <button type="button" class="btn btn-danger btnRemoveQuestion"><i class="fa fa-remove"></i></button>' +
+                    '<label for="question' + questionCount + '" class="form-label mt-2">Pregunta ' + questionCount + ':</label>' +
+                    ' <div class="question">' +
+                    '<input type="text" class="form-control  questionInput" name="question[]" required>' +
+                    ' <button type="button" class="btn btn-danger btnRemoveQuestion"><i class="fa fa-remove"></i></button>' +
                     '</div>';
 
                 $("#questionsContainer").append(newQuestionHtml);
@@ -268,62 +244,63 @@
             }
         })
         const URL_API = "http://localhost:8080/"
-        // $('#tableEvaluaciones').DataTable({
-        //     "language": {
-        //         "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
-        //     },
-        //     ajax:
-        //         {
-        //             url: URL_API + 'evento?consulta=propios&idOrganizacion=' + id,
-        //             dataSrc: ''
-        //         },
-        //     columns: [
-        //         {"data": "evento.idEvaluacion"},
-        //         {"data": "evento.nombreEvaluacion"},
-        //         {"data": "evento.descripcion"},
-        //
-        //         {
-        //             data: null,
-        //             render: function (data, type, row) {
-        //                 let estatus = "Rechazado";
-        //                 if (data.evento.estatusEvento == 1) {
-        //                     estatus = "Pendiente";
-        //                 }
-        //                 if (data.evento.estatusEvento == 2) {
-        //                     estatus = "Aceptado";
-        //                 }
-        //                 if (data.evento.estatusEvento == 4) {
-        //                     estatus = "Cancelado";
-        //                 }
-        //                 return estatus;
-        //             }
-        //         },
-        //         {
-        //             // Añadir los botones de acciones "Editar" y "Borrar"
-        //             data: null,
-        //             render: function (data, type, row) {
-        //                 // El contenido de esta función se ejecutará para cada celda de esta columna
-        //                 // Utilizamos data para acceder a los datos de la fila actual
-        //
-        //                 let editarBtn = '<a href="#" id="editarBtn" onclick=\'editar(' + JSON.stringify(data) + ')\'> <i class="fa fa-pen"></i> Editar <br></a>';
-        //                 let eliminarBtn = '<a href="#" title="Eliminar Evento" onclick="eliminar(' + data.evento.idEvento + ')"> <i class="fa-solid fa-xmark"></i> Eliminar</a> &nbsp;';
-        //
-        //                 // Devolvemos los botones como una cadena HTML
-        //                 return editarBtn + ' ' + eliminarBtn;
-        //             }
-        //         }
-        //     ]
-        // });
+
+        $('#tableEvaluaciones').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+            },
+            ajax:
+                {
+                    url: URL_API + 'evaluacion?consulta=evaluacionesPorOrganizacion&idOrganizacion=' + id,
+                    dataSrc: ''
+                },
+            columns: [
+                {"data": "idEvaluacion"},
+                {"data": "nombreEvaluacion"},
+                {"data": "fechaRegistro"},
+                {
+                    // Añadir los botones de acciones "Editar" y "Borrar"
+                    data: null,
+                    render: function (data, type, row) {
+                        // El contenido de esta función se ejecutará para cada celda de esta columna
+                        // Utilizamos data para acceder a los datos de la fila actual
+                        let verRespustas = '<a href="#" id="editarBtn" onclick=\'verDatos(' + JSON.stringify(data) + ')\'> <i class="fa fa-eye"></i> Ver preguntas <br></a>';
+
+                        return verRespustas;
+                    }
+                }
+            ]
+        });
 
 
     });
+
+    function verDatos(datos) {
+        // clear container
+        let preguntasContainer = $('.containerShowquestions');
+        preguntasContainer.empty();
+
+        $('#nameEvaluationQuestion').val(datos.nombreEvaluacion)
+        $.each(datos.preguntas, function (index, pregunta) {
+            let newQuestionHtml =
+                '<div class="containerShowquestion">' +
+                '   <label for="question' + index + '" class="form-label mt-2">Pregunta ' + index + ':</label>' +
+                '   <input type="text" class="form-control  questionShow"  id="' + pregunta.idPregunta + '" name="question" required value="' + pregunta.textoPregunta + '">' +
+                '</div>';
+            $('.containerShowquestions').append(newQuestionHtml);
+        });
+
+        // Abrir el modal de confirmación
+        $('#modalVerPreguntas').modal('show');
+
+    }
 
     //Boton de editar Usuario
     function editar(data) {
         $("#formulario_evento").validate();
 
         // Abrir el modal de confirmación
-        $('#modalEditarEvento').modal('show');
+        $('#modalVerPreguntas').modal('show');
 
         //fill fields
         let {nombreEvento, descripcion, fecha} = data.evento;
@@ -350,6 +327,25 @@
 
 
     }
+
+    $("#modalVerPreguntas").submit(function (event) {
+        event.preventDefault()
+
+        let preguntas = []
+        $(".questionShow").each(function (index) {
+            preguntas.push({
+                idPregunta: $(this).attr('id'),
+                textoPregunta: $(this).val()
+            })
+        });
+        let ouput = {
+            nombreEvaluacion: $('#nameEvaluationQuestion').val(),
+            preguntas
+        }
+
+        console.log(ouput)
+    })
+
 
     //Boton de eliminar evento
     function eliminar(id) {
@@ -401,6 +397,7 @@
     function crearEvaluacion() {
         $('#modalCrearEvaluacion').modal('show');
     }
+
     function recargarTabla() {
         let table = $('#tableEvaluaciones').DataTable();
         table.ajax.reload();
@@ -412,19 +409,63 @@
             $(this).find('label').text('Pregunta ' + questionNumber + ':');
         });
     }
+
     //save data (create evaluation)
     $("#modalCrearEvaluacion").submit(function (event) {
         event.preventDefault();
 
         // get answer and questions (form)
-        let formData = {};
+        let formData = [];
         $(".questionInput").each(function (index) {
-            formData['pregunta' + (index + 1)] = $(this).val();
+            formData.push($(this).val());
+            //formData['pregunta' + (index + 1)] = $(this).val();
         });
-        formData.name = $("#nameEvaluation").val();
 
 
-        console.log(formData);
+        let output = {
+            accion: "registrar",
+            idOrganizacion: $("#idOrganizacion").val(),
+            nombreEvaluacion: $("#nameEvaluation").val(),
+            preguntas: formData
+        }
+        // formData.name = $("#nameEvaluation").val();
+
+        $.ajax({
+            type: "POST",
+            url: "/evaluacion",
+            data: output,
+            success: function (response) {
+                // Procesar la respuesta del servlet si es necesario
+                console.log("Respuesta del servidor:", response);
+                if (response.error) {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'Error',
+                        text: "Tenemos algunos errores.",
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                } else {
+                    recargarTabla();
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Evaluación creada',
+                        text: "La evaluación ha sido creada correctamente.",
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    $('#modaleliminar').modal('hide');
+                }
+            },
+            error: function (error) {
+                console.error("Error en la petición AJAX:", error);
+            }
+        });
+
+
+        console.log(output);
 
         // Cerrar el modal después de obtener las respuestas
         $('#modalCrearEvaluacion').modal('hide');

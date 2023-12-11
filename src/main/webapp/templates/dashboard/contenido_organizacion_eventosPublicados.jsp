@@ -19,6 +19,9 @@
                 <div class="card">
                     <div class="card-body">
                         <input type="hidden" id="idOrganizacion" value="${sesion.getIdOrganizacion()}">
+                        <input type="hidden" id="idDireccion" value="">
+                        <input type="hidden" id="idEvento" value="">
+
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                             <tr>
@@ -33,7 +36,7 @@
                                 <th>Municipio</th>
                                 <th>Estado</th>
                                 <th>Estado del Evento</th>
-                                <th>Acciones</th>
+                                <th >Acciones</th>
 
                             </tr>
                             </thead>
@@ -162,9 +165,13 @@
                     render: function (data, type, row) {
                         // El contenido de esta función se ejecutará para cada celda de esta columna
                         // Utilizamos data para acceder a los datos de la fila actual
-
+                        let labelAccionActivar= "Desactivar";
                         let editarBtn = '<a href="#" id="editarBtn" onclick=\'editar(' + JSON.stringify(data) + ')\'> <i class="fa fa-pen"></i> Editar <br></a>';
-                        let eliminarBtn = '<a href="#" title="Eliminar Evento" onclick="eliminar(' + data.evento.idEvento + ')"> <i class="fa-solid fa-xmark"></i> Eliminar</a> &nbsp;';
+
+                        if(data.evento.estatusEvento === 4){
+                            labelAccionActivar = 'Activar'
+                        }
+                        let eliminarBtn = '<a href="#" title="Eliminar Evento" onclick=\'eliminar(' +  JSON.stringify(data.evento) + ')\'> <i class="fa-solid fa-xmark"></i> '+labelAccionActivar+'</a> &nbsp;';
 
                         // Devolvemos los botones como una cadena HTML
                         return editarBtn + ' ' + eliminarBtn;
@@ -204,15 +211,35 @@
         $('#stateSelect').val(estado);
 
 
+        $('#idDireccion').val(data.evento.direccion.idDireccion);
+        $('#idEvento').val(data.evento.idEvento);
+
+        // console.log(()
+
+
         //console.log('Editar usuario con ID:', data);
 
 
     }
 
     //Boton de eliminar evento
-    function eliminar(id) {
+    function eliminar(data) {
+        // console.log(data)
+
+        let textModal = "Evento Desactivado"
+        let textDescription = "El evento ha sido desactivado."
+        let estatusEvento = 4
+        if(data.estatusEvento === 4){
+            textModal = "Evento Activado"
+            textDescription = "El evento ha sido activado"
+            estatusEvento = 2;
+        }
+
+
+
         // Abrir el modal de confirmación
         $('#modaleliminar').modal('show');
+
 
         // Agregar un evento al botón de confirmación dentro del modal
         $('#confirmarRechazar').click(function () {
@@ -221,8 +248,8 @@
                 url: "/evento",
                 data: {
                     accion: "changeStatus",
-                    idEvento: id,
-                    estatusEvento: 4
+                    idEvento: data.idEvento,
+                    estatusEvento: estatusEvento
                 },
                 success: function (response) {
                     // Procesar la respuesta del servlet si es necesario
@@ -241,8 +268,8 @@
                         Swal.fire({
                             position: 'center',
                             icon: 'success',
-                            title: 'Organización aceptada',
-                            text: "La organizacion ha sido aceptada correctamente.",
+                            title: textModal,
+                            text: textDescription,
                             showConfirmButton: false,
                             timer: 1500
                         })
@@ -298,10 +325,9 @@
             idEstado: $("#stateSelect").val(),
 
 
-            idDireccion: 4,
-            idEvento: 3,
+            idDireccion: $("#idDireccion").val(),
+            idEvento: $("#idEvento").val(),
             idOrganizacion: $("#idOrganizacion").val(),
-            estatusEvento: 1
         }
 
         $.ajax({
@@ -383,17 +409,17 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="confirmModalLabel2">Confirmar cancelación</h5>
+                <h5 class="modal-title" id="confirmModalLabel2">Confirmar modificación</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                ¿Estás seguro de que deseas dar de baja este Evento?
+                ¿Estás seguro de que deseas modificar el estado del evento ?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button id="confirmarRechazar" type="button" class="btn btn-danger">Dar de Baja</button>
+                <button id="confirmarRechazar" type="button" class="btn btn-danger">Aceptar</button>
             </div>
         </div>
     </div>
