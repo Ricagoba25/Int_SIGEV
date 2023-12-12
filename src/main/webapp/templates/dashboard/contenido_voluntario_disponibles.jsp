@@ -19,19 +19,23 @@
                 <div class="card">
                     <div class="card-body">
                         <input type="hidden" id="idVoluntario" value="${sesion.getIdVoluntario()}">
-                        <table id="example2" class="table table-bordered table-striped">
-                            <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nombre evento</th>
-                                <th>Descripción</th>
-                                <th>Fecha</th>
-                                <th>Municipio</th>
-                                <th>Estado</th>
-                                <th>Acciones</th>
-                            </tr>
-                            </thead>
-                        </table>
+                        <div class="table-responsive">
+
+
+                            <table id="example2" class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre evento</th>
+                                    <th>Descripción</th>
+                                    <th>Fecha</th>
+                                    <th>Municipio</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -59,6 +63,38 @@
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                 <button id="guardarCambios" type="button" class="btn btn-primary">Postularme</button>
             </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="modalVerPreguntas" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="miModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form id="formulario_preguntas">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">Preguntas</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="idEvaluationQuestion" value="">
+
+                    <div class="containerShowquestions">
+                        <%--                        <div class="containerShowquestion">--%>
+                        <%--                            <label class="form-label">Pregunta 1:</label>--%>
+                        <%--                            <input type="text" class="form-control " name="" required>--%>
+                        <%--                        </div>--%>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary"> Guardar Cambios</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -94,7 +130,10 @@
                         // El contenido de esta función se ejecutará para cada celda de esta columna
                         // Utilizamos data para acceder a los datos de la fila actual
 
-                        let postularseBtn = '<a href="#" title="Postularse" onclick="postularse(' + data.idEvaluacionOrganizacionEvento + ')"> <i class="fa-solid fa-thumbs-up"></i> Postularse</a> &nbsp;';
+                        let postularseBtn = '<a href="#" title="Aceptar" onclick=\'postularse(' + JSON.stringify(data.evaluacion) + ')\'>  <i class="fa-solid fa-thumbs-up"></i> Postularse</a>';
+
+
+                        // let postularseBtn = '<a href="#" title="Postularse" onclick="postularse(' + data + ')"> <i class="fa-solid fa-thumbs-up"></i> Postularse</a> &nbsp;';
 
                         // Devolvemos los botones como una cadena HTML
                         return postularseBtn;
@@ -107,53 +146,32 @@
     });
 
     //Boton de postularse al Evento
-    function postularse(idEvaluacionOrganizacionEvento) {
+    function postularse(datos) {
         // Abrir el modal de confirmación
-        $('#modalPostularse').modal('show');
+        $('#modalVerPreguntas').modal('show');
         let idVoluntario = $("#idVoluntario").val();
 
-        // Agregar un evento al botón de confirmación dentro del modal
-        $('#guardarCambios').click(function () {
 
-            $.ajax({
-                type: "POST",
-                url: "/voluntario",
-                data: {
-                    accion: "postular",
-                    idEvaluacionOrganizacionEvento: idEvaluacionOrganizacionEvento,
-                    idVoluntario: idVoluntario,
-                },
-                success: function (response) {
-                    // Procesar la respuesta del servlet si es necesario
-                    console.log("Respuesta del servidor:", response);
-                    if (response.error) {
-                        Swal.fire({
-                            position: 'center',
-                            icon: 'error',
-                            title: 'Error',
-                            text: "Tenemos algunos errores.",
-                            showConfirmButton: false,
-                            timer: 1500
-                        })
-                    } else {
-                        recargarTabla();
-                        Swal.fire({
-                            position: 'center',
-                            icon: 'success',
-                            title: 'Voluntario postulado',
-                            text: "El voluntario ha sido aceptado correctamente.",
-                            showConfirmButton: false,
-                            timer: 1500
-                        })
-                        $('#modalPostularse').modal('hide');
-                    }
-                },
-                error: function (error) {
-                    console.error("Error en la petición AJAX:", error);
-                }
-            });
+        // clear container
+        let preguntasContainer = $('.containerShowquestions');
+        preguntasContainer.empty();
 
+        $('#nameEvaluationQuestion').val(datos.nombreEvaluacion)
+        $('#idEvaluationQuestion').val(datos.idEvaluacion)
+        $.each(datos.preguntas, function (index, pregunta) {
+            let consecutivo = index +1
+            let newQuestionHtml =
+                '<div class="containerShowquestion">' +
+                '   <label for="question' + consecutivo + '" class="form-label mt-2">' + pregunta.textoPregunta  + ':</label>' +
+                '   <input type="text" class="form-control  questionShow"  id="' + pregunta.idPregunta + '" name="question" required >' +
+                '</div>';
+            $('.containerShowquestions').append(newQuestionHtml);
         });
+
+        // Abrir el modal de confirmación
+        $('#modalVerPreguntas').modal('show');
+
+
     }
 
     const recargarTabla = () => {

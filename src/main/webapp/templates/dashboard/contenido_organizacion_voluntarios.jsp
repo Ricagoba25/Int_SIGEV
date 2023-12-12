@@ -86,9 +86,9 @@
                         // El contenido de esta función se ejecutará para cada celda de esta columna
                         // Utilizamos data para acceder a los datos de la fila actual
 
-                        let aceptarBtn = '<a href="#" title="Aceptar" onclick=\'aceptar(' + JSON.stringify(data) + ')\'>  <i class="fa-solid fa-check"></i> Aceptar</a> &nbsp;';
-                        let bloquearBtn = '<a href="#" title="Bloquear" onclick=\'cancelar(' + JSON.stringify(data) + ')\'>  <i class="fa-solid fa-ban"></i> Rechazar</a> &nbsp;';
-                        let verRespustas = '<a href="#" id="editarBtn" onclick=\'verDatos(' + JSON.stringify(data) + ')\'> <i class="fa fa-eye"></i> Ver Respuestas <br></a>';
+                        let aceptarBtn = '<a href="#" title="Aceptar" onclick=\'aceptar(' + JSON.stringify(data) + ')\'>  <i class="fa-solid fa-check"></i> Aceptar</a> <br>';
+                        let bloquearBtn = '<a href="#" title="Bloquear" onclick=\'cancelar(' + JSON.stringify(data) + ')\'>  <i class="fa-solid fa-ban"></i> Rechazar</a><br>';
+                        let verRespustas = '<a href="#" id="editarBtn" onclick=\'verDatos(' + JSON.stringify(data.evaluacionOrganizacionEvento.evaluacion) + ')\'> <i class="fa fa-eye"></i> Ver Respuestas <br></a>';
 
                         // Devolvemos los botones como una cadena HTML
                         return aceptarBtn + bloquearBtn + verRespustas;
@@ -213,24 +213,22 @@
         let respuestasContainer = $('.containerShowquestion');
         respuestasContainer.empty();
 
+        $('#titleEvaluation').html(datos.nombreEvaluacion)
+        // titleEvaluation
         console.log("DataVoluntarios");
         console.log(datos);
 
-        /*$('#nameEvaluationQuestion').val(datos.nombreEvaluacion)
-        $('#idEvaluationQuestion').val(datos.idEvaluacion)
-        let respuestas = datos.respuestas
         $.each(datos.preguntas, function (index, pregunta) {
             let consecutivo = index +1
             let newQuestionHtml =
                 '<div class="containerShowquestion">' +
-                '   <label class="form-label mt-2">Pregunta ' + consecutivo + ': ' + pregunta.textoPregunta + '</label>' +
-                '   <label class="form-label mt-2">Respuesta ' + consecutivo + ': ' + respuestas[index] + '</label>' +
+                '   <h6 class="font-weight-bold mt-2">Pregunta ' + consecutivo + ': ' + pregunta.textoPregunta + '</h6>' +
+                '   <p class=""> R: ' + datos.respuestas[index].textoRespuesta + '</p>' +
                 '</div>';
             $('.containerShowquestions').append(newQuestionHtml);
         });
 
-        // Abrir el modal de confirmación
-        $('#modalVerPreguntas').modal('show');*/
+        $('#modalVerPreguntas').modal('show');
 
     }
 
@@ -240,6 +238,34 @@
     }
 
 </script>
+
+<div id="modalVerPreguntas" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="miModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form id="formulario_preguntas">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">Respuestas</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <h3 class="form-label text-center" id="titleEvaluation">Nombre de la evaluación:</h3>
+                    </div>
+                    <div class="containerShowquestions">
+                    </div>
+
+                </div>
+<%--                <div class="modal-footer">--%>
+<%--                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>--%>
+<%--                    <button type="submit" class="btn btn-primary"> Guardar Cambios</button>--%>
+<%--                </div>--%>
+            </form>
+        </div>
+    </div>
+</div>
 
 <div id="modalAceptar" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel"
      aria-hidden="true">
