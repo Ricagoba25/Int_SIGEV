@@ -208,6 +208,32 @@
         });
     }
 
+    function verDatos(datos) {
+        // clear container
+        let respuestasContainer = $('.containerShowquestion');
+        respuestasContainer.empty();
+
+        console.log("DataVoluntarios");
+        console.log(datos);
+
+        /*$('#nameEvaluationQuestion').val(datos.nombreEvaluacion)
+        $('#idEvaluationQuestion').val(datos.idEvaluacion)
+        let respuestas = datos.respuestas
+        $.each(datos.preguntas, function (index, pregunta) {
+            let consecutivo = index +1
+            let newQuestionHtml =
+                '<div class="containerShowquestion">' +
+                '   <label class="form-label mt-2">Pregunta ' + consecutivo + ': ' + pregunta.textoPregunta + '</label>' +
+                '   <label class="form-label mt-2">Respuesta ' + consecutivo + ': ' + respuestas[index] + '</label>' +
+                '</div>';
+            $('.containerShowquestions').append(newQuestionHtml);
+        });
+
+        // Abrir el modal de confirmación
+        $('#modalVerPreguntas').modal('show');*/
+
+    }
+
     const recargarTabla = () => {
         let table = $('#example1').DataTable();
         table.ajax.reload();

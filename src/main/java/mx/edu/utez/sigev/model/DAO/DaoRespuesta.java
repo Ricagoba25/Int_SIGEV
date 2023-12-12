@@ -20,13 +20,12 @@ public class DaoRespuesta implements DaoRepository {
         return null;
     }
 
-    public List respuestasPorVoluntarioEvaluacion(int idVoluntarioEvaluacion) {
+    public List<BeanRespuesta> respuestasPorVoluntarioEvaluacion(int idVoluntarioEvaluacion) {
         List<BeanRespuesta> listaRespuestas = new ArrayList<>();
         try {
             String query = "SELECT * FROM respuesta r " +
                     "join pregunta p on p.idPregunta = r.pregunta_idPregunta " +
                     "join evaluacion e on e.idEvaluacion = p.evaluacion_idEvaluacion " +
-                    "join organizacion o on e.organizacion_idOrganizacion = o.idOrganizacion " +
                     "WHERE r.voluntario_evaluacion_idVoluntarioEvaluacion = ?";
 
             con = MysqlConector.connect();
@@ -35,26 +34,12 @@ public class DaoRespuesta implements DaoRepository {
             rs = pstm.executeQuery();
 
             while (rs.next()) {
-                BeanOrganizacion beanOrganizacion = new BeanOrganizacion();
-                beanOrganizacion.setIdOrganizacion(rs.getInt("idOrganizacion"));
-
-                BeanEvaluacion beanEvaluacion = new BeanEvaluacion();
-                beanEvaluacion.setIdEvaluacion(rs.getInt("idEvaluacion"));
-                beanEvaluacion.setNombreEvaluacion(rs.getString("nombreEvaluacion"));
-                beanEvaluacion.setOrganizacion(beanOrganizacion);
-
-                BeanPregunta beanPregunta = new BeanPregunta();
-                beanPregunta.setIdPregunta(rs.getInt("idPregunta"));
-                beanPregunta.setTextoPregunta(rs.getString("textoPregunta"));
-                beanPregunta.setEvaluacion(beanEvaluacion);
-
                 BeanVoluntarioEvaluacion beanVoluntarioEvaluacion = new BeanVoluntarioEvaluacion();
                 beanVoluntarioEvaluacion.setIdVoluntarioEvaluacion(rs.getInt("voluntario_evaluacion_idVoluntarioEvaluacion"));
 
                 BeanRespuesta beanRespuesta = new BeanRespuesta();
                 beanRespuesta.setIdRespuesta(rs.getInt("idRespuesta"));
                 beanRespuesta.setTextoRespuesta(rs.getString("textoRespuesta"));
-                beanRespuesta.setPregunta(beanPregunta);
                 beanRespuesta.setVoluntarioEvaluacion(beanVoluntarioEvaluacion);
 
                 listaRespuestas.add(beanRespuesta);

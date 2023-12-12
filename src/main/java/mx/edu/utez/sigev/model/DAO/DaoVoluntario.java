@@ -165,6 +165,10 @@ public class DaoVoluntario implements DaoRepository {
                 beanEvento.setNombreEvento(rs.getString("nombreEvento"));
                 BeanOrganizacion beanOrganizacion = new BeanOrganizacion(rs.getInt("idOrganizacion"));
                 BeanEvaluacion beanEvaluacion = new BeanEvaluacion(rs.getInt("idEvaluacion"));
+                List<BeanPregunta> preguntas = new DaoPregunta().preguntasPorEvaluacion(rs.getInt("idEvaluacion"));
+                beanEvaluacion.setPreguntas(preguntas);
+                List<BeanRespuesta> respuestas = new DaoRespuesta().respuestasPorVoluntarioEvaluacion(rs.getInt("idVoluntarioEvaluacion"));
+                beanEvaluacion.setRespuestas(respuestas);
 
                 BeanEvaluacionOrganizacionEvento beanEvaluacionOrganizacionEvento = new BeanEvaluacionOrganizacionEvento();
                 beanEvaluacionOrganizacionEvento.setIdEvaluacionOrganizacionEvento(rs.getInt("idEvaluacionOrganizacionEvento"));
@@ -174,9 +178,10 @@ public class DaoVoluntario implements DaoRepository {
 
 
                 BeanVoluntarioEvaluacion beanVoluntarioEvaluacion = new BeanVoluntarioEvaluacion();
+                beanVoluntarioEvaluacion.setEstatusVoluntarioEvaluacion(rs.getInt("estatusVoluntarioEvaluacion"));
+                beanVoluntarioEvaluacion.setIdVoluntarioEvaluacion(rs.getInt("idVoluntarioEvaluacion"));
                 beanVoluntarioEvaluacion.setVoluntario(beanVoluntario);
                 beanVoluntarioEvaluacion.setEvaluacionOrganizacionEvento(beanEvaluacionOrganizacionEvento);
-                beanVoluntarioEvaluacion.setEstatusVoluntarioEvaluacion(rs.getInt("estatusVoluntarioEvaluacion"));
                 listaVoluntarios.add(beanVoluntarioEvaluacion);
             }
         } catch (SQLException e) {
