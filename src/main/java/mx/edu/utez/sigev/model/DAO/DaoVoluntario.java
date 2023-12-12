@@ -164,7 +164,9 @@ public class DaoVoluntario implements DaoRepository {
                 BeanEvento beanEvento = new BeanEvento(rs.getInt("idEvento"));
                 beanEvento.setNombreEvento(rs.getString("nombreEvento"));
                 BeanOrganizacion beanOrganizacion = new BeanOrganizacion(rs.getInt("idOrganizacion"));
-                BeanEvaluacion beanEvaluacion = new BeanEvaluacion(rs.getInt("idEvaluacion"));
+                BeanEvaluacion beanEvaluacion = new BeanEvaluacion();
+                beanEvaluacion.setIdEvaluacion(rs.getInt("idEvaluacion"));
+                beanEvaluacion.setNombreEvaluacion(rs.getString("nombreEvaluacion"));
                 List<BeanPregunta> preguntas = new DaoPregunta().preguntasPorEvaluacion(rs.getInt("idEvaluacion"));
                 beanEvaluacion.setPreguntas(preguntas);
                 List<BeanRespuesta> respuestas = new DaoRespuesta().respuestasPorVoluntarioEvaluacion(rs.getInt("idVoluntarioEvaluacion"));
