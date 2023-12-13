@@ -19,12 +19,14 @@
         <div class="card">
           <div class="card-body">
             <input type="hidden" id="idVoluntario" value="${sesion.getIdVoluntario()}">
+            <div class="table-responsive">
             <table id="example1" class="table table-bordered table-striped">
               <thead>
               <tr>
                 <th>ID</th>
                 <th>Nombre evento</th>
                 <th>Descripción</th>
+                <th>Organización</th>
                 <th>Fecha</th>
                 <th>Calle</th>
                 <th>No exterior</th>
@@ -37,6 +39,8 @@
               </tr>
               </thead>
             </table>
+            </div>
+
           </div>
         </div>
       </div>
@@ -63,6 +67,7 @@
         {"data": "evaluacionOrganizacionEvento.evento.idEvento"},
         {"data": "evaluacionOrganizacionEvento.evento.nombreEvento"},
         {"data": "evaluacionOrganizacionEvento.evento.descripcion"},
+        {"data": "evaluacionOrganizacionEvento.organizacion.nombreOrganizacion"},
         {"data": "evaluacionOrganizacionEvento.evento.fecha"},
         {"data": "evaluacionOrganizacionEvento.evento.direccion.calle"},
         {"data": "evaluacionOrganizacionEvento.evento.direccion.noExterior"},

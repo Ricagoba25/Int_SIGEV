@@ -467,7 +467,6 @@
         let formData = [];
         $(".questionInput").each(function (index) {
             formData.push($(this).val());
-            //formData['pregunta' + (index + 1)] = $(this).val();
         });
 
 
@@ -513,8 +512,6 @@
             }
         });
 
-
-        console.log(output);
 
         // Cerrar el modal después de obtener las respuestas
         $('#modalCrearEvaluacion').modal('hide');

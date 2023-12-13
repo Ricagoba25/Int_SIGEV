@@ -18,22 +18,24 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <table id="dataTableOrganizacion" class="table table-bordered table-striped">
-                            <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nombre organización</th>
-                                <th>Razon social</th>
-                                <th>RFC</th>
-                                <th>Correo</th>
-                                <th>Colonia</th>
-                                <th>Estado</th>
-                                <th>Estatus</th>
-                                <th>Acciones</th>
+                        <div class="table-responsive">
+                            <table id="dataTableOrganizacion" class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre organización</th>
+                                    <th>Razon social</th>
+                                    <th>RFC</th>
+                                    <th>Correo</th>
+                                    <th>Colonia</th>
+                                    <th>Estado</th>
+                                    <th>Estatus</th>
+                                    <th>Acciones</th>
 
-                            </tr>
-                            </thead>
-                        </table>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

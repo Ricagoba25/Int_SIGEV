@@ -17,21 +17,23 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <table id="example1" class="table table-bordered table-striped">
-                            <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nombre voluntario</th>
-                                <th>Apellido paterno</th>
-                                <th>Apellido materno</th>
-                                <th>CURP</th>
-                                <th>Correo</th>
-                                <th>Teléfono</th>
-                                <th>Estatus</th>
-                                <th>Acciones</th>
-                            </tr>
-                            </thead>
-                        </table>
+                        <div class="table-responsive">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre voluntario</th>
+                                    <th>Apellido paterno</th>
+                                    <th>Apellido materno</th>
+                                    <th>CURP</th>
+                                    <th>Correo</th>
+                                    <th>Teléfono</th>
+                                    <th>Estatus</th>
+                                    <th>Acciones</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -154,7 +156,8 @@
     }
 </script>
 
-<div id="modalcancelar" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
+<div id="modalcancelar" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">

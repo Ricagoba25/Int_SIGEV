@@ -21,26 +21,27 @@
                         <input type="hidden" id="idOrganizacion" value="${sesion.getIdOrganizacion()}">
                         <input type="hidden" id="idDireccion" value="">
                         <input type="hidden" id="idEvento" value="">
+                        <div class="table-responsive">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre evento</th>
+                                    <th>Descripción</th>
+                                    <th>Fecha</th>
+                                    <th>Calle</th>
+                                    <th>No exterior</th>
+                                    <th>No interior</th>
+                                    <th>Colonia</th>
+                                    <th>Municipio</th>
+                                    <th>Estado</th>
+                                    <th>Estatus evento</th>
+                                    <th>Acciones</th>
 
-                        <table id="example1" class="table table-bordered table-striped">
-                            <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nombre evento</th>
-                                <th>Descripción</th>
-                                <th>Fecha</th>
-                                <th>Calle</th>
-                                <th>No exterior</th>
-                                <th>No interior</th>
-                                <th>Colonia</th>
-                                <th>Municipio</th>
-                                <th>Estado</th>
-                                <th>Estatus evento</th>
-                                <th>Acciones</th>
-
-                            </tr>
-                            </thead>
-                        </table>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -165,13 +166,13 @@
                     render: function (data, type, row) {
                         // El contenido de esta función se ejecutará para cada celda de esta columna
                         // Utilizamos data para acceder a los datos de la fila actual
-                        let labelAccionActivar= "Desactivar";
+                        let labelAccionActivar = "Desactivar";
                         let editarBtn = '<a href="#" id="editarBtn" onclick=\'editar(' + JSON.stringify(data) + ')\'> <i class="fa fa-pen"></i> Editar <br></a>';
 
-                        if(data.evento.estatusEvento === 4){
+                        if (data.evento.estatusEvento === 4) {
                             labelAccionActivar = 'Activar'
                         }
-                        let eliminarBtn = '<a href="#" title="Eliminar Evento" onclick=\'eliminar(' +  JSON.stringify(data.evento) + ')\'> <i class="fa-solid fa-xmark"></i> '+labelAccionActivar+'</a> &nbsp;';
+                        let eliminarBtn = '<a href="#" title="Eliminar Evento" onclick=\'eliminar(' + JSON.stringify(data.evento) + ')\'> <i class="fa-solid fa-xmark"></i> ' + labelAccionActivar + '</a> &nbsp;';
 
                         let btns = "";
                         if (data.evento.estatusEvento === 2) {
@@ -235,12 +236,11 @@
         let textModal = "Evento Desactivado"
         let textDescription = "El evento ha sido desactivado."
         let estatusEvento = 4
-        if(data.estatusEvento === 4){
+        if (data.estatusEvento === 4) {
             textModal = "Evento Activado"
             textDescription = "El evento ha sido activado"
             estatusEvento = 2;
         }
-
 
 
         // Abrir el modal de confirmación
@@ -297,24 +297,23 @@
     function editarDatos() {
         /**** editar ***/
 
-        // let {nombreEvento, descripcion, fecha} = data.evento;
-        // let calle = data.evento.direccion.calle;
-        // let noExterior = data.evento.direccion.noExterior;
-        // let noInterior = data.evento.direccion.noInterior;
-        // let colonia = data.evento.direccion.colonia;
-        // let municipio = data.evento.direccion.municipio;
-        // let estado = data.evento.direccion.estado.idEstado;
+            // let {nombreEvento, descripcion, fecha} = data.evento;
+            // let calle = data.evento.direccion.calle;
+            // let noExterior = data.evento.direccion.noExterior;
+            // let noInterior = data.evento.direccion.noInterior;
+            // let colonia = data.evento.direccion.colonia;
+            // let municipio = data.evento.direccion.municipio;
+            // let estado = data.evento.direccion.estado.idEstado;
 
 
+            // //Obtenemos los datos de los inputs para registrar en el backend
+            // let nombre = $('#nombre').val();
+            // let primerApellido = $('#primerApellido').val();
+            // let segundoApellido = $('#segundoApellido').val();
+            // let correo = $('#correo').val();
+            // let telefono = $('#telefono').val();
 
-        // //Obtenemos los datos de los inputs para registrar en el backend
-        // let nombre = $('#nombre').val();
-        // let primerApellido = $('#primerApellido').val();
-        // let segundoApellido = $('#segundoApellido').val();
-        // let correo = $('#correo').val();
-        // let telefono = $('#telefono').val();
-
-        //IDS
+            //IDS
         let idUsuario = $('#idUsuario').val();
         let idPersona = $('#idPersona').val();
 
@@ -380,6 +379,7 @@
 
 
     }
+
     function obtenerEstados() {
         $.ajax({
             url: '/estado',

@@ -18,20 +18,22 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <table id="example1" class="table table-bordered table-striped">
-                            <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nombre evento</th>
-                                <th>Descripción</th>
-                                <th>Fecha</th>
-                                <th>Colonia</th>
-                                <th>Estado</th>
-                                <th>Estatus</th>
-                                <th>Acciones</th>
-                            </tr>
-                            </thead>
-                        </table>
+                        <div class="table-responsive">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre evento</th>
+                                    <th>Descripción</th>
+                                    <th>Fecha</th>
+                                    <th>Colonia</th>
+                                    <th>Estado</th>
+                                    <th>Estatus</th>
+                                    <th>Acciones</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

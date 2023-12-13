@@ -18,22 +18,24 @@
                 <div class="card">
                     <input type="hidden" id="idOrganizacion" value="${sesion.getIdOrganizacion()}">
                     <div class="card-body">
-                        <table id="example1" class="table table-bordered table-striped">
-                            <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nombre voluntario</th>
-                                <th>Apellido paterno</th>
-                                <th>Apellido materno</th>
-                                <th>Nombre evento</th>
-                                <th>CURP</th>
-                                <th>Correo</th>
-                                <th>Teléfono</th>
-                                <th>Estatus</th>
-                                <th>Acciones</th>
-                            </tr>
-                            </thead>
-                        </table>
+                        <div class="table-responsive">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre</th>
+                                    <th>Apellido paterno</th>
+                                    <th>Apellido materno</th>
+                                    <th>Nombre evento</th>
+                                    <th>CURP</th>
+                                    <th>Correo</th>
+                                    <th>Teléfono</th>
+                                    <th>Estatus</th>
+                                    <th>Acciones</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -85,9 +87,14 @@
                     render: function (data, type, row) {
                         // El contenido de esta función se ejecutará para cada celda de esta columna
                         // Utilizamos data para acceder a los datos de la fila actual
+                        let bloquearBtn = ""
+                        let aceptarBtn = ""
+                        if (data.estatusVoluntarioEvaluacion == 2) {
+                            bloquearBtn = '<a href="#" title="Bloquear" onclick=\'cancelar(' + JSON.stringify(data) + ')\'>  <i class="fa-solid fa-ban"></i> Rechazar</a><br>';
+                        } else {
+                            aceptarBtn = '<a href="#" title="Aceptar" onclick=\'aceptar(' + JSON.stringify(data) + ')\'>  <i class="fa-solid fa-check"></i> Aceptar</a> <br>';
+                        }
 
-                        let aceptarBtn = '<a href="#" title="Aceptar" onclick=\'aceptar(' + JSON.stringify(data) + ')\'>  <i class="fa-solid fa-check"></i> Aceptar</a> <br>';
-                        let bloquearBtn = '<a href="#" title="Bloquear" onclick=\'cancelar(' + JSON.stringify(data) + ')\'>  <i class="fa-solid fa-ban"></i> Rechazar</a><br>';
                         let verRespustas = '<a href="#" id="editarBtn" onclick=\'verDatos(' + JSON.stringify(data.evaluacionOrganizacionEvento.evaluacion) + ')\'> <i class="fa fa-eye"></i> Ver Respuestas <br></a>';
 
                         // Devolvemos los botones como una cadena HTML
@@ -219,7 +226,7 @@
         console.log(datos);
 
         $.each(datos.preguntas, function (index, pregunta) {
-            let consecutivo = index +1
+            let consecutivo = index + 1
             let newQuestionHtml =
                 '<div class="containerShowquestion">' +
                 '   <h6 class="font-weight-bold mt-2">Pregunta ' + consecutivo + ': ' + pregunta.textoPregunta + '</h6>' +
@@ -258,10 +265,10 @@
                     </div>
 
                 </div>
-<%--                <div class="modal-footer">--%>
-<%--                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>--%>
-<%--                    <button type="submit" class="btn btn-primary"> Guardar Cambios</button>--%>
-<%--                </div>--%>
+                <%--                <div class="modal-footer">--%>
+                <%--                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>--%>
+                <%--                    <button type="submit" class="btn btn-primary"> Guardar Cambios</button>--%>
+                <%--                </div>--%>
             </form>
         </div>
     </div>

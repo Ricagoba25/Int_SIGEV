@@ -24,19 +24,21 @@
                                 adminstrador
                             </button>
                         </div>
-                        <table id="example1" class="table table-bordered table-striped">
-                            <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nombre</th>
-                                <th>Apellido paterno</th>
-                                <th>Apellido materno</th>
-                                <th>Correo</th>
-                                <th>Teléfono</th>
-                                <th>Acciones</th>
-                            </tr>
-                            </thead>
-                        </table>
+                        <div class="table-responsive">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre</th>
+                                    <th>Apellido paterno</th>
+                                    <th>Apellido materno</th>
+                                    <th>Correo</th>
+                                    <th>Teléfono</th>
+                                    <th>Acciones</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -281,7 +283,6 @@
 
 
     }
-
 
 
     const editar = (data) => {

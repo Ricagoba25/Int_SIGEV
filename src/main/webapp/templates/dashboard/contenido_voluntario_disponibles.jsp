@@ -19,15 +19,15 @@
                 <div class="card">
                     <div class="card-body">
                         <input type="hidden" id="idVoluntario" value="${sesion.getIdVoluntario()}">
+                        <input type="hidden" id="idEvaluacionOrganizacionEvento">
                         <div class="table-responsive">
-
-
                             <table id="example2" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
                                     <th>ID</th>
                                     <th>Nombre evento</th>
                                     <th>Descripción</th>
+                                    <th>Organización</th>
                                     <th>Fecha</th>
                                     <th>Municipio</th>
                                     <th>Estado</th>
@@ -119,6 +119,7 @@
                 {"data": "evento.idEvento"},
                 {"data": "evento.nombreEvento"},
                 {"data": "evento.descripcion"},
+                {"data": "organizacion.nombreOrganizacion"},
                 {"data": "evento.fecha"},
                 {"data": "evento.direccion.municipio"},
                 {"data": "evento.direccion.estado.nombre"},
@@ -130,7 +131,7 @@
                         // El contenido de esta función se ejecutará para cada celda de esta columna
                         // Utilizamos data para acceder a los datos de la fila actual
 
-                        let postularseBtn = '<a href="#" title="Aceptar" onclick=\'postularse(' + JSON.stringify(data.evaluacion) + ')\'>  <i class="fa-solid fa-thumbs-up"></i> Postularse</a>';
+                        let postularseBtn = '<a href="#" title="Aceptar" onclick=\'postularse(' + JSON.stringify(data) + ')\'>  <i class="fa-solid fa-thumbs-up"></i> Postularse</a>';
 
 
                         // let postularseBtn = '<a href="#" title="Postularse" onclick="postularse(' + data + ')"> <i class="fa-solid fa-thumbs-up"></i> Postularse</a> &nbsp;';
@@ -143,7 +144,73 @@
         });
 
 
+        // questionShow
+
+
     });
+
+    $("#modalVerPreguntas").submit(function (event) {
+        event.preventDefault()
+
+        let respuestas = [];
+        let idPreguntas = [];
+        $(".questionShow").each(function (index) {
+            respuestas.push($(this).val());
+            idPreguntas.push($(this).attr('id'));
+        });
+
+        let output = {
+            accion: "postular",
+            idEvaluacionOrganizacionEvento: $('#idEvaluacionOrganizacionEvento').val(),
+            idVoluntario: $('#idVoluntario').val(),
+            respuestas,
+            idPreguntas
+        }
+
+        console.log(output)
+
+        $.ajax({
+            type: "POST",
+            url: "/voluntario",
+            data: output,
+            success: function (response) {
+                // Procesar la respuesta del servlet si es necesario
+                console.log("Respuesta del servidor:", response);
+                if (response.error) {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'Error',
+                        text: "Tenemos algunos errores.",
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                } else {
+                    recargarTabla();
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Postulación exitosa',
+                        text: "Te haz postulado correctamente al evento.",
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    $('#modaleliminar').modal('hide');
+                }
+            },
+            error: function (error) {
+                console.error("Error en la petición AJAX:", error);
+            }
+        });
+
+
+        // Cerrar el modal después de obtener las respuestas
+        $('#modalVerPreguntas').modal('hide');
+        $(".questionInput").val('');
+        $("#idEvaluationQuestion").val('');
+        $("#nameEvaluation").val('');
+    })
+
 
     //Boton de postularse al Evento
     function postularse(datos) {
@@ -156,13 +223,14 @@
         let preguntasContainer = $('.containerShowquestions');
         preguntasContainer.empty();
 
-        $('#nameEvaluationQuestion').val(datos.nombreEvaluacion)
-        $('#idEvaluationQuestion').val(datos.idEvaluacion)
-        $.each(datos.preguntas, function (index, pregunta) {
-            let consecutivo = index +1
+        $('#nameEvaluationQuestion').val(datos.evaluacion.nombreEvaluacion)
+        $('#idEvaluationQuestion').val(datos.evaluacion.idEvaluacion)
+        $('#idEvaluacionOrganizacionEvento').val(datos.idEvaluacionOrganizacionEvento)
+        $.each(datos.evaluacion.preguntas, function (index, pregunta) {
+            let consecutivo = index + 1
             let newQuestionHtml =
                 '<div class="containerShowquestion">' +
-                '   <label for="question' + consecutivo + '" class="form-label mt-2">' + pregunta.textoPregunta  + ':</label>' +
+                '   <label for="question' + consecutivo + '" class="form-label mt-2">' + pregunta.textoPregunta + ':</label>' +
                 '   <input type="text" class="form-control  questionShow"  id="' + pregunta.idPregunta + '" name="question" required >' +
                 '</div>';
             $('.containerShowquestions').append(newQuestionHtml);

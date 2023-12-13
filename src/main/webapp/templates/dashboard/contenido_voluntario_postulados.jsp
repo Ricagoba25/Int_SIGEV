@@ -19,24 +19,28 @@
                 <div class="card">
                     <div class="card-body">
                         <input type="hidden" id="idVoluntario" value="${sesion.getIdVoluntario()}">
-                        <table id="example1" class="table table-bordered table-striped">
-                            <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nombre evento</th>
-                                <th>Descripción</th>
-                                <th>Fecha</th>
-                                <th>Calle</th>
-                                <th>No exterior</th>
-                                <th>No interior</th>
-                                <th>Colonia</th>
-                                <th>Municipio</th>
-                                <th>Estado</th>
-                                <th>Acciones</th>
+                        <input type="hidden" id="idEvaluacionOrganizacionEvento" value="">
+                        <div class="table-responsive">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre evento</th>
+                                    <th>Descripción</th>
+                                    <th>Organización</th>
+                                    <th>Fecha</th>
+                                    <th>Calle</th>
+                                    <th>No exterior</th>
+                                    <th>No interior</th>
+                                    <th>Colonia</th>
+                                    <th>Municipio</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
 
-                            </tr>
-                            </thead>
-                        </table>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -84,6 +88,7 @@
                 {"data": "evento.idEvento"},
                 {"data": "evento.nombreEvento"},
                 {"data": "evento.descripcion"},
+                {"data": "organizacion.nombreOrganizacion"},
                 {"data": "evento.fecha"},
                 {"data": "evento.direccion.calle"},
                 {"data": "evento.direccion.noExterior"},
@@ -95,67 +100,70 @@
                     // Añadir los botones de acciones "Editar" y "Borrar"
                     data: null,
                     render: function (data, type, row) {
-                        let cancelarBtn = '<a href="#" title="Cancelar Postulación" onclick="cancelar(' + data.evento.idEvento + ')"> <i class="fa-solid fa-xmark"></i> Cancelar</a> &nbsp;';
-
-                        // Devolvemos los botones como una cadena HTML
+                        let cancelarBtn = '<a href="#"title="Cancelar Postulación" onclick=\'cancelar(' + JSON.stringify(data) + ')\'>  <i class="fa-solid fa-xmark"></i> Cancelar</a>';
                         return cancelarBtn;
                     }
                 }
             ]
         });
 
+        $('#confirmarRechazar').click(function(){
+
+            $.ajax({
+                type: "POST",
+                url: "/voluntario",
+                data: {
+                    accion: "cancelar",
+                    idVoluntario: $("#idVoluntario").val(),
+                    idEvaluacionOrganizacionEvento: $('#idEvaluacionOrganizacionEvento').val(),
+                },
+                success: function (response) {
+                    // Procesar la respuesta del servlet si es necesario
+                    console.log("Respuesta del servidor:", response);
+                    if (response.error) {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'error',
+                            title: 'Error',
+                            text: "Tenemos algunos errores.",
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    } else {
+                        recargarTabla();
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Cancelación exitosa',
+                            text: "Haz cancelado tu postulación correctamente.",
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                        $('#modalcancelar').modal('hide');
+                    }
+                },
+                error: function (error) {
+                    console.error("Error en la petición AJAX:", error);
+                }
+            });
+
+            // Recargar la tabla o realizar otras acciones necesarias
+            //$('#datatable').DataTable().ajax.reload();
+            console.log("confirmado")
+            $('#modalcancelar').modal('hide');
+        });
+
 
     });
 
+
+
     //Boton de postularse al Evento
-    function cancelar(id) {
+    function cancelar(data) {
         // Abrir el modal de confirmación
         $('#modalcancelar').modal('show');
-
-        // Agregar un evento al botón de confirmación dentro del modal
-
-
-        $.ajax({
-            type: "POST",
-            url: "/voluntario",
-            data: {
-                accion: "postular",
-                idEvento: id,
-                estatusEvento: 4
-            },
-            success: function (response) {
-                // Procesar la respuesta del servlet si es necesario
-                console.log("Respuesta del servidor:", response);
-                if (response.error) {
-                    Swal.fire({
-                        position: 'center',
-                        icon: 'error',
-                        title: 'Error',
-                        text: "Tenemos algunos errores.",
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                } else {
-                    recargarTabla();
-                    Swal.fire({
-                        position: 'center',
-                        icon: 'success',
-                        title: 'Postulación exitosa',
-                        text: "Te haz postulado correctamente.",
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                    $('#modalcancelar').modal('hide');
-                }
-            },
-            error: function (error) {
-                console.error("Error en la petición AJAX:", error);
-            }
-        });
-
-        // Recargar la tabla o realizar otras acciones necesarias
-        //$('#datatable').DataTable().ajax.reload();
-
+        $('#idEvaluacionOrganizacionEvento').val(data.idEvaluacionOrganizacionEvento);
+        // console.log(data)
     }
 
     const recargarTabla = () => {
@@ -167,4 +175,6 @@
 </script>
 
 
+<script src="https://cdn.datatables.net/v/bs5/dt-1.13.6/datatables.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.datatables.net/v/bs5/dt-1.13.6/datatables.min.js"></script>
