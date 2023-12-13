@@ -109,6 +109,7 @@ public class DaoEvento implements DaoRepository {
 
                 BeanOrganizacion beanOrganizacion = new BeanOrganizacion();
                 beanOrganizacion.setIdOrganizacion(rs.getInt("idOrganizacion"));
+                beanOrganizacion.setNombreOrganizacion(rs.getString("nombreOrganizacion"));
 
                 BeanEstado beanEstado = new BeanEstado();
                 beanEstado.setIdEstado(rs.getInt("idEstado"));
