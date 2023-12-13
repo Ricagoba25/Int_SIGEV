@@ -188,7 +188,7 @@ public class VoluntarioServlet extends HttpServlet {
                 }
                 break;
             case "cancelar":
-                respuesta = daoVoluntario.cancelarPostulacion(idVoluntario, idEvaluacionOrganizacionEvento);
+                respuesta = daoVoluntario.aceptarRechazarVoluntario(idVoluntario, idEvaluacionOrganizacionEvento, 5);
 
                 System.out.println("resCancelacion " + respuesta);
                 if (respuesta) {
