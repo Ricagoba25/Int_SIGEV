@@ -2,11 +2,9 @@ package mx.edu.utez.sigev.controller;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import mx.edu.utez.sigev.model.BeanPersona;
-import mx.edu.utez.sigev.model.BeanRol;
-import mx.edu.utez.sigev.model.BeanUsuario;
-import mx.edu.utez.sigev.model.BeanVoluntario;
+import mx.edu.utez.sigev.model.*;
 import mx.edu.utez.sigev.model.DAO.DaoPersona;
+import mx.edu.utez.sigev.model.DAO.DaoRespuesta;
 import mx.edu.utez.sigev.model.DAO.DaoUsuario;
 import mx.edu.utez.sigev.model.DAO.DaoVoluntario;
 import mx.edu.utez.sigev.utils.Utilidades;
@@ -46,6 +44,9 @@ public class VoluntarioServlet extends HttpServlet {
         int idEvaluacionOrganizacionEvento = utilidades.numeroInt(request.getParameter("idEvaluacionOrganizacionEvento"));
         int idEstatusAceptadoRechazado = utilidades.numeroInt(request.getParameter("idEstatusAceptadoRechazado"));
 
+        String[] idPreguntas = request.getParameterValues("idPreguntas[]");
+        String[] respuestas = request.getParameterValues("respuestas[]");
+
         BeanUsuario usuario = new BeanUsuario();
         usuario.setCorreo(correo);
         usuario.setContrasena(contrasena);
@@ -63,7 +64,7 @@ public class VoluntarioServlet extends HttpServlet {
         DaoUsuario daoUsuario = new DaoUsuario();
         DaoPersona daoPersona = new DaoPersona();
         DaoVoluntario daoVoluntario = new DaoVoluntario();
-        Boolean respuesta;
+        Boolean respuesta = false;
 
         switch (accion) {
             case "registrar":
@@ -153,16 +154,37 @@ public class VoluntarioServlet extends HttpServlet {
                 }
                 break;
             case "postular":
-                respuesta = daoVoluntario.postularEvento(idVoluntario, idEvaluacionOrganizacionEvento);
+                int idVoluntarioEvaluacion = daoVoluntario.postularEvento(idVoluntario, idEvaluacionOrganizacionEvento);
+                System.out.println("resPostulacion " + idVoluntarioEvaluacion);
 
-                System.out.println("resPostulacion " + respuesta);
-                if (respuesta) {
-                    jsonResponse.addProperty("error", 0);
-                    jsonResponse.addProperty("title", "");
-                    jsonResponse.addProperty("message", "Te has postulado al evento exitosamente");
+                if (idVoluntarioEvaluacion > 0) {
+                    DaoRespuesta daoRespuesta = new DaoRespuesta();
+
+                    for (int i = 0; i < respuestas.length; i++) {
+                        BeanPregunta beanPregunta = new BeanPregunta();
+                        beanPregunta.setIdPregunta(Integer.parseInt(idPreguntas[i]));
+                        BeanRespuesta beanRespuesta = new BeanRespuesta();
+                        beanRespuesta.setTextoRespuesta(respuestas[i]);
+
+                        BeanVoluntarioEvaluacion beanVoluntarioEvaluacion = new BeanVoluntarioEvaluacion();
+                        beanVoluntarioEvaluacion.setIdVoluntarioEvaluacion(idVoluntarioEvaluacion);
+                        beanRespuesta.setVoluntarioEvaluacion(beanVoluntarioEvaluacion);
+                        beanRespuesta.setPregunta(beanPregunta);
+                        respuesta = daoRespuesta.insert(beanRespuesta);
+                        System.out.println("resRespuesta" + i + ": " + respuesta);
+                    }
+
+                    if (respuesta) {
+                        jsonResponse.addProperty("error", 0);
+                        jsonResponse.addProperty("title", "");
+                        jsonResponse.addProperty("message", "Te has postulado al evento exitosamente");
+                    } else {
+                        jsonResponse.addProperty("error", 1);
+                        jsonResponse.addProperty("title", "La postulación no se realizó, problemas en respuesta");
+                    }
                 } else {
                     jsonResponse.addProperty("error", 1);
-                    jsonResponse.addProperty("title", "La postulación no se realizó");
+                    jsonResponse.addProperty("title", "La postulación no se realizó, problemas al postularse");
                 }
                 break;
             case "cancelar":
@@ -234,8 +256,7 @@ public class VoluntarioServlet extends HttpServlet {
         try {
             if (req.getParameter("consulta").equals("todosVoluntarios")) {
                 listaVoluntarios = daoVoluntario.findAll();
-            }
-            else if (req.getParameter("consulta").equals("todos")) {
+            } else if (req.getParameter("consulta").equals("todos")) {
                 listaVoluntarios = daoVoluntario.voluntariosPorOrganizacion(utilidades.numeroInt(req.getParameter("idOrganizacion")));
             } else if (req.getParameter("consulta").equals("pendientes")) {
                 listaVoluntarios = daoVoluntario.voluntariosPorEstatus(utilidades.numeroInt(req.getParameter("idOrganizacion")), 1);

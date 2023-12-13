@@ -3,10 +3,7 @@ package mx.edu.utez.sigev.model.DAO;
 import mx.edu.utez.sigev.model.*;
 import mx.edu.utez.sigev.utils.MysqlConector;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -460,23 +457,33 @@ public class DaoVoluntario implements DaoRepository {
         return registrado;
     }
 
-    public boolean postularEvento(int idVoluntario, int idEvaluacionOrganizacionEvento) {
-        boolean postulado = false;
+    public int postularEvento(int idVoluntario, int idEvaluacionOrganizacionEvento) {
+        boolean registrado = false;
+        int idRegistro = 0;
         try {
             String query = "INSERT INTO voluntario_evaluacion (voluntario_idVoluntario, evaluacion_organizacion_evento_idEvaluacionOrganizacionEvento,estatusVoluntarioEvaluacion) VALUES (?,?,?)";
 
             con = MysqlConector.connect();
-            pstm = con.prepareStatement(query);
+            pstm = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+
             pstm.setInt(1, idVoluntario);
             pstm.setInt(2, idEvaluacionOrganizacionEvento);
             pstm.setInt(3, 1);
-            postulado = pstm.executeUpdate() > 0;
+            registrado = pstm.executeUpdate() > 0;
+
+            if (registrado) {
+                rs = pstm.getGeneratedKeys();
+
+                if (rs.next()) {
+                    idRegistro = rs.getInt(1);
+                }
+            }
         } catch (SQLException e) {
             System.err.println("Error en el método postularEvento() - DaoVoluntario -> " + e.getMessage());
         } finally {
             cerrarConexiones("postularEvento");
         }
-        return postulado;
+        return idRegistro;
     }
 
     public boolean cancelarPostulacion(int idVoluntario, int idEvaluacionOrganizacionEvento) {
