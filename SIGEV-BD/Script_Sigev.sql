@@ -300,7 +300,7 @@ DROP TABLE IF EXISTS `SIGEV`.`evaluacion` ;
 CREATE TABLE IF NOT EXISTS `SIGEV`.`evaluacion` (
   `idEvaluacion` INT NOT NULL AUTO_INCREMENT,
   `nombreEvaluacion` VARCHAR(45) NOT NULL,
-  `fechaRegistro` DATE NOT NULL,
+  `fechaRegistro` DATETIME NOT NULL,
   `estatusEvaluacion` TINYINT(1) NOT NULL DEFAULT 1,
   `organizacion_idOrganizacion` INT NOT NULL,
   PRIMARY KEY (`idEvaluacion`),
