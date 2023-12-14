@@ -56,7 +56,6 @@ public class EvaluacionServlet extends HttpServlet {
             case "registrar":
                 idEvaluacion = daoEvaluacion.registrar(evaluacion);
 
-
                 System.out.println("resEvaluacion " + idEvaluacion);
                 if (idEvaluacion > 0) {
                     evaluacion.setIdEvaluacion(idEvaluacion);
@@ -119,7 +118,7 @@ public class EvaluacionServlet extends HttpServlet {
                     jsonResponse.addProperty("message", "Estatus de la evaluación modificado exitosamente");
                 } else {
                     jsonResponse.addProperty("error", 1);
-                    jsonResponse.addProperty("title", "El estatus de la evaluación  no se cambio");
+                    jsonResponse.addProperty("title", "El estatus de la evaluación no se cambio");
                 }
                 break;
             default:
