@@ -317,52 +317,55 @@
 
     });
 
-    // Agregar un evento al botón de confirmación dentro del modal
-    $('#confirmarEstado').click(function () {
-        $.ajax({
-            type: "POST",
-            url: "/evento",
-            data: {
-                accion: "changeStatus",
-                idEvento: data.idEvento,
-                estatusEvento: estatusEvento
-            },
-            success: function (response) {
-                // Procesar la respuesta del servlet si es necesario
-                console.log("Respuesta del servidor:", response);
-                if (response.error) {
-                    Swal.fire({
-                        position: 'center',
-                        icon: 'error',
-                        title: 'Error',
-                        text: "Tenemos algunos errores.",
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                } else {
-                    recargarTabla();
-                    Swal.fire({
-                        position: 'center',
-                        icon: 'success',
-                        title: textModal,
-                        text: textDescription,
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                    $('#modaleliminar').modal('hide');
-                }
-            },
-            error: function (error) {
-                console.error("Error en la petición AJAX:", error);
-            }
-        });
-    })
+
 
     function cambiarStatusEvaluacion(data ){
 
         // Abrir el modal de confirmación
         $('#modalDesactivar').modal('show');
+
+      let status = (data.estatusEvaluacion === 1 ) ? 2 : 1;
         console.log(data)
+        // Agregar un evento al botón de confirmación dentro del modal
+        $('#confirmarEstado').click(function () {
+            $.ajax({
+                type: "POST",
+                url: "/evaluacion",
+                data: {
+                    accion: "changeStatus",
+                    idEvaluacion: data.idEvaluacion,
+                    estatusEvaluacion: ""+status
+                },
+                success: function (response) {
+                    // Procesar la respuesta del servlet si es necesario
+                    console.log("Respuesta del servidor:", response);
+                    if (response.error) {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'error',
+                            title: 'Error',
+                            text: "Tenemos algunos errores.",
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    } else {
+                        recargarTabla();
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: "Modificación exitosa",
+                            text: "Los datos se han modificado correctamente.",
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                        $('#modalDesactivar').modal('hide');
+                    }
+                },
+                error: function (error) {
+                    console.error("Error en la petición AJAX:", error);
+                }
+            });
+        })
         // abrir modal
     }
     function verDatos(datos) {

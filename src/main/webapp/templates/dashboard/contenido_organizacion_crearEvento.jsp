@@ -103,7 +103,12 @@
         obtenerEvaluaciones();
         obtenerEstados();
 
-        $("#fecha").attr('min', new Date());
+        var fechaActualEnFormatoDeseado = obtenerFechaActual();
+
+
+        $("#fecha").attr('min', fechaActualEnFormatoDeseado);
+
+
         $("#form_crear_evento").validate({
             errorClass: "is-invalid",
             validClass: "is-valid",
@@ -112,7 +117,7 @@
                     required: true
                 },
                 fecha: {
-                    required: true
+                    required: true,
                 },
                 evaluacion: {
                     required: true,
@@ -146,7 +151,6 @@
                 },
                 fecha: {
                     required: "La fecha es requerida.",
-                    min: "La fecha debe ser mayor a la fecha actual.",
                 },
                 evaluacion: {
                     required: "La evaluación es requerida.",
@@ -176,8 +180,10 @@
             },
             submitHandler: function (form) {
                 crearEvento();
-            }
+            },
+
         })
+
 
 
         // Abrir el modal cuando se haga clic en el botón "Cerrar sesión"
@@ -187,6 +193,20 @@
 
 
     });
+
+    function obtenerFechaActual() {
+        var fecha = new Date();
+
+        var año = fecha.getFullYear();
+        var mes = agregarCeroAlInicio(fecha.getMonth() + 1); // Meses comienzan desde 0
+        var dia = agregarCeroAlInicio(fecha.getDate());
+
+        return año + '-' + mes + '-' + dia;
+    }
+
+    function agregarCeroAlInicio(numero) {
+        return numero < 10 ? '0' + numero : numero;
+    }
 
     function crearEvento() {
 

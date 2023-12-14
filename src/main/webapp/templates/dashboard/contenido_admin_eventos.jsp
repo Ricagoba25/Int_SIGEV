@@ -62,6 +62,8 @@
                 {"data": "evento.fecha"},
                 {"data": "evento.direccion.colonia"},
                 {"data": "evento.direccion.estado.nombre"},
+                {"data": "organizacion.nombreOrganizacion"},
+
                 {
                     data: null,
                     render: function (data, type, row) {
@@ -78,7 +80,7 @@
                         return estatus;
                     }
                 },
-                {"data": "organizacion.nombreOrganizacion"},
+
                 {
                     // Añadir los botones de acciones "Editar" y "Borrar"
                     data: null,
