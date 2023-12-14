@@ -318,66 +318,6 @@
 
     }
 
-    //Boton de eliminar evento
-    function eliminar(data) {
-        // console.log(data)
-
-        let textModal = "Evento Desactivado"
-        let textDescription = "El evento ha sido desactivado."
-        let estatusEvento = 4
-        if (data.estatusEvento === 4) {
-            textModal = "Evento Activado"
-            textDescription = "El evento ha sido activado"
-            estatusEvento = 2;
-        }
-
-
-        // Abrir el modal de confirmación
-        $('#modaleliminar').modal('show');
-
-
-        // Agregar un evento al botón de confirmación dentro del modal
-        $('#confirmarRechazar').click(function () {
-            $.ajax({
-                type: "POST",
-                url: "/evento",
-                data: {
-                    accion: "changeStatus",
-                    idEvento: data.idEvento,
-                    estatusEvento: estatusEvento
-                },
-                success: function (response) {
-                    // Procesar la respuesta del servlet si es necesario
-                    console.log("Respuesta del servidor:", response);
-                    if (response.error) {
-                        Swal.fire({
-                            position: 'center',
-                            icon: 'error',
-                            title: 'Error',
-                            text: "Tenemos algunos errores.",
-                            showConfirmButton: false,
-                            timer: 1500
-                        })
-                    } else {
-                        recargarTabla();
-                        Swal.fire({
-                            position: 'center',
-                            icon: 'success',
-                            title: textModal,
-                            text: textDescription,
-                            showConfirmButton: false,
-                            timer: 1500
-                        })
-                        $('#modaleliminar').modal('hide');
-                    }
-                },
-                error: function (error) {
-                    console.error("Error en la petición AJAX:", error);
-                }
-            });
-        });
-    }
-
     //Boton de editar Usuario
     function editar(data) {
         $("#formulario_evento").validate();
@@ -473,54 +413,6 @@
         $("#idEvaluationQuestion").val('');
         $("#nameEvaluation").val('');
     })
-
-
-    //Boton de eliminar evento
-    function eliminar(id) {
-        // Abrir el modal de confirmación
-        $('#modaleliminar').modal('show');
-
-        // Agregar un evento al botón de confirmación dentro del modal
-        $('#confirmarRechazar').click(function () {
-            $.ajax({
-                type: "POST",
-                url: "/evento",
-                data: {
-                    accion: "changeStatus",
-                    idEvento: id,
-                    estatusEvento: 4
-                },
-                success: function (response) {
-                    // Procesar la respuesta del servlet si es necesario
-                    console.log("Respuesta del servidor:", response);
-                    if (response.error) {
-                        Swal.fire({
-                            position: 'center',
-                            icon: 'error',
-                            title: 'Error',
-                            text: "Tenemos algunos errores.",
-                            showConfirmButton: false,
-                            timer: 1500
-                        })
-                    } else {
-                        recargarTabla();
-                        Swal.fire({
-                            position: 'center',
-                            icon: 'success',
-                            title: 'Organización aceptada',
-                            text: "La organizacion ha sido aceptada correctamente.",
-                            showConfirmButton: false,
-                            timer: 1500
-                        })
-                        $('#modaleliminar').modal('hide');
-                    }
-                },
-                error: function (error) {
-                    console.error("Error en la petición AJAX:", error);
-                }
-            });
-        });
-    }
 
     function crearEvaluacion() {
         $('#modalCrearEvaluacion').modal('show');
