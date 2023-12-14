@@ -35,7 +35,7 @@
                                     <th>Colonia</th>
                                     <th>Municipio</th>
                                     <th>Estado</th>
-                                    <th>Estatus evento</th>
+                                    <th>Estatus</th>
                                     <th>Acciones</th>
 
                                 </tr>

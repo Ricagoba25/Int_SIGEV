@@ -28,6 +28,7 @@
                                     <th>Fecha</th>
                                     <th>Colonia</th>
                                     <th>Estado</th>
+                                    <th>Organización</th>
                                     <th>Estatus</th>
                                     <th>Acciones</th>
                                 </tr>
@@ -77,6 +78,7 @@
                         return estatus;
                     }
                 },
+                {"data": "organizacion.nombreOrganizacion"},
                 {
                     // Añadir los botones de acciones "Editar" y "Borrar"
                     data: null,
@@ -85,12 +87,18 @@
                         // Utilizamos data para acceder a los datos de la fila actual
 
 
-                        let aceptatBtn = '<a href="#" title="Aceptar" onclick="aceptar(' + data.evento.idEvento + ')"> <i class="fa fa-check"></i> Aceptar</a> &nbsp;';
-
+                        let aceptatBtn = '<a href="#" title="Aceptar" onclick="aceptar(' + data.evento.idEvento + ')"> <i class="fa fa-check"></i> Aceptar<br></a>';
                         let rechazarBtn = '<a href="#" title="Rechazar" onclick="rechazar(' + data.evento.idEvento + ')"> <i class="fa fa-times"></i> Rechazar</a> &nbsp;';
 
+                        let btns = aceptatBtn
+                        if (data.evento.estatusEvento == 1) {
+                            btns = aceptatBtn + ' ' + rechazarBtn
+                        } else if (data.evento.estatusEvento == 2) {
+                            btns = rechazarBtn
+                        }
+
                         // Devolvemos los botones como una cadena HTML
-                        return aceptatBtn + ' ' + rechazarBtn;
+                        return btns
                     }
                 }
 

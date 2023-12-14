@@ -48,6 +48,9 @@
     $(function () {
         const URL_API = "http://localhost:8080/"
         $('#dataTableOrganizacion').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+            },
             ajax:
                 {
                     url: URL_API + 'organizacion',
@@ -85,8 +88,15 @@
                         let aceptatBtn = '<a href="#" title="Aceptar" onclick="aceptar(' + data.idOrganizacion + ')"> <i class="fa fa-check"></i> Aceptar <br></a>';
                         let rechazarBtn = '<a href="#" title="Rechazar" onclick="rechazar(' + data.idOrganizacion + ')"> <i class="fa fa-times"></i> Rechazar</a> &nbsp;';
 
+                        let btns = aceptatBtn
+                        if (data.estatusOrganizacion == 1) {
+                            btns = aceptatBtn + ' ' + rechazarBtn
+                        } else if (data.estatusOrganizacion == 2) {
+                            btns = rechazarBtn
+                        }
+
                         // Devolvemos los botones como una cadena HTML
-                        return aceptatBtn + ' ' + rechazarBtn;
+                        return btns;
                     }
                 }
 

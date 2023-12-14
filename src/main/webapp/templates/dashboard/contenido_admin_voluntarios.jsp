@@ -84,9 +84,13 @@
 
                         let bloquearBtn = '<a href="#" title="Bloquear" onclick="bloquear(' + data.idVoluntario + ')">  <i class="fa-solid fa-ban"></i> Bloquear </a> &nbsp;';
 
+                        let btns = bloquearBtn
+                        if (data.estatusVoluntario == 3) {
+                            btns = ''
+                        }
 
                         // Devolvemos los botones como una cadena HTML
-                        return bloquearBtn;
+                        return btns;
                     }
                 }
 

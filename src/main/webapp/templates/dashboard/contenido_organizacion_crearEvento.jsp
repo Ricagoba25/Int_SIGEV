@@ -27,11 +27,11 @@
                                 <div class="col-xl-4">
                                     <label for="nombreEvento" class="form-label">Nombre Evento:</label>
                                     <input type="text" name="nombreEvento" class="form-control" id="nombreEvento"
-                                           name="nombreEvento" required>
+                                           required>
                                 </div>
                                 <div class="col-xl-4">
                                     <label for="fecha" class="form-label">Fecha:</label>
-                                    <input type="date" name="fecha" class="form-control" id="fecha" name="fecha" required min="2023-08-22">
+                                    <input type="date" name="fecha" class="form-control" id="fecha"  required min="2023-08-22">
                                 </div>
 
                                 <div class="col-xl-4">
@@ -103,6 +103,7 @@
         obtenerEvaluaciones();
         obtenerEstados();
 
+        $("#fecha").attr('min', new Date());
         $("#form_crear_evento").validate({
             errorClass: "is-invalid",
             validClass: "is-valid",
@@ -145,9 +146,10 @@
                 },
                 fecha: {
                     required: "La fecha es requerida.",
+                    min: "La fecha debe ser mayor a la fecha actual.",
                 },
                 evaluacion: {
-                    required: "El estado es requerido.",
+                    required: "La evaluación es requerida.",
                 },
                 calle: {
                     required: "La calle es requerida.",

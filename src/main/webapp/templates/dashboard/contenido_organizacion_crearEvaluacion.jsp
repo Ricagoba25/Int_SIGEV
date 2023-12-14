@@ -31,6 +31,7 @@
                                 <th>ID</th>
                                 <th>Nombre de la evaluación</th>
                                 <th>Fecha de registro</th>
+                                <th>Estatus</th>
                                 <th>Acciones</th>
                             </tr>
                             </thead>
@@ -261,6 +262,16 @@
                     }
                 },
                 {
+                    data: null,
+                    render: function (data, type, row) {
+                        let estatus = "Activa";
+                        if (data.estatusEvaluacion == 2) {
+                            estatus = "Inactiva";
+                        }
+                        return estatus;
+                    }
+                },
+                {
                     // Añadir los botones de acciones "Editar" y "Borrar"
                     data: null,
                     render: function (data, type, row) {
@@ -268,7 +279,15 @@
                         // Utilizamos data para acceder a los datos de la fila actual
                         let verRespustas = '<a href="#" id="editarBtn" onclick=\'verDatos(' + JSON.stringify(data) + ')\'> <i class="fa fa-eye"></i> Ver preguntas <br></a>';
 
-                        return verRespustas;
+
+                        let aceptarBtn = '<a href="#" title="Activar" onclick="eliminar(' + data + ')"> <i class="fa fa-check"></i> Activar </a>';
+                        let rechazarBtn = '<a href="#" title="Desactivar" onclick="eliminar(' + data + ')"> <i class="fa fa-times"></i> Desactivar</a> &nbsp;';
+
+                        let btns = verRespustas + ' ' + rechazarBtn
+                        if (data.estatusOrganizacion == 2) {
+                            btns += verRespustas + ' ' + aceptarBtn
+                        }
+                        return btns;
                     }
                 }
             ]
@@ -297,6 +316,66 @@
         // Abrir el modal de confirmación
         $('#modalVerPreguntas').modal('show');
 
+    }
+
+    //Boton de eliminar evento
+    function eliminar(data) {
+        // console.log(data)
+
+        let textModal = "Evento Desactivado"
+        let textDescription = "El evento ha sido desactivado."
+        let estatusEvento = 4
+        if (data.estatusEvento === 4) {
+            textModal = "Evento Activado"
+            textDescription = "El evento ha sido activado"
+            estatusEvento = 2;
+        }
+
+
+        // Abrir el modal de confirmación
+        $('#modaleliminar').modal('show');
+
+
+        // Agregar un evento al botón de confirmación dentro del modal
+        $('#confirmarRechazar').click(function () {
+            $.ajax({
+                type: "POST",
+                url: "/evento",
+                data: {
+                    accion: "changeStatus",
+                    idEvento: data.idEvento,
+                    estatusEvento: estatusEvento
+                },
+                success: function (response) {
+                    // Procesar la respuesta del servlet si es necesario
+                    console.log("Respuesta del servidor:", response);
+                    if (response.error) {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'error',
+                            title: 'Error',
+                            text: "Tenemos algunos errores.",
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    } else {
+                        recargarTabla();
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: textModal,
+                            text: textDescription,
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                        $('#modaleliminar').modal('hide');
+                    }
+                },
+                error: function (error) {
+                    console.error("Error en la petición AJAX:", error);
+                }
+            });
+        });
     }
 
     //Boton de editar Usuario
