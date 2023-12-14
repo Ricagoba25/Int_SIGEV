@@ -137,6 +137,26 @@
     </div>
 </div>
 
+
+<div id="modalDesactivar" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cambiarStatus">Confirmar modificación</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ¿Estás seguro de que deseas modificar el estado de la evaluación?</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button id="confirmarEstado" type="button" class="btn btn-danger">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
     $(document).ready(function () {
         let id = $("#idOrganizacion").val();
@@ -278,15 +298,16 @@
                         // El contenido de esta función se ejecutará para cada celda de esta columna
                         // Utilizamos data para acceder a los datos de la fila actual
                         let verRespustas = '<a href="#" id="editarBtn" onclick=\'verDatos(' + JSON.stringify(data) + ')\'> <i class="fa fa-eye"></i> Ver preguntas <br></a>';
-
-
-                        let aceptarBtn = '<a href="#" title="Activar" onclick="eliminar(' + data + ')"> <i class="fa fa-check"></i> Activar </a>';
-                        let rechazarBtn = '<a href="#" title="Desactivar" onclick="eliminar(' + data + ')"> <i class="fa fa-times"></i> Desactivar</a> &nbsp;';
-
-                        let btns = verRespustas + ' ' + rechazarBtn
-                        if (data.estatusOrganizacion == 2) {
-                            btns += verRespustas + ' ' + aceptarBtn
+                        let estatus = " Desactivar ";
+                        if (data.estatusEvaluacion == 2) {
+                            estatus = " Activar ";
                         }
+
+                        // let aceptarBtn = '<a href="#" title="Activar" onclick="eliminar(' + data + ')"> <i class="fa fa-check"></i> Activar </a>';
+                        let rechazarBtn = '<a href="#"  onclick=\'cambiarStatusEvaluacion(' + JSON.stringify(data) + ')\'> <i class="fa fa-times"></i>'+estatus+'</a>';
+
+                        let btns = verRespustas + rechazarBtn;
+
                         return btns;
                     }
                 }
@@ -296,6 +317,54 @@
 
     });
 
+    // Agregar un evento al botón de confirmación dentro del modal
+    $('#confirmarEstado').click(function () {
+        $.ajax({
+            type: "POST",
+            url: "/evento",
+            data: {
+                accion: "changeStatus",
+                idEvento: data.idEvento,
+                estatusEvento: estatusEvento
+            },
+            success: function (response) {
+                // Procesar la respuesta del servlet si es necesario
+                console.log("Respuesta del servidor:", response);
+                if (response.error) {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'Error',
+                        text: "Tenemos algunos errores.",
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                } else {
+                    recargarTabla();
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: textModal,
+                        text: textDescription,
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    $('#modaleliminar').modal('hide');
+                }
+            },
+            error: function (error) {
+                console.error("Error en la petición AJAX:", error);
+            }
+        });
+    })
+
+    function cambiarStatusEvaluacion(data ){
+
+        // Abrir el modal de confirmación
+        $('#modalDesactivar').modal('show');
+        console.log(data)
+        // abrir modal
+    }
     function verDatos(datos) {
         // clear container
         let preguntasContainer = $('.containerShowquestions');
